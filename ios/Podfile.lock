@@ -1,0 +1,41 @@
+PODS:
+  - BIJKPlayer (0.7.16)
+  - device_information (0.0.1):
+    - Flutter
+  - fijkplayer (0.11.0):
+    - BIJKPlayer (~> 0.7.16)
+    - Flutter
+  - Flutter (1.0.0)
+  - modal_progress_hud_nsn (0.4.0):
+    - Flutter
+
+DEPENDENCIES:
+  - device_information (from `.symlinks/plugins/device_information/ios`)
+  - fijkplayer (from `.symlinks/plugins/fijkplayer/ios`)
+  - Flutter (from `Flutter`)
+  - modal_progress_hud_nsn (from `.symlinks/plugins/modal_progress_hud_nsn/ios`)
+
+SPEC REPOS:
+  trunk:
+    - BIJKPlayer
+
+EXTERNAL SOURCES:
+  device_information:
+    :path: ".symlinks/plugins/device_information/ios"
+  fijkplayer:
+    :path: ".symlinks/plugins/fijkplayer/ios"
+  Flutter:
+    :path: Flutter
+  modal_progress_hud_nsn:
+    :path: ".symlinks/plugins/modal_progress_hud_nsn/ios"
+
+SPEC CHECKSUMS:
+  BIJKPlayer: 4c5d66e5cb99ae5bade6f22a4fcc031722a81c64
+  device_information: d652f6dcea86bdc5300ffd495486de1d5047bf4f
+  fijkplayer: 8b6d864948dc28e6e07248ed4fce61a7467db4df
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  modal_progress_hud_nsn: b66f99f02da7de83484e50dfe1fe2d71ac406e67
+
+PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
+
+COCOAPODS: 1.11.3
