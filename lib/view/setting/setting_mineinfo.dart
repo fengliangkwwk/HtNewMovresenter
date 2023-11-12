@@ -5,9 +5,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/view/setting/provider/setting_provider.dart';
 import 'package:ht_new_movpresenter/view/setting/setting_feedback.dart';
 import 'package:ht_new_movpresenter/view/setting/setting_persondata.dart';
 import 'package:ht_new_movpresenter/view/setting/setting_play_history.dart';
+import 'package:provider/provider.dart';
 
 class HTClassSettingInfoPage extends StatefulWidget {
   const HTClassSettingInfoPage({Key? key, required this.title})
@@ -18,6 +20,7 @@ class HTClassSettingInfoPage extends StatefulWidget {
 }
 
 class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
+  final SettingProvider provider = SettingProvider();
   @override
   void initState() {
     super.initState();
@@ -25,9 +28,16 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      child: scrollWidget(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => provider,
+        )
+      ],
+      child: Container(
+        color: Colors.red,
+        child: scrollWidget(),
+      ),
     );
   }
 
@@ -87,52 +97,50 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   ///第一行
   Widget headerWidget() {
     return Container(
-      height: 54 + MediaQuery.of(context).padding.top + 20 ,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(ImageURL.url_244),
-            fit: BoxFit.cover,
-          ),
-          color: Colors.white,
+      height: 54 + MediaQuery.of(context).padding.top + 20,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage(ImageURL.url_244),
+          fit: BoxFit.cover,
         ),
-        child: GestureDetector(
-            child: Column(
-              children: [
-                 const Expanded(child: SizedBox()),
-                 SizedBox(
-                  height: 54,
-                  child: Row(
-                  
-                  children: [
-                  Container(width: 10.0),
-                  Container(
-                    width: 54.0,
-                    height: 54.0,
-                    decoration: BoxDecoration(
-                        image:
-                            const DecorationImage(image: NetworkImage(ImageURL.url_347)),
-                        borderRadius: BorderRadius.circular(27.0),
-                        border: Border.all(color: Colors.white)),
-                  ),
-                  Container(width: 15.0),
-                  const Text("Login/Signup",
-                      style: TextStyle(
-                          fontSize: 16.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600)),
-                  const Spacer(),
-                  Image.network(ImageURL.url_289, width: 24.0, height: 24.0),
-                  Container(width: 10.0),
-                              ]),
+        color: Colors.white,
+      ),
+      child: GestureDetector(
+        child: Column(
+          children: [
+            const Expanded(child: SizedBox()),
+            SizedBox(
+              height: 54,
+              child: Row(children: [
+                Container(width: 10.0),
+                Container(
+                  width: 54.0,
+                  height: 54.0,
+                  decoration: BoxDecoration(
+                      image: const DecorationImage(
+                          image: NetworkImage(ImageURL.url_347)),
+                      borderRadius: BorderRadius.circular(27.0),
+                      border: Border.all(color: Colors.white)),
                 ),
-               const SizedBox(height: 20,)
-              ],
+                Container(width: 15.0),
+                const Text("Login/Signup",
+                    style: TextStyle(
+                        fontSize: 16.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600)),
+                const Spacer(),
+                Image.network(ImageURL.url_289, width: 24.0, height: 24.0),
+                Container(width: 10.0),
+              ]),
             ),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const HTClassPersondataPage(title: "");
-              }));
-            }));
+            const SizedBox(
+              height: 20,
+            )
+          ],
+        ),
+        onTap: () => provider.goLogin(context),
+      ),
+    );
   }
 
   /// 第二行

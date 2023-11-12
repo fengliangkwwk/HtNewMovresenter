@@ -6,7 +6,21 @@ PODS:
     - BIJKPlayer (~> 0.7.16)
     - Flutter
   - Flutter (1.0.0)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - modal_progress_hud_nsn (0.4.0):
+    - Flutter
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - sqflite (0.0.3):
+    - Flutter
+    - FMDB (>= 2.7.5)
+  - webview_flutter_wkwebview (0.0.1):
     - Flutter
 
 DEPENDENCIES:
@@ -14,10 +28,15 @@ DEPENDENCIES:
   - fijkplayer (from `.symlinks/plugins/fijkplayer/ios`)
   - Flutter (from `Flutter`)
   - modal_progress_hud_nsn (from `.symlinks/plugins/modal_progress_hud_nsn/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
 SPEC REPOS:
   trunk:
     - BIJKPlayer
+    - FMDB
 
 EXTERNAL SOURCES:
   device_information:
@@ -28,13 +47,26 @@ EXTERNAL SOURCES:
     :path: Flutter
   modal_progress_hud_nsn:
     :path: ".symlinks/plugins/modal_progress_hud_nsn/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  shared_preferences_foundation:
+    :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
+  webview_flutter_wkwebview:
+    :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
   BIJKPlayer: 4c5d66e5cb99ae5bade6f22a4fcc031722a81c64
   device_information: d652f6dcea86bdc5300ffd495486de1d5047bf4f
   fijkplayer: 8b6d864948dc28e6e07248ed4fce61a7467db4df
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   modal_progress_hud_nsn: b66f99f02da7de83484e50dfe1fe2d71ac406e67
+  path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
+  shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
+  sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
+  webview_flutter_wkwebview: 2e2d318f21a5e036e2c3f26171342e95908bd60a
 
 PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
 

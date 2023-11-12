@@ -25,6 +25,7 @@ class KTClassUIUtils{
     var devId = await DeviceInformation.deviceName;
       if (io.Platform.isIOS) {
 //通知栏回调里的deviceToken
+
         htVarParam.putIfAbsent(
             "apns_id", () => "8a983582effc3d97a8a8333eeeb790e187c2caeb3c3f88a48cd18ae7c84a3d93");
         htVarParam.putIfAbsent("app_id", () => "266"); //app编号，测试用100默认是100
@@ -37,7 +38,7 @@ class KTClassUIUtils{
         htVarParam.putIfAbsent("imsi", () => '51502');//网络供应商国家编号+网络编号  默认值:51502
         htVarParam.putIfAbsent("installTime", () => DateTime.now().millisecondsSinceEpoch);//首次安装时间
         htVarParam.putIfAbsent("lang", () => "en");//公参：设备当前语言 默认值:en
-        htVarParam.putIfAbsent("control", () => modelID);//设备型号 默认值:iPhone10,3
+        htVarParam.putIfAbsent("model", () => modelID);//设备型号 默认值:iPhone10,3
         htVarParam.putIfAbsent("os_ver", () => devId);//设备系统版本，如16.0(UIDevice.currentDevice.systemVersion)
         htVarParam.putIfAbsent("r1", () => "100");//开关状态 默认值:100
         htVarParam.putIfAbsent("reg_id", () => "0");//推送fcmToken 默认值:0

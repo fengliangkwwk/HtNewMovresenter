@@ -5,6 +5,16 @@
 
 import 'package:ht_new_movpresenter/utils/url_domain.dart';
 class Global{
+
+
+  ///未登录
+  static const unLoginWebUrl = 'https://www.h5login.work';
+  ///登录
+  static const loginWebUrl = 'https://www.h5login.work/user';
+
+
+
+
 // class Api {
   static const portNO = ':4523/';
   static const midStr = 'm1/1583329-0-default/';
