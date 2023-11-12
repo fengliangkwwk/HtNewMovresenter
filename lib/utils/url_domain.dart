@@ -7,5 +7,5 @@ class HTReqestDomainClass{
    /// 获取图片域名
   static const htImageDomain = 'https://autoeq.top/img/ios/';
   ///数据请求域名
-  static const htRequestDomain = 'http://127.0.0.1';
+  static const htRequestDomain = 'http://54.187.6.80/';
 }

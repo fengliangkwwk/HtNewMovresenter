@@ -10,7 +10,7 @@ class Global{
   static const midStr = 'm1/1583329-0-default/';
   static const lastStr = '/';
   ///318邀请码
-  static const invitationCode =  HTReqestDomainClass.htRequestDomain + portNO + '318' + lastStr;
+  static const invitationCode =  HTReqestDomainClass.htRequestDomain  + '318' + lastStr;
   ///获取分享链接
   static const getShareUrl =  HTReqestDomainClass.htRequestDomain + portNO + '78' + lastStr;
   ///获取广告配置及冷却时间

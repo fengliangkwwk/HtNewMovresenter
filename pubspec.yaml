@@ -85,7 +85,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
-    - assets/images/hthome_images/
+    # - assets/images/hthome_images/
     - assets/images/httabbar_images/
   #   - images/a_dot_ham.jpeg
 

@@ -63,7 +63,7 @@ class _HTClassLauncherPageState extends State<HTClassLauncherPage> {
                     return const HTClassPremiumLauncherPage(title: "");
                   }));
             // ignore: unnecessary_null_comparison
-            }else if(htVarinviteCodeBean!=null && htVarinviteCodeBean.data != null && htVarinviteCodeBean.data.resolution.toString() == "100"){
+            }else if(htVarinviteCodeBean!=null  && htVarinviteCodeBean.resolution.toString() == "100"){
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) {
                     return const HTClassPremiumLauncherPage(title: "");
