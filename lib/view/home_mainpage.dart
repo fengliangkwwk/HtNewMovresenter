@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:ht_new_movpresenter/control/HomePageController.dart';
+// import 'package:ht_new_movpresenter/control/HomePageController.dart';
+import 'package:ht_new_movpresenter/ht_providers/ht_home_provider/ht_home_provider.dart';
+import 'package:ht_new_movpresenter/ht_providers/ht_home_provider/ht_home_provider_base.dart';
 import 'package:ht_new_movpresenter/view/play/play_detailpage.dart';
 import 'package:ht_new_movpresenter/view/play/play_detailpage_drama.dart';
 import 'package:ht_new_movpresenter/view/search/search_middlepage.dart';
 import 'package:get/get.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
-
+import 'package:provider/provider.dart';
 class HTClassHomeMainPage extends StatefulWidget {
   const HTClassHomeMainPage({Key? key, required this.title}) : super(key: key);
   final String title;
@@ -16,7 +18,7 @@ class HTClassHomeMainPage extends StatefulWidget {
 }
 
 class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
-  final _htVarDataController = Get.put(HomePageController());
+  final HTHomeProvider homeProvider = HTHomeProvider();///初始化provider
   final List<String> imgList = [
     'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
     'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
@@ -29,7 +31,8 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
   var imageSliders = null;
   @override
   void initState() {
-    _htVarDataController.imageList;
+    homeProvider.loadData();
+    // _htVarDataController.imageList;
     imageSliders = imgList
         // ignore: avoid_unnecessary_containers
         .map((item) => Container(
@@ -77,7 +80,15 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    var homeData = context.read<HTHomeProvider>().homeData;
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => homeProvider,
+        )
+      ],
+
+      child:  Scaffold(
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
           child: Column(
@@ -749,6 +760,8 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
           )
         ],
       )),
+    )
+
     );
   }
 }

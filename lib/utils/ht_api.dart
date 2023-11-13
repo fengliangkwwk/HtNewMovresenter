@@ -28,7 +28,7 @@ class Global{
   ///意见反馈
   static const feedbackUrl =  HTReqestDomainClass.htRequestDomain + portNO + '5' + lastStr;
   ///影视首页
-  static const homePageUrl =  HTReqestDomainClass.htRequestDomain + portNO + '250' + lastStr;
+  static const homePageUrl =  HTReqestDomainClass.htRequestDomain + '250' + lastStr;
   ///专题seeAll
   static const loginUrl =  HTReqestDomainClass.htRequestDomain + portNO + '253' + lastStr;
   ///瀑布流无限下拉

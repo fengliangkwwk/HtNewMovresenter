@@ -8,7 +8,7 @@ import 'package:ht_new_movpresenter/view/setting/setting_mineinfo.dart';
 void main() async{
   
   ///
-   await initApp();
+  //  await initApp();
   runApp(const HTClassApp());
 }
 

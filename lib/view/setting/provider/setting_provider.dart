@@ -28,9 +28,7 @@ class SettingProvider extends SettingProviderBase with SettingProviderMixin {
         return const LoginPage();
       }));
 
-
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-
       var res = {
         "phone": "1967584653",
         "email": "test_lvguorui8718@gmail.com",

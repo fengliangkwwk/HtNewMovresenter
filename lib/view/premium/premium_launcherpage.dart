@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/main.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
@@ -23,7 +24,11 @@ class _HTClassPremiumLauncherPageState
         body: Container(
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage(ImageURL.url_86), fit: BoxFit.fill)),
+                  image: CachedNetworkImageProvider(ImageURL.url_86), fit: BoxFit.fill)
+                  // image:Image(image: CachedNetworkImageProvider(ImageURL.url_86)),
+                  // Image(image: CachedNetworkImage(imageUrl: ImageURL.url_86), fit: BoxFit.fill)),
+                    // image: NetworkImage(ImageURL.url_86), fit: BoxFit.fill)
+                    ),
             child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
               Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Container(width: 16.0),
@@ -43,7 +48,8 @@ class _HTClassPremiumLauncherPageState
               Container(height: 24.0),
               Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Container(width: 16.0),
-                Image.network(ImageURL.url_89, width: 24.0, height: 24.0),
+                CachedNetworkImage(imageUrl: ImageURL.url_89, width: 24.0, height: 24.0),
+                // Image.network(ImageURL.url_89, width: 24.0, height: 24.0),
                 // Image.asset("image/icon_premium_launcher_1.png",width: 24.0, height: 24.0),
                 Container(width: 8.0),
                 const Text("The latest popular movies and TV shows",
@@ -52,7 +58,8 @@ class _HTClassPremiumLauncherPageState
               Container(height: 24.0),
               Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Container(width: 16.0),
-                Image.network(ImageURL.url_88, width: 24.0, height: 24.0),
+                CachedNetworkImage(imageUrl: ImageURL.url_88, width: 24.0, height: 24.0),
+                // Image.network(ImageURL.url_88, width: 24.0, height: 24.0),
                 // Image.asset("image/icon_premium_launcher_2.png",width: 24.0, height: 24.0),
                 Container(width: 8.0),
                 const Text("Important news, APP updates and more",
@@ -61,7 +68,8 @@ class _HTClassPremiumLauncherPageState
               Container(height: 24.0),
               Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Container(width: 16.0),
-                Image.network(ImageURL.url_87, width: 24.0, height: 24.0),
+                CachedNetworkImage(imageUrl: ImageURL.url_87, width: 24.0, height: 24.0),
+                // Image.network(ImageURL.url_87, width: 24.0, height: 24.0),
                 // Image.asset("image/icon_premium_launcher_3.png",width: 24.0, height: 24.0),
                 Container(width: 8.0),
                 const Text("Personalized Recommendations",
@@ -75,7 +83,8 @@ class _HTClassPremiumLauncherPageState
                       height: 45.0,
                       decoration: BoxDecoration(
                         image: const DecorationImage(
-                            image: NetworkImage(ImageURL.url_348),
+                               image: CachedNetworkImageProvider(ImageURL.url_348),
+                            // image: NetworkImage(ImageURL.url_348),
                           fit: BoxFit.cover,
                           ),
                         borderRadius: BorderRadius.circular(22.5),

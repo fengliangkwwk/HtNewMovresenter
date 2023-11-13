@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ht_new_movpresenter/control/HomePageController.dart';
+// import 'package:ht_new_movpresenter/control/HomePageController.dart';
 import 'package:ht_new_movpresenter/control/InviteCodeController.dart';
 import 'package:ht_new_movpresenter/utils/ui_utils.dart';
 import 'package:ht_new_movpresenter/view/premium/premium_launcherpage.dart';
