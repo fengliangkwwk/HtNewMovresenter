@@ -16,7 +16,6 @@ class HTClassHomeMainPage extends StatefulWidget {
   @override
   State<HTClassHomeMainPage> createState() => _HTClassHomeMainPageState();
 }
-
 class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
   final HTHomeProvider homeProvider = HTHomeProvider();///初始化provider
   final List<String> imgList = [
@@ -78,27 +77,11 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
     super.initState();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    var homeData = context.read<HTHomeProvider>().homeData;
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => homeProvider,
-        )
-      ],
+Widget HTTopSearchWidget(){
 
-      child:  Scaffold(
-      backgroundColor: Colors.black,
-      body: SingleChildScrollView(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Container(height: MediaQuery.of(context).padding.top),
-          SizedBox(
-              height: 56.0,
-              child:
-                  Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+  return SizedBox(
+    height: 56,
+    child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 Container(width: 10.0),
                 Image.network(ImageURL.url_281,width: 24,height: 24),
                 // Image.asset("image/icon_main_upload.png",
@@ -141,8 +124,13 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                     Image.network(ImageURL.url_282,width: 24,height: 24),
                     // Image.asset("image/icon_main_clock.png", width: 24, height: 24),
                 Container(width: 10.0),
-              ])),
-          Container(
+              ]),
+
+  );
+}
+///轮播图
+Widget HTBannerWidget(){
+  return  Container(
               height: 254.0,
               margin: const EdgeInsets.only(top: 12.0, bottom: 21.0),
               child: CarouselSlider(
@@ -153,7 +141,34 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                   enlargeStrategy: CenterPageEnlargeStrategy.height,
                 ),
                 items: imageSliders,
-              )),
+              ));
+}
+
+  @override
+
+  Widget build(BuildContext context) {
+    // var homeData = context.read<HTHomeProvider>().homeData;
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => homeProvider,
+        )
+      ],
+      child:  Scaffold(
+      backgroundColor: Colors.black,
+      body: SingleChildScrollView(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Container(height: MediaQuery.of(context).padding.top),
+          HTTopSearchWidget(),
+          HTBannerWidget(),
+
+
+
+
+
+         
           Row(children: [
             Container(width: 10.0),
             const Text("You May Also Like",
@@ -764,4 +779,6 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
 
     );
   }
+
 }
+
