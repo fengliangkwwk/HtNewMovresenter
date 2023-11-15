@@ -5,12 +5,14 @@ import 'package:ht_new_movpresenter/utils/ht_dio_utils.dart';
 import 'package:ht_new_movpresenter/utils/ui_utils.dart';
 import 'package:dio/dio.dart'as MidSearch;
 mixin HTMidSearchProviderMiXin on HTMidSearchProviderBase{
+
+  ht_mid_search_bean? data;
+
 Future<void> apiRequest (String type) async{
 /**
  * type  5.All; 1.Movies; 2.TV Shows; 3.Animated Series; 4.Animation Movies
  */
 
-ht_mid_search_bean data;
 
 Map<String,dynamic>htVarparams = {"type":type};
 await KTClassUIUtils.htMethodPutRequestCommonParams(htVarparams);

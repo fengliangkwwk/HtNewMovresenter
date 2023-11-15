@@ -149,6 +149,13 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage> with Single
                 },
                 //设置分割线，颜色为黑色，高度为1
                 separatorBuilder: (BuildContext context, int index){
+
+
+
+                    ///可以直接使用
+                    midSearchProvider.data;
+
+
                   return Divider(color: Color(0x70ECECEC), height: 1,);
                 },
             )
