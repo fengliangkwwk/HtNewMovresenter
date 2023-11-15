@@ -6,14 +6,11 @@ import 'package:ht_new_movpresenter/utils/ui_utils.dart';
 import 'package:dio/dio.dart'as MidSearch;
 mixin HTMidSearchProviderMiXin on HTMidSearchProviderBase{
 
-  ht_mid_search_bean? data;
-
+ht_mid_search_bean?midSearchBean;
 Future<void> apiRequest (String type) async{
 /**
  * type  5.All; 1.Movies; 2.TV Shows; 3.Animated Series; 4.Animation Movies
  */
-
-
 Map<String,dynamic>htVarparams = {"type":type};
 await KTClassUIUtils.htMethodPutRequestCommonParams(htVarparams);
 var formData = MidSearch.FormData.fromMap(htVarparams);
@@ -22,9 +19,7 @@ var dio = MidSearch.Dio();
     Global.midSearchUrl,
     data: formData,
     );
-
-   data = ht_mid_search_bean.fromJson(res.data['data']);
-
+    midSearchBean = ht_mid_search_bean.fromJson(res.data);
    print(res);
  }
 }
