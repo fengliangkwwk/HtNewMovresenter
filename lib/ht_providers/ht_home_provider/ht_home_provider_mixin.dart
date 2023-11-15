@@ -1,4 +1,3 @@
-
 import 'package:ht_new_movpresenter/ht_providers/ht_home_provider/ht_home_provider_base.dart';
 import 'package:ht_new_movpresenter/utils/ht_api.dart';
 import 'package:ht_new_movpresenter/utils/ht_dio_utils.dart';
@@ -28,12 +27,18 @@ mixin HTHomeProviderMixin  on HTHomeProviderBase {
     await KTClassUIUtils.htMethodPutRequestCommonParams(htVarparams);
     var formData = FormData.fromMap(htVarparams);
     // ignore: avoid_print
-    final res = await HttpUtils.instance.post(
+    var res = await HttpUtils.instance.post(
       Global.homePageUrl,
       params: formData,
       tips: true,
     );
-    print(res);
-    homeData = res;
+    print(res.data["default_set"]['data']);
+
+    // Map<String, dynamic> map = res.decode(res);
+    // String jsonString = map.encode(map);
+
+    // homeData = res.data.remove("dated_new");
+
+    homeData = res.data["default_set"]['data'];
    }
 }

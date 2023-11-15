@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -18,136 +21,16 @@ class HTClassHomeMainPage extends StatefulWidget {
 }
 class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
   final HTHomeProvider homeProvider = HTHomeProvider();///初始化provider
-  final List<String> imgList = [
-    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
-  ];
-  // ignore: avoid_init_to_null
-  var imageSliders = null;
+  var homeData;
+
   @override
   void initState() {
     homeProvider.loadData();
     // _htVarDataController.imageList;
-    imageSliders = imgList
-        // ignore: avoid_unnecessary_containers
-        .map((item) => Container(
-              child: Container(
-                margin: const EdgeInsets.all(5.0),
-                child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                    child: Stack(
-                      children: <Widget>[
-                        Image.network(item, fit: BoxFit.cover, width: 1000.0),
-                        Positioned(
-                          bottom: 0.0,
-                          left: 0.0,
-                          right: 0.0,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(200, 0, 0, 0),
-                                  Color.fromARGB(0, 0, 0, 0)
-                                ],
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
-                              ),
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 20.0),
-                            child: Text(
-                              'No. ${imgList.indexOf(item)} image',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )),
-              ),
-            ))
-        .toList();
     super.initState();
   }
-
-Widget HTTopSearchWidget(){
-
-  return SizedBox(
-    height: 56,
-    child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                Container(width: 10.0),
-                Image.network(ImageURL.url_281,width: 24,height: 24),
-                // Image.asset("image/icon_main_upload.png",
-                //     width: 24, height: 24),
-                Container(width: 6.0),
-                Expanded(
-                    child: Container(
-                  height: 36.0,
-                  decoration: BoxDecoration(
-                      color: const Color(0xff36373C),
-                      borderRadius: BorderRadius.circular(10.0)),
-                  child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(width: 20.0),
-                        Expanded(
-                            child: TextField(
-                                controller: TextEditingController(),
-                                enableInteractiveSelection: false,
-                                decoration: const InputDecoration(
-                                    hintText: "Search for Movies,TV",
-                                    border: InputBorder.none,
-                                    hintStyle: TextStyle(
-                                        color: Color(0xffAEAFB1),
-                                        fontSize: 15.0)),
-                                onTap: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return const HTClassSearchMidPage(
-                                        title: "");
-                                  }));
-                                })),
-                        Image.network(ImageURL.url_283,width: 16,height: 16),
-                        // Image.asset("image/icon_main_search.png",
-                        //     width: 16, height: 16),
-                        Container(width: 10.0),
-                      ]),
-                )),
-                Container(width: 6.0),
-                    Image.network(ImageURL.url_282,width: 24,height: 24),
-                    // Image.asset("image/icon_main_clock.png", width: 24, height: 24),
-                Container(width: 10.0),
-              ]),
-
-  );
-}
-///轮播图
-Widget HTBannerWidget(){
-  return  Container(
-              height: 254.0,
-              margin: const EdgeInsets.only(top: 12.0, bottom: 21.0),
-              child: CarouselSlider(
-                options: CarouselOptions(
-                  autoPlay: true,
-                  aspectRatio: 2.0,
-                  enlargeCenterPage: true,
-                  enlargeStrategy: CenterPageEnlargeStrategy.height,
-                ),
-                items: imageSliders,
-              ));
-}
-
   @override
-
   Widget build(BuildContext context) {
-    // var homeData = context.read<HTHomeProvider>().homeData;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -162,13 +45,7 @@ Widget HTBannerWidget(){
         children: <Widget>[
           Container(height: MediaQuery.of(context).padding.top),
           HTTopSearchWidget(),
-          HTBannerWidget(),
-
-
-
-
-
-         
+          HTBannerWidget(),      
           Row(children: [
             Container(width: 10.0),
             const Text("You May Also Like",
@@ -779,6 +656,376 @@ Widget HTBannerWidget(){
 
     );
   }
+///上面的搜索框
+Widget HTTopSearchWidget(){
+  // homeData = context.read<HTHomeProvider>().homeData;
+  return SizedBox(
+    height: 56,
+    child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                Container(width: 10.0),
+                Image.network(ImageURL.url_281,width: 24,height: 24),
+                Container(width: 6.0),
+                Expanded(
+                    child: Container(
+                  height: 36.0,
+                  decoration: BoxDecoration(
+                      color: const Color(0xff36373C),
+                      borderRadius: BorderRadius.circular(10.0)),
+                  child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(width: 20.0),
+                        Expanded(
+                            child: TextField(
+                                controller: TextEditingController(),
+                                enableInteractiveSelection: false,
+                                decoration: const InputDecoration(
+                                    hintText: "Search for Movies,TV",
+                                    border: InputBorder.none,
+                                    hintStyle: TextStyle(
+                                        color: Color(0xffAEAFB1),
+                                        fontSize: 15.0)),
+                                onTap: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return const HTClassSearchMidPage(
+                                        title: "");
+                                  }));
+                                })),
+                        Image.network(ImageURL.url_283,width: 16,height: 16),
+                        // Image.asset("image/icon_main_search.png",
+                        //     width: 16, height: 16),
+                        Container(width: 10.0),
+                      ]),
+                )),
+                Container(width: 6.0),
+                    Image.network(ImageURL.url_282,width: 24,height: 24),
+                    // Image.asset("image/icon_main_clock.png", width: 24, height: 24),
+                Container(width: 10.0),
+              ]),
+
+  );
+}
+///样式上面标题那一行
+Widget HTHeaderWidget(){
+  return SizedBox(
+    child:Row(children: [
+            Container(width: 10.0),
+            const Text("You May Also Like",
+                style: TextStyle(
+                    fontSize: 18.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600)),
+            const Spacer(),
+            Image.network(ImageURL.url_289,width: 24,height: 24),
+            Container(width: 10.0)
+          ]),
+  );
+}
+/**
+ * 首页UI有3种类型，轮播图、横滑、九宫格
+ * "display_type": 1、竖滑(九宫格)；2、横滑；3、轮播图
+ */
+
+///样式一 轮播图 display_type = 3
+Widget HTBannerWidget(){
+
+   final List<String> imgList = [
+    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
+    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
+    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+    'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
+    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
+  ];
+  // ignore: avoid_init_to_null
+  var imageSliders = null;
+ imageSliders = imgList
+//  imageSliders = homeProvider.homeData.data
+        // ignore: avoid_unnecessary_containers
+        .map((item) => Container(
+              child: Container(
+                margin: const EdgeInsets.all(5.0),
+                child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                    child: Stack(
+                      children: <Widget>[
+                        // CachedNetworkImage(imageUrl: item["nw_img"],fit: BoxFit.cover, width: 1000.0),
+                        Image.network(item, fit: BoxFit.cover, width: 1000.0),
+                        Positioned(
+                          bottom: 0.0,
+                          left: 0.0,
+                          right: 0.0,
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color.fromARGB(200, 0, 0, 0),
+                                  Color.fromARGB(0, 0, 0, 0)
+                                ],
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                              ),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20.0),
+                            child: Text(
+                              'No. ${imgList.indexOf(item)} image',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+              ),
+            ))
+        .toList();
+  return  Container(
+              height: 254.0,
+              margin: const EdgeInsets.only(top: 12.0, bottom: 21.0),
+              child: CarouselSlider(
+                options: CarouselOptions(
+                  autoPlay: true,
+                  aspectRatio: 2.0,
+                  enlargeCenterPage: true,
+                  enlargeStrategy: CenterPageEnlargeStrategy.height,
+                ),
+                items: imageSliders,
+              ));
+}
+
+///样式二 横滑 display_type = 2
+Widget HTSideslipWiget(){
+  return Container(
+    child:ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [1, 2, 3, 4, 5]
+                      .map((index) => GestureDetector(
+                          child: Container(
+                              width: 112.0,
+                              margin: const EdgeInsets.only(right: 5.0),
+                              child: Stack(children: [
+                                Image.asset("image/pic_banner_test.png",
+                                    height: 180.0, fit: BoxFit.fill),
+                                const Positioned(
+                                    left: 5.0,
+                                    top: 5.0,
+                                    child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Text("8.",
+                                              style: TextStyle(
+                                                  color: Color(0xffFF6D1C),
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w600)),
+                                          Text("0",
+                                              style: TextStyle(
+                                                  color: Color(0xffFF6D1C),
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w600))
+                                        ])),
+                                Positioned(
+                                    top: 5.0,
+                                    right: 5.0,
+                                    child: Image.asset(
+                                        "image/icon_main_camera.png",
+                                        width: 34,
+                                        height: 16.0)),
+                                Positioned(
+                                    bottom: 46.0,
+                                    width: 112.0,
+                                    child: Container(
+                                        height: 24.0,
+                                        decoration: const BoxDecoration(
+                                            gradient: LinearGradient(
+                                                begin: Alignment.topCenter,
+                                                end: Alignment.bottomCenter,
+                                                colors: [
+                                              Colors.transparent,
+                                              Colors.black
+                                            ])),
+                                        child: const Row(children: [
+                                          Spacer(),
+                                          Text("NEW",
+                                              style: TextStyle(
+                                                  color: Color(0xffFF6D1C),
+                                                  fontSize: 8.0)),
+                                          Text("|S07 E08",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 8.0))
+                                        ]))),
+                                const Positioned(
+                                    top: 185.0,
+                                    left: 5.0,
+                                    right: 5.0,
+                                    child: Text("Minions:The Rise of Gru",
+                                        maxLines: 2,
+                                        style: TextStyle(
+                                            color: Color(0xff828386),
+                                            fontSize: 12.0)))
+                              ])),
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return const HTClassPresentDetailPage(title: "");
+                            }));
+                          }
+                          ))
+                      .toList()),
+  );
+
+}
+
+///样式三 九宫格 display_type = 1
+Widget HTGridStyleWidget(){
+  return Container(
+    child:  GridView.count(
+              crossAxisCount: 3,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              childAspectRatio: 0.575,
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
+              mainAxisSpacing: 10.0,
+              crossAxisSpacing: 9.5,
+              children: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                  .map((index) => GestureDetector(
+                      child: Container(
+                          width: 112.0,
+                          margin: const EdgeInsets.only(right: 5.0),
+                          child: Stack(children: [
+                            Image.asset("image/pic_banner_test.png",
+                                height: 180.0, fit: BoxFit.fill),
+                            const Positioned(
+                                left: 5.0,
+                                top: 5.0,
+                                child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text("8.",
+                                          style: TextStyle(
+                                              color: Color(0xffFF6D1C),
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600)),
+                                      Text("0",
+                                          style: TextStyle(
+                                              color: Color(0xffFF6D1C),
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600))
+                                    ])),
+                            const Positioned(
+                                top: 185.0,
+                                left: 5.0,
+                                right: 5.0,
+                                child: Text("Minions:The Rise of Gru",
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                        color: Color(0xff828386),
+                                        fontSize: 12.0)))
+                          ])),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const HTClassDramaDetailPage(title: "");
+                        }));
+                      }))
+                  .toList()),
+  );
+}
+
+///瀑布流
+Widget HTWaterfallFlowWidget(){
+  return Container(
+    child:  MasonryGridView.count(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: 2,
+            itemCount: 5,
+            itemBuilder: (BuildContext context, int index) => index % 4 == 3
+                ? Container(
+                    alignment: Alignment.center,
+                    color: Colors.blue,
+                    height: 200,
+                    child: const Text("广告"),
+                  )
+                : Container(
+                    decoration: BoxDecoration(
+                        color: const Color(0xff23252A),
+                        borderRadius: BorderRadius.circular(5.0)),
+                    width: double.infinity,
+                    height: 226.0,
+                    child: Stack(children: [
+                      Image.asset("image/pic_banner_test.png",
+                          height: 180.0, fit: BoxFit.fill),
+                      const Positioned(
+                          left: 5.0,
+                          top: 5.0,
+                          child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text("8.",
+                                    style: TextStyle(
+                                        color: Color(0xffFF6D1C),
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600)),
+                                Text("0",
+                                    style: TextStyle(
+                                        color: Color(0xffFF6D1C),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600))
+                              ])),
+                      Positioned(
+                          bottom: 45.0,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                              height: 24.0,
+                              decoration: const BoxDecoration(
+                                  gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [
+                                    Colors.transparent,
+                                    Colors.black
+                                  ])),
+                              child: const Row(children: [
+                                Spacer(),
+                                Text("NEW",
+                                    style: TextStyle(
+                                        color: Color(0xffFF6D1C),
+                                        fontSize: 8.0)),
+                                Text("|S07 E08",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 8.0))
+                              ]))),
+                      const Positioned(
+                          top: 188.0,
+                          left: 10.0,
+                          right: 10.0,
+                          child: Text(
+                              "Minions:The Rise of Gru What are you Doing",
+                              maxLines: 2,
+                              style: TextStyle(
+                                  color: Color(0xff828386), fontSize: 12.0)))
+                    ])),
+            mainAxisSpacing: 10.0,
+            crossAxisSpacing: 11.0,
+          ),
+
+  );
+
+}
+
+
+
+
+
 
 }
 
