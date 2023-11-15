@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/ht_providers/ht_midsearch_provider/ht_midsearch_provider.dart';
 import 'package:ht_new_movpresenter/view/search/search_resultpage.dart';
+import 'package:provider/provider.dart';
 import '../../utils/ui_utils.dart';
 
 class HTClassSearchMidPage extends StatefulWidget {
@@ -21,14 +23,14 @@ class HTClassSearchMidPage extends StatefulWidget {
 }
 
 class _HTClassSearchMidPageState extends State<HTClassSearchMidPage> with SingleTickerProviderStateMixin {
-
+  final HTMidSearchProvider  midSearchProvider = HTMidSearchProvider();
   var _htVarTabController = null;
   var _htVarFieldFocusNode = FocusNode();
   var _htVarSearchValue = "";
   var _htVarFieldController = TextEditingController();
-
   @override
   void initState() {
+    midSearchProvider.loadData();
     _htVarTabController = TabController(length:5, vsync: this);
     _htVarFieldFocusNode.addListener(() {
       if(_htVarFieldFocusNode.hasFocus){
@@ -39,7 +41,13 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage> with Single
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  MultiProvider(
+      providers:[
+        ChangeNotifierProvider(
+          create:(context)=> midSearchProvider,
+          )
+      ],
+      child: Scaffold(
         backgroundColor: Colors.black,
         body: SingleChildScrollView(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children: [
           Container(height: MediaQuery.of(context).padding.top),
@@ -145,6 +153,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage> with Single
                 },
             )
           ]))
-        ])));
+        ])))
+      );
   }
 }

@@ -16,7 +16,8 @@ class Global{
 
 
 // class Api {
-  static const portNO = ':4523/';
+  // static const portNO = ':4523/';
+  static const portNO = '';
   static const midStr = 'm1/1583329-0-default/';
   static const lastStr = '/';
   ///318邀请码

@@ -25,7 +25,6 @@ class KTClassUIUtils{
     var devId = await DeviceInformation.deviceName;
       if (io.Platform.isIOS) {
 //通知栏回调里的deviceToken
-
         htVarParam.putIfAbsent(
             "apns_id", () => "8a983582effc3d97a8a8333eeeb790e187c2caeb3c3f88a48cd18ae7c84a3d93");
         htVarParam.putIfAbsent("app_id", () => "266"); //app编号，测试用100默认是100
@@ -36,13 +35,13 @@ class KTClassUIUtils{
         htVarParam.putIfAbsent("deviceNo", () => imeiID);//公参：设备信息
         htVarParam.putIfAbsent("idfa", () => imeiID);//公参：IDFA（
         htVarParam.putIfAbsent("imsi", () => '51502');//网络供应商国家编号+网络编号  默认值:51502
-        htVarParam.putIfAbsent("installTime", () => DateTime.now().millisecondsSinceEpoch);//首次安装时间
+        htVarParam.putIfAbsent("installTime", () => (DateTime.now().millisecondsSinceEpoch).toString());//首次安装时间
         htVarParam.putIfAbsent("lang", () => "en");//公参：设备当前语言 默认值:en
         htVarParam.putIfAbsent("model", () => modelID);//设备型号 默认值:iPhone10,3
-        htVarParam.putIfAbsent("os_ver", () => devId);//设备系统版本，如16.0(UIDevice.currentDevice.systemVersion)
+        htVarParam.putIfAbsent("os_ver", () => "16.1");//设备系统版本，如16.0(UIDevice.currentDevice.systemVersion)
         htVarParam.putIfAbsent("r1", () => "100");//开关状态 默认值:100
         htVarParam.putIfAbsent("reg_id", () => "0");//推送fcmToken 默认值:0
-        htVarParam.putIfAbsent("resolution", () => defRes);//屏幕分辨率 默认值: 1125x2436
+        htVarParam.putIfAbsent("resolution", () => "1125x2436");//屏幕分辨率 默认值: 1125x2436
         htVarParam.putIfAbsent("simcard", () => "1");//是否插入手机卡 默认值:1
         htVarParam.putIfAbsent("timezone", () => "8");//时区 默认值:8
         htVarParam.putIfAbsent("token", () => "1");//默认传1 默认值:1
@@ -60,7 +59,7 @@ class KTClassUIUtils{
         htVarParam.putIfAbsent(
             "idfa", () => "276E0495-66F6-417B-92FA-66EF0DC69DD4");
         htVarParam.putIfAbsent("imsi", () => "51502");
-        htVarParam.putIfAbsent("installTime", () => "1676455895");
+        htVarParam.putIfAbsent("installTime", () => (DateTime.now().millisecondsSinceEpoch).toString());
         htVarParam.putIfAbsent("lang", () => "en");
         htVarParam.putIfAbsent("control", () => "iPhone10,3");
         htVarParam.putIfAbsent("os_ver", () => "16.1");
@@ -85,7 +84,7 @@ class KTClassUIUtils{
       htVarParam.putIfAbsent(
           "idfa", () => "276E0495-66F6-417B-92FA-66EF0DC69DD4");
       htVarParam.putIfAbsent("imsi", () => "51502");
-      htVarParam.putIfAbsent("installTime", () => "1676455895");
+      htVarParam.putIfAbsent("installTime", () => (DateTime.now().millisecondsSinceEpoch).toString());
       htVarParam.putIfAbsent("lang", () => "en");
       htVarParam.putIfAbsent("control", () => "iPhone10,3");
       htVarParam.putIfAbsent("os_ver", () => "16.1");
