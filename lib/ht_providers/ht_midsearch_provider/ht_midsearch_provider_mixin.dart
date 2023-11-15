@@ -1,3 +1,4 @@
+import 'package:ht_new_movpresenter/bean/ht_mid_search_bean.dart';
 import 'package:ht_new_movpresenter/ht_providers/ht_midsearch_provider/ht_midsearch_provider_base.dart';
 import 'package:ht_new_movpresenter/utils/ht_api.dart';
 import 'package:ht_new_movpresenter/utils/ht_dio_utils.dart';
@@ -9,6 +10,8 @@ Future<void> apiRequest (String type) async{
  * type  5.All; 1.Movies; 2.TV Shows; 3.Animated Series; 4.Animation Movies
  */
 
+ht_mid_search_bean data;
+
 Map<String,dynamic>htVarparams = {"type":type};
 await KTClassUIUtils.htMethodPutRequestCommonParams(htVarparams);
 var formData = MidSearch.FormData.fromMap(htVarparams);
@@ -17,6 +20,9 @@ var dio = MidSearch.Dio();
     Global.midSearchUrl,
     data: formData,
     );
+
+   data = ht_mid_search_bean.fromJson(res.data['data']);
+
    print(res);
  }
 }
