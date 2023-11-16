@@ -1,9 +1,13 @@
+import 'dart:math';
+
 import 'package:ht_new_movpresenter/bean/ht_mid_search_bean.dart';
 import 'package:ht_new_movpresenter/ht_providers/ht_midsearch_provider/ht_midsearch_provider_base.dart';
 import 'package:ht_new_movpresenter/utils/ht_api.dart';
 import 'package:ht_new_movpresenter/utils/ht_dio_utils.dart';
 import 'package:ht_new_movpresenter/utils/ui_utils.dart';
 import 'package:dio/dio.dart'as MidSearch;
+import "dart:convert";
+
 mixin HTMidSearchProviderMiXin on HTMidSearchProviderBase{
 
 ht_mid_search_bean?midSearchBean;
@@ -19,7 +23,15 @@ var dio = MidSearch.Dio();
     Global.midSearchUrl,
     data: formData,
     );
-    midSearchBean = ht_mid_search_bean.fromJson(res.data);
-   print(res);
+    print(res);  
+    // res.data.forEach((item){
+    //  midSearchBean = ht_mid_search_bean.fromJson(item);
+    // });
+    // midSearchBean = ht_mid_search_bean.fromJson(res);
+
+    Map map = jsonDecode(res.toString());
+    Map<String, dynamic> stringMap = map.map((key, value) => MapEntry(key.toString(), value));
+    midSearchBean = ht_mid_search_bean.fromJson(stringMap);
+    print(midSearchBean);
  }
 }

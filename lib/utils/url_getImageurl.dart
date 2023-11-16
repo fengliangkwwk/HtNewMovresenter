@@ -99,16 +99,16 @@ class ImageURL {
   static const url_294 = HTReqestDomainClass.htImageDomain + '294@3x.png';
   static const url_295 = HTReqestDomainClass.htImageDomain + '295@3x.png';
   ///播放--横屏
-  static const url_75 = HTReqestDomainClass.htImageDomain + '295@3x.png';
-  static const url_76 = HTReqestDomainClass.htImageDomain + '295@3x.png';
-  static const url_105 = HTReqestDomainClass.htImageDomain + '295@3x.png';
-  static const url_161 = HTReqestDomainClass.htImageDomain + '295@3x.png';
-  static const url_162 = HTReqestDomainClass.htImageDomain + '295@3x.png';
-  static const url_163 = HTReqestDomainClass.htImageDomain + '295@3x.png';
-  static const url_164 = HTReqestDomainClass.htImageDomain + '295@3x.png';
-  static const url_249 = HTReqestDomainClass.htImageDomain + '295@3x.png';
-  static const url_258 = HTReqestDomainClass.htImageDomain + '295@3x.png';
-  static const url_259 = HTReqestDomainClass.htImageDomain + '295@3x.png';
+  static const url_75 = HTReqestDomainClass.htImageDomain + '75@3x.png';
+  static const url_76 = HTReqestDomainClass.htImageDomain + '76@3x.png';
+  static const url_105 = HTReqestDomainClass.htImageDomain + '105@3x.png';
+  static const url_161 = HTReqestDomainClass.htImageDomain + '161@3x.png';
+  static const url_162 = HTReqestDomainClass.htImageDomain + '162@3x.png';
+  static const url_163 = HTReqestDomainClass.htImageDomain + '163@3x.png';
+  static const url_164 = HTReqestDomainClass.htImageDomain + '164@3x.png';
+  static const url_249 = HTReqestDomainClass.htImageDomain + '249@3x.png';
+  static const url_258 = HTReqestDomainClass.htImageDomain + '258@3x.png';
+  static const url_259 = HTReqestDomainClass.htImageDomain + '259@3x.png';
   static const url_310 = HTReqestDomainClass.htImageDomain + '310@3x.png';
   static const url_311 = HTReqestDomainClass.htImageDomain + '311@3x.png';
   static const url_312 = HTReqestDomainClass.htImageDomain + '312@3x.png';

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/ht_providers/ht_searchresult_provider/ht_searchresult_provider.dart';
 import 'package:ht_new_movpresenter/view/search/search_middlepage.dart';
+import 'package:provider/provider.dart';
 
 class HTClassSearchResultPage extends StatefulWidget {
   const HTClassSearchResultPage({Key? key, required this.title}) : super(key: key);
@@ -20,10 +22,11 @@ class HTClassSearchResultPage extends StatefulWidget {
 }
 
 class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
+  HTSearchResultProvider searchResultProvider = HTSearchResultProvider();
   var _htVarFieldFocusNode = FocusNode();
-
   @override
   void initState() {
+    searchResultProvider.loadSearchResulrData();
     _htVarFieldFocusNode.addListener(() {
       if(_htVarFieldFocusNode.hasFocus){
         Navigator.push(context,
@@ -34,10 +37,15 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
     });
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context)=>searchResultProvider,
+          )
+      ],
+      child:Scaffold(
         backgroundColor: Colors.black,
         body: SingleChildScrollView(child: Column(children: [
           Container(height: MediaQuery.of(context).padding.top),
@@ -101,6 +109,11 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                   Spacer(),Text("NEW",style: TextStyle(color: Color(0xffFF6D1C),fontSize: 8.0)),Text("|S07 E08",style: TextStyle(color: Colors.white,fontSize: 8.0))]))),
                 Positioned(top:185.0,left:5.0,right: 5.0,child: Text("Minions:The Rise of Gru",maxLines: 2, style: TextStyle(color: Color(0xff828386),fontSize: 12.0)))
               ]))).toList()),
-        ])));
+        ])))
+      );
+    
+    
+    
+    
   }
 }

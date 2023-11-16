@@ -59,8 +59,6 @@ class _HTClassPremiumLauncherPageState
               Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Container(width: 16.0),
                 CachedNetworkImage(imageUrl: ImageURL.url_88, width: 24.0, height: 24.0),
-                // Image.network(ImageURL.url_88, width: 24.0, height: 24.0),
-                // Image.asset("image/icon_premium_launcher_2.png",width: 24.0, height: 24.0),
                 Container(width: 8.0),
                 const Text("Important news, APP updates and more",
                     style: TextStyle(color: Colors.white, fontSize: 16.0))
@@ -69,8 +67,6 @@ class _HTClassPremiumLauncherPageState
               Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Container(width: 16.0),
                 CachedNetworkImage(imageUrl: ImageURL.url_87, width: 24.0, height: 24.0),
-                // Image.network(ImageURL.url_87, width: 24.0, height: 24.0),
-                // Image.asset("image/icon_premium_launcher_3.png",width: 24.0, height: 24.0),
                 Container(width: 8.0),
                 const Text("Personalized Recommendations",
                     style: TextStyle(color: Colors.white, fontSize: 16.0))
@@ -84,7 +80,6 @@ class _HTClassPremiumLauncherPageState
                       decoration: BoxDecoration(
                         image: const DecorationImage(
                                image: CachedNetworkImageProvider(ImageURL.url_348),
-                            // image: NetworkImage(ImageURL.url_348),
                           fit: BoxFit.cover,
                           ),
                         borderRadius: BorderRadius.circular(22.5),
