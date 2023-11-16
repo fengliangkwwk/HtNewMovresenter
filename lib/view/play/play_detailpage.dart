@@ -27,7 +27,8 @@ class _HTClassPresentDetailPageState extends State<HTClassPresentDetailPage> {
   ];
   final List<String> videoList = [
     'http://playertest.longtailvideo.com/adaptive/bipbop/gear4/prog_index.m3u8',
-    'https://media.w3.org/2010/05/sintel/trailer.mp4',
+    'https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_20mb.mp4',
+    'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
     'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4'
   ];
   final FijkPlayer _htVarplayer = FijkPlayer();
@@ -35,8 +36,20 @@ class _HTClassPresentDetailPageState extends State<HTClassPresentDetailPage> {
   var _htVarInfoShown = false;
   @override
   void initState() {
-    _htVarplayer .setDataSource(videoList[1], autoPlay: true);
+    //     if(videoList[2].contains("rtsp")){
+    //     //rtsp视频关键配置
+    //    _htVarplayer.setOption(FijkOption.formatCategory, "rtsp_transport", "tcp");
+    //     // fijkPlayer 初始化不启用缓冲，避免画面卡死不动
+    //    _htVarplayer.setOption(FijkOption.playerCategory, 'packet-buffering', 0);
+    //    _htVarplayer.setOption(FijkOption.playerCategory, 'framedrop', 1);
+    // }
     super.initState();
+        _htVarplayer .setDataSource(videoList[2], autoPlay: true);
+  }
+  @override
+  void dispose(){
+    super.dispose();
+    _htVarplayer.release();
   }
 
   @override
@@ -62,23 +75,6 @@ class _HTClassPresentDetailPageState extends State<HTClassPresentDetailPage> {
                     },
                     child: CachedNetworkImage(imageUrl:ImageURL.url_291,width: 24.0, height: 24.0,fit: BoxFit.fill,),
                   )
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  // Container(
-                  //   width: 24,
-                  //   height: 24,
-                  //   decoration: const BoxDecoration(
-                  //     image: DecorationImage(
-                  //         image: CachedNetworkImageProvider(ImageURL.url_291),
-                  //         fit: BoxFit.fill,
-                  //         ),
-                  //   ),
-                  // )
                 ),
                   //  CachedNetworkImage(imageUrl:ImageURL.url_291,width: 24.0, height: 24.0,fit: BoxFit.fill,),left: 10.0, top: 11.0),//返回图标
                 Positioned(right:11.0, top:10.0,child: 

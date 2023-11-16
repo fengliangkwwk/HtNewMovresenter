@@ -34,11 +34,11 @@ mixin HTHomeProviderMixin  on HTHomeProviderBase {
     data: formData,
     );
 
-    print(res.data["default_set"]['data']);
+    // print(res.data["default_set"]['data']);
     // Map<String, dynamic> map = res.decode(res);
     // String jsonString = map.encode(map);
 
     // homeData = res.data.remove("dated_new");
-    homeData = res.data["default_set"]['data'];
+    // homeData = res.data["default_set"]['data'];
    }
 }
