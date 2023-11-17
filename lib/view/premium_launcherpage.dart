@@ -1,3 +1,6 @@
+/**
+ * 启动广告页
+ */
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/main.dart';

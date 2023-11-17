@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ht_new_movpresenter/view/premium/premium_family_addpage.dart';
+import 'package:ht_new_movpresenter/view/premium/ht_premiun_views/premium_family_addpage.dart';
 
 class HTClassFamilyNoProjPage extends StatefulWidget {
   const HTClassFamilyNoProjPage({Key? key, required this.title}) : super(key: key);

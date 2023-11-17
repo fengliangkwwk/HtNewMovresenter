@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 
 class HTClassFamilyAddPage extends StatefulWidget {
   const HTClassFamilyAddPage({Key? key, required this.title}) : super(key: key);
@@ -39,9 +41,17 @@ class _HTClassFamilyAddPageState extends State<HTClassFamilyAddPage> {
               fontWeight: FontWeight.w600)),
           centerTitle: true,
           leadingWidth: 24.0,
-          leading: Image.asset("image/icon_setting_back_w.png", width: 24.0,
-              height: 24.0,
-              fit: BoxFit.scaleDown),
+          leading: InkWell(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: CachedNetworkImage(
+                imageUrl: ImageURL.url_291,
+                width: 24.0,
+                height: 24.0,
+                fit: BoxFit.contain,
+              ),
+            ),
         ),
         body: Column(children: [
           Container(margin: EdgeInsets.fromLTRB(32.0, 56.0, 31.0, 0.0),height: 26.0,child: Row(children: [

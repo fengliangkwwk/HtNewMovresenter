@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/utils/ht_init_app.dart';
 import 'package:ht_new_movpresenter/view/home_launcherpage.dart';
 import 'package:ht_new_movpresenter/view/home_mainpage.dart';
-import 'package:ht_new_movpresenter/view/premium/premium_indexerpage.dart';
+import 'package:ht_new_movpresenter/view/premium/ht_premiun_views/premium_indexerpage.dart';
 import 'package:ht_new_movpresenter/view/setting/setting_mineinfo.dart';
 
 void main() async{
