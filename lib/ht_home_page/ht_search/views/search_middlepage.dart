@@ -1,3 +1,6 @@
+/**
+ * 搜索中间页
+ */
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/providers/ht_midsearch_provider/ht_midsearch_provider.dart';
@@ -24,8 +27,15 @@ class HTClassSearchMidPage extends StatefulWidget {
   State<HTClassSearchMidPage> createState() => _HTClassSearchMidPageState();
 }
 
-class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
-    with SingleTickerProviderStateMixin {
+class _HTClassSearchMidPageState extends State<HTClassSearchMidPage> with SingleTickerProviderStateMixin {
+  final List<String> imgList = [
+    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
+    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
+    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+    'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
+    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
+  ];
   final HTMidSearchProvider midSearchProvider = HTMidSearchProvider();
   var _htVarTabController = null;
   var _htVarFieldFocusNode = FocusNode();
@@ -85,7 +95,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                                             controller: _htVarFieldController,
                                             autofocus: true,
                                             focusNode: _htVarFieldFocusNode,
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                                 hintText:
                                                     "Search for Movies,TV",
                                                 border: InputBorder.none,
@@ -93,14 +103,9 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                                                     color: Color(0xffAEAFB1),
                                                     fontSize: 15.0)),
                                             onChanged: (val) {
-                                              if (_htVarFieldController.value
-                                                      .toString()
-                                                      .length >
-                                                  0) {
+                                              if (_htVarFieldController.value.toString().isNotEmpty) {
                                                 setState(() {
-                                                  _htVarSearchValue =
-                                                      _htVarFieldController
-                                                          .value.text;
+                                                  _htVarSearchValue = _htVarFieldController.value.text;
                                                 });
                                               }
                                             })),
@@ -121,7 +126,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                                 children: [
                                   Row(children: [
                                     Container(width: 10.0),
-                                    Text("History",
+                                    const Text("History",
                                         style: TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.white,
@@ -140,11 +145,11 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                                         textDirection: TextDirection.ltr,
                                         children: [1, 2, 3, 4, 5, 6]
                                             .map((index) => Container(
-                                                padding: EdgeInsets.symmetric(
+                                                padding: const EdgeInsets.symmetric(
                                                     horizontal: 15.0,
                                                     vertical: 5.0),
                                                 child: Text(index.toString(),
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         color:
                                                             Color(0xffBCBDBE),
                                                         fontSize: 14.0)),
@@ -159,7 +164,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                         Container(height: 20.0),
                         Row(children: [
                           Container(width: 10.0),
-                          Text("Top Search",
+                          const Text("Top Search",
                               style: TextStyle(
                                   fontSize: 18.0,
                                   color: Colors.white,
@@ -173,7 +178,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                                 isScrollable: true,
                                 indicatorSize: TabBarIndicatorSize.label,
                                 indicatorColor: Color(0xff3CDEF4),
-                                tabs: <Widget>[
+                                tabs: const <Widget>[
                                   Tab(text: 'All'),
                                   Tab(text: 'Movie'),
                                   Tab(text: 'TV Shows'),
@@ -186,41 +191,30 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                         GridView.count(
                             crossAxisCount: 3,
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             childAspectRatio: 0.575,
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 10.0, horizontal: 0.0),
                             mainAxisSpacing: 10.0,
                             crossAxisSpacing: 9.5,
                             children: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
                                 .map((index) => Container(
                                     width: 112.0,
-                                    margin: EdgeInsets.only(right: 5.0),
+                                    margin: const EdgeInsets.only(right: 5.0),
                                     child: Stack(children: [
-                                      Image.asset("image/pic_banner_test.png",
-                                          height: 180.0, fit: BoxFit.fill),
-                                      Positioned(
-                                          left: 5.0,
-                                          top: 5.0,
-                                          child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Text("8.",
-                                                    style: TextStyle(
-                                                        color:
-                                                            Color(0xffFF6D1C),
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.w600)),
-                                                Text("0",
-                                                    style: TextStyle(
-                                                        color:
-                                                            Color(0xffFF6D1C),
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w600))
-                                              ])),
+                                      CachedNetworkImage(imageUrl: imgList[0],height: 180.0, fit: BoxFit.fill),///背景图片
+                                      const Positioned(
+                                          left: 0.0,
+                                          top: 0.0,
+                                          height: 30,
+                                          width: 30,
+                                          child: Image(
+                                            fit: BoxFit.cover,
+                                            height: 30,
+                                            width: 30,
+                                            image: CachedNetworkImageProvider(ImageURL.url_296),
+                                            ),
+                                          ),
                                       Positioned(
                                           left: 0,
                                           top: 0,
@@ -228,7 +222,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                                               child: KTClassUIUtils
                                                   .htMethodGetRankingNumbers(
                                                       index))),
-                                      Positioned(
+                                      const Positioned(
                                           top: 185.0,
                                           left: 5.0,
                                           right: 5.0,
@@ -248,9 +242,9 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                           children: [
                             Container(height: 20.0),
                             Container(
-                                padding: EdgeInsets.only(left: 10.0),
+                                padding: const EdgeInsets.only(left: 10.0),
                                 child: Text("Search \"${_htVarSearchValue}\"",
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Color(0xff29D3EA),
                                         fontSize: 14.0))),
                             Container(height: 20.0),
@@ -271,7 +265,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                                           children: [
                                             CachedNetworkImage(imageUrl: ImageURL.url_300,width: 16,height: 16),
                                             Container(width: 10.0),
-                                            Text("the closest one",
+                                            const Text("the closest one",
                                                 style: TextStyle(
                                                     color: Color(0xffECECEC),
                                                     fontSize: 14.0))
@@ -290,7 +284,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                                   (BuildContext context, int index) {
                                 ///可以直接使用
                                 // midSearchProvider.data;
-                                return Divider(
+                                return const Divider(
                                   color: Color(0x70ECECEC),
                                   height: 1,
                                 );

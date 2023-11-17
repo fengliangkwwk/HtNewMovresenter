@@ -1,20 +1,36 @@
 import 'dart:io' as io;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:device_information/device_information.dart';
+import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 
 class KTClassUIUtils{
   static var defRes = "";
+  ///搜索页面的三个
   static Widget htMethodGetRankingNumbers(int htVarranking){
     switch (htVarranking){
       case 1:
-        return Image.asset("image/icon_search_rank_1.png",width: 30,height: 30);
+        return CachedNetworkImage(imageUrl:ImageURL.url_296,width: 30,height: 30);
       case 2:
-        return Image.asset("image/icon_search_rank_2.png",width: 30,height: 30);
+        return CachedNetworkImage(imageUrl:ImageURL.url_297,width: 30,height: 30);
       case 3:
-        return Image.asset("image/icon_search_rank_3.png",width: 30,height: 30);
+        return CachedNetworkImage(imageUrl:ImageURL.url_298,width: 30,height: 30);
       default:
-        return Container(width: 30,height: 30,alignment:Alignment.center,decoration: BoxDecoration(color:Color(0xff3E4553),borderRadius: BorderRadius.only(bottomRight: Radius.circular(5.0))),child:
-        Text((htVarranking<10?"0":"")+(htVarranking.toString()),style: TextStyle(color: Color(0xffECECEC),fontSize: 18.0)));
+        return  Container(
+          child: Stack(
+            children: [
+              CachedNetworkImage(imageUrl:ImageURL.url_299,width: 30,height: 30),
+               const Positioned(
+                                         
+              child: Text("",style: TextStyle(color: Color(0xffECECEC),fontSize: 18.0))
+              ),
+            ],
+          ),
+        );
+        
+        
+        // return Container(width: 30,height: 30,alignment:Alignment.center,decoration: BoxDecoration(color:Color(0xff3E4553),borderRadius: BorderRadius.only(bottomRight: Radius.circular(5.0))),child:
+        // Text((htVarranking<10?"0":"")+(htVarranking.toString()),style: TextStyle(color: Color(0xffECECEC),fontSize: 18.0)));
     }
   }
 
