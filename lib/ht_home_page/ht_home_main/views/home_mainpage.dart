@@ -56,17 +56,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                 children: <Widget>[
                   // Container(height: MediaQuery.of(context).padding.top),
                   HTTopSearchWidget(),
-                  ...mainListWidget()
-
-                  ///1.
-                  // HTBannerWidget(),
-
-                  // ///2.
-                  // HTSideslipWiget(),
-
-                  // ///3.
-                  // HTGridStyleWidget(),
-
+                  ...mainListWidget(),
                   // ///4.
                   // adWidget(),
 
@@ -81,9 +71,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
 
   List<Widget> mainListWidget() {
     var result = <Widget>[];
-
     bool ishasAd = false;
-
     for (var element in homeProvider.homeData?.dataList ?? <DataList>[]) {
       if (element.displayType == '3') {
         ///轮播图
@@ -205,12 +193,13 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
   }
 
   ///样式上面标题那一行
-  Widget HTHeaderWidget() {
+  Widget HTHeaderWidget(DataList data) {
+    String name = data.name??"";
     return SizedBox(
       child: Row(children: [
         Container(width: 10.0),
-        const Text("You May Also Like",
-            style: TextStyle(
+         Text(name,
+            style: const TextStyle(
                 fontSize: 18.0,
                 color: Colors.white,
                 fontWeight: FontWeight.w600)),
@@ -228,7 +217,6 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
   ///样式一 轮播图 display_type = 3
   Widget HTBannerWidget(DataList data) {
     var imageSliders = <Widget>[];
-
     for (var element in data.itemData ?? <ItemData>[]) {
       imageSliders.add(Container(
         margin: const EdgeInsets.all(5.0),
@@ -292,41 +280,46 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
   Widget HTSideslipWiget(DataList data) {
     return Column(
       children: [
-        HTHeaderWidget(),
+        HTHeaderWidget(data),
         Container(
             height: 226.0,
             margin: const EdgeInsets.only(top: 11.0, bottom: 21.0),
             padding: const EdgeInsets.fromLTRB(0.0, 0, 5, 0),
             child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: [1, 2, 3, 4, 5, 6]
-                    .map((index) => GestureDetector(
+                children: (data.itemData ?? <ItemData>[])
+                    .map((item) => GestureDetector(
                         child: Container(
                             width: 112.0,
                             margin: const EdgeInsets.only(right: 5.0),
                             child: Stack(children: [
                               CachedNetworkImage(
-                                  imageUrl: imgList[0],
+                                  imageUrl: item.newImg ?? '',
                                   height: 180.0,
-                                  fit: BoxFit.fill),
-                              const Positioned(
-                                  left: 5.0,
-                                  top: 5.0,
-                                  child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        Text("8.",
-                                            style: TextStyle(
-                                                color: Color(0xffFF6D1C),
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w600)),
-                                        Text("0",
-                                            style: TextStyle(
-                                                color: Color(0xffFF6D1C),
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w600))
-                                      ])),
+                                  fit: BoxFit.cover),
+                               Positioned(
+                                left: 5.0,
+                                top: 5.0,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      item.newConfRate ?? '',
+                                      style: const TextStyle(
+                                          color: Color(0xffFF6D1C),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    // Text(
+                                    //   "0",
+                                    //   style: TextStyle(
+                                    //       color: Color(0xffFF6D1C),
+                                    //       fontSize: 12,
+                                    //       fontWeight: FontWeight.w600),
+                                    // ),
+                                  ],
+                                ),
+                              ),
                               Positioned(
                                   top: 5.0,
                                   right: 5.0,
@@ -381,12 +374,13 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
 
   ///样式三 九宫格 display_type = 1
   Widget HTGridStyleWidget(DataList data) {
+    String name = data.name??"";
     return Column(
       children: [
         Row(children: [
           Container(width: 10.0),
-          const Text("Trending",
-              style: TextStyle(
+           Text(name,
+              style: const TextStyle(
                   fontSize: 18.0,
                   color: Colors.white,
                   fontWeight: FontWeight.w600)),
