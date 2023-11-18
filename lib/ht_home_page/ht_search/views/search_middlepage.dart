@@ -31,19 +31,10 @@ class HTClassSearchMidPage extends StatefulWidget {
 
 class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
     with SingleTickerProviderStateMixin {
-  final List<String> imgList = [
-    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
-  ];
   final HTMidSearchProvider midSearchProvider = HTMidSearchProvider();
   late TabController _htVarTabController;
-  var _htVarFieldFocusNode = FocusNode();
+  final _htVarFieldFocusNode = FocusNode();
   var _htVarSearchValue = "";
-  var _htVarFieldController = TextEditingController();
   @override
   void initState() {
     midSearchProvider.loadData();
@@ -111,34 +102,53 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                                     Container(width: 8),
                                     Expanded(
                                       child: TextField(
-                                        controller: _htVarFieldController,
+                                        controller: midSearchProvider
+                                            .htVarFieldController,
                                         autofocus: true,
                                         focusNode: _htVarFieldFocusNode,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                        ),
                                         decoration: const InputDecoration(
-                                            hintText: "Search for Movies,TV",
-                                            border: InputBorder.none,
-                                            hintStyle: TextStyle(
-                                                color: Color(0xffAEAFB1),
-                                                fontSize: 15.0)),
+                                          hintText: "Search for Movies,TV",
+                                          border: InputBorder.none,
+                                          hintStyle: TextStyle(
+                                            color: Color(0xffAEAFB1),
+                                            fontSize: 15.0,
+                                          ),
+                                        ),
                                         onChanged: (val) {
-                                          if (_htVarFieldController.value
+                                          if (midSearchProvider
+                                              .htVarFieldController.value
                                               .toString()
                                               .isNotEmpty) {
                                             setState(() {
                                               _htVarSearchValue =
-                                                  _htVarFieldController
-                                                      .value.text;
+                                                  midSearchProvider
+                                                      .htVarFieldController
+                                                      .value
+                                                      .text;
                                             });
                                           }
+                                          midSearchProvider.onChanged(val);
                                         },
                                         onSubmitted:
                                             midSearchProvider.onSubmitted,
                                       ),
                                     ),
-                                    CachedNetworkImage(
+
+                                    ///删除图标
+                                    GestureDetector(
+                                      onTap: () {
+                                        midSearchProvider.deleteInput(context,_htVarFieldFocusNode);
+                                        
+                                      },
+                                      child: CachedNetworkImage(
                                         imageUrl: ImageURL.url_79,
                                         width: 16,
-                                        height: 16),
+                                        height: 16,
+                                      ),
+                                    ),
                                     Container(width: 10.0),
                                   ]),
                             )),
@@ -200,65 +210,9 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                           },
                         )
                       ])),
-                  Offstage(
-                      offstage: _htVarSearchValue.length == 0,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(height: 20.0),
-                            Container(
-                                padding: const EdgeInsets.only(left: 10.0),
-                                child: Text("Search \"${_htVarSearchValue}\"",
-                                    style: const TextStyle(
-                                        color: Color(0xff29D3EA),
-                                        fontSize: 14.0))),
-                            Container(height: 20.0),
-                            ListView.separated(
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
-                              itemCount: 8,
-                              itemBuilder: (BuildContext context, int index) {
-                                //子Widget
-                                return GestureDetector(
-                                  child: Container(
-                                      height: 45,
-                                      padding: EdgeInsets.only(top: 10.0),
-                                      child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            CachedNetworkImage(
-                                                imageUrl: ImageURL.url_300,
-                                                width: 16,
-                                                height: 16),
-                                            Container(width: 10.0),
-                                            const Text("the closest one",
-                                                style: TextStyle(
-                                                    color: Color(0xffECECEC),
-                                                    fontSize: 14.0))
-                                          ])),
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return const HTClassSearchResultPage(
-                                          title: "");
-                                    }));
-                                  },
-                                );
-                              },
-                              //设置分割线，颜色为黑色，高度为1
-                              separatorBuilder:
-                                  (BuildContext context, int index) {
-                                ///可以直接使用
-                                // midSearchProvider.data;
-                                return const Divider(
-                                  color: Color(0x70ECECEC),
-                                  height: 1,
-                                );
-                              },
-                            )
-                          ]))
+
+                  ///搜索联想起页
+                  searchResultWidget(),
                 ]))));
   }
 
@@ -392,6 +346,80 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                       .toList(),
                 ),
               ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  ///搜索结果
+  Widget searchResultWidget() {
+    return Selector<HTMidSearchProvider, List?>(
+      selector: (p0, p1) => p1.searchResult,
+      builder: (context, value, child) {
+        if (value == null  || (value.isEmpty)) {
+          return Container();
+        }
+        
+        return Offstage(
+          offstage: _htVarSearchValue.isEmpty,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(height: 20.0),
+              Container(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: Text("Search \"$_htVarSearchValue\"",
+                      style: const TextStyle(
+                          color: Color(0xff29D3EA), fontSize: 14.0))),
+              Container(height: 20.0),
+              ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                padding: const EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
+                itemCount:  midSearchProvider.searchResult!= null ? (midSearchProvider.searchResult?[1]?.length ?? 0) : 0,
+                itemBuilder: (BuildContext context, int index) {
+                  List itemData = midSearchProvider.searchResult?[1][index];
+                  //子Widget
+                  return GestureDetector(
+                    child: Container(
+                        height: 45,
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CachedNetworkImage(
+                                  imageUrl: ImageURL.url_300,
+                                  width: 16,
+                                  height: 16),
+                              Container(width: 10.0),
+                              Text(
+                                itemData[0] ?? '',
+                                style: const TextStyle(
+                                  color: Color(0xffECECEC),
+                                  fontSize: 14.0,
+                                ),
+                              )
+                            ])),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const HTClassSearchResultPage(title: "");
+                      }));
+                    },
+                  );
+                },
+                //设置分割线，颜色为黑色，高度为1
+                separatorBuilder: (BuildContext context, int index) {
+                  ///可以直接使用
+                  // midSearchProvider.data;
+                  return const Divider(
+                    color: Color(0x70ECECEC),
+                    height: 1,
+                  );
+                },
+              )
             ],
           ),
         );
