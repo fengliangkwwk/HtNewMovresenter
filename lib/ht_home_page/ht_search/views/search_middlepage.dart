@@ -110,28 +110,31 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                                     ///搜索图标
                                     Container(width: 8),
                                     Expanded(
-                                        child: TextField(
-                                            controller: _htVarFieldController,
-                                            autofocus: true,
-                                            focusNode: _htVarFieldFocusNode,
-                                            decoration: const InputDecoration(
-                                                hintText:
-                                                    "Search for Movies,TV",
-                                                border: InputBorder.none,
-                                                hintStyle: TextStyle(
-                                                    color: Color(0xffAEAFB1),
-                                                    fontSize: 15.0)),
-                                            onChanged: (val) {
-                                              if (_htVarFieldController.value
-                                                  .toString()
-                                                  .isNotEmpty) {
-                                                setState(() {
-                                                  _htVarSearchValue =
-                                                      _htVarFieldController
-                                                          .value.text;
-                                                });
-                                              }
-                                            })),
+                                      child: TextField(
+                                        controller: _htVarFieldController,
+                                        autofocus: true,
+                                        focusNode: _htVarFieldFocusNode,
+                                        decoration: const InputDecoration(
+                                            hintText: "Search for Movies,TV",
+                                            border: InputBorder.none,
+                                            hintStyle: TextStyle(
+                                                color: Color(0xffAEAFB1),
+                                                fontSize: 15.0)),
+                                        onChanged: (val) {
+                                          if (_htVarFieldController.value
+                                              .toString()
+                                              .isNotEmpty) {
+                                            setState(() {
+                                              _htVarSearchValue =
+                                                  _htVarFieldController
+                                                      .value.text;
+                                            });
+                                          }
+                                        },
+                                        onSubmitted:
+                                            midSearchProvider.onSubmitted,
+                                      ),
+                                    ),
                                     CachedNetworkImage(
                                         imageUrl: ImageURL.url_79,
                                         width: 16,
@@ -145,52 +148,9 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                       offstage: _htVarSearchValue.length > 0,
                       child: Column(children: [
                         Container(height: 20.0),
-                        Offstage(
-                            offstage: false,
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(children: [
-                                    Container(width: 10.0),
-                                    const Text("History",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600)),
-                                    Spacer(),
-                                    CachedNetworkImage(
-                                        imageUrl: ImageURL.url_301,
-                                        width: 24,
-                                        height: 24), //删除图标
-                                    Container(width: 10.0)
-                                  ]),
-                                  Container(height: 20.0),
-                                  Container(
-                                      padding: EdgeInsets.only(left: 10.0),
-                                      child: Wrap(
-                                        direction: Axis.horizontal,
-                                        spacing: 10,
-                                        runSpacing: 10,
-                                        textDirection: TextDirection.ltr,
-                                        children: [1, 2, 3, 4, 5, 6]
-                                            .map((index) => Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 15.0,
-                                                        vertical: 5.0),
-                                                child: Text(index.toString(),
-                                                    style: const TextStyle(
-                                                        color:
-                                                            Color(0xffBCBDBE),
-                                                        fontSize: 14.0)),
-                                                decoration: BoxDecoration(
-                                                    color: Color(0xff23252A),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15.0))))
-                                            .toList(),
-                                      ))
-                                ])),
+
+                        ///搜索历史
+                        historyWidget(),
                         Container(height: 20.0),
                         Row(children: [
                           Container(width: 10.0),
@@ -302,6 +262,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                 ]))));
   }
 
+////item widget
   List<Widget> itemWidget() {
     var result = <Widget>[];
 
@@ -366,5 +327,75 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
     }
 
     return result;
+  }
+
+  ///搜索widget
+
+  Widget historyWidget() {
+    ///局部刷新,根据状态值来进行刷新
+    return Selector<HTMidSearchProvider, bool>(
+      ///p0上线文 p1是provider
+      selector: (p0, p1) => p1.searchHistoty,
+      builder: (context, value, child) {
+        return Visibility(
+          visible: midSearchProvider.searchHistoty,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(children: [
+                Container(width: 10.0),
+                const Text(
+                  "History",
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const Spacer(),
+                GestureDetector(
+                  onTap: midSearchProvider.deleteHistory,
+                  child: CachedNetworkImage(
+                    imageUrl: ImageURL.url_301,
+                    width: 24,
+                    height: 24,
+                  ),
+                ), //删除图标
+                Container(width: 10.0)
+              ]),
+              Container(height: 20.0),
+              Container(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Wrap(
+                  direction: Axis.horizontal,
+                  spacing: 10,
+                  runSpacing: 10,
+                  textDirection: TextDirection.ltr,
+                  children: midSearchProvider.searchDataList
+                      .map(
+                        (value) => Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15.0, vertical: 5.0),
+                          child: Text(
+                            value,
+                            style: const TextStyle(
+                              color: Color(0xffBCBDBE),
+                              fontSize: 14.0,
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xff23252A),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
