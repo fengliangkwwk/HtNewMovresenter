@@ -39,5 +39,7 @@ mixin HTHomeProviderMixin  on HTHomeProviderBase {
 
     // homeData = res.data.remove("dated_new");
     // homeData = res.data["default_set"]['data'];
+    homeData = res.data['data'];
+    notifyListeners();
    }
 }

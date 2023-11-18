@@ -3,6 +3,8 @@
  */
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_search/beans/ht_mid_search_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/providers/ht_midsearch_provider/ht_midsearch_provider.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_resultpage.dart';
 import 'package:ht_new_movpresenter/utils/ui_utils.dart';
@@ -27,7 +29,8 @@ class HTClassSearchMidPage extends StatefulWidget {
   State<HTClassSearchMidPage> createState() => _HTClassSearchMidPageState();
 }
 
-class _HTClassSearchMidPageState extends State<HTClassSearchMidPage> with SingleTickerProviderStateMixin {
+class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
+    with SingleTickerProviderStateMixin {
   final List<String> imgList = [
     'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
     'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
@@ -73,7 +76,12 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage> with Single
                           children: [
                             Container(width: 10.0),
                             GestureDetector(
-                                child:CachedNetworkImage(imageUrl: ImageURL.url_291,width: 24,height: 24),///返回按钮
+                                child: CachedNetworkImage(
+                                    imageUrl: ImageURL.url_291,
+                                    width: 24,
+                                    height: 24),
+
+                                ///返回按钮
                                 onTap: () {
                                   Navigator.pop(context);
                                 }),
@@ -88,7 +96,12 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage> with Single
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Container(width: 11.3),
-                                    CachedNetworkImage(imageUrl: ImageURL.url_283,width: 24,height: 24),///搜索图标
+                                    CachedNetworkImage(
+                                        imageUrl: ImageURL.url_283,
+                                        width: 24,
+                                        height: 24),
+
+                                    ///搜索图标
                                     Container(width: 8),
                                     Expanded(
                                         child: TextField(
@@ -103,13 +116,20 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage> with Single
                                                     color: Color(0xffAEAFB1),
                                                     fontSize: 15.0)),
                                             onChanged: (val) {
-                                              if (_htVarFieldController.value.toString().isNotEmpty) {
+                                              if (_htVarFieldController.value
+                                                  .toString()
+                                                  .isNotEmpty) {
                                                 setState(() {
-                                                  _htVarSearchValue = _htVarFieldController.value.text;
+                                                  _htVarSearchValue =
+                                                      _htVarFieldController
+                                                          .value.text;
                                                 });
                                               }
                                             })),
-                                    CachedNetworkImage(imageUrl: ImageURL.url_79,width: 16,height: 16),
+                                    CachedNetworkImage(
+                                        imageUrl: ImageURL.url_79,
+                                        width: 16,
+                                        height: 16),
                                     Container(width: 10.0),
                                   ]),
                             )),
@@ -132,7 +152,10 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage> with Single
                                             color: Colors.white,
                                             fontWeight: FontWeight.w600)),
                                     Spacer(),
-                                    CachedNetworkImage(imageUrl: ImageURL.url_301,width: 24,height: 24),//删除图标
+                                    CachedNetworkImage(
+                                        imageUrl: ImageURL.url_301,
+                                        width: 24,
+                                        height: 24), //删除图标
                                     Container(width: 10.0)
                                   ]),
                                   Container(height: 20.0),
@@ -145,9 +168,10 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage> with Single
                                         textDirection: TextDirection.ltr,
                                         children: [1, 2, 3, 4, 5, 6]
                                             .map((index) => Container(
-                                                padding: const EdgeInsets.symmetric(
-                                                    horizontal: 15.0,
-                                                    vertical: 5.0),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 15.0,
+                                                        vertical: 5.0),
                                                 child: Text(index.toString(),
                                                     style: const TextStyle(
                                                         color:
@@ -186,54 +210,28 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage> with Single
                                   Tab(text: 'Focus')
                                 ])),
                         // Container(height: 10.0,),
-                        Container(height: 0.25,  color: Colors.grey,),
-                        Container(height: 20.0,),
-                        GridView.count(
-                            crossAxisCount: 3,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            childAspectRatio: 0.575,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 0.0),
-                            mainAxisSpacing: 10.0,
-                            crossAxisSpacing: 9.5,
-                            children: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-                                .map((index) => Container(
-                                    width: 112.0,
-                                    margin: const EdgeInsets.only(right: 5.0),
-                                    child: Stack(children: [
-                                      CachedNetworkImage(imageUrl: imgList[0],height: 180.0, fit: BoxFit.fill),///背景图片
-                                      const Positioned(
-                                          left: 0.0,
-                                          top: 0.0,
-                                          height: 30,
-                                          width: 30,
-                                          child: Image(
-                                            fit: BoxFit.cover,
-                                            height: 30,
-                                            width: 30,
-                                            image: CachedNetworkImageProvider(ImageURL.url_296),
-                                            ),
-                                          ),
-                                      Positioned(
-                                          left: 0,
-                                          top: 0,
-                                          child: Container(
-                                              child: KTClassUIUtils
-                                                  .htMethodGetRankingNumbers(
-                                                      index))),
-                                      const Positioned(
-                                          top: 185.0,
-                                          left: 5.0,
-                                          right: 5.0,
-                                          child: Text("Minions:The Rise of Gru",
-                                              maxLines: 2,
-                                              style: TextStyle(
-                                                  color: Color(0xff828386),
-                                                  fontSize: 12.0,
-                                                  fontWeight: FontWeight.w600)))
-                                    ])))
-                                .toList())
+                        Container(
+                          height: 0.25,
+                          color: Colors.grey,
+                        ),
+                        Container(
+                          height: 20.0,
+                        ),
+                        ///2.刷新数据
+                        Consumer<HTMidSearchProvider>(
+                          builder: (context, value, child) {
+                            return GridView.count(
+                                crossAxisCount: 3,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                childAspectRatio: 0.575,
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 0.0),
+                                mainAxisSpacing: 10.0,
+                                crossAxisSpacing: 9.5,
+                                children: [...itemWidget()]);
+                          },
+                        )
                       ])),
                   Offstage(
                       offstage: _htVarSearchValue.length == 0,
@@ -263,7 +261,10 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage> with Single
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            CachedNetworkImage(imageUrl: ImageURL.url_300,width: 16,height: 16),
+                                            CachedNetworkImage(
+                                                imageUrl: ImageURL.url_300,
+                                                width: 16,
+                                                height: 16),
                                             Container(width: 10.0),
                                             const Text("the closest one",
                                                 style: TextStyle(
@@ -292,5 +293,71 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage> with Single
                             )
                           ]))
                 ]))));
+  }
+
+  List<Widget> itemWidget() {
+    var result = <Widget>[];
+
+    for (var i = 0;
+        i < (midSearchProvider.midSearchBean?.data ?? <Data>[]).length;
+        i++) {
+      var itemData = midSearchProvider.midSearchBean?.data?[i];
+
+      result.add(
+        Container(
+          width: 112.0,
+          margin: const EdgeInsets.only(right: 5.0),
+          child: Stack(
+            children: [
+              ///背景图片
+              CachedNetworkImage(
+                imageUrl: itemData?.cover ?? '',
+                height: 180.0,
+                fit: BoxFit.fill,
+              ),
+
+              const Positioned(
+                left: 0.0,
+                top: 0.0,
+                height: 30,
+                width: 30,
+                child: Image(
+                  fit: BoxFit.cover,
+                  height: 30,
+                  width: 30,
+                  image: CachedNetworkImageProvider(ImageURL.url_296),
+                ),
+              ),
+              Positioned(
+                left: 0,
+                top: 0,
+                child: Container(
+                  child: KTClassUIUtils.htMethodGetRankingNumbers(i + 1),
+                ),
+              ),
+              Positioned(
+                top: 185.0,
+                left: 5.0,
+                right: 5.0,
+                child: Center(
+                  child: Text(
+                    itemData?.title ?? '',
+                    maxLines: 2,
+                    style: const TextStyle(
+                      color: Color(0xff828386),
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    // textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return result;
   }
 }

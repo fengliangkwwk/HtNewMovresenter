@@ -32,6 +32,6 @@ var dio = MidSearch.Dio();
     Map map = jsonDecode(res.toString());
     Map<String, dynamic> stringMap = map.map((key, value) => MapEntry(key.toString(), value));
     midSearchBean = ht_mid_search_bean.fromJson(stringMap);
-    print(midSearchBean);
+    print(' $midSearchBean');
  }
 }

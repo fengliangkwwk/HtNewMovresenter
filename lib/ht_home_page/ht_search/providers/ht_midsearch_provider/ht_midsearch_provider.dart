@@ -8,7 +8,9 @@ class HTMidSearchProvider extends HTMidSearchProviderBase with HTMidSearchProvid
  */
 var type = '5';
 Future<void> loadData () async{
-apiRequest(type);
+  //1.请求数据,并且刷新
+ await apiRequest(type);
+ notifyListeners();
 }
 
 }
