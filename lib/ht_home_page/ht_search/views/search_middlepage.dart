@@ -40,7 +40,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
     'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
   ];
   final HTMidSearchProvider midSearchProvider = HTMidSearchProvider();
-  var _htVarTabController = null;
+  late TabController _htVarTabController;
   var _htVarFieldFocusNode = FocusNode();
   var _htVarSearchValue = "";
   var _htVarFieldController = TextEditingController();
@@ -51,6 +51,12 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
     _htVarFieldFocusNode.addListener(() {
       if (_htVarFieldFocusNode.hasFocus) {}
     });
+    _htVarTabController.addListener(() {
+      if (_htVarTabController.indexIsChanging) {
+        midSearchProvider.apiRequest(_htVarTabController.index.toString());
+      }
+    });
+
     super.initState();
   }
 
@@ -217,6 +223,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                         Container(
                           height: 20.0,
                         ),
+
                         ///2.刷新数据
                         Consumer<HTMidSearchProvider>(
                           builder: (context, value, child) {

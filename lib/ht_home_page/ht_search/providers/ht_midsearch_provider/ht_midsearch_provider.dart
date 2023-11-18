@@ -10,7 +10,6 @@ var type = '5';
 Future<void> loadData () async{
   //1.请求数据,并且刷新
  await apiRequest(type);
- notifyListeners();
 }
 
 }

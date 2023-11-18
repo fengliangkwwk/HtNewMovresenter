@@ -11,10 +11,21 @@ import "dart:convert";
 mixin HTMidSearchProviderMiXin on HTMidSearchProviderBase{
 ///ht_mid_search_bean
 ht_mid_search_bean?midSearchBean;
+
+var map = {
+  0:null,
+};
+
+
+
 Future<void> apiRequest (String type) async{
 /**
  * type  5.All; 1.Movies; 2.TV Shows; 3.Animated Series; 4.Animation Movies
  */
+if (type == '0') {
+  type = '5';
+}
+
 Map<String,dynamic>htVarparams = {"type":type};
 await KTClassUIUtils.htMethodPutRequestCommonParams(htVarparams);
 var formData = MidSearch.FormData.fromMap(htVarparams);
@@ -33,5 +44,6 @@ var dio = MidSearch.Dio();
     Map<String, dynamic> stringMap = map.map((key, value) => MapEntry(key.toString(), value));
     midSearchBean = ht_mid_search_bean.fromJson(stringMap);
     print(' $midSearchBean');
+    notifyListeners();
  }
 }
