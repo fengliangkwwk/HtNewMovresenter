@@ -36,6 +36,8 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
     // _htVarDataController.imageList;
     super.initState();
   }
+
+ 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -53,17 +55,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
           Container(height: MediaQuery.of(context).padding.top),
           HTTopSearchWidget(),
           HTBannerWidget(),      
-          Row(children: [
-            Container(width: 10.0),
-            const Text("You May Also Like",
-                style: TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600)),
-            const Spacer(),
-            CachedNetworkImage(imageUrl: ImageURL.url_289,width: 24,height: 24),
-            Container(width: 10.0)
-          ]),
+          HTHeaderWidget(),
           Container(
               height: 226.0,
               margin: const EdgeInsets.only(top: 11.0, bottom: 21.0),
@@ -684,6 +676,47 @@ Widget HTTopSearchWidget(){
                 Container(width: 10.0),
               ]),
 
+  );
+}
+///seeAll More 按钮
+Widget seeAllAndMoreButtoonWidget(){
+  return Container(
+    child:  Row(children: [
+            Flexible(
+                flex: 1,
+                child: Container(
+                    margin: const EdgeInsets.only(left: 10.0, right: 5.0),
+                    height: 35.0,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.0),
+                        color: const Color(0xff23252A)),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("More",
+                              style: TextStyle(
+                                  color: Color(0xffBCBDBE), fontSize: 15.0)),
+                          Container(width: 5.0),
+                          CachedNetworkImage(imageUrl: ImageURL.url_286,width: 18,height: 18),
+                        ]))),
+            Flexible(
+                flex: 1,
+                child: Container(
+                    margin: const EdgeInsets.only(left: 0.0, right: 10.0),
+                    height: 35.0,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.0),
+                        color: const Color(0xff23252A)),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("See All",
+                              style: TextStyle(
+                                  color: Color(0xffBCBDBE), fontSize: 15.0)),
+                          Container(width: 5.0),
+                          CachedNetworkImage(imageUrl: ImageURL.url_289,width: 18,height: 18),
+                        ]))),
+          ]),
   );
 }
 ///样式上面标题那一行
