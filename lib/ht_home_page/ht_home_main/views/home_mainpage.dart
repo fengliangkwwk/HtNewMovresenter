@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -31,7 +32,6 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
   final HTHomeProvider homeProvider = HTHomeProvider();
 
   ///初始化provider
-  var homeData;
 
   @override
   void initState() {
@@ -52,20 +52,24 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
           builder: (context, value, child) {
             return Scaffold(
               backgroundColor: Colors.black,
-              body: SingleChildScrollView(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  // Container(height: MediaQuery.of(context).padding.top),
-                  HTTopSearchWidget(),
-                  ...mainListWidget(),
-                  // ///4.
-                  // adWidget(),
+              body: EasyRefresh(
+                onLoad: homeProvider.onLoad,
+                onRefresh: homeProvider.onRefresh,
+                child: SingleChildScrollView(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    // Container(height: MediaQuery.of(context).padding.top),
+                    HTTopSearchWidget(),
+                    ...mainListWidget(),
+                    // ///4.
+                    // adWidget(),
 
-                  // ///5.
-                  // HTWaterfallFlowWidget(),
-                ],
-              )),
+                    // ///5.
+                    // HTWaterfallFlowWidget(),
+                  ],
+                )),
+              ),
             );
           },
         ));
@@ -74,7 +78,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
   List<Widget> mainListWidget() {
     var result = <Widget>[];
     bool ishasAd = false;
-    for (var element in homeProvider.homeData?.dataList ?? <DataList>[]) {
+    for (var element in homeProvider.dataList) {
       if (element.displayType == '3' && element.itemData?.isNotEmpty == true) {
         ///轮播图
         result.add(HTBannerWidget(element));
@@ -92,10 +96,19 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
       ///九宫格
       if (element.displayType == '1' && element.itemData?.isNotEmpty == true) {
         result.add(HTGridStyleWidget(element));
+        result.add(seeAllAndMoreButtoonWidget());
         if (ishasAd == false) {
           result.add(adWidget());
           ishasAd = true;
         }
+      }
+    }
+
+    ///瀑布流
+
+    if (homeProvider.droppingWaterDataList.isNotEmpty) {
+      for (var element in homeProvider.droppingWaterDataList) {
+        result.add(HTWaterfallFlowWidget());
       }
     }
 
@@ -104,7 +117,6 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
 
   ///上面的搜索框
   Widget HTTopSearchWidget() {
-    // homeData = context.read<HTHomeProvider>().homeData;
     return SafeArea(
       // top: false,
       bottom: false,
@@ -154,7 +166,8 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
 
   ///seeAll More 按钮
   Widget seeAllAndMoreButtoonWidget() {
-    return Container(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
       child: Row(children: [
         Flexible(
             flex: 1,
@@ -396,7 +409,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
             crossAxisCount: 3,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            childAspectRatio: 0.575,
+            childAspectRatio: 112 / 160,
             padding:
                 const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
             mainAxisSpacing: 10.0,
@@ -404,13 +417,16 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
             children: (data.itemData ?? <ItemData>[])
                 .map((itemData) => GestureDetector(
                     child: Container(
-                        width: 112.0,
-                        margin: const EdgeInsets.only(right: 5.0),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5)),
                         child: Stack(children: [
-                          CachedNetworkImage(
-                            imageUrl: itemData.iconImage(),
-                            height: 180.0,
-                            fit: BoxFit.cover,
+                          SizedBox(
+                            width: double.infinity,
+                            height: double.infinity,
+                            child: CachedNetworkImage(
+                              imageUrl: itemData.iconImage(),
+                              fit: BoxFit.fill,
+                            ),
                           ),
                           Positioned(
                               left: 5.0,
@@ -423,21 +439,54 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                                             color: Color(0xffFF6D1C),
                                             fontSize: 20,
                                             fontWeight: FontWeight.w600)),
-                                    // Text("0",
-                                    //     style: TextStyle(
-                                    //         color: Color(0xffFF6D1C),
-                                    //         fontSize: 12,
-                                    //         fontWeight: FontWeight.w600))
                                   ])),
                           Positioned(
-                              top: 185.0,
-                              left: 5.0,
+                            top: 185.0,
+                            left: 5.0,
+                            right: 5.0,
+                            child: Text(
+                              itemData.newConfName ?? '',
+                              maxLines: 2,
+                              style: const TextStyle(
+                                color: Color(0xff828386),
+                                fontSize: 12.0,
+                              ),
+                            ),
+                          ),
+
+                          ///右上角
+                          Visibility(
+                            visible: itemData.showRightTop(),
+                            child: Positioned(
+                              top: 5.0,
                               right: 5.0,
-                              child: Text(itemData.newConfName ?? '',
-                                  maxLines: 2,
-                                  style: const TextStyle(
-                                      color: Color(0xff828386),
-                                      fontSize: 12.0)))
+                              child: CachedNetworkImage(
+                                imageUrl: ImageURL.url_243,
+                                width: 34,
+                                height: 16.0,
+                              ),
+                            ),
+                          ),
+
+                          ///右下角
+                          Visibility(
+                            visible: itemData.showRightBottom(),
+                            child: Positioned(
+                              bottom: 5.0,
+                              right: 5.0,
+                              child: Row(
+                                children: [
+                                  Text("NEW",
+                                      style: TextStyle(
+                                          color: Color(0xffFF6D1C),
+                                          fontSize: 8.0)),
+                                  Text(" | S07 E08",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 8.0))
+                                ],
+                              ),
+                            ),
+                          ),
                         ])),
                     onTap: () {
                       Navigator.push(context,
@@ -456,8 +505,8 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       crossAxisCount: 2,
-      itemCount: 5,
-      itemBuilder: (BuildContext context, int index) => index % 4 == 3
+      itemCount: homeProvider.droppingWaterDataList.length,
+      itemBuilder: (BuildContext context, int index) => index == 3
           ? Container(
               alignment: Alignment.center,
               color: Colors.blue,
@@ -527,44 +576,6 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
   Widget adWidget() {
     return Column(
       children: [
-        Row(children: [
-          Flexible(
-              flex: 1,
-              child: Container(
-                  margin: const EdgeInsets.only(left: 10.0, right: 5.0),
-                  height: 35.0,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      color: const Color(0xff23252A)),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("More",
-                            style: TextStyle(
-                                color: Color(0xffBCBDBE), fontSize: 15.0)),
-                        Container(width: 5.0),
-                        CachedNetworkImage(
-                            imageUrl: ImageURL.url_286, width: 18, height: 18),
-                      ]))),
-          Flexible(
-              flex: 1,
-              child: Container(
-                  margin: const EdgeInsets.only(left: 0.0, right: 10.0),
-                  height: 35.0,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      color: const Color(0xff23252A)),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("See All",
-                            style: TextStyle(
-                                color: Color(0xffBCBDBE), fontSize: 15.0)),
-                        Container(width: 5.0),
-                        CachedNetworkImage(
-                            imageUrl: ImageURL.url_289, width: 18, height: 18),
-                      ]))),
-        ]),
         Container(
             height: 60.0,
             width: double.infinity,

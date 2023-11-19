@@ -168,6 +168,17 @@ class ItemData {
     return cover2 ?? '';
   }
 
+  bool showRightBottom() {
+    
+
+    return true;
+  }
+
+  bool showRightTop() {
+    return true;
+  }
+
+
 
   ItemData();
 
