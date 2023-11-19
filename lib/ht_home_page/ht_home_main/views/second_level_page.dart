@@ -3,6 +3,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/home_second_level_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_second_level_provider.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_middlepage.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
@@ -66,12 +67,17 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: CachedNetworkImage(
-                imageUrl: ImageURL.url_291,
-                width: 24,
-                height: 24,
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: CachedNetworkImage(
+                  imageUrl: ImageURL.url_291,
+                  width: 24,
+                  height: 24,
+                ),
               ),
             ),
             Expanded(
@@ -85,12 +91,22 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
                 ),
               ),
             )),
-            Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: CachedNetworkImage(
-                imageUrl: ImageURL.url_292,
-                width: 24,
-                height: 24,
+            GestureDetector(
+              onTap: () {
+                //HTClassSearchMidPage
+
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) {
+                    return const HTClassSearchMidPage(title: "");
+                  }));
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: CachedNetworkImage(
+                  imageUrl: ImageURL.url_292,
+                  width: 24,
+                  height: 24,
+                ),
               ),
             ),
           ],
