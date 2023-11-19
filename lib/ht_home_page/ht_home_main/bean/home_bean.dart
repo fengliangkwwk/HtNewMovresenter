@@ -1,10 +1,9 @@
-import 'package:json_annotation/json_annotation.dart'; 
-      
-part 'home_bean.g.dart';
-    
-@JsonSerializable(explicitToJson: true)
-class HomeBean{
+import 'package:json_annotation/json_annotation.dart';
 
+part 'home_bean.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class HomeBean {
   @JsonKey(name: '348')
   List<dynamic>? list348;
 
@@ -43,16 +42,14 @@ class HomeBean{
 
   HomeBean();
 
-  static HomeBean fromJson(Map<String, dynamic> srcJson) => _$HomeBeanFromJson(srcJson);
+  static HomeBean fromJson(Map<String, dynamic> srcJson) =>
+      _$HomeBeanFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$HomeBeanToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class DataList{
-
+class DataList {
   @JsonKey(name: 'name')
   String? name;
 
@@ -73,16 +70,14 @@ class DataList{
 
   DataList();
 
-  static DataList fromJson(Map<String, dynamic> srcJson) => _$DataListFromJson(srcJson);
+  static DataList fromJson(Map<String, dynamic> srcJson) =>
+      _$DataListFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$DataListToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class ItemData{
-
+class ItemData {
   @JsonKey(name: 'id')
   String? id;
 
@@ -158,12 +153,26 @@ class ItemData{
   @JsonKey(name: 'nw_conf_name_2')
   String? nwConfName2;
 
+  @JsonKey(name: 'cover')
+  String? cover;
+
+  @JsonKey(name: 'cover2')
+  String? cover2;
+
+
+  String iconImage() {
+    if (cover2 == null || cover2?.isEmpty == true) {
+      return cover ?? '';
+    }
+
+    return cover2 ?? '';
+  }
+
+
   ItemData();
 
-  static ItemData fromJson(Map<String, dynamic> srcJson) => _$ItemDataFromJson(srcJson);
+  static ItemData fromJson(Map<String, dynamic> srcJson) =>
+      _$ItemDataFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$ItemDataToJson(this);
-
 }
-
-  

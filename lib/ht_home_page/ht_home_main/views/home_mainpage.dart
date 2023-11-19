@@ -18,6 +18,15 @@ class HTClassHomeMainPage extends StatefulWidget {
 }
 
 class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
+  final List<String> imgList = [
+    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
+    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
+    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+    'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
+    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
+  ];
+
   final HTHomeProvider homeProvider = HTHomeProvider();
 
   ///初始化provider
@@ -65,13 +74,13 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
     var result = <Widget>[];
     bool ishasAd = false;
     for (var element in homeProvider.homeData?.dataList ?? <DataList>[]) {
-      if (element.displayType == '3') {
+      if (element.displayType == '3'&& element.itemData?.isNotEmpty == true) {
         ///轮播图
         result.add(HTBannerWidget(element));
       }
 
       ///横向
-      if (element.displayType == '2') {
+      if (element.displayType == '2' && element.itemData?.isNotEmpty == true) {
         result.add(HTSideslipWiget(element));
         if (ishasAd == false) {
           result.add(adWidget());
@@ -80,7 +89,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
       }
 
       ///九宫格
-      if (element.displayType == '3') {
+      if (element.displayType == '1' && element.itemData?.isNotEmpty == true) {
         result.add(HTGridStyleWidget(element));
         if (ishasAd == false) {
           result.add(adWidget());
@@ -186,15 +195,17 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
 
   ///样式上面标题那一行
   Widget HTHeaderWidget(DataList data) {
-    String name = data.name??"";
     return SizedBox(
       child: Row(children: [
         Container(width: 10.0),
-         Text(name,
-            style: const TextStyle(
-                fontSize: 18.0,
-                color: Colors.white,
-                fontWeight: FontWeight.w600)),
+        Text(
+          data.name ?? '',
+          style: const TextStyle(
+            fontSize: 18.0,
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         const Spacer(),
         CachedNetworkImage(imageUrl: ImageURL.url_289, width: 24, height: 24),
         Container(width: 10.0)
@@ -286,10 +297,10 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                             margin: const EdgeInsets.only(right: 5.0),
                             child: Stack(children: [
                               CachedNetworkImage(
-                                  imageUrl: item.newImg ?? '',
+                                  imageUrl: item.iconImage(),
                                   height: 180.0,
                                   fit: BoxFit.cover),
-                               Positioned(
+                              Positioned(
                                 left: 5.0,
                                 top: 5.0,
                                 child: Row(
@@ -366,16 +377,16 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
 
   ///样式三 九宫格 display_type = 1
   Widget HTGridStyleWidget(DataList data) {
-    String name = data.name??"";
+    String name = data.name ?? "";
     return Column(
       children: [
         Row(children: [
           Container(width: 10.0),
-           Text(name,
+          Text(name,
               style: const TextStyle(
                   fontSize: 18.0,
                   color: Colors.white,
-                  fontWeight: FontWeight.w600)),
+                  fontWeight: FontWeight.w600,),),
           const Spacer(),
           Image.network(ImageURL.url_289, width: 24, height: 24),
           Container(width: 10.0)
@@ -396,7 +407,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                         margin: const EdgeInsets.only(right: 5.0),
                         child: Stack(children: [
                           CachedNetworkImage(
-                            imageUrl: itemData.newImg ?? '',
+                            imageUrl: itemData.iconImage(),
                             height: 180.0,
                             fit: BoxFit.cover,
                           ),

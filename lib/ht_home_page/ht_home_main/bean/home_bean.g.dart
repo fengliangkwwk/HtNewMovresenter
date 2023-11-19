@@ -81,7 +81,9 @@ ItemData _$ItemDataFromJson(Map<String, dynamic> json) => ItemData()
   ..nwConfRate = json['nw_conf_rate'] as String?
   ..nwConfDuration = json['nw_conf_duration'] as String?
   ..nwConfPub = json['nw_conf_pub'] as String?
-  ..nwConfName2 = json['nw_conf_name_2'] as String?;
+  ..nwConfName2 = json['nw_conf_name_2'] as String?
+  ..cover = json['cover'] as String?
+  ..cover2 = json['cover2'] as String?;
 
 Map<String, dynamic> _$ItemDataToJson(ItemData instance) => <String, dynamic>{
       'id': instance.id,
@@ -109,4 +111,6 @@ Map<String, dynamic> _$ItemDataToJson(ItemData instance) => <String, dynamic>{
       'nw_conf_duration': instance.nwConfDuration,
       'nw_conf_pub': instance.nwConfPub,
       'nw_conf_name_2': instance.nwConfName2,
+      'cover': instance.cover,
+      'cover2': instance.cover2,
     };
