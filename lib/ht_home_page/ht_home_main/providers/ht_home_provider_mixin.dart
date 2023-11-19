@@ -108,6 +108,6 @@ mixin HTHomeProviderMixin on HTHomeProviderBase {
     }
     droppingWaterDataList.addAll(_dataList);
     print('解析瀑布流数据成功');
-    notifyListeners();
+    // notifyListeners();
   }
 }

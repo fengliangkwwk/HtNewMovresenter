@@ -51,36 +51,31 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
             create: (context) => homeProvider,
           )
         ],
-        child: Selector<HTHomeProvider, bool>(
-          selector: (p0, p1) => p1.loading,
+        child: Selector<HTHomeProvider,
+            Tuple3<List<DataList>, List<HomedroppingWaterBean>, bool>>(
+          selector: (p0, p1) =>
+              Tuple3(p1.dataList, p1.droppingWaterDataList, p1.loading),
           builder: (context, value, child) {
             return ModalProgressHUD(
-              inAsyncCall: value,
-              child: child!,
+              inAsyncCall: false,
+              child: Scaffold(
+                backgroundColor: Colors.black,
+                body: EasyRefresh(
+                  onLoad: homeProvider.onLoad,
+                  onRefresh: homeProvider.onRefresh,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        HTTopSearchWidget(),
+                        ...mainListWidget(),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             );
           },
-          child: Scaffold(
-            backgroundColor: Colors.black,
-            body: EasyRefresh(
-              onLoad: homeProvider.onLoad,
-              onRefresh: homeProvider.onRefresh,
-              child: Selector<HTHomeProvider,
-                  Tuple2<List<DataList>, List<HomedroppingWaterBean>>>(
-                selector: (p0, p1) =>
-                    Tuple2(p1.dataList, p1.droppingWaterDataList),
-                builder: (context, value, child) {
-                  return SingleChildScrollView(
-                      child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      HTTopSearchWidget(),
-                      ...mainListWidget(),
-                    ],
-                  ));
-                },
-              ),
-            ),
-          ),
         ));
   }
 

@@ -20,8 +20,8 @@ class HTHomeProvider extends HTHomeProviderBase with HTHomeProviderMixin {
   ///上拉加载
   void onLoad() async {
     page++;
-    // loading = true;
-    // notifyListeners();
+    loading = true;
+    notifyListeners();
     apiRequest();
     print('上拉加载');
   }
