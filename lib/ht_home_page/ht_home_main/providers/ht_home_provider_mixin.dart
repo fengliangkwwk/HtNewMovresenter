@@ -24,7 +24,7 @@ mixin HTHomeProviderMixin on HTHomeProviderBase {
   var droppingWaterPage = 1;
 
   ///影视首页数据请求
-  Future<void> apiRequest() async {
+  Future<void> apiRequest({bool refresh = false}) async {
     ///页码，从1开始
     var pageSize = "20";
 
@@ -63,6 +63,10 @@ mixin HTHomeProviderMixin on HTHomeProviderBase {
       data: formData,
     );
     var json = jsonDecode(res.data);
+    if (refresh) {
+      dataList = [];
+      droppingWaterDataList = [];
+    }
     var _dataList = <DataList>[];
     for (var element in json?['data']?['default_set']?['data'] ?? []) {
       _dataList.add(DataList.fromJson(element));
@@ -71,11 +75,12 @@ mixin HTHomeProviderMixin on HTHomeProviderBase {
     ///
     if (_dataList.isEmpty && page > 1) {
       droppingWaterPage++;
-      droppingWaterNet();
+      await droppingWaterNet();
     } else {
       dataList.addAll(_dataList);
       print('首页解析数据成功');
     }
+    loading = false;
     notifyListeners();
   }
 

@@ -64,6 +64,8 @@ dependencies:
 
   #下拉刷新
   easy_refresh: ^3.3.2+4
+
+  tuple: ^2.0.2
   
 dev_dependencies:
   flutter_test:

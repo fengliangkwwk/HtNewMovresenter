@@ -4,13 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/home_bean.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/homedropping_water_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_provider.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/views/second_level_page.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_middlepage.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage_drama.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class HTClassHomeMainPage extends StatefulWidget {
   const HTClassHomeMainPage({Key? key, required this.title}) : super(key: key);
@@ -48,30 +51,36 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
             create: (context) => homeProvider,
           )
         ],
-        child: Consumer<HTHomeProvider>(
+        child: Selector<HTHomeProvider, bool>(
+          selector: (p0, p1) => p1.loading,
           builder: (context, value, child) {
-            return Scaffold(
-              backgroundColor: Colors.black,
-              body: EasyRefresh(
-                onLoad: homeProvider.onLoad,
-                onRefresh: homeProvider.onRefresh,
-                child: SingleChildScrollView(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    // Container(height: MediaQuery.of(context).padding.top),
-                    HTTopSearchWidget(),
-                    ...mainListWidget(),
-                    // ///4.
-                    // adWidget(),
-
-                    // ///5.
-                    // HTWaterfallFlowWidget(),
-                  ],
-                )),
-              ),
+            return ModalProgressHUD(
+              inAsyncCall: value,
+              child: child!,
             );
           },
+          child: Scaffold(
+            backgroundColor: Colors.black,
+            body: EasyRefresh(
+              onLoad: homeProvider.onLoad,
+              onRefresh: homeProvider.onRefresh,
+              child: Selector<HTHomeProvider,
+                  Tuple2<List<DataList>, List<HomedroppingWaterBean>>>(
+                selector: (p0, p1) =>
+                    Tuple2(p1.dataList, p1.droppingWaterDataList),
+                builder: (context, value, child) {
+                  return SingleChildScrollView(
+                      child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      HTTopSearchWidget(),
+                      ...mainListWidget(),
+                    ],
+                  ));
+                },
+              ),
+            ),
+          ),
         ));
   }
 
@@ -107,9 +116,38 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
     ///瀑布流
 
     if (homeProvider.droppingWaterDataList.isNotEmpty) {
-      for (var element in homeProvider.droppingWaterDataList) {
-        result.add(HTWaterfallFlowWidget());
-      }
+      result.add(Container(
+        margin: const EdgeInsets.only(top: 0, bottom: 10),
+        height: 20,
+        width: double.infinity,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(right: 30),
+              width: 60,
+              height: 0.5,
+              color: const Color(0xFFECECEC),
+            ),
+            const Text(
+              'Expleore More',
+              style: TextStyle(
+                color: Color(0xFFECECEC),
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 30),
+              width: 60,
+              height: 0.5,
+              color: const Color(0xFFECECEC),
+            ),
+          ],
+        ),
+      ));
+      result.add(HTWaterfallFlowWidget());
     }
 
     return result;
@@ -501,75 +539,94 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
 
   ///瀑布流
   Widget HTWaterfallFlowWidget() {
-    return MasonryGridView.count(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      crossAxisCount: 2,
-      itemCount: homeProvider.droppingWaterDataList.length,
-      itemBuilder: (BuildContext context, int index) => index == 3
-          ? Container(
-              alignment: Alignment.center,
-              color: Colors.blue,
-              height: 200,
-              child: const Text("广告"),
-            )
-          : Container(
-              decoration: BoxDecoration(
-                  color: const Color(0xff23252A),
-                  borderRadius: BorderRadius.circular(5.0)),
-              width: double.infinity,
-              height: 226.0,
-              child: Stack(children: [
-                CachedNetworkImage(
-                    imageUrl: imgList[3], height: 180.0, fit: BoxFit.fill),
-                const Positioned(
-                    left: 5.0,
-                    top: 5.0,
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text("8.",
-                              style: TextStyle(
-                                  color: Color(0xffFF6D1C),
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600)),
-                          Text("0",
-                              style: TextStyle(
-                                  color: Color(0xffFF6D1C),
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600))
-                        ])),
-                Positioned(
-                    bottom: 45.0,
-                    left: 0,
-                    right: 0,
-                    child: Container(
-                        height: 24.0,
-                        decoration: const BoxDecoration(
-                            gradient: LinearGradient(
+    return MediaQuery.removePadding(
+      context: context,
+      removeTop: true,
+      child: MasonryGridView.count(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        crossAxisCount: 2,
+        itemCount: homeProvider.droppingWaterDataList.length,
+        itemBuilder: (context, index) {
+          var itemData = homeProvider.droppingWaterDataList[index];
+          return // index == 3
+              //     ? Container(
+              //         alignment: Alignment.center,
+              //         color: Colors.blue,
+              //         height: 200,
+              //         child: const Text("广告"),
+              //       )
+              //     :
+
+              Container(
+                  decoration: BoxDecoration(
+                      color: const Color(0xff23252A),
+                      borderRadius: BorderRadius.circular(5.0)),
+                  width: double.infinity,
+                  height: 246.0 + 48,
+                  child: Stack(children: [
+                    CachedNetworkImage(
+                      imageUrl: itemData.cover ?? '',
+                      height: 246.0,
+                      width: double.infinity,
+                      fit: BoxFit.fill,
+                    ),
+                    Positioned(
+                        left: 5.0,
+                        top: 5.0,
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(itemData.rate ?? '',
+                                  style: const TextStyle(
+                                      color: Color(0xffFF6D1C),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600)),
+                            ])),
+                    Positioned(
+                        bottom: 45.0,
+                        left: 0,
+                        right: 0,
+                        child: Container(
+                            height: 24.0,
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
-                                colors: [Colors.transparent, Colors.black])),
-                        child: const Row(children: [
-                          Spacer(),
-                          Text("NEW",
-                              style: TextStyle(
-                                  color: Color(0xffFF6D1C), fontSize: 8.0)),
-                          Text("|S07 E08",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 8.0))
-                        ]))),
-                const Positioned(
-                    top: 188.0,
-                    left: 10.0,
-                    right: 10.0,
-                    child: Text("Minions:The Rise of Gru What are you Doing",
-                        maxLines: 2,
-                        style: TextStyle(
-                            color: Color(0xff828386), fontSize: 12.0)))
-              ])),
-      mainAxisSpacing: 10.0,
-      crossAxisSpacing: 11.0,
+                                colors: [Colors.transparent, Colors.black],
+                              ),
+                            ),
+                            child: const Row(children: [
+                              Spacer(),
+                              Text("NEW",
+                                  style: TextStyle(
+                                      color: Color(0xffFF6D1C), fontSize: 8.0)),
+                              Text("|S07 E08",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 8.0))
+                            ]))),
+                    Positioned(
+                      bottom: 0,
+                      child: Container(
+                        height: 48,
+                        padding: EdgeInsets.all(5),
+                        child: Center(
+                          child: Text(
+                            itemData.title ?? '',
+                            maxLines: 2,
+                            style: const TextStyle(
+                              color: Color(0xff828386),
+                              fontSize: 12.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ]));
+        },
+        mainAxisSpacing: 10.0,
+        crossAxisSpacing: 11.0,
+      ),
     );
   }
 
