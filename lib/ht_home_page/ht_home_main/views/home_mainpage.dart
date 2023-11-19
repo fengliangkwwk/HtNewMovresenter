@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/home_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_provider.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/views/second_level_page.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_middlepage.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage_drama.dart';
@@ -74,7 +75,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
     var result = <Widget>[];
     bool ishasAd = false;
     for (var element in homeProvider.homeData?.dataList ?? <DataList>[]) {
-      if (element.displayType == '3'&& element.itemData?.isNotEmpty == true) {
+      if (element.displayType == '3' && element.itemData?.isNotEmpty == true) {
         ///轮播图
         result.add(HTBannerWidget(element));
       }
@@ -195,21 +196,32 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
 
   ///样式上面标题那一行
   Widget HTHeaderWidget(DataList data) {
-    return SizedBox(
-      child: Row(children: [
-        Container(width: 10.0),
-        Text(
-          data.name ?? '',
-          style: const TextStyle(
-            fontSize: 18.0,
-            color: Colors.white,
-            fontWeight: FontWeight.w600,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return SecondLevelPage(
+            titleStr: data.name ?? '',
+            listId: data.order.toString(),
+          );
+        }));
+      },
+      child: Container(
+        color: Colors.transparent,
+        child: Row(children: [
+          Container(width: 10.0),
+          Text(
+            data.name ?? '',
+            style: const TextStyle(
+              fontSize: 18.0,
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-        ),
-        const Spacer(),
-        CachedNetworkImage(imageUrl: ImageURL.url_289, width: 24, height: 24),
-        Container(width: 10.0)
-      ]),
+          const Spacer(),
+          CachedNetworkImage(imageUrl: ImageURL.url_289, width: 24, height: 24),
+          Container(width: 10.0)
+        ]),
+      ),
     );
   }
 /**
@@ -377,20 +389,9 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
 
   ///样式三 九宫格 display_type = 1
   Widget HTGridStyleWidget(DataList data) {
-    String name = data.name ?? "";
     return Column(
       children: [
-        Row(children: [
-          Container(width: 10.0),
-          Text(name,
-              style: const TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,),),
-          const Spacer(),
-          Image.network(ImageURL.url_289, width: 24, height: 24),
-          Container(width: 10.0)
-        ]),
+        HTHeaderWidget(data),
         GridView.count(
             crossAxisCount: 3,
             shrinkWrap: true,

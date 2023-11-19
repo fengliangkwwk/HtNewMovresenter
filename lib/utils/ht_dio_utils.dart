@@ -36,17 +36,7 @@ class HttpUtils {
     );
     // 实例化 Dio
     _dio = Dio(options);
-    // 忽略 https 证书校验
-//     if(_dio.httpClientAdapter is BrowserHttpClientAdapter){
-// //do your code
-//     } else {
-// //do something else
-//     }
-//     (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
-//       client.badCertificateCallback =
-//           (X509Certificate cert, String host, int port) => true;
-//       return client;
-//     };
+
     // 添加迭代器
     _dio.interceptors.add(interceptor.AuthInterceptor());
     if (kDebugMode) {
@@ -54,12 +44,16 @@ class HttpUtils {
     }
   }
 
+  
+
+
+
+
   Future<BaseResponse> _request(
     String url, {
     String? method = 'POST',
     dynamic params,
     bool tips = false,
-
     void Function(int, int)? onSendProgress,
     void Function(int, int)? onReceiveProgress,
   }) async {
@@ -110,7 +104,7 @@ class HttpUtils {
 
   // POST
   Future<BaseResponse> post(
-  String url, {
+    String url, {
     dynamic params,
     bool tips = false,
   }) async {

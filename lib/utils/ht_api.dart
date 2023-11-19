@@ -25,7 +25,7 @@ class Global{
   ///影视首页
   static const homePageUrl =  HTReqestDomainClass.htRequestDomain + '250' + lastStr;
   ///专题seeAll
-  static const loginUrl =  HTReqestDomainClass.htRequestDomain + portNO + '253' + lastStr;
+  static const secondLevelUrl =  HTReqestDomainClass.htRequestDomain + portNO + '253' + lastStr;
   ///瀑布流无限下拉
   static const droppingWaterfallFlowUrl =  HTReqestDomainClass.htRequestDomain + portNO + '156' + lastStr + '?apifoxApiId=40055877';
   ///九宫格下More
