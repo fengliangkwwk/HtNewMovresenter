@@ -95,7 +95,14 @@ ItemData _$ItemDataFromJson(Map<String, dynamic> json) => ItemData()
   ..nwConfPub = json['nw_conf_pub'] as String?
   ..nwConfName2 = json['nw_conf_name_2'] as String?
   ..cover = json['cover'] as String?
-  ..cover2 = json['cover2'] as String?;
+  ..cover2 = json['cover2'] as String?
+  ..desc = json['desc'] as String?
+  ..browser = json['browser'] as String?
+  ..type = json['type'] as String?
+  ..status = json['status'] as String?
+  ..m20 = (json['m20'] as List<dynamic>?)
+      ?.map((e) => M20.fromJson(e as Map<String, dynamic>))
+      .toList();
 
 Map<String, dynamic> _$ItemDataToJson(ItemData instance) => <String, dynamic>{
       'id': instance.id,
@@ -125,4 +132,44 @@ Map<String, dynamic> _$ItemDataToJson(ItemData instance) => <String, dynamic>{
       'nw_conf_name_2': instance.nwConfName2,
       'cover': instance.cover,
       'cover2': instance.cover2,
+      'desc': instance.desc,
+      'browser': instance.browser,
+      'type': instance.type,
+      'status': instance.status,
+      'm20': instance.m20?.map((e) => e.toJson()).toList(),
+    };
+
+M20 _$M20FromJson(Map<String, dynamic> json) => M20()
+  ..order = json['order'] as int?
+  ..id = json['id'] as String?
+  ..title = json['title'] as String?
+  ..cover = json['cover'] as String?
+  ..rate = json['rate'] as String?
+  ..stars = json['stars'] as String?
+  ..views = json['views'] as String?
+  ..pubDate = json['pub_date'] as String?
+  ..tags = json['tags'] as String?
+  ..mType = json['m_type'] as String?
+  ..mType2 = json['m_type_2'] as String?
+  ..quality = json['quality'] as String?
+  ..gif = json['gif'] as String?
+  ..description = json['description'] as String?
+  ..cCnts = json['c_cnts'] as String?;
+
+Map<String, dynamic> _$M20ToJson(M20 instance) => <String, dynamic>{
+      'order': instance.order,
+      'id': instance.id,
+      'title': instance.title,
+      'cover': instance.cover,
+      'rate': instance.rate,
+      'stars': instance.stars,
+      'views': instance.views,
+      'pub_date': instance.pubDate,
+      'tags': instance.tags,
+      'm_type': instance.mType,
+      'm_type_2': instance.mType2,
+      'quality': instance.quality,
+      'gif': instance.gif,
+      'description': instance.description,
+      'c_cnts': instance.cCnts,
     };
