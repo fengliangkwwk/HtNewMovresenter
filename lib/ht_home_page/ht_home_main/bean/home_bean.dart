@@ -68,7 +68,6 @@ class DataList {
   @JsonKey(name: 'data_type')
   String? dataType;
 
-
   @JsonKey(name: 'open_mode_value')
   String? open_mode_value;
 
@@ -178,6 +177,14 @@ class ItemData {
   @JsonKey(name: 'cover2')
   String? cover2;
 
+  @JsonKey(name: 'desc')
+  String? desc;
+  @JsonKey(name: 'browser')
+  String? browser;
+  @JsonKey(name: 'type')
+  String? type;
+  @JsonKey(name: 'status')
+  String? status;
 
   String iconImage() {
     if (cover2 == null || cover2?.isEmpty == true) {
@@ -188,16 +195,12 @@ class ItemData {
   }
 
   bool showRightBottom() {
-    
-
     return true;
   }
 
   bool showRightTop() {
     return true;
   }
-
-
 
   ItemData();
 

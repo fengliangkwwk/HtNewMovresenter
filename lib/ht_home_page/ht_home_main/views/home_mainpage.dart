@@ -454,15 +454,17 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
             children: (data.itemData ?? <ItemData>[])
                 .map((itemData) => GestureDetector(
                     child: Container(
+                      height: 160 + 33,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5)),
                         child: Stack(children: [
                           SizedBox(
                             width: double.infinity,
-                            height: double.infinity,
                             child: CachedNetworkImage(
+                              height: 160,
                               imageUrl: itemData.iconImage(),
-                              fit: BoxFit.fill,
+                               width: double.infinity,
+                               fit: BoxFit.fill,
                             ),
                           ),
                           Positioned(
@@ -471,25 +473,25 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                               child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Text(itemData.newConfRate ?? '',
+                                    Text(itemData.newConfRate ?? '8.0',
                                         style: const TextStyle(
                                             color: Color(0xffFF6D1C),
                                             fontSize: 20,
                                             fontWeight: FontWeight.w600)),
                                   ])),
-                          Positioned(
-                            top: 185.0,
-                            left: 5.0,
-                            right: 5.0,
-                            child: Text(
-                              itemData.newConfName ?? '',
-                              maxLines: 2,
-                              style: const TextStyle(
-                                color: Color(0xff828386),
-                                fontSize: 12.0,
-                              ),
-                            ),
-                          ),
+                          // Positioned(
+                          //   top: 185.0,
+                          //   left: 5.0,
+                          //   right: 5.0,
+                          //   child: Text(
+                          //     itemData.newConfName ?? '',
+                          //     maxLines: 2,
+                          //     style: const TextStyle(
+                          //       color: Color(0xff828386),
+                          //       fontSize: 12.0,
+                          //     ),
+                          //   ),
+                          // ),
 
                           ///右上角
                           Visibility(
@@ -509,7 +511,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                           Visibility(
                             visible: itemData.showRightBottom(),
                             child: const Positioned(
-                              bottom: 5.0,
+                              bottom: 33.0,
                               right: 5.0,
                               child: Row(
                                 children: [
@@ -524,6 +526,24 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                               ),
                             ),
                           ),
+
+                          Positioned(
+                            bottom: 5,
+                            child: Container(
+                              height: 28,
+                              padding: EdgeInsets.all(5),
+                              child: Center(
+                                child: Text(
+                                  itemData.desc ?? '没有返回数据的情况下，显示此句',
+                                  maxLines:2,  
+                                  style: const TextStyle(
+                                    color: Color(0xff828386),
+                                    fontSize: 12.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
                         ])),
                     onTap: () {
                       Navigator.push(context,

@@ -3,6 +3,7 @@
 ///   @Date   : 2023-11-09 13:56:31
 ///   @Desc   : 个人中心页面
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/providers/setting_provider.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/views/setting_feedback.dart';
@@ -207,59 +208,138 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   ///historyListView列表
   Widget historyList() {
     return Container(
-        height: 145.0,
-        margin: const EdgeInsets.only(top: 11.0, bottom: 21.0),
-        padding: const EdgeInsets.fromLTRB(5.0, 0, 5, 0),
-        child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: [1, 2, 3, 4, 5]
-                .map((index) => GestureDetector(
-                    child: Container(
-                        width: 112.0,
-                        margin: EdgeInsets.only(right: 5.0),
-                        child: Stack(alignment: Alignment.center, children: [
-                          Positioned(
-                              top: 0,
-                              left: 0,
-                              right: 0,
-                              child: Image.network(ImageURL.url_254,
-                                  height: 120.0,
-                                  width: 84.0,
-                                  fit: BoxFit.fill)),
-                          Container(
-                              // padding:const EdgeIns ets.only(bottom: 45.0),
-                              child: Image.network(ImageURL.url_268,
-                                  width: 24.0, height: 24.0, fit: BoxFit.fill)),
-                          const Positioned(
-                              left: 5.0,
-                              top: 5.0,
-                              child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text("8.",
-                                        style: TextStyle(
-                                            color: Color(0xffFF6D1C),
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600)),
-                                    Text("0",
-                                        style: TextStyle(
-                                            color: Color(0xffFF6D1C),
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w600))
-                                  ])),
-                          const Positioned(
-                              top: 185.0,
-                              left: 5.0,
-                              right: 5.0,
-                              child: Text("Minions:The Rise of Gru",
-                                  maxLines: 2,
-                                  style: TextStyle(
-                                      color: Color(0xff828386),
-                                      fontSize: 12.0)))
-                        ])),
-                    onTap: () {}))
-                .toList()));
+      // color: Colors.green,
+      height: 145,
+
+      // width: double.infinity,
+      child: ListView.builder(
+        itemCount: 13,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return historyListItem();
+        },
+      ),
+    );
   }
+
+  Widget historyListItem() {
+    return Column(
+      children: [
+        topPart(),
+        const SizedBox(
+            height: 20,
+            child: Text("Minions:The Rise of Gru",
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Color(0xff828386), fontSize: 8.0)))
+      ],
+    );
+  }
+
+  Widget topPart() {
+    return Container(
+        height: 120,
+        width: 84,
+        // color:Colors.green,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+          image: CachedNetworkImageProvider(
+              'https://autoeq.top/crm/banner/img_v2_33ac2d2a-4970-4d27-879a-17378796e6bg_1666775339_0x0.png'),
+        )),
+        margin: const EdgeInsets.only(right: 5.0),
+        child: Stack(alignment: Alignment.center, children: [
+          Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Image.network(ImageURL.url_254,
+                  height: 120.0, width: 84.0, fit: BoxFit.fill)),
+          Container(
+              // padding:const EdgeIns ets.only(bottom: 45.0),
+              child: Image.network(ImageURL.url_268,
+                  width: 24.0, height: 24.0, fit: BoxFit.fill)),
+          const Positioned(
+              left: 5.0,
+              top: 5.0,
+              child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                Text("8.",
+                    style: TextStyle(
+                        color: Color(0xffFF6D1C),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600)),
+                Text("0",
+                    style: TextStyle(
+                        color: Color(0xffFF6D1C),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600))
+              ])),
+        ]));
+  }
+//  Widget historyList() {
+//     return Container(
+//         height: 145.0,
+//         margin: const EdgeInsets.only(top: 11.0, bottom: 21.0),
+//         padding: const EdgeInsets.fromLTRB(5.0, 0, 5, 0),
+//         child:historyListItem());
+//   }
+// Widget historyListItem(){
+//   return Container(
+//     child: ListView(
+//             scrollDirection: Axis.horizontal,
+//             children: [1, 2, 3, 4, 5]
+//                 .map((index) => GestureDetector(
+//                     child: Container(
+//                       decoration: const BoxDecoration(
+//                         image: DecorationImage(
+//                           image: CachedNetworkImageProvider('https://autoeq.top/crm/banner/img_v2_33ac2d2a-4970-4d27-879a-17378796e6bg_1666775339_0x0.png'),
+//                         )
+//                       ),
+//                         width: 112.0,
+//                         margin: const EdgeInsets.only(right: 5.0),
+//                         child: Stack(alignment: Alignment.center, children: [
+//                           Positioned(
+//                               top: 0,
+//                               left: 0,
+//                               right: 0,
+//                               child: Image.network(ImageURL.url_254,
+//                                   height: 120.0,
+//                                   width: 84.0,
+//                                   fit: BoxFit.fill)),
+//                           Container(
+//                               // padding:const EdgeIns ets.only(bottom: 45.0),
+//                               child: Image.network(ImageURL.url_268,
+//                                   width: 24.0, height: 24.0, fit: BoxFit.fill)),
+//                           const Positioned(
+//                               left: 5.0,
+//                               top: 5.0,
+//                               child: Row(
+//                                   crossAxisAlignment: CrossAxisAlignment.end,
+//                                   children: [
+//                                     Text("8.",
+//                                         style: TextStyle(
+//                                             color: Color(0xffFF6D1C),
+//                                             fontSize: 20,
+//                                             fontWeight: FontWeight.w600)),
+//                                     Text("0",
+//                                         style: TextStyle(
+//                                             color: Color(0xffFF6D1C),
+//                                             fontSize: 12,
+//                                             fontWeight: FontWeight.w600))
+//                                   ])),
+//                           const Positioned(
+//                               top: 185.0,
+//                               left: 5.0,
+//                               right: 5.0,
+//                               child: Text("Minions:The Rise of Gru",
+//                                   maxLines: 2,
+//                                   style: TextStyle(
+//                                       color: Color(0xff828386),
+//                                       fontSize: 12.0)))
+//                         ])),
+//                     onTap: () {}))
+//                 .toList()),
+//   );
+// }
 
   ///watchList
   Widget watchListWidget() {

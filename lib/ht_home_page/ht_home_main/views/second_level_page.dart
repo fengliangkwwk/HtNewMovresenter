@@ -134,10 +134,10 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
                 child: GridView.builder(
                   itemCount: value.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    childAspectRatio: 112 / 160,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 9.5,
+                    crossAxisCount: 3,///
+                    childAspectRatio: 112 / 160,///
+                    mainAxisSpacing: 10,///
+                    crossAxisSpacing: 9.5,///
                   ),
                   itemBuilder: (context, index) {
                     return itemWidget(value[index]);

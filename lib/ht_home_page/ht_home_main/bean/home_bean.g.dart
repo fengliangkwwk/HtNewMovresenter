@@ -45,7 +45,13 @@ DataList _$DataListFromJson(Map<String, dynamic> json) => DataList()
   ..order = json['order'] as int?
   ..displayType = json['display_type'] as String?
   ..secname = json['secname'] as String?
-  ..dataType = json['data_type'] as String?;
+  ..dataType = json['data_type'] as String?
+  ..open_mode_value = json['open_mode_value'] as String?
+  ..moreflag = json['moreflag'] as String?
+  ..seeall = json['seeall'] as String?
+  ..seeall_value = json['seeall_value'] as String?
+  ..open_mode = json['open_mode'] as String?
+  ..info_type_2 = json['info_type_2'] as String?;
 
 Map<String, dynamic> _$DataListToJson(DataList instance) => <String, dynamic>{
       'name': instance.name,
@@ -54,6 +60,12 @@ Map<String, dynamic> _$DataListToJson(DataList instance) => <String, dynamic>{
       'display_type': instance.displayType,
       'secname': instance.secname,
       'data_type': instance.dataType,
+      'open_mode_value': instance.open_mode_value,
+      'moreflag': instance.moreflag,
+      'seeall': instance.seeall,
+      'seeall_value': instance.seeall_value,
+      'open_mode': instance.open_mode,
+      'info_type_2': instance.info_type_2,
     };
 
 ItemData _$ItemDataFromJson(Map<String, dynamic> json) => ItemData()
