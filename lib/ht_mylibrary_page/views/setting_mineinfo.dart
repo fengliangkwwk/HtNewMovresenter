@@ -34,7 +34,8 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
         )
       ],
       child: Container(
-        color: Colors.red,
+        height: double.infinity,
+        color: const Color(0xff111218),
         child: scrollWidget(),
       ),
     );
@@ -44,7 +45,6 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          //  Container(height: MediaQuery.of(context).padding.top + 0.0),
           headerWidget(),
           secondWidget(),
           historyWidget(),

@@ -638,7 +638,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
             margin: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
             padding: const EdgeInsets.only(left: 16.0),
             decoration: BoxDecoration(
-                image: DecorationImage(
+                image: const DecorationImage(
                     image: CachedNetworkImageProvider(ImageURL.url_280),
                     fit: BoxFit.fill),
                 borderRadius: BorderRadius.circular(6.0)),
