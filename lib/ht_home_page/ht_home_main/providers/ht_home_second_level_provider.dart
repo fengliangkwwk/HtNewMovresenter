@@ -28,7 +28,7 @@ class HTHomeSecondLevelProvidr extends ChangeNotifier {
     var res = await HTNetUtils.htPost(
       apiUrl: Global.secondLevelUrl,
       params: {
-        'id': 1,
+        'id': listId,
         'page': page.toString(),
         'page_size': 20.toString(),
       },

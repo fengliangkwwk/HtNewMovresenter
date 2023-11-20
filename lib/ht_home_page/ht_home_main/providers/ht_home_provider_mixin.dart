@@ -55,14 +55,11 @@ mixin HTHomeProviderMixin on HTHomeProviderBase {
       "datetag": datetag,
       "id": id
     };
-    await KTClassUIUtils.htMethodPutRequestCommonParams(htVarparams);
-    var formData = FormData.fromMap(htVarparams);
-    var dio = Dio();
-    var res = await dio.post(
-      Global.homePageUrl,
-      data: formData,
-    );
-    var json = jsonDecode(res.data);
+    var res = await HTNetUtils.htPost(
+        apiUrl: Global.homePageUrl,
+        params: htVarparams
+        );
+    var json = jsonDecode(res?.data);
     if (refresh) {
       dataList = [];
       droppingWaterDataList = [];

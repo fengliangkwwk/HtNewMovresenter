@@ -68,6 +68,25 @@ class DataList {
   @JsonKey(name: 'data_type')
   String? dataType;
 
+
+  @JsonKey(name: 'open_mode_value')
+  String? open_mode_value;
+
+  @JsonKey(name: 'moreflag')
+  String? moreflag;
+
+  @JsonKey(name: 'seeall')
+  String? seeall;
+
+  @JsonKey(name: 'seeall_value')
+  String? seeall_value;
+
+  @JsonKey(name: 'open_mode')
+  String? open_mode;
+
+  @JsonKey(name: 'info_type_2')
+  String? info_type_2;
+
   DataList();
 
   static DataList fromJson(Map<String, dynamic> srcJson) =>

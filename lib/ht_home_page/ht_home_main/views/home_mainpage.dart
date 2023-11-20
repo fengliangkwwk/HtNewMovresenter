@@ -3,6 +3,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/home_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/homedropping_water_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_provider.dart';
@@ -23,19 +24,9 @@ class HTClassHomeMainPage extends StatefulWidget {
 }
 
 class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
-  final List<String> imgList = [
-    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
-  ];
-
   final HTHomeProvider homeProvider = HTHomeProvider();
 
   ///初始化provider
-
   @override
   void initState() {
     homeProvider.loadData();
@@ -100,7 +91,9 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
       ///九宫格
       if (element.displayType == '1' && element.itemData?.isNotEmpty == true) {
         result.add(HTGridStyleWidget(element));
-        result.add(seeAllAndMoreButtoonWidget());
+        if (element.moreflag == '1') {
+          result.add(seeAllAndMoreButtoonWidget(element));
+        }
         if (ishasAd == false) {
           result.add(adWidget());
           ishasAd = true;
@@ -198,7 +191,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
   }
 
   ///seeAll More 按钮
-  Widget seeAllAndMoreButtoonWidget() {
+  Widget seeAllAndMoreButtoonWidget(DataList data) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: Row(children: [
@@ -221,21 +214,32 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                 ]))),
         Flexible(
             flex: 1,
-            child: Container(
-                margin: const EdgeInsets.only(left: 0.0, right: 10.0),
-                height: 35.0,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.0),
-                    color: const Color(0xff23252A)),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  const Text("See All",
-                      style:
-                          TextStyle(color: Color(0xffBCBDBE), fontSize: 15.0)),
-                  Container(width: 5.0),
-                  CachedNetworkImage(
-                      imageUrl: ImageURL.url_289, width: 18, height: 18),
-                ]))),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return SecondLevelPage(
+                    titleStr: data.name ?? '',
+                    listId: data.open_mode_value.toString(),
+                  );
+                }));
+              },
+              child: Container(
+                  margin: const EdgeInsets.only(left: 0.0, right: 10.0),
+                  height: 35.0,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: const Color(0xff23252A)),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("See All",
+                            style: TextStyle(
+                                color: Color(0xffBCBDBE), fontSize: 15.0)),
+                        Container(width: 5.0),
+                        CachedNetworkImage(
+                            imageUrl: ImageURL.url_289, width: 18, height: 18),
+                      ])),
+            )),
       ]),
     );
   }
@@ -247,7 +251,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return SecondLevelPage(
             titleStr: data.name ?? '',
-            listId: data.order.toString(),
+            listId: data.displayType.toString(),
           );
         }));
       },
@@ -504,7 +508,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                           ///右下角
                           Visibility(
                             visible: itemData.showRightBottom(),
-                            child: Positioned(
+                            child: const Positioned(
                               bottom: 5.0,
                               right: 5.0,
                               child: Row(

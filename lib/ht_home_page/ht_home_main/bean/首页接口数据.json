@@ -1,0 +1,1224 @@
+{
+    "status": 200,
+    "msg": "success",
+    "data": [
+        {
+            "name": "Banner",
+            "data": [
+                {
+                    "id": "3287",
+                    "img": "https://autoeq.top/crm/banner/wolfpack-850x370_1678691357_0x0.jpg",
+                    "playlist_id": 0,
+                    "new_img": "https://autoeq.top/crm/tlist/28287_1688031144_400x500.jpg",
+                    "new_conf_type": 5,
+                    "new_conf_value": "28287",
+                    "new_conf_name": "Five Nights at Freddy's",
+                    "new_conf_artist": "",
+                    "new_conf_desc": "",
+                    "new_conf_rate": "5.9",
+                    "new_conf_duration": "",
+                    "new_conf_pub": "",
+                    "new_conf_name_2": "Eps 20: Revelation",
+                    "order": 6,
+                    "ss_tag": "",
+                    "nw_img": "https://autoeq.top/crm/tlist/28287_1688031144_400x500.jpg",
+                    "nw_conf_type": 5,
+                    "nw_conf_value": "28287",
+                    "nw_conf_name": "Five Nights at Freddy's",
+                    "nw_conf_artist": "",
+                    "nw_conf_desc": "",
+                    "nw_conf_rate": "5.9",
+                    "nw_conf_duration": "",
+                    "nw_conf_pub": "",
+                    "nw_conf_name_2": "Eps 20: Revelation"
+                }
+            ],
+            "order": 1,
+            "display_type": "3",
+            "secname": "banner",
+            "data_type": "1"
+        },
+        {
+            "info_type_2": "mtype",
+            "secname": "1",
+            "playlist_key": "1",
+            "module_key": "Trending",
+            "data_type": "1",
+            "name": "Trending",
+            "data": [
+                {
+                    "id": "1",
+                    "name": "Trending",
+                    "cover": "https://autoeq.top/crm/tlist/None_1677838758_700x350.jpg",
+                    "cover2": "https://autoeq.top/crm/mlist/1_1677759400_400x500.jpg",
+                    "cover3": "",
+                    "desc": "",
+                    "tag": "",
+                    "type": "0",
+                    "comment": "0",
+                    "fav": "0",
+                    "share": "0",
+                    "status": "0",
+                    "creator_id": "0",
+                    "create_time": "0",
+                    "recognition": "",
+                    "browser": "110842",
+                    "dislikes": "0",
+                    "country": "",
+                    "lang": "",
+                    "region": "US",
+                    "m20": [
+                        {
+                            "order": 1,
+                            "id": "28287",
+                            "title": "Five Nights at Freddy's",
+                            "cover": "https://autoeq.top/crm/tlist/28287_1688031144_400x500.jpg",
+                            "rate": "5.9",
+                            "stars": "Josh Hutcherson, Matthew Lillard, Mary Stuart Masterson",
+                            "views": "81",
+                            "pub_date": "2023-10-27",
+                            "tags": "horror,mystery,thriller",
+                            "m_type": "myflixer",
+                            "m_type_2": "myfx",
+                            "quality": "",
+                            "gif": "",
+                            "description": "Set in Freddy Fazbear's Pizza, a darker version of Chuck-E-Cheese, an animatronic animal band performs kiddy songs by day, and goes on murderous rampages by night. Based on the video game series.",
+                            "c_cnts": "2.8k"
+                        }
+                    ],
+                    "total": 401
+                }
+            ],
+            "display_type": "1",
+            "moreflag": "1",
+            "seeall": "1",
+            "seeall_value": "See All &gt;",
+            "open_mode": "1",
+            "open_mode_value": "1",
+            "order": 2
+        },
+        {
+            "info_type_2": "mtype",
+            "secname": "198",
+            "playlist_key": "198",
+            "module_key": "Marvel Cinematic Universe",
+            "data_type": "1",
+            "name": "Marvel Cinematic Universe",
+            "data": [
+                {
+                    "id": "198",
+                    "name": "Marvel Cinematic Universe",
+                    "cover": "https://autoeq.top/crm/tlist/198_1668569795_700x350.png",
+                    "cover2": "https://autoeq.top/crm/mlist/198_1677837978_400x500.jpg",
+                    "cover3": "",
+                    "desc": "The most successful commercial film series since the birth of the film industry",
+                    "tag": "",
+                    "type": "2",
+                    "comment": "0",
+                    "fav": "0",
+                    "share": "0",
+                    "status": "0",
+                    "creator_id": "0",
+                    "create_time": "0",
+                    "recognition": "",
+                    "browser": "17720",
+                    "dislikes": "0",
+                    "country": "",
+                    "lang": "",
+                    "region": "en-us",
+                    "m20": [
+                        {
+                            "order": 1,
+                            "id": "30376",
+                            "title": "Captain Marvel 2",
+                            "cover": "https://autoeq.top/crm/tlist/30376_1699519618_400x500.jpg",
+                            "rate": "",
+                            "stars": "Brie Larson,Zawe Ashton,Teyonah Parris,Iman Vellani",
+                            "views": "7",
+                            "pub_date": "2023-11-10",
+                            "tags": "Adventure,Mystery,Science Fiction,Fantasy,Action",
+                            "m_type": "myflixer",
+                            "m_type_2": "myfx",
+                            "quality": "CAM",
+                            "gif": "",
+                            "description": "The sequel to Captain Marvel (2019).",
+                            "c_cnts": "200+"
+                        }
+                    ],
+                    "total": 80
+                }
+            ],
+            "display_type": "2",
+            "moreflag": "0",
+            "seeall": "1",
+            "seeall_value": "See All &gt;",
+            "open_mode": "1",
+            "open_mode_value": "198",
+            "order": 4
+        }
+    ],
+    "region": "en-US",
+    "source": "250",
+    "pagecnt": 1,
+    "total": 1,
+    "kws": [
+        "invincible",
+        "rick and morty",
+        "inside out 2",
+        "trolls",
+        "shameless",
+        "sistas",
+        "inside out",
+        "family guy",
+        "power",
+        "barbie",
+        "south park",
+        "the grinch",
+        "wish",
+        "chucky",
+        "the creator",
+        "five nights at freddy's",
+        "the chi",
+        "the marvels",
+        "home alone",
+        "euphoria"
+    ],
+    "shortcut": [],
+    "348": [],
+    "retract": "3",
+    "region_tag": "en-US"
+}
+
+/**
+
+{
+    "status": 200,
+    "msg": "success",
+    "data": {
+        // 首页用到的数据都在default_set里
+        "default_set": {
+            "status": 200,
+            "msg": "success",
+            // 模块数据
+            "data": [
+                {
+                    // 轮播图
+                    "name": "Banner",
+                    "data": [
+                        {
+                            "id": "1209",
+                            "img": "https://autoeq.top/crm/banner/img_v2_5cc6a007-fa57-4f88-add2-b05300b14a9g_1666775331_0x0.png",// 封面横图
+                            "playlist_id": 0,
+                            "new_img": "https://autoeq.top/crm/banner/img_v2_33ac2d2a-4970-4d27-879a-17378796e6bg_1666775339_0x0.png",// 封面竖图
+                            "new_conf_type": 7,// 5、movie；7、tv
+                            "new_conf_value": "1011381",// movie id 或 tv剧id
+                            "new_conf_name": "Baddies West Auditions",// movie或tv名字
+                            "new_conf_artist": "",
+                            "new_conf_desc": "",
+                            "new_conf_rate": "",
+                            "new_conf_duration": "",
+                            "new_conf_pub": "",
+                            "new_conf_name_2": "",
+                            "order": 1,
+                            "nw_img": "https://autoeq.top/crm/banner/img_v2_33ac2d2a-4970-4d27-879a-17378796e6bg_1666775339_0x0.png",
+                            "nw_conf_type": 7,
+                            "nw_conf_value": "1011381",
+                            "nw_conf_name": "Baddies West Auditions",
+                            "nw_conf_artist": "",
+                            "nw_conf_desc": "",
+                            "nw_conf_rate": "",
+                            "nw_conf_duration": "",
+                            "nw_conf_pub": "",
+                            "nw_conf_name_2": ""
+                        }
+                        // 实际有多条数据，此处仅留一个
+                    ],
+                    "order": 1,
+                    "display_type": "3",// 1、竖滑(九宫格)；2、横滑；3、轮播图
+                    "secname": "banner",
+                    "data_type": "1"// 1.电影/电视剧，4.18+
+                },
+                {
+                    // 电影专题
+                    "info_type_2": "mtype",// mtype电影，tttype电视剧
+                    "secname": "Trending",
+                    "playlist_key": "1",// 专题ID
+                    "module_key": "Trending",
+                    "data_type": "1",// 1.电影/电视剧，4.18+
+                    "name": "Trending",// 专题名
+                    "data": [// 专题数据
+                        {
+                            "id": "1",// 所属专题ID（不要用，用外层的）
+                            "name": "Trending",// 专题名（不要用，显示用外层的）
+                            "cover": "https://youngtunes.s3.amazonaws.com/youngtunes/cover/1_1611922543_700x350.jpg",// 所属专题封面
+                            "cover2": "",
+                            "cover3": "",
+                            "desc": "",
+                            "tag": "",
+                            "type": "0",
+                            "comment": "0",
+                            "fav": "0",
+                            "share": "0",
+                            "status": "0",
+                            "creator_id": "0",
+                            "create_time": "0",
+                            "recognition": "",
+                            "browser": "223970",
+                            "dislikes": "0",
+                            "country": "",
+                            "lang": "",
+                            "region": "US",
+                            "m20": [// 电影专题内容列表
+                                {
+                                    "order": 1,
+                                    "id": "37062",// 电影ID
+                                    "title": "Smile",// 电影名
+                                    "cover": "http://autoeq.top/m_cover/mc_901_37062_cf4012623d75c1e1f73eef47b4ec918d.jpg",// 电影封面
+                                    "rate": "7",// 评分
+                                    "stars": "Sosie Bacon,Kal Penn,Nick Arapoglou,Robin Weigert,Kyle Gallner",// 演员名单
+                                    "views": "0",// 观看量
+                                    "pub_date": "2022-09-23",// 上映时间
+                                    "tags": "Horror,Mystery,Thriller",// 类型标签
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",// myfx电影，tt_mflx电视剧
+                                    "quality": "HD"// 清晰度，CAM、HD等
+                                },
+                                {
+                                    "order": 2,
+                                    "id": "37297",
+                                    "title": "The System",
+                                    "cover": "http://autoeq.top/m_cover/mc_101_37297_5e1ff67e139a8864f865e8291d7dd9ba.jpg",
+                                    "rate": "5.6",
+                                    "stars": "Laura Aleman,Ric Reitz,Jeremy Piven,Tyrese Gibson,Terrence Howard",
+                                    "views": "0",
+                                    "pub_date": "2022-10-28",
+                                    "tags": "Crime,Action",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                }
+                            ],
+                            "total": 399
+                        }
+                    ],
+                    "display_type": "1",// 1、竖滑；2、横滑；3、轮播图
+                    "moreflag": "1",// 1显示 0隐藏;竖滑时九宫格下边是否显示More/Seeall;
+                    "seeall": "1",// 专题Header上SeeAll:1显示 0隐藏
+                    "seeall_value": "See All >",// 专题Header上SeeAll:文案
+                    "open_mode": "1",// seeall的二级样式：6跳艺术家列表，其他跳常规电影电视剧列表
+                    "open_mode_value": "1",// 专题ID（seeall使用）
+                    "order": 2
+                },
+                {
+                    // 电视剧专题
+                    "info_type_2": "tttype",// mtype电影，tttype电视剧
+                    "secname": "Popular TV Shows (US)",
+                    "playlist_key": "1000001",
+                    "module_key": "Popular TV Shows (US)",
+                    "data_type": "1",// 1.电影/电视剧，4.18+
+                    "name": "Popular TV Shows",// 专题名
+                    "data": [
+                        {
+                            "id": "1000001",// 专题ID（不要用，显示用外层的）
+                            "name": "Popular TV Shows (US)",// 专题名（不要用，显示用外层的）
+                            "cover": "https://autoeq.top/crm/tlist/1000001_1661827243_700x350.png",// 所属专题封面
+                            "desc": "",
+                            "tag": "",
+                            "type": "0",
+                            "comment": "0",
+                            "fav": "0",
+                            "share": "0",
+                            "status": "0",
+                            "creator_id": "0",
+                            "create_time": "0",
+                            "recognition": "",
+                            "browser": "0",
+                            "dislikes": "0",
+                            "country": "",
+                            "lang": "",
+                            "region": "",
+                            "tt20": [// 电视剧专题内容列表
+                                {
+                                    "id": "1011381",// 电视剧ID
+                                    "title": "Baddies West Auditions",// 剧名
+                                    "stars": "Tommie Lee,Sukihana",// 演员名单
+                                    "cover": "https://autoeq.top/crm/banner/img_v2_33ac2d2a-4970-4d27-879a-17378796e6bg_1666664582_0x0.png",// 封面
+                                    "rate": "8.0",// 评分
+                                    "pub_date": "2022-10-22",// 上映时间
+                                    "tags": "Reality- TV",// 类型标签
+                                    "m_type": "other",
+                                    "m_type_2": "tt_mflx",// myfx电影，tt_mflx电视剧
+                                    "order": 1,
+                                    "new_flag": "NEW",// 标签：有更新
+                                    "nw_flag": "NEW",
+                                    "ss_eps": "S1 E3",// 剧集信息
+                                    "update": "3"
+                                },
+                                {
+                                    "id": "1010000",
+                                    "title": "Chucky",
+                                    "stars": "Brad Dourif,Zackary Arthur,Fiona Dourif,Teo Briones,Christine Elise",
+                                    "cover": "http://autoeq.top/t_cover/tc_1010000_689f147b796161fdbfece681a9dd2ad7.jpg",
+                                    "rate": "8.1",
+                                    "pub_date": "2021-10-12",
+                                    "tags": "Mystery,Drama",
+                                    "m_type": "tv_mflx",
+                                    "m_type_2": "tt_mflx",
+                                    "order": 2,
+                                    "new_flag": "NEW",
+                                    "nw_flag": "NEW",
+                                    "ss_eps": "S2 E6",
+                                    "update": "3"
+                                }
+                            ]
+                        }
+                    ],
+                    "display_type": "1",// 1、竖滑；2、横滑；3、轮播图
+                    "moreflag": "1",// 1显示 0隐藏;竖滑时九宫格下边是否显示More/Seeall;
+                    "seeall": "1",// 专题Header上SeeAll:1显示 0隐藏
+                    "seeall_value": "See All >",// 专题Header上SeeAll:文案
+                    "open_mode": "1",// seeall的二级样式：6跳艺术家列表，其他跳常规电影电视剧列表
+                    "open_mode_value": "1000001",// seeall的二级列表ID
+                    "order": 3
+                },
+                {
+                    // 18+ 专题
+                    "info_type_2": "mtype",// mtype电影，tttype电视剧
+                    "secname": "Hot 18+",
+                    "playlist_key": "292",
+                    "module_key": "Hot 18+",
+                    "data_type": "4",// 1.电影/电视剧，4.18+
+                    "name": "Hot 18+",// 专题名
+                    "data": [
+                        {
+                            "id": "292",// 专题ID（不要用，显示用外层的）
+                            "name": "Hot 18+",// 专题名（不要用，显示用外层的）
+                            "cover": "https://youngtunes.s3.amazonaws.com/youngtunes/cover/292_1611922634_700x350.jpg",// 所属专题封面
+                            "cover2": "",
+                            "cover3": "",
+                            "desc": "The fusion of love and desire",
+                            "tag": "",
+                            "type": "4",
+                            "comment": "0",
+                            "fav": "0",
+                            "share": "0",
+                            "status": "0",
+                            "creator_id": "0",
+                            "create_time": "0",
+                            "recognition": "",
+                            "browser": "9225",
+                            "dislikes": "0",
+                            "country": "",
+                            "lang": "",
+                            "region": "",
+                            "m20": [// 电影专题内容列表
+                                {
+                                    "order": 1,
+                                    "id": "21462",// 电影ID
+                                    "title": "The Japanese Wife Next Door",// 电影名
+                                    "cover": "http://autoeq.top/m_cover/mc_21462_37e83c96bcea8158cced5add35c02417.jpg",// 电影封面
+                                    "rate": "5.2",// 评分
+                                    "stars": "Naohiro Hirakawa,Reiko Yamaguchi,Lemon Hanazawa",// 演员名单
+                                    "views": "1086",// 观看量
+                                    "pub_date": "2004-06-23",// 上映时间
+                                    "tags": "N/A",// 类型标签
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD",// 清晰度，CAM、HD等
+                                    "gif": "",
+                                    "description": "An outrageous and insanely over the top erotic (&#39;Pinku&#39;) movie that delights in breaking several taboos, in the unique way that just a Pinku movie can!  The narrative starts using office worker Takashi, who shares a drink one night with two women (Mina and Sakura).  Fate intervenes and then he subsequently ends up marrying Sakura (played with busty JAV Idol, Reiko Yamaguchi).  The newlywed couple go into Takashi&#39;s home (distributed to his sister, dad and grandfather), but Sakura&#39;s nymphomaniac sexdrive soon starts to cause anxieties.   When Takashi begins to moan in his marital commitments, Sakura turns to the remainder of your family in order to satisfy her nympho excitement....   Trivia: This movie was followed with a sequel (The Japanese Wife across the street -- Part two ) which features the exact same cast, but follows Takashi&#39;s fate when he&#39;d married Mina (the different woman he shared the drink with that night) rather than",// 描述
+                                    "c_cnts": "200+"
+                                },
+                                {
+                                    "order": 2,
+                                    "id": "25349",
+                                    "title": "All Ladies Do It",
+                                    "cover": "http://autoeq.top/m_cover/mc_25349_c90a356873c27f2033848630133bbf22.jpg",
+                                    "rate": "5.3",
+                                    "stars": "Claudia Koll,Paolo Lanza,Franco Branciaroli,Isabella Deiana,Renzo Rinaldi,Ornella Marcucci,Marco Marciani,Maurizio Martinoli,Luciana Cirenei,Rossana Di Pierro,Rosa Maria Pezzullo,Osiride Pevarello,Antonio Conte,Lucia Lucchesino,Pierangela Vallerino",
+                                    "views": "1214",
+                                    "pub_date": "1992-02-21",
+                                    "tags": "Comedy,Drama",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD",
+                                    "gif": "",
+                                    "description": "Diana is just a Roman wife married to sympathetic Paolo but she is keen on playing benign games of seduction while resisting the progress of lingerie shopowner Silvio.  She narrates her adventures in order to stimulate their life that is otherwise boring.  Under the sway of her friend Antonietta and sister Nadia, Diana starts to proceed the on-goings further while Paolo is more likely to believing that events her are merely fantasies.",
+                                    "c_cnts": "100+"
+                                }
+                            ],
+                            "total": 53
+                        }
+                    ],
+                    "display_type": "2",// 1、竖滑；2、横滑；3、轮播图
+                    "moreflag": "0",// 1显示 0隐藏;竖滑时九宫格下边是否显示More/Seeall;
+                    "seeall": "1",// 专题Header上SeeAll:1显示 0隐藏
+                    "seeall_value": "See All >",// 专题Header上SeeAll文案
+                    "open_mode": "1",// seeall的二级样式：6跳艺术家列表，其他跳常规电影电视剧列表
+                    "open_mode_value": "292",// seeall的二级列表ID
+                    "order": 14
+                },
+                {
+                    // 组合卡片
+                    "info_type_2": "composite",
+                    "secname": "",
+                    "playlist_key": "com_1",
+                    "module_key": "",
+                    "data_type": "9",// 不用时用这个字段过滤
+                    "name": "com_1",
+                    "cover": "",
+                    "total": 5,
+                    "data": [
+                        {
+                            "title": "Horror",
+                            "cover": "https://autoeq.top/crm/banner/img_v2_717f5b3d-1779-43e7-bd78-9094b40581bg_1665563011_0x0.png",
+                            "type": "3",
+                            "order": 1,
+                            "api": "/253/",
+                            "params": [
+                                {
+                                    "key1": "id",
+                                    "val1": "75"
+                                }
+                            ],
+                            "id": "6"
+                        },
+                        {
+                            "title": "Netflix Movies",
+                            "cover": "https://autoeq.top/crm/banner/400_1664330021_700x350_1665558678_0x0.png",
+                            "type": "3",
+                            "order": 2,
+                            "api": "/show_mlist_sp_3/",
+                            "params": [
+                                {
+                                    "key1": "id",
+                                    "val1": "400"
+                                }
+                            ],
+                            "id": "8"
+                        },
+                        {
+                            "title": "Disney",
+                            "cover": "https://autoeq.top/crm/banner/195_1664329853_700x350_1665560184_0x0.png",
+                            "type": "3",
+                            "order": 3,
+                            "api": "/show_mlist_sp_3/",
+                            "params": [
+                                {
+                                    "key1": "id",
+                                    "val1": "195"
+                                }
+                            ],
+                            "id": "7"
+                        },
+                        {
+                            "title": "Latest Movies",
+                            "cover": "https://autoeq.top/crm/banner/MV5BMjM2OTkyNTY3N15BMl5BanBnXkFtZTgwNzgzNDc2NjE@_1665558566_0x0.jpg",
+                            "type": "3",
+                            "order": 4,
+                            "api": "/253/",
+                            "params": [
+                                {
+                                    "key1": "id",
+                                    "val1": "4"
+                                }
+                            ],
+                            "id": "9"
+                        },
+                        {
+                            "title": "Thriller Movies",
+                            "cover": "https://autoeq.top/crm/banner/79_1666087552_700x350_1666683469_0x0.png",
+                            "type": "3",
+                            "order": 5,
+                            "api": "/253/",
+                            "params": [
+                                {
+                                    "key1": "id",
+                                    "val1": "79"
+                                }
+                            ],
+                            "id": "10"
+                        }
+                    ],
+                    "display_type": "1",
+                    "seeall": "0",
+                    "seeall_value": "See All >",
+                    "open_mode": "10",
+                    "open_mode_value": "",
+                    "order": 10
+                },
+                {
+                    // 榜单
+                    "info_type": "charts",
+                    "info_type_2": "charts",
+                    "secname": "Top Charts",
+                    "playlist_key": "",
+                    "module_key": "Top Charts",
+                    "data_type": "8",// 不用时用这个字段过滤
+                    "name": "Top Charts",
+                    "total": 8,
+                    "data": [],
+                    "data_charts": [
+                        {
+                            "g1": "100",
+                            "g2": "104",
+                            "info_type": "charts",
+                            "info_type_2": "charts",
+                            "name": "New",
+                            "cover": "http://autoeq.top/m_cover/mc_301_37235_c8651789d418118b810c58696ae5ac18.jpg",
+                            "data": [
+                                {
+                                    "order": 1,
+                                    "id": "37235",
+                                    "title": "The Lair",
+                                    "cover": "http://autoeq.top/m_cover/mc_301_37235_c8651789d418118b810c58696ae5ac18.jpg",
+                                    "rate": "4.7",
+                                    "stars": "Kibong Tanji,Troy Alexander,Jamie Bamber,Jonathan Howard,Leon Ockenden",
+                                    "views": "0",
+                                    "pub_date": "2023-01-13",
+                                    "tags": "Horror,Action",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                },
+                                {
+                                    "order": 2,
+                                    "id": "37323",
+                                    "title": "R.I.P.D. 2: Rise of the Damned",
+                                    "cover": "http://autoeq.top/m_cover/mc_301_37323_f7714df1cdee7f141a99c1ae7b9950b4.jpg",
+                                    "rate": "",
+                                    "stars": "Jeffrey Donovan,Penelope Mitchell,Richard Brake,Kerry Knuppe,Jake Choi,Richard Fleeshman,N\u00f3ra Trok\u00e1n,Tilly Keeper,Stephanie Levi-John,Nick Wittman,Petra Veres-Kov\u00e1cs,Robert Jackson,Rachel Adedeji,G\u00e1bor Perei",
+                                    "views": "0",
+                                    "pub_date": "2022-11-15",
+                                    "tags": "Crime,Comedy,Fantasy,Action",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                },
+                                {
+                                    "order": 3,
+                                    "id": "37300",
+                                    "title": "The Minute You Wake Up Dead",
+                                    "cover": "http://autoeq.top/m_cover/mc_101_37300_b2c74b6da800cc1e5843266f1e2ed397.jpg",
+                                    "rate": "4.7",
+                                    "stars": "Cole Hauser,Jaimie Alexander,Kenneth Farmer,Andrew Stevens,Darren Mann",
+                                    "views": "0",
+                                    "pub_date": "2022-11-04",
+                                    "tags": "Thriller,Crime",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                }
+                            ]
+                        },
+                        {
+                            "g1": "100",
+                            "g2": "102",
+                            "info_type": "charts",
+                            "info_type_2": "charts",
+                            "name": "Fastest Rise",
+                            "cover": "http://autoeq.top/m_cover/mc_101_37297_5e1ff67e139a8864f865e8291d7dd9ba.jpg",
+                            "data": [
+                                {
+                                    "order": 1,
+                                    "id": "37297",
+                                    "title": "The System",
+                                    "cover": "http://autoeq.top/m_cover/mc_101_37297_5e1ff67e139a8864f865e8291d7dd9ba.jpg",
+                                    "rate": "5.6",
+                                    "stars": "Laura Aleman,Ric Reitz,Jeremy Piven,Tyrese Gibson,Terrence Howard",
+                                    "views": "0",
+                                    "pub_date": "2022-10-28",
+                                    "tags": "Crime,Action",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                },
+                                {
+                                    "order": 2,
+                                    "id": "28880",
+                                    "title": "Street Fighter Assassin's Fist",
+                                    "cover": "http://autoeq.top/m_cover/mc_28880_ae4dba1743cc6d441257ccf513a51ff5.jpg",
+                                    "rate": "7.4",
+                                    "stars": "Togo Igawa,Christian Howard,Mike Moh,Shogen,Gaku Space,Akira Koieyama,Joey Ansah,Hyunri",
+                                    "views": "15",
+                                    "pub_date": "2014-05-23",
+                                    "tags": "Action,Drama,Adventure,Fantasy",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                },
+                                {
+                                    "order": 3,
+                                    "id": "37294",
+                                    "title": "Overdose",
+                                    "cover": "http://autoeq.top/m_cover/mc_101_37294_bc1b6963467946794d6acb1ca6facd17.jpg",
+                                    "rate": "5.8",
+                                    "stars": "Assaad Bouab,Kool Shen,Francis Renaud,Julie Chevallier,Kenza Fortas",
+                                    "views": "0",
+                                    "pub_date": "2022-11-04",
+                                    "tags": "Action,Crime,Thriller",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                }
+                            ]
+                        },
+                        {
+                            "g1": "100",
+                            "g2": "105",
+                            "info_type": "charts",
+                            "info_type_2": "charts",
+                            "name": "Top Rated",
+                            "cover": "http://autoeq.top/m_cover/mc_13154_55a51239dc6fe8cf8c09ec91f36f5250.jpg",
+                            "data": [
+                                {
+                                    "order": 1,
+                                    "id": "13154",
+                                    "title": "The Dark Knight",
+                                    "cover": "http://autoeq.top/m_cover/mc_13154_55a51239dc6fe8cf8c09ec91f36f5250.jpg",
+                                    "rate": "9.0",
+                                    "stars": "Christian Bale,Heath Ledger,Aaron Eckhart,Michael Caine,Maggie Gyllenhaal,Gary Oldman,Morgan Freeman,Monique Gabriela Curnen,Ron Dean,Cillian Murphy,Chin Han,Nestor Carbonell,Eric Roberts,Ritchie Coster,Anthony Michael Hall",
+                                    "views": "70",
+                                    "pub_date": "2008-07-16",
+                                    "tags": "Drama,Action,Crime,Thriller",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                },
+                                {
+                                    "order": 2,
+                                    "id": "8168",
+                                    "title": "The Lord of the Rings: The Return of the King",
+                                    "cover": "http://autoeq.top/m_cover/mc_8168_0c9e63b6cec0627182663ae8feb204cb.jpg",
+                                    "rate": "8.9",
+                                    "stars": "Noel Appleby,Ali Astin,Sean Astin,David Aston,John Bach,Sean Bean,Cate Blanchett,Orlando Bloom,Billy Boyd,Sadwyn Brophy,Alistair Browning,Marton Csokas,Richard Edge,Jason Fitch,Bernard Hill",
+                                    "views": "62",
+                                    "pub_date": "2003-12-01",
+                                    "tags": "Adventure,Fantasy,Action",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                },
+                                {
+                                    "order": 3,
+                                    "id": "12106",
+                                    "title": "Fight Club",
+                                    "cover": "http://autoeq.top/m_cover/mc_12106_59378da7650a0c665518961273af6b05.jpg",
+                                    "rate": "8.8",
+                                    "stars": "Edward Norton,Brad Pitt,Meat Loaf,Zach Grenier,Richmond Arquette,David Andrews,George Maguire,Eugenie Bondurant,Helena Bonham Carter,Christina Cabot,Sydney 'Big Dawg' Colston,Rachel Singer,Christie Cronenweth,Tim DeZarn,Ezra Buzzington",
+                                    "views": "81",
+                                    "pub_date": "1999-10-15",
+                                    "tags": "Drama",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                }
+                            ]
+                        },
+                        {
+                            "g1": "100",
+                            "g2": "103",
+                            "info_type": "charts",
+                            "info_type_2": "charts",
+                            "name": " Top Searches",
+                            "cover": "http://autoeq.top/m_cover/mc_501_36621_acd5b6d5d51950ae88fae89262a97aa0.jpg",
+                            "data": [
+                                {
+                                    "order": 1,
+                                    "id": "36621",
+                                    "title": "Dragon Ball Super: Super Hero",
+                                    "cover": "http://autoeq.top/m_cover/mc_501_36621_acd5b6d5d51950ae88fae89262a97aa0.jpg",
+                                    "rate": "7.2",
+                                    "stars": "Masako Nozawa,Toshio Furukawa,Y\u00fbko Minaguchi,Ry\u00f4 Horikawa,Aya Hisakawa,Mayumi Tanaka,Miki It\u00f4,Takeshi Kusao,K\u00f4ichi Yamadera,Masakazu Morita,Bin Shimada,Nana Mizuki,Tomokazu Sugita,Zach Aguilar,Johnny Yong Bosch",
+                                    "views": "0",
+                                    "pub_date": "2022-08-19",
+                                    "tags": "Animation,Science Fiction,Action",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                },
+                                {
+                                    "order": 2,
+                                    "id": "35667",
+                                    "title": "Black Adam",
+                                    "cover": "http://autoeq.top/m_cover/mc_901_35667_13b96a16c5db9bc9de8f05b6f74a5d96.jpg",
+                                    "rate": "7.1",
+                                    "stars": "Dwayne Johnson,Sarah Shahi,Viola Davis,Pierce Brosnan,Aldis Hodge,Noah Centineo,Joseph Gatt,Natalie Burn,Odelya Halevi,Quintessa Swindell,Patrick Sabongui,Angel Rosario Jr.,Derek Russo,Christopher Matthew Cook",
+                                    "views": "0",
+                                    "pub_date": "2022-10-19",
+                                    "tags": "Fantasy,Adventure,Action",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "CAM"
+                                },
+                                {
+                                    "order": 3,
+                                    "id": "37199",
+                                    "title": "Terrifier 2",
+                                    "cover": "http://autoeq.top/m_cover/mc_701_37199_8c8b4ac8a579c8bea7c977fe96d65983.jpg",
+                                    "rate": "6.5",
+                                    "stars": "David Howard Thornton,Jenna Kanell,Lauren LaVera,Catherine Corcoran,Samantha Scaffidi,Kailey Hyman,Katie Maguire,Felissa Rose,Casey Hartnett,Griffin Santopietro,Jackie Adragna,Tamara Glynn,Chris Jericho,Elliott Fullam,Sarah Voigt,Amelie McLain,Georgia Mac",
+                                    "views": "0",
+                                    "pub_date": "2022-10-06",
+                                    "tags": "Horror,Thriller",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                }
+                            ]
+                        },
+                        {
+                            "g1": "100",
+                            "g2": "106",
+                            "info_type": "charts",
+                            "info_type_2": "charts",
+                            "name": "Horror and Thriller",
+                            "cover": "http://autoeq.top/m_cover/mc_901_37062_cf4012623d75c1e1f73eef47b4ec918d.jpg",
+                            "data": [
+                                {
+                                    "order": 1,
+                                    "id": "37062",
+                                    "title": "Smile",
+                                    "cover": "http://autoeq.top/m_cover/mc_901_37062_cf4012623d75c1e1f73eef47b4ec918d.jpg",
+                                    "rate": "7",
+                                    "stars": "Sosie Bacon,Kal Penn,Nick Arapoglou,Robin Weigert,Kyle Gallner",
+                                    "views": "0",
+                                    "pub_date": "2022-09-23",
+                                    "tags": "Horror,Mystery,Thriller",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                },
+                                {
+                                    "order": 2,
+                                    "id": "37199",
+                                    "title": "Terrifier 2",
+                                    "cover": "http://autoeq.top/m_cover/mc_701_37199_8c8b4ac8a579c8bea7c977fe96d65983.jpg",
+                                    "rate": "6.5",
+                                    "stars": "David Howard Thornton,Jenna Kanell,Lauren LaVera,Catherine Corcoran,Samantha Scaffidi,Kailey Hyman,Katie Maguire,Felissa Rose,Casey Hartnett,Griffin Santopietro,Jackie Adragna,Tamara Glynn,Chris Jericho,Elliott Fullam,Sarah Voigt,Amelie McLain,Georgia Mac",
+                                    "views": "0",
+                                    "pub_date": "2022-10-06",
+                                    "tags": "Horror,Thriller",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                },
+                                {
+                                    "order": 3,
+                                    "id": "37138",
+                                    "title": "Halloween Ends",
+                                    "cover": "http://autoeq.top/m_cover/mc_501_37138_98a5ad54e01fee0f3a9b88257b81c878.jpg",
+                                    "rate": "5.3",
+                                    "stars": "Judy Greer,Keraun Harris,Russel Bryan Winstead,Will Patton,Stephanie McIntyre",
+                                    "views": "0",
+                                    "pub_date": "2022-10-12",
+                                    "tags": "Thriller,Horror",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                }
+                            ]
+                        },
+                        {
+                            "g1": "100",
+                            "g2": "107",
+                            "info_type": "charts",
+                            "info_type_2": "charts",
+                            "name": "Action & Adventure",
+                            "cover": "http://autoeq.top/m_cover/mc_101_37297_5e1ff67e139a8864f865e8291d7dd9ba.jpg",
+                            "data": [
+                                {
+                                    "order": 1,
+                                    "id": "37297",
+                                    "title": "The System",
+                                    "cover": "http://autoeq.top/m_cover/mc_101_37297_5e1ff67e139a8864f865e8291d7dd9ba.jpg",
+                                    "rate": "5.6",
+                                    "stars": "Laura Aleman,Ric Reitz,Jeremy Piven,Tyrese Gibson,Terrence Howard",
+                                    "views": "0",
+                                    "pub_date": "2022-10-28",
+                                    "tags": "Crime,Action",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                },
+                                {
+                                    "order": 2,
+                                    "id": "36933",
+                                    "title": "The Woman King",
+                                    "cover": "http://autoeq.top/m_cover/mc_901_36933_171061605226364f27c0a15445307397.jpg",
+                                    "rate": "5.7",
+                                    "stars": "Viola Davis,Thuso Mbedu,Jayme Lawson,John Boyega,Adrienne Warren",
+                                    "views": "0",
+                                    "pub_date": "2022-09-15",
+                                    "tags": "History,Action,Drama",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                },
+                                {
+                                    "order": 3,
+                                    "id": "28880",
+                                    "title": "Street Fighter Assassin's Fist",
+                                    "cover": "http://autoeq.top/m_cover/mc_28880_ae4dba1743cc6d441257ccf513a51ff5.jpg",
+                                    "rate": "7.4",
+                                    "stars": "Togo Igawa,Christian Howard,Mike Moh,Shogen,Gaku Space,Akira Koieyama,Joey Ansah,Hyunri",
+                                    "views": "15",
+                                    "pub_date": "2014-05-23",
+                                    "tags": "Action,Drama,Adventure,Fantasy",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                }
+                            ]
+                        },
+                        {
+                            "g1": "100",
+                            "g2": "108",
+                            "info_type": "charts",
+                            "info_type_2": "charts",
+                            "name": "Comedy Movies",
+                            "cover": "http://autoeq.top/m_cover/mc_502_35633_ac42634b27b4530eac740d6b72fcb713.jpg",
+                            "data": [
+                                {
+                                    "order": 1,
+                                    "id": "35633",
+                                    "title": "Minions: The Rise of Gru",
+                                    "cover": "http://autoeq.top/m_cover/mc_502_35633_ac42634b27b4530eac740d6b72fcb713.jpg",
+                                    "rate": "6.6",
+                                    "stars": "Steve Carell,Pierre Coffin,Alan Arkin,Taraji P. Henson,Michelle Yeoh,Julie Andrews,Russell Brand,Jean-Claude Van Damme,Dolph Lundgren,Danny Trejo,Lucy Lawless,Jimmy O. Yang,Kevin Michael Richardson,John DiMaggio,RZA,Michael Beattie,Will Arnett,Steve Cooga",
+                                    "views": "18574",
+                                    "pub_date": "2022-06-16",
+                                    "tags": "Family,Adventure,Animation,Comedy,Action",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                },
+                                {
+                                    "order": 2,
+                                    "id": "37164",
+                                    "title": "Lyle, Lyle, Crocodile",
+                                    "cover": "http://autoeq.top/m_cover/mc_901_37164_bf050ac42411f066b9f802fe83ae053b.jpg",
+                                    "rate": "6.5",
+                                    "stars": "Constance Wu,Sal Viscuso,Shawn Mendes,Elijahawon Perrin,Lindsey Moser",
+                                    "views": "0",
+                                    "pub_date": "2022-10-07",
+                                    "tags": "Comedy,Family,Music",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                },
+                                {
+                                    "order": 3,
+                                    "id": "36261",
+                                    "title": "DC League of Super-Pets",
+                                    "cover": "http://autoeq.top/m_cover/mc_501_36261_3c15a433ccfcf41da986454560848b50.jpg",
+                                    "rate": "7.6",
+                                    "stars": "Dwayne Johnson,Kevin Hart,Kate McKinnon,John Krasinski,Vanessa Bayer,Natasha Lyonne,Diego Luna,Marc Maron,Keanu Reeves,Thomas Middleditch,Ben Schwartz,Olivia Wilde,Maya Erskine,Yvette Nicole Brown,Jameela Jamil,Jemaine Clement,John Early,Dascha Polanco",
+                                    "views": "4183",
+                                    "pub_date": "2022-07-27",
+                                    "tags": "Animation,Action,Family,Science Fiction,Comedy",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                }
+                            ]
+                        },
+                        {
+                            "g1": "100",
+                            "g2": "109",
+                            "info_type": "charts",
+                            "info_type_2": "charts",
+                            "name": "Cartoon and Animation",
+                            "cover": "http://autoeq.top/m_cover/mc_502_35633_ac42634b27b4530eac740d6b72fcb713.jpg",
+                            "data": [
+                                {
+                                    "order": 1,
+                                    "id": "35633",
+                                    "title": "Minions: The Rise of Gru",
+                                    "cover": "http://autoeq.top/m_cover/mc_502_35633_ac42634b27b4530eac740d6b72fcb713.jpg",
+                                    "rate": "6.6",
+                                    "stars": "Steve Carell,Pierre Coffin,Alan Arkin,Taraji P. Henson,Michelle Yeoh,Julie Andrews,Russell Brand,Jean-Claude Van Damme,Dolph Lundgren,Danny Trejo,Lucy Lawless,Jimmy O. Yang,Kevin Michael Richardson,John DiMaggio,RZA,Michael Beattie,Will Arnett,Steve Cooga",
+                                    "views": "18574",
+                                    "pub_date": "2022-06-16",
+                                    "tags": "Family,Adventure,Animation,Comedy,Action",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                },
+                                {
+                                    "order": 2,
+                                    "id": "36261",
+                                    "title": "DC League of Super-Pets",
+                                    "cover": "http://autoeq.top/m_cover/mc_501_36261_3c15a433ccfcf41da986454560848b50.jpg",
+                                    "rate": "7.6",
+                                    "stars": "Dwayne Johnson,Kevin Hart,Kate McKinnon,John Krasinski,Vanessa Bayer,Natasha Lyonne,Diego Luna,Marc Maron,Keanu Reeves,Thomas Middleditch,Ben Schwartz,Olivia Wilde,Maya Erskine,Yvette Nicole Brown,Jameela Jamil,Jemaine Clement,John Early,Dascha Polanco",
+                                    "views": "4183",
+                                    "pub_date": "2022-07-27",
+                                    "tags": "Animation,Action,Family,Science Fiction,Comedy",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                },
+                                {
+                                    "order": 3,
+                                    "id": "37161",
+                                    "title": "Batman and Superman: Battle of the Super Sons",
+                                    "cover": "http://autoeq.top/m_cover/mc_301_37161_25da35c3caae93fe52ceb26ba1d5adb1.jpg",
+                                    "rate": "6.7",
+                                    "stars": "Nolan North,Travis Willingham,Laura Bailey,Darin De Paul,Myrna Velasco",
+                                    "views": "0",
+                                    "pub_date": "2022-10-17",
+                                    "tags": "Animation,Action,Science Fiction",
+                                    "m_type": "myflixer",
+                                    "m_type_2": "myfx",
+                                    "quality": "HD"
+                                }
+                            ]
+                        }
+                    ],
+                    "display_type": "2",
+                    "seeall": "0",
+                    "seeall_value": "See All >",
+                    "open_mode": "9",
+                    "open_mode_value": "mt_charts",
+                    "order": 11
+                }
+            ],
+            "region": "en-US",
+            "source": "250",
+            "pagecnt": 1,
+            "total": 1,
+            "kws": [
+                // 热门标签(暂时不用)
+            ],
+            "shortcut": [],
+            "348": [],
+            "retract": "3",
+            "region_tag": "en-US"
+        },
+        "flex": [// 首页顶部Tab切换
+            {
+                "cover": "https://autoeq.top/crm/banner/onepiece_1638357074_0x0.jpg",
+                "title": "Featured",// tab标题（显示用）
+                "type": "3",
+                "dp_type": "3",// 1请求时需传筛选条件如156接口；3请求时可传alsoLikeId(字段id，值获取规则见需求文档)，同时传p1=2如252接口；5无额外参数；6请求时传p1=1；9无额外参数；
+                "order": 1,
+                "api": "/252/",// 该tab对应的api接口
+                "params": [// 如果下列字典中的key1和val1都不为空，则按照{key1:val1}的形式加到参数里
+                    {
+                        "key1": "id",
+                        "val1": ""
+                    }
+                ],
+                "id": 1,
+                "fcolor1": "",
+                "fcolor2": "",
+                "bgcolor": ""
+            },
+            {
+                "cover": "",
+                "title": "TV Shows",
+                "type": "0",
+                "dp_type": "9",
+                "order": 2,
+                "api": "/246/",
+                "params": [
+                    {
+                        "key1": "id",
+                        "val1": ""
+                    }
+                ],
+                "id": 8,
+                "fcolor1": "",
+                "fcolor2": "",
+                "bgcolor": ""
+            },
+            {
+                "cover": "https://autoeq.top/crm/banner/734aea4b1032ecc68a30fa323d2f1f5a_1670488462_0x0.jpg",
+                "title": "Tyler Perry",
+                "type": "0",
+                "dp_type": "9",
+                "order": 5,
+                "api": "/249/",
+                "params": [
+                    {
+                        "key1": "id",
+                        "val1": "tylerperry"
+                    }
+                ],
+                "id": 81,
+                "fcolor1": "#FF785A",
+                "fcolor2": "#FF785A",
+                "bgcolor": ""
+            },
+            {
+                "cover": "https://autoeq.top/crm/banner/origin_img_v2_8842794c-abad-439c-b2cc-6947f1e9e48g_1662628486_0x0.png",
+                "title": "Reality TV ",
+                "type": "0",
+                "dp_type": "9",
+                "order": 6,
+                "api": "/249/",
+                "params": [
+                    {
+                        "key1": "id",
+                        "val1": "realitytv"
+                    }
+                ],
+                "id": 72,
+                "fcolor1": "",
+                "fcolor2": "",
+                "bgcolor": ""
+            },
+            {
+                "cover": "https://autoeq.top/crm/banner/20220310-170051_1646902975_0x0.png",
+                "title": "Collections",
+                "type": "0",
+                "dp_type": "5",
+                "order": 7,
+                "api": "/220/",
+                "params": [
+                    {
+                        "key1": "id",
+                        "val1": ""
+                    }
+                ],
+                "id": 6,
+                "fcolor1": "",
+                "fcolor2": "",
+                "bgcolor": ""
+            },
+            {
+                "cover": "",
+                "title": "Disney",
+                "type": "0",
+                "dp_type": "9",
+                "order": 8,
+                "api": "/249/",
+                "params": [
+                    {
+                        "key1": "id",
+                        "val1": "disney"
+                    }
+                ],
+                "id": 63,
+                "fcolor1": "",
+                "fcolor2": "",
+                "bgcolor": ""
+            },
+            {
+                "cover": "https://autoeq.top/crm/banner/img_v2_99ea360e-f705-4ed2-9b00-529b988c4cag_1665285855_0x0.jpg",
+                "title": "Netflix",
+                "type": "0",
+                "dp_type": "9",
+                "order": 8,
+                "api": "/249/",
+                "params": [
+                    {
+                        "key1": "id",
+                        "val1": "net"
+                    }
+                ],
+                "id": 75,
+                "fcolor1": "",
+                "fcolor2": "",
+                "bgcolor": ""
+            },
+            {
+                "cover": "https://autoeq.top/crm/banner/20220310-170625_1646903254_0x0.png",
+                "title": "HBOMAX",
+                "type": "0",
+                "dp_type": "9",
+                "order": 9,
+                "api": "/249/",
+                "params": [
+                    {
+                        "key1": "id",
+                        "val1": "hbo"
+                    }
+                ],
+                "id": 9,
+                "fcolor1": "",
+                "fcolor2": "",
+                "bgcolor": ""
+            },
+            {
+                "cover": "",
+                "title": "Stars",
+                "type": "6",
+                "dp_type": "6",
+                "order": 10,
+                "api": "/188/",
+                "params": [
+                    {
+                        "key1": "id",
+                        "val1": "2000002"
+                    }
+                ],
+                "id": 2,
+                "fcolor1": "",
+                "fcolor2": "",
+                "bgcolor": ""
+            },
+            {
+                "cover": "",
+                "title": "Hulu",
+                "type": "0",
+                "dp_type": "9",
+                "order": 11,
+                "api": "/249/",
+                "params": [
+                    {
+                        "key1": "id",
+                        "val1": "hulu"
+                    }
+                ],
+                "id": 76,
+                "fcolor1": "",
+                "fcolor2": "",
+                "bgcolor": ""
+            },
+            {
+                "cover": "",
+                "title": "Prime",
+                "type": "0",
+                "dp_type": "9",
+                "order": 12,
+                "api": "/249/",
+                "params": [
+                    {
+                        "key1": "id",
+                        "val1": "prime"
+                    }
+                ],
+                "id": 79,
+                "fcolor1": "",
+                "fcolor2": "",
+                "bgcolor": ""
+            },
+            {
+                "cover": "",
+                "title": "All",
+                "type": "0",
+                "dp_type": "1",
+                "order": 13,
+                "api": "/156/",
+                "params": [
+                    {}
+                ],
+                "id": 5,
+                "fcolor1": "",
+                "fcolor2": "",
+                "bgcolor": ""
+            }
+        ],
+        "flag": "3",
+        "push_guide_img": "https://autoeq.top/crm/banner/guide_img2.jpg",
+        "guide_img": "https://autoeq.top/crm/banner/img_v2_2808794b-da40-4b4c-93b4-b231aab579ag_1667441810_0x0.jpg",// 内容大卡：封面
+        "type": "mid",// 内容大卡：mid电影，tid电视剧
+        "id": "37062",// 内容大卡：电影ID/电视剧ID
+        "s_id": "0",// 内容大卡：电视剧-季ID
+        "e_id": "0"// 内容大卡：电视剧-集ID
+    }
+}
+
+*/

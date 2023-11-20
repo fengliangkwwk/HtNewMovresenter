@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_ad_lunch_page/views/home_launcherpage.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/views/home_mainpage.dart';
-import 'package:ht_new_movpresenter/ht_mylibrary_page/views/setting_mineinfo1.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/views/setting_mineinfo.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/views/premium_indexerpage.dart';
 import 'package:ht_new_movpresenter/utils/ht_init_app.dart';
 
@@ -11,10 +11,6 @@ void main() async{
   //  await initApp();
   runApp(const HTClassApp());
 }
-
-
-
-
 
 class HTClassApp extends StatelessWidget {
   const HTClassApp({Key? key}) : super(key: key);
