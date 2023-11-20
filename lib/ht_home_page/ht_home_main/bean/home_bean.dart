@@ -190,6 +190,9 @@ class ItemData {
   @JsonKey(name: 'm20')
   List<M20>? m20;
 
+ @JsonKey(name: 'tt20')
+  List<TT20>? tt20;
+
 
   String iconImage() {
     if (cover2 == null || cover2?.isEmpty == true) {
@@ -270,4 +273,66 @@ class M20{
 
   Map<String, dynamic> toJson() => _$M20ToJson(this);
 
+}
+
+
+@JsonSerializable(explicitToJson: true)
+class TT20{
+
+  @JsonKey(name: 'id')
+  String? id;
+
+  @JsonKey(name: 'title')
+  String? title;
+
+  @JsonKey(name: 'stars')
+  String? stars;
+
+  @JsonKey(name: 'cover')
+  String? cover;
+
+  @JsonKey(name: 'rate')
+  String? rate;
+
+  @JsonKey(name: 'pub_date')
+  String? pub_date;
+
+  @JsonKey(name: 'tags')
+  String? tags;
+
+  @JsonKey(name: 'm_type')
+  String? m_type;
+
+  @JsonKey(name: 'm_type_2')
+  String? m_type_2;
+
+  @JsonKey(name: 'order')
+  String? order;
+
+  @JsonKey(name: 'new_flag')
+  String? new_flag;
+
+  @JsonKey(name: 'nw_flag')
+  String? nw_flag;
+
+  @JsonKey(name: 'ss_eps')
+  String? ss_eps;
+
+  @JsonKey(name: 'update')
+  String? update;
+
+  @JsonKey(name: 'c_cnts')
+  String? c_cnts;
+
+  @JsonKey(name: 'description')
+  String? description;
+
+  @JsonKey(name: 'gif')
+  String? gif;
+
+  TT20();
+   
+  static TT20 fromJson(Map<String, dynamic> srcJson) => _$TT20FromJson(srcJson);
+
+  Map<String, dynamic> toJson() => _$TT20ToJson(this);
 }

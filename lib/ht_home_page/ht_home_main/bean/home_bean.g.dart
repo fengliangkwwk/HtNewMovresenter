@@ -102,6 +102,9 @@ ItemData _$ItemDataFromJson(Map<String, dynamic> json) => ItemData()
   ..status = json['status'] as String?
   ..m20 = (json['m20'] as List<dynamic>?)
       ?.map((e) => M20.fromJson(e as Map<String, dynamic>))
+      .toList()
+  ..tt20 = (json['tt20'] as List<dynamic>?)
+      ?.map((e) => TT20.fromJson(e as Map<String, dynamic>))
       .toList();
 
 Map<String, dynamic> _$ItemDataToJson(ItemData instance) => <String, dynamic>{
@@ -137,6 +140,7 @@ Map<String, dynamic> _$ItemDataToJson(ItemData instance) => <String, dynamic>{
       'type': instance.type,
       'status': instance.status,
       'm20': instance.m20?.map((e) => e.toJson()).toList(),
+      'tt20': instance.tt20?.map((e) => e.toJson()).toList(),
     };
 
 M20 _$M20FromJson(Map<String, dynamic> json) => M20()
@@ -172,4 +176,43 @@ Map<String, dynamic> _$M20ToJson(M20 instance) => <String, dynamic>{
       'gif': instance.gif,
       'description': instance.description,
       'c_cnts': instance.cCnts,
+    };
+
+TT20 _$TT20FromJson(Map<String, dynamic> json) => TT20()
+  ..id = json['id'] as String?
+  ..title = json['title'] as String?
+  ..stars = json['stars'] as String?
+  ..cover = json['cover'] as String?
+  ..rate = json['rate'] as String?
+  ..pub_date = json['pub_date'] as String?
+  ..tags = json['tags'] as String?
+  ..m_type = json['m_type'] as String?
+  ..m_type_2 = json['m_type_2'] as String?
+  ..order = json['order'] as String?
+  ..new_flag = json['new_flag'] as String?
+  ..nw_flag = json['nw_flag'] as String?
+  ..ss_eps = json['ss_eps'] as String?
+  ..update = json['update'] as String?
+  ..c_cnts = json['c_cnts'] as String?
+  ..description = json['description'] as String?
+  ..gif = json['gif'] as String?;
+
+Map<String, dynamic> _$TT20ToJson(TT20 instance) => <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'stars': instance.stars,
+      'cover': instance.cover,
+      'rate': instance.rate,
+      'pub_date': instance.pub_date,
+      'tags': instance.tags,
+      'm_type': instance.m_type,
+      'm_type_2': instance.m_type_2,
+      'order': instance.order,
+      'new_flag': instance.new_flag,
+      'nw_flag': instance.nw_flag,
+      'ss_eps': instance.ss_eps,
+      'update': instance.update,
+      'c_cnts': instance.c_cnts,
+      'description': instance.description,
+      'gif': instance.gif,
     };
