@@ -307,7 +307,7 @@ class TT20{
   String? m_type_2;
 
   @JsonKey(name: 'order')
-  String? order;
+  int? order;
 
   @JsonKey(name: 'new_flag')
   String? new_flag;
