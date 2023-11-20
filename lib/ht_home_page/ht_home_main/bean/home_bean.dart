@@ -186,6 +186,11 @@ class ItemData {
   @JsonKey(name: 'status')
   String? status;
 
+
+  @JsonKey(name: 'm20')
+  List<M20>? m20;
+
+
   String iconImage() {
     if (cover2 == null || cover2?.isEmpty == true) {
       return cover ?? '';
@@ -208,4 +213,61 @@ class ItemData {
       _$ItemDataFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$ItemDataToJson(this);
+}
+
+
+@JsonSerializable(explicitToJson: true)
+class M20{
+
+  @JsonKey(name: 'order')
+  int? order;
+
+  @JsonKey(name: 'id')
+  String? id;
+
+  @JsonKey(name: 'title')
+  String? title;
+
+  @JsonKey(name: 'cover')
+  String? cover;
+
+  @JsonKey(name: 'rate')
+  String? rate;
+
+  @JsonKey(name: 'stars')
+  String? stars;
+
+  @JsonKey(name: 'views')
+  String? views;
+
+  @JsonKey(name: 'pub_date')
+  String? pubDate;
+
+  @JsonKey(name: 'tags')
+  String? tags;
+
+  @JsonKey(name: 'm_type')
+  String? mType;
+
+  @JsonKey(name: 'm_type_2')
+  String? mType2;
+
+  @JsonKey(name: 'quality')
+  String? quality;
+
+  @JsonKey(name: 'gif')
+  String? gif;
+
+  @JsonKey(name: 'description')
+  String? description;
+
+  @JsonKey(name: 'c_cnts')
+  String? cCnts;
+
+  M20();
+
+  static M20 fromJson(Map<String, dynamic> srcJson) => _$M20FromJson(srcJson);
+
+  Map<String, dynamic> toJson() => _$M20ToJson(this);
+
 }
