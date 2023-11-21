@@ -5,18 +5,17 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:get/get.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 
-class HTClassPresentDetailPage extends StatefulWidget {
-  const HTClassPresentDetailPage({Key? key, required this.title}) : super(key: key);
+class HTClassVideoDetailPage extends StatefulWidget {
+  const HTClassVideoDetailPage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
-  State<HTClassPresentDetailPage> createState() => _HTClassPresentDetailPageState();
+  State<HTClassVideoDetailPage> createState() => _HTClassVideoDetailPageState();
 }
 
-class _HTClassPresentDetailPageState extends State<HTClassPresentDetailPage> {
+class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
    final List<String> imgList = [
     'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
     'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
@@ -31,7 +30,9 @@ class _HTClassPresentDetailPageState extends State<HTClassPresentDetailPage> {
     'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
     'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4'
   ];
-  final FijkPlayer _htVarplayer = FijkPlayer();
+  final FijkPlayer _htVarplayer = FijkPlayer(
+
+  );
   ///more info 是否展开
   var _htVarInfoShown = false;
   @override
@@ -61,9 +62,11 @@ class _HTClassPresentDetailPageState extends State<HTClassPresentDetailPage> {
             Container(height:220.0,margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
               child: Stack(children: [
                 FijkView(
+                  width: 400,
+                  height: 200,
                   player: _htVarplayer,
-                  fit: FijkFit.fill,
-                  fsFit: FijkFit.fill,
+                  fit: FijkFit.cover,
+                  fsFit: FijkFit.cover,
                   panelBuilder: fijkPanel2Builder(),
                 ),
                 Positioned(
@@ -208,7 +211,7 @@ class _HTClassPresentDetailPageState extends State<HTClassPresentDetailPage> {
               ])),onTap: (){
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) {
-                      return const HTClassPresentDetailPage(title: "");
+                      return const HTClassVideoDetailPage(title: "");
                     }));
               })).toList())),
           ])),

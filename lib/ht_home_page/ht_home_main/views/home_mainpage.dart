@@ -4,8 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/home_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/homedropping_water_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_provider.dart';
@@ -17,7 +17,6 @@ import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
-import 'package:ht_new_movpresenter/utils/ht_sys_tool.dart';
 
 class HTClassHomeMainPage extends StatefulWidget {
   const HTClassHomeMainPage({Key? key, required this.title}) : super(key: key);
@@ -28,6 +27,8 @@ class HTClassHomeMainPage extends StatefulWidget {
 
 class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
   final HTHomeProvider homeProvider = HTHomeProvider();
+// 创建一个 CarouselController 以控制 CarouselSlider
+  final CarouselController _controller = CarouselController();
 
   ///初始化provider
   @override
@@ -260,6 +261,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
         }));
       },
       child: Container(
+        padding: EdgeInsets.only(top: 2, bottom: 2),
         color: Colors.transparent,
         child: Row(children: [
           Container(width: 10.0),
@@ -275,9 +277,9 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
             width: 10,
           ),
           Visibility(
-              visible: data.data_type == '4'?true:false,
+              visible: data.data_type == '4' ? true : false,
               child: GestureDetector(
-                onTap:(){
+                onTap: () {
                   print('点击了 18 +');
                 },
                 child: const Text(
@@ -285,6 +287,8 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                   style: TextStyle(
                     color: Colors.white,
                     decoration: TextDecoration.underline,
+                    decorationColor: Colors.white, // 可以设置下划线的颜色
+                    decorationThickness: 1.0, // 可以设置下划线的厚度
                   ),
                 ),
               )),
@@ -304,62 +308,112 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
   Widget HTBannerWidget(DataList data) {
     var imageSliders = <Widget>[];
     for (var element in data.itemData ?? <ItemData>[]) {
-      imageSliders.add(Container(
-        margin: const EdgeInsets.all(5.0),
-        child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-            child: Stack(
-              children: <Widget>[
-                CachedNetworkImage(
-                  imageUrl: element.img ?? '',
-                  fit: BoxFit.fill,
-                  width: 1000.0,
-                  height: double.infinity,
-                ),
-                Positioned(
-                  bottom: 0.0,
-                  left: 0.0,
-                  right: 0.0,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Color.fromARGB(200, 0, 0, 0),
-                          Color.fromARGB(0, 0, 0, 0)
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
+      imageSliders.add(GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return const HTClassVideoDetailPage(title: "");
+              },
+            ),
+          );
+        },
+        child: Container(
+          margin: const EdgeInsets.all(5.0),
+          child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+              child: Stack(
+                children: <Widget>[
+                  CachedNetworkImage(
+                    imageUrl: element.img ?? '',
+                    fit: BoxFit.fill,
+                    width: 1000.0,
+                    height: double.infinity,
+                  ),
+                  Positioned(
+                    bottom: 0.0,
+                    left: 0.0,
+                    right: 0.0,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Color.fromARGB(200, 0, 0, 0),
+                            Color.fromARGB(0, 0, 0, 0)
+                          ],
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                        ),
                       ),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 20.0),
-                    child: Text(
-                      'No. ${data.itemData?.indexOf(element)} image',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 20.0),
+                      child: Text(
+                        'No. ${data.itemData?.indexOf(element)} image',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            )),
+                ],
+              )),
+        ),
       ));
     }
 
-    return Container(
-        height: 254.0,
-        margin: const EdgeInsets.only(top: 12.0, bottom: 21.0),
-        child: CarouselSlider(
-          options: CarouselOptions(
-            autoPlay: true,
-            aspectRatio: 2.0,
-            enlargeCenterPage: true,
-            enlargeStrategy: CenterPageEnlargeStrategy.height,
-          ),
-          items: imageSliders,
-        ));
+    return Column(
+      children: [
+        Stack(
+          children: [
+            Positioned(
+              child: Container(
+                // color: Colors.green,
+                height: 254.0,
+                margin: const EdgeInsets.only(top: 12.0, bottom: 21.0),
+                child: CarouselSlider(
+                  carouselController: _controller,
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    aspectRatio: 2.0,
+                    enlargeCenterPage: true,
+                    enlargeStrategy: CenterPageEnlargeStrategy.height,
+                  ),
+                  items: imageSliders,
+                ),
+              ),
+            ),
+
+            // 添加跑马指示器
+            Positioned(
+              top: 244,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    for (int i = 0; i < imageSliders.length; i++)
+                      Container(
+                        width: 10,
+                        height: 10,
+                        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: _controller.reactive == i
+                              ? Colors.red
+                              : Colors.grey,
+                        ),
+                      ),
+                  ],
+                ),
+            ),
+          ],
+        ),
+        Container(
+          height: 20,
+        ),
+      ],
+    );
   }
 
   ///样式二 横滑 display_type = 2
@@ -376,7 +430,8 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
               child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: ((data.itemData?[0].m20 ?? <M20>[]))
-                      .map((item) => GestureDetector(
+                      .map(
+                        (item) => GestureDetector(
                           child: Container(
                               width: 112.0,
                               margin: const EdgeInsets.only(right: 5.0),
@@ -424,11 +479,18 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                                             fontSize: 12.0)))
                               ])),
                           onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return const HTClassPresentDetailPage(title: "");
-                            }));
-                          }))
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return const HTClassVideoDetailPage(
+                                      title: "");
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      )
                       .toList())),
         ],
       );
@@ -512,7 +574,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return const HTClassPresentDetailPage(title: "");
+                              return const HTClassVideoDetailPage(title: "");
                             }));
                           }))
                       .toList())),
@@ -601,7 +663,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return const HTClassDramaDetailPage(title: "");
+                          return const HTClassVideoDetailPage(title: "");
                         }));
                       }))
                   .toList()),
@@ -622,91 +684,96 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
               mainAxisSpacing: 10.0,
               crossAxisSpacing: 9.5,
               children: (data.itemData?[0].tt20 ?? <TT20>[])
-                  .map((tt20) => GestureDetector(
-                      child: Column(
-                        children: [
-                          Container(
-                            child: Stack(children: [
-                              Container(
-                                child: CachedNetworkImage(
-                                  width: double.infinity,
-                                  height: 160,
-                                  imageUrl: (tt20.cover ?? ''),
-                                  fit: BoxFit.cover,
+                  .map(
+                    (tt20) => GestureDetector(
+                        child: Column(
+                          children: [
+                            Container(
+                              child: Stack(children: [
+                                Container(
+                                  child: CachedNetworkImage(
+                                    width: double.infinity,
+                                    height: 160,
+                                    imageUrl: (tt20.cover ?? ''),
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                              ),
-                              Positioned(
-                                  left: 5.0,
-                                  top: 5.0,
-                                  child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        Text(tt20.rate ?? '',
-                                            style: const TextStyle(
-                                                color: Color(0xffFF6D1C),
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w600)),
-                                      ])),
-
-                              ///右下角
-                              Visibility(
-                                visible: tt20.new_flag == "NEW" ? true : false,
-                                child: Positioned(
-                                    bottom: 0.0,
-                                    left: 0,
-                                    right: 0,
-                                    child: Container(
-                                        padding: const EdgeInsets.only(
-                                            right: 5, left: 5),
-                                        height: 24.0,
-                                        decoration: const BoxDecoration(
-                                          gradient: LinearGradient(
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                            colors: [
-                                              Colors.transparent,
-                                              Colors.black
-                                            ],
-                                          ),
-                                        ),
-                                        child: Row(children: [
-                                          Spacer(),
-                                          Text(tt20.new_flag ?? 'NEW',
+                                Positioned(
+                                    left: 5.0,
+                                    top: 5.0,
+                                    child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Text(tt20.rate ?? '',
                                               style: const TextStyle(
                                                   color: Color(0xffFF6D1C),
-                                                  fontSize: 8.0)),
-                                          Text("| ${tt20.ss_eps}",
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 8.0))
-                                        ]))),
-                              ),
-                            ]),
-                          ),
-                          Container(
-                            height: 35,
-                            width: double.infinity,
-                            padding: EdgeInsets.all(2),
-                            child: Center(
-                              child: Text(
-                                tt20.title ?? '',
-                                maxLines: 2,
-                                style: const TextStyle(
-                                  color: Color(0xff828386),
-                                  fontSize: 12.0,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w600)),
+                                        ])),
+
+                                ///右下角
+                                Visibility(
+                                  visible:
+                                      tt20.new_flag == "NEW" ? true : false,
+                                  child: Positioned(
+                                      bottom: 0.0,
+                                      left: 0,
+                                      right: 0,
+                                      child: Container(
+                                          padding: const EdgeInsets.only(
+                                              right: 5, left: 5),
+                                          height: 24.0,
+                                          decoration: const BoxDecoration(
+                                            gradient: LinearGradient(
+                                              begin: Alignment.topCenter,
+                                              end: Alignment.bottomCenter,
+                                              colors: [
+                                                Colors.transparent,
+                                                Colors.black
+                                              ],
+                                            ),
+                                          ),
+                                          child: Row(children: [
+                                            Spacer(),
+                                            Text(tt20.new_flag ?? 'NEW',
+                                                style: const TextStyle(
+                                                    color: Color(0xffFF6D1C),
+                                                    fontSize: 8.0)),
+                                            Text("| ${tt20.ss_eps}",
+                                                style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 8.0))
+                                          ]))),
+                                ),
+                              ]),
+                            ),
+                            Container(
+                              height: 35,
+                              width: double.infinity,
+                              padding: EdgeInsets.all(2),
+                              child: Center(
+                                child: Text(
+                                  tt20.title ?? '',
+                                  maxLines: 2,
+                                  style: const TextStyle(
+                                    color: Color(0xff828386),
+                                    fontSize: 12.0,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      onTap: () {
-                        Navigator.push(context,
+                          ],
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
                             MaterialPageRoute(builder: (context) {
-                          return const HTClassDramaDetailPage(title: "");
-                        }));
-                      }))
+                              return const HTClassVideoDetailPage(title: "");
+                            }),
+                          );
+                        }),
+                  )
                   .toList()),
         ],
       );
@@ -734,97 +801,108 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
               //       )
               //     :
 
-              Container(
-                  decoration: BoxDecoration(
-                      color: const Color(0xff23252A),
-                      borderRadius: BorderRadius.circular(5.0)),
-                  width: double.infinity,
-                  height: 246.0 + 48,
-                  child: Stack(children: [
-                    CachedNetworkImage(
-                      imageUrl: itemData.cover ?? '',
-                      height: 246.0,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                    ),
-                    Positioned(
-                        left: 5.0,
-                        top: 5.0,
-                        child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(itemData.rate ?? '',
-                                  style: const TextStyle(
-                                      color: Color(0xffFF6D1C),
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600)),
-                            ])),
+              GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return const HTClassVideoDetailPage(title: "");
+                }),
+              );
+              // 添加点击事件逻辑
+              print('Item $index clicked!');
+            },
+            child: Container(
+                decoration: BoxDecoration(
+                    color: const Color(0xff23252A),
+                    borderRadius: BorderRadius.circular(5.0)),
+                width: double.infinity,
+                height: 246.0 + 48,
+                child: Stack(children: [
+                  CachedNetworkImage(
+                    imageUrl: itemData.cover ?? '',
+                    height: 246.0,
+                    width: double.infinity,
+                    fit: BoxFit.fill,
+                  ),
+                  Positioned(
+                      left: 5.0,
+                      top: 5.0,
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(itemData.rate ?? '',
+                                style: const TextStyle(
+                                    color: Color(0xffFF6D1C),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600)),
+                          ])),
 
-                    ///右上角
-                    Visibility(
-                      visible: (itemData.m_type_2 == 'myfx' &&
-                              itemData.quality == 'CAD')
-                          ? true
-                          : false,
-                      child: Positioned(
-                        top: 5.0,
-                        right: 5.0,
-                        child: CachedNetworkImage(
-                          imageUrl: ImageURL.url_243,
-                          width: 34,
-                          height: 16,
-                        ),
+                  ///右上角
+                  Visibility(
+                    visible: (itemData.m_type_2 == 'myfx' &&
+                            itemData.quality == 'CAD')
+                        ? true
+                        : false,
+                    child: Positioned(
+                      top: 5.0,
+                      right: 5.0,
+                      child: CachedNetworkImage(
+                        imageUrl: ImageURL.url_243,
+                        width: 34,
+                        height: 16,
                       ),
                     ),
+                  ),
 
-                    ///右下角
-                    Visibility(
-                      visible: (itemData.m_type_2 == 'tt_mflx' &&
-                              itemData.new_flag == 'NEW')
-                          ? true
-                          : false,
-                      child: Positioned(
-                          bottom: 45.0,
-                          left: 0,
-                          right: 0,
-                          child: Container(
-                              height: 24.0,
-                              decoration: const BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [Colors.transparent, Colors.black],
-                                ),
+                  ///右下角
+                  Visibility(
+                    visible: (itemData.m_type_2 == 'tt_mflx' &&
+                            itemData.new_flag == 'NEW')
+                        ? true
+                        : false,
+                    child: Positioned(
+                        bottom: 45.0,
+                        left: 0,
+                        right: 0,
+                        child: Container(
+                            height: 24.0,
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [Colors.transparent, Colors.black],
                               ),
-                              child: Row(children: [
-                                Spacer(),
-                                Text(itemData.new_flag ?? '',
-                                    style: const TextStyle(
-                                        color: Color(0xffFF6D1C),
-                                        fontSize: 8.0)),
-                                Text("|${itemData.ss_eps}",
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 8.0))
-                              ]))),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      child: Container(
-                        height: 48,
-                        padding: EdgeInsets.all(5),
-                        child: Center(
-                          child: Text(
-                            itemData.title ?? '',
-                            maxLines: 2,
-                            style: const TextStyle(
-                              color: Color(0xff828386),
-                              fontSize: 12.0,
                             ),
+                            child: Row(children: [
+                              Spacer(),
+                              Text(itemData.new_flag ?? '',
+                                  style: const TextStyle(
+                                      color: Color(0xffFF6D1C), fontSize: 8.0)),
+                              Text("|${itemData.ss_eps}",
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 8.0))
+                            ]))),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    child: Container(
+                      height: 48,
+                      padding: const EdgeInsets.all(5),
+                      child: Center(
+                        child: Text(
+                          itemData.title ?? '',
+                          maxLines: 2,
+                          style: const TextStyle(
+                            color: Color(0xff828386),
+                            fontSize: 12.0,
                           ),
                         ),
                       ),
-                    )
-                  ]));
+                    ),
+                  )
+                ])),
+          );
         },
         mainAxisSpacing: 10.0,
         crossAxisSpacing: 11.0,
