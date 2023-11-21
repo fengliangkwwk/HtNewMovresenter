@@ -1,7 +1,10 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/home_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/homedropping_water_bean.dart';
@@ -81,7 +84,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
       }
 
       ///横向
-      if (element.display_type == '2' && element.itemData?.isNotEmpty == true) {
+      if (element.display_type == '2') {
         result.add(HTSideslipWiget(element));
         if (ishasAd == false) {
           result.add(adWidget());
@@ -90,7 +93,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
       }
 
       ///九宫格
-      if (element.display_type == '1' && element.itemData?.isNotEmpty == true) {
+      if (element.display_type == '1') {
         result.add(HTGridStyleWidget(element));
         if (element.moreflag == '1') {
           result.add(seeAllAndMoreButtoonWidget(element));
@@ -344,195 +347,345 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
 
   ///样式二 横滑 display_type = 2
   Widget HTSideslipWiget(DataList data) {
-    return Column(
-      children: [
-        HTHeaderWidget(data),
-        Container(
-            height: 193.0,
-            margin: const EdgeInsets.only(top: 11.0, bottom: 21.0),
-            padding: const EdgeInsets.fromLTRB(0.0, 0, 5, 0),
-            child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: (data.itemData ?? <ItemData>[])
-                    .map((item) => GestureDetector(
-                        child: Container(
-                            width: 112.0,
-                            margin: const EdgeInsets.only(right: 5.0),
+    ///电影
+    if (data.info_type_2 == 'mtype') {
+      return Column(
+        children: [
+          HTHeaderWidget(data),
+          Container(
+              height: 193.0,
+              margin: const EdgeInsets.only(top: 11.0, bottom: 21.0),
+              padding: const EdgeInsets.fromLTRB(0.0, 0, 5, 0),
+              child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: ((data.itemData?[0].m20 ?? <M20>[]))
+                      .map((item) => GestureDetector(
+                          child: Container(
+                              width: 112.0,
+                              margin: const EdgeInsets.only(right: 5.0),
+                              child: Stack(children: [
+                                CachedNetworkImage(
+                                    imageUrl: (item.cover ?? ''),
+                                    height: 160.0,
+                                    fit: BoxFit.cover),
+                                Positioned(
+                                  left: 5.0,
+                                  top: 5.0,
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        item.rate ?? '',
+                                        style: const TextStyle(
+                                            color: Color(0xffFF6D1C),
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                ///右上角的 CAD
+                                Visibility(
+                                  visible: item.quality == 'CAD'?true:false,
+                                  child: Positioned(
+                                      top: 5.0,
+                                      right: 5.0,
+                                      child: CachedNetworkImage(
+                                          imageUrl: ImageURL.url_243,
+                                          width: 34,
+                                          height: 16.0)),
+                                ),
+                                Positioned(
+                                    top: 165.0,
+                                    left: 5.0,
+                                    right: 5.0,
+                                    child: Text((item.title ?? ''),
+                                        maxLines: 2,
+                                        style: const TextStyle(
+                                            color: Color(0xff828386),
+                                            fontSize: 12.0)))
+                              ])),
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return const HTClassPresentDetailPage(title: "");
+                            }));
+                          }))
+                      .toList())),
+        ],
+      );
+    } else {
+      ///电视剧
+      return Column(
+        children: [
+          HTHeaderWidget(data),
+          Container(
+              height: 193.0,
+              margin: const EdgeInsets.only(top: 11.0, bottom: 21.0),
+              padding: const EdgeInsets.fromLTRB(0.0, 0, 5, 0),
+              child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: ((data.itemData?[0].tt20 ?? <TT20>[]))
+                      .map((item) => GestureDetector(
+                          child: Container(
+                              width: 112.0,
+                              margin: const EdgeInsets.only(right: 5.0),
+                              child: Stack(children: [
+                                CachedNetworkImage(
+                                    imageUrl: (item.cover ?? ''),
+                                    height: 160.0,
+                                    fit: BoxFit.cover),
+                                Positioned(
+                                  left: 5.0,
+                                  top: 5.0,
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        item.rate ?? '',
+                                        style: const TextStyle(
+                                            color: Color(0xffFF6D1C),
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                ///右下角的电视剧
+                                Visibility(
+                                  visible:item.new_flag == 'NEW'?true:false,
+                                  child: Positioned(
+                                      bottom: 33.0,
+                                      width: 112.0,
+                                      child: Container(
+                                          height: 24.0,
+                                          decoration: const BoxDecoration(
+                                              gradient: LinearGradient(
+                                                  begin: Alignment.topCenter,
+                                                  end: Alignment.bottomCenter,
+                                                  colors: [
+                                                Colors.transparent,
+                                                Colors.black
+                                              ])),
+                                          child: Row(children: [
+                                            const Spacer(),
+                                            Text(item.new_flag ?? '',
+                                                style: const TextStyle(
+                                                    color: Color(0xffFF6D1C),
+                                                    fontSize: 8.0)),
+                                            Text("|${item.ss_eps}",
+                                                style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 8.0))
+                                          ]))),
+                                ),
+                                Positioned(
+                                    top: 165.0,
+                                    left: 5.0,
+                                    right: 5.0,
+                                    child: Text((item.title ?? ''),
+                                        maxLines: 2,
+                                        style: const TextStyle(
+                                            color: Color(0xff828386),
+                                            fontSize: 12.0)))
+                              ])),
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return const HTClassPresentDetailPage(title: "");
+                            }));
+                          }))
+                      .toList())),
+        ],
+      );
+    }
+  }
+
+  // ignore: non_constant_identifier_names
+  ///样式三 九宫格 display_type = 1
+  Widget HTGridStyleWidget(DataList data) {
+    if (data.info_type_2 == 'mtype') {
+      ///电影
+      return Column(
+        children: [
+          HTHeaderWidget(data),
+          GridView.count(
+              crossAxisCount: 3,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              childAspectRatio: 112 / 160,
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
+              mainAxisSpacing: 10.0,
+              crossAxisSpacing: 9.5,
+              children: (data.itemData?[0].m20 ?? <M20>[])
+                  .map((m20) => GestureDetector(
+                      child: Column(
+                        children: [
+                          Container(
                             child: Stack(children: [
-                              CachedNetworkImage(
-                                  imageUrl: item.iconImage(),
-                                  height: 160.0,
-                                  fit: BoxFit.cover),
-                              Positioned(
-                                left: 5.0,
-                                top: 5.0,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      item.new_conf_rate ?? '',
-                                      style: const TextStyle(
-                                          color: Color(0xffFF6D1C),
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ],
+                              Container(
+                                child: CachedNetworkImage(
+                                  width: double.infinity,
+                                  height: 160,
+                                  imageUrl: m20.cover ?? '',
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                               Positioned(
+                                  left: 5.0,
+                                  top: 5.0,
+                                  child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(m20.rate ?? '',
+                                            style: const TextStyle(
+                                                color: Color(0xffFF6D1C),
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600)),
+                                      ])),
+
+                              ///右上角
+                              Visibility(
+                                visible:m20.quality == 'CAD'?true:false,
+                                child: Positioned(
                                   top: 5.0,
                                   right: 5.0,
                                   child: CachedNetworkImage(
-                                      imageUrl: ImageURL.url_243,
-                                      width: 34,
-                                      height: 16.0)),
-                              Positioned(
-                                  bottom: 33.0,
-                                  width: 112.0,
-                                  child: Container(
-                                      height: 24.0,
-                                      decoration: const BoxDecoration(
-                                          gradient: LinearGradient(
-                                              begin: Alignment.topCenter,
-                                              end: Alignment.bottomCenter,
-                                              colors: [
-                                            Colors.transparent,
-                                            Colors.black
-                                          ])),
-                                      child: const Row(children: [
-                                        Spacer(),
-                                        Text("NEW",
-                                            style: TextStyle(
-                                                color: Color(0xffFF6D1C),
-                                                fontSize: 8.0)),
-                                        Text("|S07 E08",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 8.0))
-                                      ]))),
-                              const Positioned(
-                                  top: 160.0,
-                                  left: 5.0,
-                                  right: 5.0,
-                                  child: Text("Minions:The Rise of Gru",
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                          color: Color(0xff828386),
-                                          fontSize: 12.0)))
-                            ])),
-                        onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return const HTClassPresentDetailPage(title: "");
-                          }));
-                        }))
-                    .toList())),
-      ],
-    );
-  }
-
-  ///样式三 九宫格 display_type = 1
-  Widget HTGridStyleWidget(DataList data) {
-    return Column(
-      children: [
-        HTHeaderWidget(data),
-        GridView.count(
-            crossAxisCount: 3,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            childAspectRatio: 112 / 160,
-            padding:
-                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
-            mainAxisSpacing: 10.0,
-            crossAxisSpacing: 9.5,
-            children: (data.itemData ?? <ItemData>[])
-                .map((itemData) => GestureDetector(
-                    child: Column(
-                      children: [
-                        Container(
-                          child: Stack(children: [
-                            Container(
-                              child: CachedNetworkImage(
-                                width: double.infinity,
-                                height: 160,
-                                imageUrl: itemData.iconImage(),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Positioned(
-                                left: 5.0,
-                                top: 5.0,
-                                child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Text(itemData.new_conf_rate ?? '8.0',
-                                          style: const TextStyle(
-                                              color: Color(0xffFF6D1C),
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w600)),
-                                    ])),
-
-                            ///右上角
-                            Visibility(
-                              visible: itemData.showRightTop(),
-                              child: Positioned(
-                                top: 5.0,
-                                right: 5.0,
-                                child: CachedNetworkImage(
-                                  imageUrl: ImageURL.url_243,
-                                  width: 34,
-                                  height: 16.0,
+                                    imageUrl: ImageURL.url_243,
+                                    width: 34,
+                                    height: 16.0,
+                                  ),
                                 ),
                               ),
-                            ),
-
-                            ///右下角
-                            Visibility(
-                              visible: itemData.showRightBottom(),
-                              child: const Positioned(
-                                bottom: 0.0,
-                                right: 5.0,
-                                child: Row(
-                                  children: [
-                                    Text("NEW",
-                                        style: TextStyle(
-                                            color: Color(0xffFF6D1C),
-                                            fontSize: 8.0)),
-                                    Text(" | S07 E08",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 8.0))
-                                  ],
+                            ]),
+                          ),
+                          Container(
+                            height: 35,
+                            width: double.infinity,
+                            padding: EdgeInsets.all(2),
+                            child: Center(
+                              child: Text(
+                                m20.title ?? '',
+                                maxLines: 2,
+                                style: const TextStyle(
+                                  color: Color(0xff828386),
+                                  fontSize: 12.0,
                                 ),
-                              ),
-                            ),
-                          ]),
-                        ),
-                        Container(
-                          height: 35,
-                          width: double.infinity,
-                          padding: EdgeInsets.all(2),
-                          child: const Center(
-                            child: Text(
-                              'jksajfkajkjkjrkleq',
-                              maxLines: 2,
-                              style: TextStyle(
-                                color: Color(0xff828386),
-                                fontSize: 12.0,
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const HTClassDramaDetailPage(title: "");
+                        }));
+                      }))
+                  .toList()),
+        ],
+      );
+    } else {
+      ///电视剧
+      return Column(
+        children: [
+          HTHeaderWidget(data),
+          GridView.count(
+              crossAxisCount: 3,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              childAspectRatio: 112 / 160,
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
+              mainAxisSpacing: 10.0,
+              crossAxisSpacing: 9.5,
+              children: (data.itemData?[0].tt20 ?? <TT20>[])
+                  .map((tt20) => GestureDetector(
+                      child: Column(
+                        children: [
+                          Container(
+                            child: Stack(children: [
+                              Container(
+                                child: CachedNetworkImage(
+                                  width: double.infinity,
+                                  height: 160,
+                                  imageUrl: (tt20.cover ?? ''),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Positioned(
+                                  left: 5.0,
+                                  top: 5.0,
+                                  child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(tt20.rate ?? '',
+                                            style: const TextStyle(
+                                                color: Color(0xffFF6D1C),
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600)),
+                                      ])),
+                              ///右下角
+                    Visibility(
+                      visible:tt20.new_flag == "NEW"?true:false,
+                      child: Positioned(
+                          bottom:0.0,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            padding: const EdgeInsets.only(right: 5,left: 5),
+                              height: 24.0,
+                              decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [Colors.transparent, Colors.black],
+                                ),
+                              ),
+                              child: Row(children: [
+                                Spacer(),
+                                Text(tt20.new_flag??'NEW',
+                                    style: const TextStyle(
+                                        color: Color(0xffFF6D1C),
+                                        fontSize: 8.0)),
+                                Text("| ${tt20.ss_eps}",
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 8.0))
+                              ]))),
                     ),
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return const HTClassDramaDetailPage(title: "");
-                      }));
-                    }))
-                .toList()),
-      ],
-    );
+                            ]),
+                          ),
+                          Container(
+                            height: 35,
+                            width: double.infinity,
+                            padding: EdgeInsets.all(2),
+                            child: Center(
+                              child: Text(
+                                tt20.title ?? '',
+                                maxLines: 2,
+                                style: const TextStyle(
+                                  color: Color(0xff828386),
+                                  fontSize: 12.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const HTClassDramaDetailPage(title: "");
+                        }));
+                      }))
+                  .toList()),
+        ],
+      );
+    }
   }
 
   ///瀑布流
@@ -581,28 +734,54 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                                       fontSize: 20,
                                       fontWeight: FontWeight.w600)),
                             ])),
-                    Positioned(
-                        bottom: 45.0,
-                        left: 0,
-                        right: 0,
-                        child: Container(
-                            height: 24.0,
-                            decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [Colors.transparent, Colors.black],
+
+                    ///右上角
+                    Visibility(
+                      visible: (itemData.m_type_2 == 'myfx' &&
+                              itemData.quality == 'CAD')
+                          ? true
+                          : false,
+                      child: Positioned(
+                        top: 5.0,
+                        right: 5.0,
+                        child: CachedNetworkImage(
+                          imageUrl: ImageURL.url_243,
+                          width: 34,
+                          height: 16,
+                        ),
+                      ),
+                    ),
+
+                    ///右下角
+                    Visibility(
+                      visible: (itemData.m_type_2 == 'tt_mflx' &&
+                              itemData.new_flag == 'NEW')
+                          ? true
+                          : false,
+                      child: Positioned(
+                          bottom: 45.0,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                              height: 24.0,
+                              decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [Colors.transparent, Colors.black],
+                                ),
                               ),
-                            ),
-                            child: const Row(children: [
-                              Spacer(),
-                              Text("NEW",
-                                  style: TextStyle(
-                                      color: Color(0xffFF6D1C), fontSize: 8.0)),
-                              Text("|S07 E08",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 8.0))
-                            ]))),
+                              child: Row(children: [
+                                Spacer(),
+                                Text(itemData.new_flag ?? '',
+                                    style: const TextStyle(
+                                        color: Color(0xffFF6D1C),
+                                        fontSize: 8.0)),
+                                Text("|${itemData.ss_eps}",
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 8.0))
+                              ]))),
+                    ),
                     Positioned(
                       bottom: 0,
                       child: Container(
@@ -700,7 +879,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                         margin: const EdgeInsets.symmetric(horizontal: 52.0),
                         height: 48.0,
                         decoration: BoxDecoration(
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: NetworkImage(ImageURL.url_280),
                             fit: BoxFit.cover,
                           ),
@@ -715,7 +894,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                         margin: const EdgeInsets.fromLTRB(52.0, 30.0, 52.0, 0),
                         height: 48.0,
                         decoration: BoxDecoration(
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: NetworkImage(ImageURL.url_285),
                             fit: BoxFit.cover,
                           ),

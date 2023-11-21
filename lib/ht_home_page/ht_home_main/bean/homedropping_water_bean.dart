@@ -18,22 +18,25 @@ class HomedroppingWaterBean{
   String? cover;
 
   @JsonKey(name: 'eps_cnts')
-  String? epsCnts;
+  String? eps_cnts;
 
   @JsonKey(name: 'order')
   int? order;
 
   @JsonKey(name: 'm_type_2')
-  String? mType2;
+  String? m_type_2;
+
+  @JsonKey(name: 'quality')
+  String? quality;
 
   @JsonKey(name: 'ss_eps')
-  String? ssEps;
+  String? ss_eps;
 
   @JsonKey(name: 'new_flag')
-  String? newFlag;
+  String? new_flag;
 
   @JsonKey(name: 'nw_flag')
-  String? nwFlag;
+  String? nw_flag;
 
   @JsonKey(name: 'tags')
   String? tags;
@@ -42,10 +45,10 @@ class HomedroppingWaterBean{
   String? board;
 
   @JsonKey(name: 'board_id_1')
-  String? boardId1;
+  String? board_id_1;
 
   @JsonKey(name: 'board_id_2')
-  String? boardId2;
+  String? board_id_2;
 
   HomedroppingWaterBean();
 

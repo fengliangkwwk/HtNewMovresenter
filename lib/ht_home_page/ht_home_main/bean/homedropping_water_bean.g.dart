@@ -13,16 +13,17 @@ HomedroppingWaterBean _$HomedroppingWaterBeanFromJson(
       ..rate = json['rate'] as String?
       ..title = json['title'] as String?
       ..cover = json['cover'] as String?
-      ..epsCnts = json['eps_cnts'] as String?
+      ..eps_cnts = json['eps_cnts'] as String?
       ..order = json['order'] as int?
-      ..mType2 = json['m_type_2'] as String?
-      ..ssEps = json['ss_eps'] as String?
-      ..newFlag = json['new_flag'] as String?
-      ..nwFlag = json['nw_flag'] as String?
+      ..m_type_2 = json['m_type_2'] as String?
+      ..quality = json['quality'] as String?
+      ..ss_eps = json['ss_eps'] as String?
+      ..new_flag = json['new_flag'] as String?
+      ..nw_flag = json['nw_flag'] as String?
       ..tags = json['tags'] as String?
       ..board = json['board'] as String?
-      ..boardId1 = json['board_id_1'] as String?
-      ..boardId2 = json['board_id_2'] as String?;
+      ..board_id_1 = json['board_id_1'] as String?
+      ..board_id_2 = json['board_id_2'] as String?;
 
 Map<String, dynamic> _$HomedroppingWaterBeanToJson(
         HomedroppingWaterBean instance) =>
@@ -31,14 +32,15 @@ Map<String, dynamic> _$HomedroppingWaterBeanToJson(
       'rate': instance.rate,
       'title': instance.title,
       'cover': instance.cover,
-      'eps_cnts': instance.epsCnts,
+      'eps_cnts': instance.eps_cnts,
       'order': instance.order,
-      'm_type_2': instance.mType2,
-      'ss_eps': instance.ssEps,
-      'new_flag': instance.newFlag,
-      'nw_flag': instance.nwFlag,
+      'm_type_2': instance.m_type_2,
+      'quality': instance.quality,
+      'ss_eps': instance.ss_eps,
+      'new_flag': instance.new_flag,
+      'nw_flag': instance.nw_flag,
       'tags': instance.tags,
       'board': instance.board,
-      'board_id_1': instance.boardId1,
-      'board_id_2': instance.boardId2,
+      'board_id_1': instance.board_id_1,
+      'board_id_2': instance.board_id_2,
     };

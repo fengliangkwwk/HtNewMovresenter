@@ -1,3 +1,4 @@
+import 'package:ht_new_movpresenter/ht_home_page/ht_search/beans/ht_mid_search_bean.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'home_bean.g.dart';
@@ -201,12 +202,18 @@ class ItemData {
 
     return cover2 ?? '';
   }
-
+///右下角剧集更新  只有电视剧(tttype)才会显示 且new_flag==’NEW‘代表有更新时才会显示
   bool showRightBottom() {
-    return true;
+    //  if (DataList.info_type_2 == 'tttype' && TT20.new_flag == 'NEW') {
+    //    return true;
+    //  }
+    return false;
   }
-
+///右上角 CAD  只有电影，且是枪版电影（quality == 'CAD） 才会显示
   bool showRightTop() {
+    // if (DataList.info_type_2 == 'mtype'&& M20.quality == 'CAD') {
+    //   return true;
+    // }
     return true;
   }
 
