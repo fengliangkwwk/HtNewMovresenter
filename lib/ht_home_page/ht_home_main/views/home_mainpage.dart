@@ -15,6 +15,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 import 'package:ht_new_movpresenter/utils/ht_sys_tool.dart';
+
 class HTClassHomeMainPage extends StatefulWidget {
   const HTClassHomeMainPage({Key? key, required this.title}) : super(key: key);
   final String title;
@@ -73,13 +74,14 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
     var result = <Widget>[];
     bool ishasAd = false;
     for (var element in homeProvider.dataList) {
-      if (element.displayType == '3' && element.itemData?.isNotEmpty == true) {
+      ///专题 data_type 目前只支持 1（电视剧/电影） 和 4（18+）
+      if (element.display_type == '3' && element.itemData?.isNotEmpty == true) {
         ///轮播图
         result.add(HTBannerWidget(element));
       }
 
       ///横向
-      if (element.displayType == '2' && element.itemData?.isNotEmpty == true) {
+      if (element.display_type == '2' && element.itemData?.isNotEmpty == true) {
         result.add(HTSideslipWiget(element));
         if (ishasAd == false) {
           result.add(adWidget());
@@ -88,7 +90,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
       }
 
       ///九宫格
-      if (element.displayType == '1' && element.itemData?.isNotEmpty == true) {
+      if (element.display_type == '1' && element.itemData?.isNotEmpty == true) {
         result.add(HTGridStyleWidget(element));
         if (element.moreflag == '1') {
           result.add(seeAllAndMoreButtoonWidget(element));
@@ -250,7 +252,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return SecondLevelPage(
             titleStr: data.name ?? '',
-            listId: data.displayType.toString(),
+            listId: data.display_type.toString(),
           );
         }));
       },
@@ -368,7 +370,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Text(
-                                      item.newConfRate ?? '',
+                                      item.new_conf_rate ?? '',
                                       style: const TextStyle(
                                           color: Color(0xffFF6D1C),
                                           fontSize: 20,
@@ -451,7 +453,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                           child: Stack(children: [
                             Container(
                               child: CachedNetworkImage(
-                                 width: double.infinity,
+                                width: double.infinity,
                                 height: 160,
                                 imageUrl: itemData.iconImage(),
                                 fit: BoxFit.cover,
@@ -463,12 +465,13 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                                 child: Row(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      Text(itemData.newConfRate ?? '8.0',
+                                      Text(itemData.new_conf_rate ?? '8.0',
                                           style: const TextStyle(
                                               color: Color(0xffFF6D1C),
                                               fontSize: 20,
                                               fontWeight: FontWeight.w600)),
                                     ])),
+
                             ///右上角
                             Visibility(
                               visible: itemData.showRightTop(),
@@ -503,20 +506,17 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                               ),
                             ),
                           ]),
-
                         ),
                         Container(
-                          // color: Colors.amber,
                           height: 35,
                           width: double.infinity,
                           padding: EdgeInsets.all(2),
                           child: const Center(
                             child: Text(
-                             'jksajfkajkjkjrkleq',
+                              'jksajfkajkjkjrkleq',
                               maxLines: 2,
                               style: TextStyle(
                                 color: Color(0xff828386),
-                                
                                 fontSize: 12.0,
                               ),
                             ),

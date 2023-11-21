@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/home_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/homedropping_water_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_provider_base.dart';
@@ -14,6 +15,12 @@ mixin HTHomeProviderMixin on HTHomeProviderBase {
 
   ///首页的列表数据
   List<DataList> dataList = [];
+
+  ///首页的列表数据
+  List<M20> m20List = [];
+
+  ///首页的列表数据
+  List<TT20> tt20List = [];
 
   ///瀑布流数据
   List<HomedroppingWaterBean> droppingWaterDataList = [];
@@ -56,9 +63,7 @@ mixin HTHomeProviderMixin on HTHomeProviderBase {
       "id": id
     };
     var res = await HTNetUtils.htPost(
-        apiUrl: Global.homePageUrl,
-        params: htVarparams
-        );
+        apiUrl: Global.homePageUrl, params: htVarparams);
     var json = jsonDecode(res?.data);
     if (refresh) {
       dataList = [];
@@ -66,7 +71,34 @@ mixin HTHomeProviderMixin on HTHomeProviderBase {
     }
     var _dataList = <DataList>[];
     for (var element in json?['data']?['default_set']?['data'] ?? []) {
-      _dataList.add(DataList.fromJson(element));
+      print(element['data']);
+      if (element["data_type"] == '1' || element["data_type"] == '4') {
+
+
+        if (element['info_type_2'] == 'mtype') {
+          ///首页的列表数据
+          List<M20> m20List = [];
+
+          for (var item
+              in json?['data']?['default_set']?['data'][0]['m20'] ?? []) {
+            m20List.add(M20.fromJson(item));
+          }
+
+          element.m20 = m20List;
+        }
+        if (element['info_type_2'] == 'tttype') {
+          ///首页的列表数据
+          List<TT20> tt20List = [];
+          for (var item
+              in json?['data']?['default_set']?['data'][0]['tt20'] ?? []) {
+            tt20List.add(TT20.fromJson(item));
+          }
+          element.tt20 = tt20List;
+        }
+
+
+        _dataList.add(DataList.fromJson(element));
+      }
     }
 
     ///
@@ -107,4 +139,17 @@ mixin HTHomeProviderMixin on HTHomeProviderBase {
     print('解析瀑布流数据成功');
     // notifyListeners();
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

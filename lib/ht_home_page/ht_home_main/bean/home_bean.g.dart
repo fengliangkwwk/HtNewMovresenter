@@ -43,9 +43,9 @@ DataList _$DataListFromJson(Map<String, dynamic> json) => DataList()
       ?.map((e) => ItemData.fromJson(e as Map<String, dynamic>))
       .toList()
   ..order = json['order'] as int?
-  ..displayType = json['display_type'] as String?
+  ..display_type = json['display_type'] as String?
   ..secname = json['secname'] as String?
-  ..dataType = json['data_type'] as String?
+  ..data_type = json['data_type'] as String?
   ..open_mode_value = json['open_mode_value'] as String?
   ..moreflag = json['moreflag'] as String?
   ..seeall = json['seeall'] as String?
@@ -57,9 +57,9 @@ Map<String, dynamic> _$DataListToJson(DataList instance) => <String, dynamic>{
       'name': instance.name,
       'data': instance.itemData?.map((e) => e.toJson()).toList(),
       'order': instance.order,
-      'display_type': instance.displayType,
+      'display_type': instance.display_type,
       'secname': instance.secname,
-      'data_type': instance.dataType,
+      'data_type': instance.data_type,
       'open_mode_value': instance.open_mode_value,
       'moreflag': instance.moreflag,
       'seeall': instance.seeall,
@@ -71,29 +71,29 @@ Map<String, dynamic> _$DataListToJson(DataList instance) => <String, dynamic>{
 ItemData _$ItemDataFromJson(Map<String, dynamic> json) => ItemData()
   ..id = json['id'] as String?
   ..img = json['img'] as String?
-  ..playlistId = json['playlist_id'] as int?
-  ..newImg = json['new_img'] as String?
-  ..newConfType = json['new_conf_type'] as int?
-  ..newConfValue = json['new_conf_value'] as String?
-  ..newConfName = json['new_conf_name'] as String?
-  ..newConfArtist = json['new_conf_artist'] as String?
-  ..newConfDesc = json['new_conf_desc'] as String?
-  ..newConfRate = json['new_conf_rate'] as String?
-  ..newConfDuration = json['new_conf_duration'] as String?
-  ..newConfPub = json['new_conf_pub'] as String?
-  ..newConfName2 = json['new_conf_name_2'] as String?
+  ..playlist_id = json['playlist_id'] as int?
+  ..new_img = json['new_img'] as String?
+  ..new_conf_type = json['new_conf_type'] as int?
+  ..new_conf_value = json['new_conf_value'] as String?
+  ..new_conf_name = json['new_conf_name'] as String?
+  ..new_conf_artist = json['new_conf_artist'] as String?
+  ..new_conf_desc = json['new_conf_desc'] as String?
+  ..new_conf_rate = json['new_conf_rate'] as String?
+  ..new_conf_duration = json['new_conf_duration'] as String?
+  ..new_conf_pub = json['new_conf_pub'] as String?
+  ..new_conf_name_2 = json['new_conf_name_2'] as String?
   ..order = json['order'] as int?
-  ..ssTag = json['ss_tag'] as String?
-  ..nwImg = json['nw_img'] as String?
-  ..nwConfType = json['nw_conf_type'] as int?
-  ..nwConfValue = json['nw_conf_value'] as String?
-  ..nwConfName = json['nw_conf_name'] as String?
-  ..nwConfArtist = json['nw_conf_artist'] as String?
-  ..nwConfDesc = json['nw_conf_desc'] as String?
-  ..nwConfRate = json['nw_conf_rate'] as String?
-  ..nwConfDuration = json['nw_conf_duration'] as String?
-  ..nwConfPub = json['nw_conf_pub'] as String?
-  ..nwConfName2 = json['nw_conf_name_2'] as String?
+  ..ss_tag = json['ss_tag'] as String?
+  ..nw_img = json['nw_img'] as String?
+  ..nw_conf_type = json['nw_conf_type'] as int?
+  ..nw_conf_value = json['nw_conf_value'] as String?
+  ..nw_conf_name = json['nw_conf_name'] as String?
+  ..nw_conf_artist = json['nw_conf_artist'] as String?
+  ..nw_conf_desc = json['nw_conf_desc'] as String?
+  ..nw_conf_rate = json['nw_conf_rate'] as String?
+  ..nw_conf_duration = json['nw_conf_duration'] as String?
+  ..nw_conf_pub = json['nw_conf_pub'] as String?
+  ..nw_conf_name_2 = json['nw_conf_name_2'] as String?
   ..cover = json['cover'] as String?
   ..cover2 = json['cover2'] as String?
   ..desc = json['desc'] as String?
@@ -110,29 +110,29 @@ ItemData _$ItemDataFromJson(Map<String, dynamic> json) => ItemData()
 Map<String, dynamic> _$ItemDataToJson(ItemData instance) => <String, dynamic>{
       'id': instance.id,
       'img': instance.img,
-      'playlist_id': instance.playlistId,
-      'new_img': instance.newImg,
-      'new_conf_type': instance.newConfType,
-      'new_conf_value': instance.newConfValue,
-      'new_conf_name': instance.newConfName,
-      'new_conf_artist': instance.newConfArtist,
-      'new_conf_desc': instance.newConfDesc,
-      'new_conf_rate': instance.newConfRate,
-      'new_conf_duration': instance.newConfDuration,
-      'new_conf_pub': instance.newConfPub,
-      'new_conf_name_2': instance.newConfName2,
+      'playlist_id': instance.playlist_id,
+      'new_img': instance.new_img,
+      'new_conf_type': instance.new_conf_type,
+      'new_conf_value': instance.new_conf_value,
+      'new_conf_name': instance.new_conf_name,
+      'new_conf_artist': instance.new_conf_artist,
+      'new_conf_desc': instance.new_conf_desc,
+      'new_conf_rate': instance.new_conf_rate,
+      'new_conf_duration': instance.new_conf_duration,
+      'new_conf_pub': instance.new_conf_pub,
+      'new_conf_name_2': instance.new_conf_name_2,
       'order': instance.order,
-      'ss_tag': instance.ssTag,
-      'nw_img': instance.nwImg,
-      'nw_conf_type': instance.nwConfType,
-      'nw_conf_value': instance.nwConfValue,
-      'nw_conf_name': instance.nwConfName,
-      'nw_conf_artist': instance.nwConfArtist,
-      'nw_conf_desc': instance.nwConfDesc,
-      'nw_conf_rate': instance.nwConfRate,
-      'nw_conf_duration': instance.nwConfDuration,
-      'nw_conf_pub': instance.nwConfPub,
-      'nw_conf_name_2': instance.nwConfName2,
+      'ss_tag': instance.ss_tag,
+      'nw_img': instance.nw_img,
+      'nw_conf_type': instance.nw_conf_type,
+      'nw_conf_value': instance.nw_conf_value,
+      'nw_conf_name': instance.nw_conf_name,
+      'nw_conf_artist': instance.nw_conf_artist,
+      'nw_conf_desc': instance.nw_conf_desc,
+      'nw_conf_rate': instance.nw_conf_rate,
+      'nw_conf_duration': instance.nw_conf_duration,
+      'nw_conf_pub': instance.nw_conf_pub,
+      'nw_conf_name_2': instance.nw_conf_name_2,
       'cover': instance.cover,
       'cover2': instance.cover2,
       'desc': instance.desc,

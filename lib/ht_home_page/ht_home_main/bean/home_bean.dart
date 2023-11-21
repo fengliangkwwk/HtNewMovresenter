@@ -60,13 +60,13 @@ class DataList {
   int? order;
 
   @JsonKey(name: 'display_type')
-  String? displayType;
+  String? display_type;
 
   @JsonKey(name: 'secname')
   String? secname;
 
   @JsonKey(name: 'data_type')
-  String? dataType;
+  String? data_type;
 
   @JsonKey(name: 'open_mode_value')
   String? open_mode_value;
@@ -103,73 +103,73 @@ class ItemData {
   String? img;
 
   @JsonKey(name: 'playlist_id')
-  int? playlistId;
+  int? playlist_id;
 
   @JsonKey(name: 'new_img')
-  String? newImg;
+  String? new_img;
 
   @JsonKey(name: 'new_conf_type')
-  int? newConfType;
+  int? new_conf_type;
 
   @JsonKey(name: 'new_conf_value')
-  String? newConfValue;
+  String? new_conf_value;
 
   @JsonKey(name: 'new_conf_name')
-  String? newConfName;
+  String? new_conf_name;
 
   @JsonKey(name: 'new_conf_artist')
-  String? newConfArtist;
+  String? new_conf_artist;
 
   @JsonKey(name: 'new_conf_desc')
-  String? newConfDesc;
+  String? new_conf_desc;
 
   @JsonKey(name: 'new_conf_rate')
-  String? newConfRate;
+  String? new_conf_rate;
 
   @JsonKey(name: 'new_conf_duration')
-  String? newConfDuration;
+  String? new_conf_duration;
 
   @JsonKey(name: 'new_conf_pub')
-  String? newConfPub;
+  String? new_conf_pub;
 
   @JsonKey(name: 'new_conf_name_2')
-  String? newConfName2;
+  String? new_conf_name_2;
 
   @JsonKey(name: 'order')
   int? order;
 
   @JsonKey(name: 'ss_tag')
-  String? ssTag;
+  String? ss_tag;
 
   @JsonKey(name: 'nw_img')
-  String? nwImg;
+  String? nw_img;
 
   @JsonKey(name: 'nw_conf_type')
-  int? nwConfType;
+  int? nw_conf_type;
 
   @JsonKey(name: 'nw_conf_value')
-  String? nwConfValue;
+  String? nw_conf_value;
 
   @JsonKey(name: 'nw_conf_name')
-  String? nwConfName;
+  String? nw_conf_name;
 
   @JsonKey(name: 'nw_conf_artist')
-  String? nwConfArtist;
+  String? nw_conf_artist;
 
   @JsonKey(name: 'nw_conf_desc')
-  String? nwConfDesc;
+  String? nw_conf_desc;
 
   @JsonKey(name: 'nw_conf_rate')
-  String? nwConfRate;
+  String? nw_conf_rate;
 
   @JsonKey(name: 'nw_conf_duration')
-  String? nwConfDuration;
+  String? nw_conf_duration;
 
   @JsonKey(name: 'nw_conf_pub')
-  String? nwConfPub;
+  String? nw_conf_pub;
 
   @JsonKey(name: 'nw_conf_name_2')
-  String? nwConfName2;
+  String? nw_conf_name_2;
 
   @JsonKey(name: 'cover')
   String? cover;
