@@ -271,6 +271,23 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
               fontWeight: FontWeight.w600,
             ),
           ),
+          Container(
+            width: 10,
+          ),
+          Visibility(
+              visible: data.data_type == '4'?true:false,
+              child: GestureDetector(
+                onTap:(){
+                  print('点击了 18 +');
+                },
+                child: const Text(
+                  'Hidden',
+                  style: TextStyle(
+                    color: Colors.white,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              )),
           const Spacer(),
           CachedNetworkImage(imageUrl: ImageURL.url_289, width: 24, height: 24),
           Container(width: 10.0)
@@ -387,7 +404,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
 
                                 ///右上角的 CAD
                                 Visibility(
-                                  visible: item.quality == 'CAD'?true:false,
+                                  visible: item.quality == 'CAD' ? true : false,
                                   child: Positioned(
                                       top: 5.0,
                                       right: 5.0,
@@ -452,9 +469,11 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                                     ],
                                   ),
                                 ),
+
                                 ///右下角的电视剧
                                 Visibility(
-                                  visible:item.new_flag == 'NEW'?true:false,
+                                  visible:
+                                      item.new_flag == 'NEW' ? true : false,
                                   child: Positioned(
                                       bottom: 33.0,
                                       width: 112.0,
@@ -549,7 +568,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
 
                               ///右上角
                               Visibility(
-                                visible:m20.quality == 'CAD'?true:false,
+                                visible: m20.quality == 'CAD' ? true : false,
                                 child: Positioned(
                                   top: 5.0,
                                   right: 5.0,
@@ -565,7 +584,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                           Container(
                             height: 35,
                             width: double.infinity,
-                            padding: EdgeInsets.all(2),
+                            padding: const EdgeInsets.all(2),
                             child: Center(
                               child: Text(
                                 m20.title ?? '',
@@ -629,34 +648,40 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w600)),
                                       ])),
+
                               ///右下角
-                    Visibility(
-                      visible:tt20.new_flag == "NEW"?true:false,
-                      child: Positioned(
-                          bottom:0.0,
-                          left: 0,
-                          right: 0,
-                          child: Container(
-                            padding: const EdgeInsets.only(right: 5,left: 5),
-                              height: 24.0,
-                              decoration: const BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [Colors.transparent, Colors.black],
-                                ),
+                              Visibility(
+                                visible: tt20.new_flag == "NEW" ? true : false,
+                                child: Positioned(
+                                    bottom: 0.0,
+                                    left: 0,
+                                    right: 0,
+                                    child: Container(
+                                        padding: const EdgeInsets.only(
+                                            right: 5, left: 5),
+                                        height: 24.0,
+                                        decoration: const BoxDecoration(
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                            colors: [
+                                              Colors.transparent,
+                                              Colors.black
+                                            ],
+                                          ),
+                                        ),
+                                        child: Row(children: [
+                                          Spacer(),
+                                          Text(tt20.new_flag ?? 'NEW',
+                                              style: const TextStyle(
+                                                  color: Color(0xffFF6D1C),
+                                                  fontSize: 8.0)),
+                                          Text("| ${tt20.ss_eps}",
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 8.0))
+                                        ]))),
                               ),
-                              child: Row(children: [
-                                Spacer(),
-                                Text(tt20.new_flag??'NEW',
-                                    style: const TextStyle(
-                                        color: Color(0xffFF6D1C),
-                                        fontSize: 8.0)),
-                                Text("| ${tt20.ss_eps}",
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 8.0))
-                              ]))),
-                    ),
                             ]),
                           ),
                           Container(
@@ -807,6 +832,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
     );
   }
 
+  ///广告
   Widget adWidget() {
     return Column(
       children: [
