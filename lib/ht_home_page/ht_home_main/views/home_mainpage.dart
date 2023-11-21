@@ -3,7 +3,6 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:get/get.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/home_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/homedropping_water_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_provider.dart';
@@ -15,7 +14,7 @@ import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
-
+import 'package:ht_new_movpresenter/utils/ht_sys_tool.dart';
 class HTClassHomeMainPage extends StatefulWidget {
   const HTClassHomeMainPage({Key? key, required this.title}) : super(key: key);
   final String title;
@@ -347,7 +346,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
       children: [
         HTHeaderWidget(data),
         Container(
-            height: 226.0,
+            height: 193.0,
             margin: const EdgeInsets.only(top: 11.0, bottom: 21.0),
             padding: const EdgeInsets.fromLTRB(0.0, 0, 5, 0),
             child: ListView(
@@ -360,7 +359,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                             child: Stack(children: [
                               CachedNetworkImage(
                                   imageUrl: item.iconImage(),
-                                  height: 180.0,
+                                  height: 160.0,
                                   fit: BoxFit.cover),
                               Positioned(
                                 left: 5.0,
@@ -375,13 +374,6 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                                           fontSize: 20,
                                           fontWeight: FontWeight.w600),
                                     ),
-                                    // Text(
-                                    //   "0",
-                                    //   style: TextStyle(
-                                    //       color: Color(0xffFF6D1C),
-                                    //       fontSize: 12,
-                                    //       fontWeight: FontWeight.w600),
-                                    // ),
                                   ],
                                 ),
                               ),
@@ -393,7 +385,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                                       width: 34,
                                       height: 16.0)),
                               Positioned(
-                                  bottom: 46.0,
+                                  bottom: 33.0,
                                   width: 112.0,
                                   child: Container(
                                       height: 24.0,
@@ -417,7 +409,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                                                 fontSize: 8.0))
                                       ]))),
                               const Positioned(
-                                  top: 185.0,
+                                  top: 160.0,
                                   left: 5.0,
                                   right: 5.0,
                                   child: Text("Minions:The Rise of Gru",
@@ -453,98 +445,85 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
             crossAxisSpacing: 9.5,
             children: (data.itemData ?? <ItemData>[])
                 .map((itemData) => GestureDetector(
-                    child: Container(
-                      height: 160 + 33,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5)),
-                        child: Stack(children: [
-                          SizedBox(
-                            width: double.infinity,
-                            child: CachedNetworkImage(
-                              height: 160,
-                              imageUrl: itemData.iconImage(),
-                               width: double.infinity,
-                               fit: BoxFit.fill,
-                            ),
-                          ),
-                          Positioned(
-                              left: 5.0,
-                              top: 5.0,
-                              child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(itemData.newConfRate ?? '8.0',
-                                        style: const TextStyle(
-                                            color: Color(0xffFF6D1C),
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600)),
-                                  ])),
-                          // Positioned(
-                          //   top: 185.0,
-                          //   left: 5.0,
-                          //   right: 5.0,
-                          //   child: Text(
-                          //     itemData.newConfName ?? '',
-                          //     maxLines: 2,
-                          //     style: const TextStyle(
-                          //       color: Color(0xff828386),
-                          //       fontSize: 12.0,
-                          //     ),
-                          //   ),
-                          // ),
-
-                          ///右上角
-                          Visibility(
-                            visible: itemData.showRightTop(),
-                            child: Positioned(
-                              top: 5.0,
-                              right: 5.0,
+                    child: Column(
+                      children: [
+                        Container(
+                          child: Stack(children: [
+                            Container(
                               child: CachedNetworkImage(
-                                imageUrl: ImageURL.url_243,
-                                width: 34,
-                                height: 16.0,
+                                 width: double.infinity,
+                                height: 160,
+                                imageUrl: itemData.iconImage(),
+                                fit: BoxFit.cover,
                               ),
                             ),
-                          ),
-
-                          ///右下角
-                          Visibility(
-                            visible: itemData.showRightBottom(),
-                            child: const Positioned(
-                              bottom: 33.0,
-                              right: 5.0,
-                              child: Row(
-                                children: [
-                                  Text("NEW",
-                                      style: TextStyle(
-                                          color: Color(0xffFF6D1C),
-                                          fontSize: 8.0)),
-                                  Text(" | S07 E08",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 8.0))
-                                ],
-                              ),
-                            ),
-                          ),
-
-                          Positioned(
-                            bottom: 5,
-                            child: Container(
-                              height: 28,
-                              padding: EdgeInsets.all(5),
-                              child: Center(
-                                child: Text(
-                                  itemData.desc ?? '没有返回数据的情况下，显示此句',
-                                  maxLines:2,  
-                                  style: const TextStyle(
-                                    color: Color(0xff828386),
-                                    fontSize: 12.0,
-                                  ),
+                            Positioned(
+                                left: 5.0,
+                                top: 5.0,
+                                child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(itemData.newConfRate ?? '8.0',
+                                          style: const TextStyle(
+                                              color: Color(0xffFF6D1C),
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600)),
+                                    ])),
+                            ///右上角
+                            Visibility(
+                              visible: itemData.showRightTop(),
+                              child: Positioned(
+                                top: 5.0,
+                                right: 5.0,
+                                child: CachedNetworkImage(
+                                  imageUrl: ImageURL.url_243,
+                                  width: 34,
+                                  height: 16.0,
                                 ),
                               ),
                             ),
-                          )
-                        ])),
+
+                            ///右下角
+                            Visibility(
+                              visible: itemData.showRightBottom(),
+                              child: const Positioned(
+                                bottom: 0.0,
+                                right: 5.0,
+                                child: Row(
+                                  children: [
+                                    Text("NEW",
+                                        style: TextStyle(
+                                            color: Color(0xffFF6D1C),
+                                            fontSize: 8.0)),
+                                    Text(" | S07 E08",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 8.0))
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ]),
+
+                        ),
+                        Container(
+                          // color: Colors.amber,
+                          height: 35,
+                          width: double.infinity,
+                          padding: EdgeInsets.all(2),
+                          child: const Center(
+                            child: Text(
+                             'jksajfkajkjkjrkleq',
+                              maxLines: 2,
+                              style: TextStyle(
+                                color: Color(0xff828386),
+                                
+                                fontSize: 12.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
