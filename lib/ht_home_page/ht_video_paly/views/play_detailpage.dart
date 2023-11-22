@@ -63,33 +63,35 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         body: Column(
           children: [
             videoPlayerViewWidget(),
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  ///带背景图的第一行
-                  firstPartWidget(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ///带背景图的第一行
+                    firstPartWidget(),
 
-                  ///第二行标题哪一行
-                  secondPartWidget(),
+                    ///第二行标题哪一行
+                    secondPartWidget(),
 
-                  ///第三行评分那一行
-                  scorePartWidget(),
+                    ///第三行评分那一行
+                    scorePartWidget(),
 
-                  ///第四行moreInfo按钮那一行
-                  moreInfoClickPartWidget(),
+                    ///第四行moreInfo按钮那一行
+                    moreInfoClickPartWidget(),
 
-                  ///moreInfo内容那一行
-                  moreInfoWidget(),
+                    ///moreInfo内容那一行
+                    moreInfoWidget(),
 
-                  ///分享那一行
-                  sharePartWidget(),
+                    ///分享那一行
+                    sharePartWidget(),
 
-                  ///专题 title 那一行
-                  specialSubjectTitleWidget(),
+                    ///专题 title 那一行
+                    specialSubjectTitleWidget(),
 
-                  ///专题列表那部分
-                  specialSubjectListWidget(),
-                ],
+                    ///专题列表那部分
+                    specialSubjectListWidget(),
+                  ],
+                ),
               ),
             )
           ],
@@ -303,11 +305,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                             fontSize: 14.0, color: Color(0xff999999))),
                     Container(width: 2.0),
                     CachedNetworkImage(
-                        imageUrl: _htVarInfoShown
-                            ? ImageURL.url_303
-                            : ImageURL.url_302,
-                        width: 16.0,
-                        height: 16.0),
+                        imageUrl: ImageURL.url_302, width: 16.0, height: 16.0),
                   ]),
                   onTap: () {
                     setState(() {
@@ -404,7 +402,27 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                 child: const Text(
                     "when van helsing’s mysterious invention,the “mons-terfiction ray,”goes haywire,drac and his monster palare when van helsing’s mysterious invention,the “monsterfiction ray,”goes haywire,drac and his monster pal arewhen van helsing’s mysterious invention,the “mons-terfiction ray,”goes haywire,drac and his monster palare when van helsing’s mysterious invention,the “monsterfiction ray,”goes haywire,drac and his monster pal arewhen van helsing’s mysterious invention,the “mons-terfiction ray,”goes haywire,drac and his monster palare when van helsing’s mysterious invention,the “monsterfiction ray,”goes haywire,drac and his monster pal are",
                     style: TextStyle(
-                        color: Color(0xff999999), fontSize: 14.0, height: 1.5)))
+                        color: Color(0xff999999),
+                        fontSize: 14.0,
+                        height: 1.5))),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  if (_htVarInfoShown == false) {
+                    _htVarInfoShown = true;
+                  } else {
+                    _htVarInfoShown = false;
+                  }
+                });
+              },
+              child: const Center(
+                child: Image(
+                  image: CachedNetworkImageProvider(ImageURL.url_303),
+                  width: 24,
+                  height: 24,
+                ),
+              ),
+            )
           ]),
         ));
   }
