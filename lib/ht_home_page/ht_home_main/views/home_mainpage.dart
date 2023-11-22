@@ -13,6 +13,7 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/views/second_level
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_middlepage.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage_drama.dart';
+import 'package:ht_new_movpresenter/utils/ht_sys_tool.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
@@ -390,22 +391,22 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
             Positioned(
               top: 244,
               child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    for (int i = 0; i < imageSliders.length; i++)
-                      Container(
-                        width: 10,
-                        height: 10,
-                        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: _controller.reactive == i
-                              ? Colors.red
-                              : Colors.grey,
-                        ),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  for (int i = 0; i < imageSliders.length; i++)
+                    Container(
+                      width: 10,
+                      height: 10,
+                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: _controller.reactive == i
+                            ? Colors.red
+                            : Colors.grey,
                       ),
-                  ],
-                ),
+                    ),
+                ],
+              ),
             ),
           ],
         ),
