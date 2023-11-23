@@ -5,12 +5,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_part.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 
 class HTClassVideoDetailPage extends StatefulWidget {
-  const HTClassVideoDetailPage({Key? key, required this.title})
+  // ignore: non_constant_identifier_names
+  const HTClassVideoDetailPage({Key? key, required this.m_type_2,required this.id})
       : super(key: key);
-  final String title;
+  // ignore: non_constant_identifier_names
+  final String m_type_2;///"m_type_2": "myfx",// myfx电影，tt_mflx电视剧
+
+  final String id;///电影 id 或者 电视剧 id
+
+
+
 
   @override
   State<HTClassVideoDetailPage> createState() => _HTClassVideoDetailPageState();
@@ -36,6 +44,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
   ///more info 是否展开
   var _htVarInfoShown = false;
+
   @override
   void initState() {
     if (videoList[2].contains("rtsp")) {
@@ -85,6 +94,13 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                     ///分享那一行
                     sharePartWidget(),
 
+                    ///如果是电视剧播放页的话会有这部分
+                    (widget.m_type_2 == 'tt_mflx')
+                        ? const TVPlayPartWidget()
+                        : Container(
+                            height: 0,
+                          ),
+
                     ///专题 title 那一行
                     specialSubjectTitleWidget(),
 
@@ -108,8 +124,8 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
             width: double.infinity,
             height: 220,
             player: player,
-            fit: FijkFit.cover,
-            fsFit: FijkFit.cover,
+            fit: FijkFit.fill,
+            fsFit: FijkFit.fill,
             panelBuilder: fijkPanel2Builder(),
           ),
           Positioned(
@@ -273,7 +289,8 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
   ///moreInfo 点击按钮那一行
   Widget moreInfoClickPartWidget() {
     return Container(
-        margin: const EdgeInsets.only(top: 8.0, left: 10.0, bottom: 0.0),
+        margin:
+            const EdgeInsets.only(top: 8.0, left: 10.0, bottom: 0.0, right: 10),
         child: Row(children: [
           const Text("Animation",
               style: TextStyle(fontSize: 14.0, color: Color(0xff999999))),
@@ -431,17 +448,16 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
   Widget specialSubjectTitleWidget() {
     return Container(
       margin: const EdgeInsets.only(top: 20.0, left: 10.0, bottom: 0.0),
-      child: Row(children: [
-        Container(width: 10.0),
-        const Text("Trending",
+      child: const Row(children: [
+        Text("Trending",
+            textAlign: TextAlign.left,
             style: TextStyle(
                 fontSize: 18.0,
                 color: Colors.white,
                 fontWeight: FontWeight.w600)),
-        const Spacer(),
-        CachedNetworkImage(
-            imageUrl: ImageURL.url_308, width: 24.0, height: 24.0),
-        Container(width: 10.0)
+        Spacer(),
+        // CachedNetworkImage(
+        //     imageUrl: ImageURL.url_308, width: 24.0, height: 24.0),
       ]),
     );
   }
@@ -450,8 +466,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
   Widget specialSubjectListWidget() {
     return Container(
       height: 192.0,
-      margin: const EdgeInsets.only(top: 11.0, bottom: 0.0),
-      padding: const EdgeInsets.fromLTRB(0.0, 0, 5, 0),
+      margin: const EdgeInsets.only(top: 11.0, bottom: 0.0, right: 0),
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [1, 2, 3, 4, 5]

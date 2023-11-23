@@ -12,8 +12,6 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/views/second_level_page.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_middlepage.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage.dart';
-import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage_drama.dart';
-import 'package:ht_new_movpresenter/utils/ht_sys_tool.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
@@ -315,7 +313,8 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return const HTClassVideoDetailPage(title: "");
+                ///"new_conf_type": 7,// 5、movie；7、tv  (myfx电影，tt_mflx电视剧)
+                return HTClassVideoDetailPage(m_type_2:(element.new_conf_type == 5?"myfx":"tt_mflx"),id: element.id??"",);
               },
             ),
           );
@@ -484,8 +483,8 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return const HTClassVideoDetailPage(
-                                      title: "");
+                                  return HTClassVideoDetailPage(
+                                      m_type_2:item.mType2??"",id: item.id??"",);
                                 },
                               ),
                             );
@@ -575,7 +574,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return const HTClassVideoDetailPage(title: "");
+                              return HTClassVideoDetailPage(m_type_2:item.m_type_2??"",id: item.id??"",);
                             }));
                           }))
                       .toList())),
@@ -664,7 +663,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return const HTClassVideoDetailPage(title: "");
+                          return HTClassVideoDetailPage(m_type_2:m20.mType2??"",id: m20.id??"",);
                         }));
                       }))
                   .toList()),
@@ -770,7 +769,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) {
-                              return const HTClassVideoDetailPage(title: "");
+                              return HTClassVideoDetailPage(m_type_2:tt20.m_type_2??"",id:tt20.id??"",);
                             }),
                           );
                         }),
@@ -807,7 +806,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) {
-                  return const HTClassVideoDetailPage(title: "");
+                  return HTClassVideoDetailPage(m_type_2:itemData.m_type_2??"",id:itemData.id??"",);
                 }),
               );
               // 添加点击事件逻辑
