@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -6,14 +5,14 @@ import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 import 'package:quds_popup_menu/quds_popup_menu.dart';
 
 class TVPlayPartWidget extends StatelessWidget {
-  const TVPlayPartWidget({Key? key}) : super(key: key);
+  final Function(bool)allEpisodesEvent;
+   TVPlayPartWidget({required this.allEpisodesEvent});
 
   @override
   Widget build(BuildContext context) {
     return tvPlayPartWidget();
   }
 }
-
 Widget tvPlayPartWidget() {
   return Container(
     child: Column(
@@ -37,13 +36,19 @@ Widget tvPlayPartWidget() {
                       imageUrl: ImageURL.url_114, width: 10.0, height: 8.0)
                 ])),
             const Spacer(),
-            Row(children: [
-              const Text("All Episodes",
-                  style: TextStyle(color: Color(0xff999999), fontSize: 14.0)),
-              Container(width: 4.0),
-              CachedNetworkImage(
-                  imageUrl: ImageURL.url_288, width: 16.0, height: 16.0),
-            ]),
+            GestureDetector(
+            onTap: (() {
+              print('你好👋你好👋你好👋你好👋你好👋你好👋');
+              allEpisodesEvent(true);
+            }),
+              child: Row(children: [
+                const Text("All Episodes",
+                    style: TextStyle(color: Color(0xff999999), fontSize: 14.0)),
+                Container(width: 4.0),
+                CachedNetworkImage(
+                    imageUrl: ImageURL.url_288, width: 16.0, height: 16.0),
+              ]),
+            ),
           ],
         ),
         ////中间的横线
@@ -88,4 +93,7 @@ Widget tvPlayPartWidget() {
       ],
     ),
   );
+}
+
+void allEpisodesEvent(bool bool) {
 }

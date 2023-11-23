@@ -5,20 +5,22 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_all_episodes.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_part.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 
 class HTClassVideoDetailPage extends StatefulWidget {
   // ignore: non_constant_identifier_names
-  const HTClassVideoDetailPage({Key? key, required this.m_type_2,required this.id})
+  const HTClassVideoDetailPage(
+      {Key? key, required this.m_type_2, required this.id})
       : super(key: key);
   // ignore: non_constant_identifier_names
-  final String m_type_2;///"m_type_2": "myfx",// myfx电影，tt_mflx电视剧
+  final String m_type_2;
 
-  final String id;///电影 id 或者 电视剧 id
+  ///"m_type_2": "myfx",// myfx电影，tt_mflx电视剧
+  final String id;
 
-
-
+  ///电影 id 或者 电视剧 id
 
   @override
   State<HTClassVideoDetailPage> createState() => _HTClassVideoDetailPageState();
@@ -45,6 +47,15 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
   ///more info 是否展开
   var _htVarInfoShown = false;
 
+  /// isAllEpisodes 是否展开剧集详情
+  var isAllEpisodes = false;
+ // 回调函数，用于接收子widget传递的数据
+  void allEpisodesEvent(bool isEpisodesDes) {
+    print('点击了大块头点击了大块头');
+    isAllEpisodes = isEpisodesDes;
+    setState(() {});
+  }
+  
   @override
   void initState() {
     if (videoList[2].contains("rtsp")) {
@@ -71,42 +82,52 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         backgroundColor: Colors.black,
         body: Column(
           children: [
+            ///播放器
             videoPlayerViewWidget(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ///带背景图的第一行
-                    firstPartWidget(),
 
-                    ///第二行标题哪一行
-                    secondPartWidget(),
+            ///带背景图的第一行
+            firstPartWidget(),
 
-                    ///第三行评分那一行
-                    scorePartWidget(),
+            ///AllEpisodes界面
+            Visibility(
+              visible: isAllEpisodes,
+              child: const Expanded(child: AllEpisodesWidget()),
+            ),
+            Visibility(
+              visible: !isAllEpisodes,
+              child: Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ///第二行标题哪一行
+                      secondPartWidget(),
 
-                    ///第四行moreInfo按钮那一行
-                    moreInfoClickPartWidget(),
+                      ///第三行评分那一行
+                      scorePartWidget(),
 
-                    ///moreInfo内容那一行
-                    moreInfoWidget(),
+                      ///第四行moreInfo按钮那一行
+                      moreInfoClickPartWidget(),
 
-                    ///分享那一行
-                    sharePartWidget(),
+                      ///moreInfo内容那一行
+                      moreInfoWidget(),
 
-                    ///如果是电视剧播放页的话会有这部分
-                    (widget.m_type_2 == 'tt_mflx')
-                        ? const TVPlayPartWidget()
-                        : Container(
-                            height: 0,
-                          ),
+                      ///分享那一行
+                      sharePartWidget(),
 
-                    ///专题 title 那一行
-                    specialSubjectTitleWidget(),
+                      ///如果是电视剧播放页的话会有这部分
+                      (widget.m_type_2 == 'tt_mflx')
+                          ? TVPlayPartWidget(allEpisodesEvent: allEpisodesEvent)
+                          : Container(
+                              height: 0,
+                            ),
 
-                    ///专题列表那部分
-                    specialSubjectListWidget(),
-                  ],
+                      ///专题 title 那一行
+                      specialSubjectTitleWidget(),
+
+                      ///专题列表那部分
+                      specialSubjectListWidget(),
+                    ],
+                  ),
                 ),
               ),
             )
@@ -114,6 +135,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         ));
   }
 
+ 
   ///播放器
   Widget videoPlayerViewWidget() {
     return Container(
