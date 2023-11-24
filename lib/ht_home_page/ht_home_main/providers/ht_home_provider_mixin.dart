@@ -33,16 +33,6 @@ mixin HTHomeProviderMixin on HTHomeProviderBase {
     var id = "35140";
 
     ///猜你喜欢电影ID，不传时无对应模块信息
-
-    // Map<String, dynamic> htVarparams = {"page": page,"page_size":page_size,"p1":p1,"datetag":datetag,"id":id};
-    // await KTClassUIUtils.htMethodPutRequestCommonParams(htVarparams);
-    // var formData = FormData.fromMap(htVarparams);
-    // // ignore: avoid_print
-    // var res = await HttpUtils.instance.post(
-    //   Global.homePageUrl,
-    //   params: formData,
-    //   tips: true,
-    // );
     Map<String, dynamic> htVarparams = {
       "page": page.toString(),
       "page_size": pageSize,

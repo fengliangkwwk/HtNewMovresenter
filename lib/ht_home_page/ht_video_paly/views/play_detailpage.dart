@@ -44,7 +44,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
     'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
     'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'
   ];
-    final HTVideoDescProvider videoDescProvider = HTVideoDescProvider();
+  final HTVideoDescProvider videoDescProvider = HTVideoDescProvider();
 
   FijkPlayer player = FijkPlayer();
 
@@ -53,23 +53,24 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
   /// isAllEpisodes 是否展开剧集详情
   var isAllEpisodes = false;
- // 回调函数，用于接收子widget传递的数据
+  // 回调函数，用于接收子widget传递的数据
   void allEpisodesEvent(bool isEpisodesDes) {
     print('点击了大块头点击了大块头');
     isAllEpisodes = isEpisodesDes;
     setState(() {});
   }
-  
+
   @override
   void initState() {
     videoDescProvider.loadData(widget.m_type_2, widget.id);
-    if (videoList[2].contains("rtsp")) {
-      //rtsp视频关键配置
-      player.setOption(FijkOption.formatCategory, "rtsp_transport", "tcp");
-      // fijkPlayer 初始化不启用缓冲，避免画面卡死不动
-      player.setOption(FijkOption.playerCategory, 'packet-buffering', 0);
-      player.setOption(FijkOption.playerCategory, 'framedrop', 1);
-    }
+    // if (videoList[2].contains("rtsp")) {
+    //   //rtsp视频关键配置
+    //   player.setOption(FijkOption.formatCategory, "rtsp_transport", "tcp");
+    //   // fijkPlayer 初始化不启用缓冲，避免画面卡死不动
+    //   player.setOption(FijkOption.playerCategory, 'packet-buffering', 0);
+    //   player.setOption(FijkOption.playerCategory, 'framedrop', 1);
+    // }
+    player.setOption(FijkOption.hostCategory, 'enable-position-notify', 1);
     super.initState();
   }
 
@@ -88,13 +89,12 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
           backgroundColor: Colors.black,
           body: Column(
             children: [
-
               ///播放器
               videoPlayerViewWidget(),
-    
+
               ///带背景图的第一行
               firstPartWidget(),
-    
+
               ///AllEpisodes界面
               Visibility(
                 visible: isAllEpisodes,
@@ -108,29 +108,30 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                       children: [
                         ///第二行标题哪一行
                         secondPartWidget(),
-    
+
                         ///第三行评分那一行
                         scorePartWidget(),
-    
+
                         ///第四行moreInfo按钮那一行
                         moreInfoClickPartWidget(),
-    
+
                         ///moreInfo内容那一行
                         moreInfoWidget(),
-    
+
                         ///分享那一行
                         sharePartWidget(),
-    
+
                         ///如果是电视剧播放页的话会有这部分
                         (widget.m_type_2 == 'tt_mflx')
-                            ? TVPlayPartWidget(allEpisodesEvent: allEpisodesEvent)
+                            ? TVPlayPartWidget(
+                                allEpisodesEvent: allEpisodesEvent)
                             : Container(
                                 height: 0,
                               ),
-    
+
                         ///专题 title 那一行
                         specialSubjectTitleWidget(),
-    
+
                         ///专题列表那部分
                         specialSubjectListWidget(),
                       ],
@@ -143,9 +144,10 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
     );
   }
 
- 
   ///播放器
   Widget videoPlayerViewWidget() {
+    String videoUrl = videoDescProvider.videoDescBean?.data?.hd?.link??"";
+    player.setDataSource(videoUrl, autoPlay: true);
     return Container(
         height: 220.0,
         margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),

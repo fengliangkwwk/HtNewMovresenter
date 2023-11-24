@@ -7,7 +7,7 @@ import 'package:ht_new_movpresenter/utils/ht_net_utils.dart';
 import 'package:ht_new_movpresenter/utils/ht_sys_tool.dart';
 
 mixin HTVideoProviderMixin on HTVideoDescProviderBase {
-  HTVideoDescBean? videoDescBean;
+  HtVideoDescBean? videoDescBean;
   /// m_type_2:tt_mflx=电视剧   myfx:电影
   /// id:出入的视频id
 
@@ -36,11 +36,10 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
       apiUrl = Global.tvLinkUrl;
     }
     var result = await HTNetUtils.htPost(apiUrl: apiUrl, params: htVarparams);
-
     print(result);
     // 解析JSON数据为User对象
     Map<String, dynamic> jsonMap = jsonDecode(result.toString());
-    videoDescBean = HTVideoDescBean.fromJson(jsonMap);
+    videoDescBean = HtVideoDescBean.fromJson(jsonMap);
     notifyListeners();
   }
 }

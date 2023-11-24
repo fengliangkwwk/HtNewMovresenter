@@ -1,10 +1,9 @@
-import 'package:json_annotation/json_annotation.dart'; 
-      
-part 'ht_video_desc_bean.g.dart';
-    
-@JsonSerializable(explicitToJson: true)
-class HtVideoDescBean{
+import 'package:json_annotation/json_annotation.dart';
 
+part 'ht_video_desc_bean.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class HtVideoDescBean {
   @JsonKey(name: 'status')
   int? status;
 
@@ -22,16 +21,14 @@ class HtVideoDescBean{
 
   HtVideoDescBean();
 
-  static HtVideoDescBean fromJson(Map<String, dynamic> srcJson) => _$HtVideoDescBeanFromJson(srcJson);
+  static HtVideoDescBean fromJson(Map<String, dynamic> srcJson) =>
+      _$HtVideoDescBeanFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$HtVideoDescBeanToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Data{
-
+class Data {
   @JsonKey(name: 'id')
   String? id;
 
@@ -197,13 +194,11 @@ class Data{
   @JsonKey(name: 'end1')
   String? end1;
 
-
   @JsonKey(name: 'm_type_2')
   String? mType2;
 
   @JsonKey(name: 'ss_eps')
   String? ssEps;
-
 
   @JsonKey(name: 'order')
   int? order;
@@ -216,13 +211,10 @@ class Data{
   static Data fromJson(Map<String, dynamic> srcJson) => _$DataFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$DataToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Movie_123_params{
-
+class Movie_123_params {
   @JsonKey(name: 'postid')
   String? postid;
 
@@ -243,16 +235,14 @@ class Movie_123_params{
 
   Movie_123_params();
 
-  static Movie_123_params fromJson(Map<String, dynamic> srcJson) => _$Movie_123_paramsFromJson(srcJson);
+  static Movie_123_params fromJson(Map<String, dynamic> srcJson) =>
+      _$Movie_123_paramsFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$Movie_123_paramsToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class M123_params{
-
+class M123_params {
   @JsonKey(name: 'postid')
   String? postid;
 
@@ -273,16 +263,14 @@ class M123_params{
 
   M123_params();
 
-  static M123_params fromJson(Map<String, dynamic> srcJson) => _$M123_paramsFromJson(srcJson);
+  static M123_params fromJson(Map<String, dynamic> srcJson) =>
+      _$M123_paramsFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$M123_paramsToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Hd{
-
+class Hd {
   @JsonKey(name: 'link')
   String? link;
 
@@ -294,13 +282,10 @@ class Hd{
   static Hd fromJson(Map<String, dynamic> srcJson) => _$HdFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$HdToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Sd{
-
+class Sd {
   @JsonKey(name: 'link')
   String? link;
 
@@ -312,49 +297,40 @@ class Sd{
   static Sd fromJson(Map<String, dynamic> srcJson) => _$SdFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$SdToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Mheader{
-
+class Mheader {
   Mheader();
 
-  static Mheader fromJson(Map<String, dynamic> srcJson) => _$MheaderFromJson(srcJson);
+  static Mheader fromJson(Map<String, dynamic> srcJson) =>
+      _$MheaderFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$MheaderToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Crwdsrc{
-
+class Crwdsrc {
   Crwdsrc();
 
-  static Crwdsrc fromJson(Map<String, dynamic> srcJson) => _$CrwdsrcFromJson(srcJson);
+  static Crwdsrc fromJson(Map<String, dynamic> srcJson) =>
+      _$CrwdsrcFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$CrwdsrcToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Sub_src{
-
+class Sub_src {
   Sub_src();
 
-  static Sub_src fromJson(Map<String, dynamic> srcJson) => _$Sub_srcFromJson(srcJson);
+  static Sub_src fromJson(Map<String, dynamic> srcJson) =>
+      _$Sub_srcFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$Sub_srcToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Data_2{
-
+class Data_2 {
   @JsonKey(name: 'info_type')
   String? infoType;
 
@@ -399,16 +375,14 @@ class Data_2{
 
   Data_2();
 
-  static Data_2 fromJson(Map<String, dynamic> srcJson) => _$Data_2FromJson(srcJson);
+  static Data_2 fromJson(Map<String, dynamic> srcJson) =>
+      _$Data_2FromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$Data_2ToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Data_3{
-
+class Data_3 {
   @JsonKey(name: 'info_type')
   String? infoType;
 
@@ -453,12 +427,8 @@ class Data_3{
 
   Data_3();
 
-  static Data_3 fromJson(Map<String, dynamic> srcJson) => _$Data_3FromJson(srcJson);
+  static Data_3 fromJson(Map<String, dynamic> srcJson) =>
+      _$Data_3FromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$Data_3ToJson(this);
-
 }
-
-
-
-  
