@@ -17,7 +17,7 @@ class HTNetUtils {
     }
     var formData = FormData.fromMap(htVarparams);
     var dio = Dio();
-
+    
     ///设置代理
     // dio.httpClientAdapter = IOHttpClientAdapter()
     //   ..onHttpClientCreate = (client) {

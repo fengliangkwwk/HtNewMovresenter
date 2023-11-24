@@ -1,5 +1,6 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 import 'package:quds_popup_menu/quds_popup_menu.dart';
@@ -38,7 +39,9 @@ Widget tvPlayPartWidget() {
             const Spacer(),
             GestureDetector(
             onTap: (() {
-              print('你好👋你好👋你好👋你好👋你好👋你好👋');
+              if (kDebugMode) {
+                print('你好👋你好👋你好👋你好👋你好👋你好👋');
+              }
               allEpisodesEvent(true);
             }),
               child: Row(children: [

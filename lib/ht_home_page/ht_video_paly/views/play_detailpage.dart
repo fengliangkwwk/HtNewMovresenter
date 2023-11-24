@@ -5,9 +5,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_all_episodes.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_part.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
+import 'package:provider/provider.dart';
 
 class HTClassVideoDetailPage extends StatefulWidget {
   // ignore: non_constant_identifier_names
@@ -42,6 +44,8 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
     'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
     'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'
   ];
+    final HTVideoDescProvider videoDescProvider = HTVideoDescProvider();
+
   FijkPlayer player = FijkPlayer();
 
   ///more info 是否展开
@@ -58,6 +62,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
   
   @override
   void initState() {
+    videoDescProvider.loadData(widget.m_type_2, widget.id);
     if (videoList[2].contains("rtsp")) {
       //rtsp视频关键配置
       player.setOption(FijkOption.formatCategory, "rtsp_transport", "tcp");
@@ -66,7 +71,6 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
       player.setOption(FijkOption.playerCategory, 'framedrop', 1);
     }
     super.initState();
-    player.setDataSource(videoList[4], autoPlay: true);
   }
 
   @override
@@ -78,61 +82,65 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
   @override
   Widget build(BuildContext context) {
     FijkPlugin.keepScreenOn(true);
-    return Scaffold(
-        backgroundColor: Colors.black,
-        body: Column(
-          children: [
-            ///播放器
-            videoPlayerViewWidget(),
+    return ChangeNotifierProvider(
+      create: (context) => videoDescProvider,
+      child: Scaffold(
+          backgroundColor: Colors.black,
+          body: Column(
+            children: [
 
-            ///带背景图的第一行
-            firstPartWidget(),
-
-            ///AllEpisodes界面
-            Visibility(
-              visible: isAllEpisodes,
-              child: const Expanded(child: AllEpisodesWidget()),
-            ),
-            Visibility(
-              visible: !isAllEpisodes,
-              child: Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      ///第二行标题哪一行
-                      secondPartWidget(),
-
-                      ///第三行评分那一行
-                      scorePartWidget(),
-
-                      ///第四行moreInfo按钮那一行
-                      moreInfoClickPartWidget(),
-
-                      ///moreInfo内容那一行
-                      moreInfoWidget(),
-
-                      ///分享那一行
-                      sharePartWidget(),
-
-                      ///如果是电视剧播放页的话会有这部分
-                      (widget.m_type_2 == 'tt_mflx')
-                          ? TVPlayPartWidget(allEpisodesEvent: allEpisodesEvent)
-                          : Container(
-                              height: 0,
-                            ),
-
-                      ///专题 title 那一行
-                      specialSubjectTitleWidget(),
-
-                      ///专题列表那部分
-                      specialSubjectListWidget(),
-                    ],
+              ///播放器
+              videoPlayerViewWidget(),
+    
+              ///带背景图的第一行
+              firstPartWidget(),
+    
+              ///AllEpisodes界面
+              Visibility(
+                visible: isAllEpisodes,
+                child: const Expanded(child: AllEpisodesWidget()),
+              ),
+              Visibility(
+                visible: !isAllEpisodes,
+                child: Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        ///第二行标题哪一行
+                        secondPartWidget(),
+    
+                        ///第三行评分那一行
+                        scorePartWidget(),
+    
+                        ///第四行moreInfo按钮那一行
+                        moreInfoClickPartWidget(),
+    
+                        ///moreInfo内容那一行
+                        moreInfoWidget(),
+    
+                        ///分享那一行
+                        sharePartWidget(),
+    
+                        ///如果是电视剧播放页的话会有这部分
+                        (widget.m_type_2 == 'tt_mflx')
+                            ? TVPlayPartWidget(allEpisodesEvent: allEpisodesEvent)
+                            : Container(
+                                height: 0,
+                              ),
+    
+                        ///专题 title 那一行
+                        specialSubjectTitleWidget(),
+    
+                        ///专题列表那部分
+                        specialSubjectListWidget(),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            )
-          ],
-        ));
+              )
+            ],
+          )),
+    );
   }
 
  

@@ -5,11 +5,11 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_
 import 'package:ht_new_movpresenter/utils/ht_api.dart';
 import 'package:ht_new_movpresenter/utils/ht_net_utils.dart';
 
-
 ///数据请求
 mixin HTHomeProviderMixin on HTHomeProviderBase {
   ///首页的列表数据
   List<DataList> dataList = [];
+
   ///瀑布流数据
   List<HomedroppingWaterBean> droppingWaterDataList = [];
 
@@ -101,17 +101,4 @@ mixin HTHomeProviderMixin on HTHomeProviderBase {
     print('解析瀑布流数据成功');
     // notifyListeners();
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
