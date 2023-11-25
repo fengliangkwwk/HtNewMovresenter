@@ -66,6 +66,8 @@ dependencies:
   easy_refresh: ^3.3.2+4
 
   tuple: ^2.0.2
+  #设备预览
+  device_preview: ^1.1.0
     
 dev_dependencies:
   flutter_test:

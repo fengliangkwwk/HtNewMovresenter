@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_ad_lunch_page/views/home_launcherpage.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/views/home_mainpage.dart';
@@ -9,7 +11,10 @@ import 'package:ht_new_movpresenter/utils/ht_init_app.dart';
 void main() async{
   ///
   //  await initApp();
-  runApp(const HTClassApp());
+  runApp(DevicePreview(
+    enabled: !kReleaseMode,
+    builder: (context) => const HTClassApp(), // Wrap your app
+  ),);
 }
 
 class HTClassApp extends StatelessWidget {
@@ -20,6 +25,9 @@ class HTClassApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       theme: ThemeData(
         // This is the theme of your application.
         //
