@@ -314,7 +314,10 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
             MaterialPageRoute(
               builder: (context) {
                 ///"new_conf_type": 7,// 5、movie；7、tv  (myfx电影，tt_mflx电视剧)
-                return HTClassVideoDetailPage(m_type_2:(element.new_conf_type == 5?"myfx":"tt_mflx"),id: element.id??"",);
+                return HTClassVideoDetailPage(
+                  m_type_2: (element.new_conf_type == 5 ? "myfx" : "tt_mflx"),
+                  id: element.id ?? "",
+                );
               },
             ),
           );
@@ -367,6 +370,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
     return Column(
       children: [
         Stack(
+          alignment: AlignmentDirectional.center,
           children: [
             Positioned(
               child: Container(
@@ -376,11 +380,14 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                 child: CarouselSlider(
                   carouselController: _controller,
                   options: CarouselOptions(
-                    autoPlay: true,
-                    aspectRatio: 2.0,
-                    enlargeCenterPage: true,
-                    enlargeStrategy: CenterPageEnlargeStrategy.height,
-                  ),
+                      autoPlay: true,
+                      aspectRatio: 2.0,
+                      enlargeCenterPage: true,
+                      enlargeStrategy: CenterPageEnlargeStrategy.height,
+                      onPageChanged: (index, reason) {
+                        homeProvider.carouselSliderCurrent = index;
+                        homeProvider.notifyListeners();
+                      }),
                   items: imageSliders,
                 ),
               ),
@@ -389,22 +396,38 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
             // 添加跑马指示器
             Positioned(
               top: 244,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  for (int i = 0; i < imageSliders.length; i++)
-                    Container(
-                      width: 10,
-                      height: 10,
-                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: _controller.reactive == i
-                            ? Colors.red
-                            : Colors.grey,
-                      ),
-                    ),
-                ],
+              child: Selector<HTHomeProvider, int>(
+                selector: (p0, p1) => p1.carouselSliderCurrent,
+                builder: (context, value, child) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: imageSliders.asMap().entries.map((entry) {
+                      return GestureDetector(
+                        onTap: () {
+                          // _controller.jumpToPage(entry.key);
+                          _controller.animateToPage(entry.key,duration: const Duration(milliseconds: 100));
+                        },
+                        child: Container(
+                          width: 12.0,
+                          height: 12.0,
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 4.0),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: (homeProvider.carouselSliderCurrent ==
+                                              entry.key
+                                      ? Colors.white
+                                      : Colors.red)
+                                  .withOpacity(
+                                      homeProvider.carouselSliderCurrent ==
+                                              entry.key
+                                          ? 0.9
+                                          : 0.4)),
+                        ),
+                      );
+                    }).toList(),
+                  );
+                },
               ),
             ),
           ],
@@ -484,7 +507,9 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                               MaterialPageRoute(
                                 builder: (context) {
                                   return HTClassVideoDetailPage(
-                                      m_type_2:item.mType2??"",id: item.id??"",);
+                                    m_type_2: item.mType2 ?? "",
+                                    id: item.id ?? "",
+                                  );
                                 },
                               ),
                             );
@@ -574,7 +599,10 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return HTClassVideoDetailPage(m_type_2:item.m_type_2??"",id: item.id??"",);
+                              return HTClassVideoDetailPage(
+                                m_type_2: item.m_type_2 ?? "",
+                                id: item.id ?? "",
+                              );
                             }));
                           }))
                       .toList())),
@@ -625,7 +653,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w600)),
                                       ])),
-                          
+
                               ///右上角
                               Visibility(
                                 visible: m20.quality == 'CAD' ? true : false,
@@ -661,7 +689,10 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return HTClassVideoDetailPage(m_type_2:m20.mType2??"",id: m20.id??"",);
+                          return HTClassVideoDetailPage(
+                            m_type_2: m20.mType2 ?? "",
+                            id: m20.id ?? "",
+                          );
                         }));
                       }))
                   .toList()),
@@ -707,7 +738,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.w600)),
                                         ])),
-                            
+
                                 ///右下角
                                 Visibility(
                                   visible:
@@ -765,7 +796,10 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) {
-                              return HTClassVideoDetailPage(m_type_2:tt20.m_type_2??"",id:tt20.id??"",);
+                              return HTClassVideoDetailPage(
+                                m_type_2: tt20.m_type_2 ?? "",
+                                id: tt20.id ?? "",
+                              );
                             }),
                           );
                         }),
@@ -802,7 +836,10 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) {
-                  return HTClassVideoDetailPage(m_type_2:itemData.m_type_2??"",id:itemData.id??"",);
+                  return HTClassVideoDetailPage(
+                    m_type_2: itemData.m_type_2 ?? "",
+                    id: itemData.id ?? "",
+                  );
                 }),
               );
               // 添加点击事件逻辑
