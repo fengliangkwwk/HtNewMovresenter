@@ -541,7 +541,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
   ///专题列表
   Widget specialSubjectListWidget() {
-    var dataList = provider.videoDescBean?.data2?[2].data;
+    var dataList = provider.projectList();
     return Container(
       height: 192.0,
       margin: const EdgeInsets.only(top: 11.0, bottom: 0.0, right: 0),

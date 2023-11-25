@@ -48,10 +48,19 @@ mixin HTVideoDescDataProviderMixin on HTVideoProviderMixin {
     return videoDescBean?.data?.description ?? '';
   }
 
+  ///演员列表
   List? actionList() {
     if (isTV()) {
       return tv202Bean?.data?.casts;
     }
     return videoDescBean?.data2?[0].data;
+  }
+
+  ///专题列表 provider.videoDescBean?.data2?[2].data
+  List? projectList() {
+    if (isTV()) {
+      return  tv202Bean?.data3?[0].data;
+    }
+    return videoDescBean?.data2?[2].data;
   }
 }
