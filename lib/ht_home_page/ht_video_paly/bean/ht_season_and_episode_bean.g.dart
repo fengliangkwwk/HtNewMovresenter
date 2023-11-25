@@ -61,7 +61,19 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data()
   ..unlike = json['unlike'] as String?
   ..playLock = json['play_lock'] as String?
   ..playLockT = json['play_lock_t'] as String?
-  ..r18 = json['r18'] as String?;
+  ..r18 = json['r18'] as String?
+  ..stars = json['stars'] as String?
+  ..mType = json['m_type'] as String?
+  ..mType2 = json['m_type_2'] as String?
+  ..order = json['order'] as int?
+  ..newFlag = json['new_flag'] as String?
+  ..nwFlag = json['nw_flag'] as String?
+  ..ssEps = json['ss_eps'] as String?
+  ..update = json['update'] as String?
+  ..cCnts = json['c_cnts'] as String?
+  ..gif = json['gif'] as String?
+  ..views = json['views'] as String?
+  ..quality = json['quality'] as String?;
 
 Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
       'logout': instance.logout,
@@ -86,6 +98,18 @@ Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
       'play_lock': instance.playLock,
       'play_lock_t': instance.playLockT,
       'r18': instance.r18,
+      'stars': instance.stars,
+      'm_type': instance.mType,
+      'm_type_2': instance.mType2,
+      'order': instance.order,
+      'new_flag': instance.newFlag,
+      'nw_flag': instance.nwFlag,
+      'ss_eps': instance.ssEps,
+      'update': instance.update,
+      'c_cnts': instance.cCnts,
+      'gif': instance.gif,
+      'views': instance.views,
+      'quality': instance.quality,
     };
 
 Casts _$CastsFromJson(Map<String, dynamic> json) => Casts()
@@ -115,45 +139,6 @@ Data_2 _$Data_2FromJson(Map<String, dynamic> json) => Data_2()
 
 Map<String, dynamic> _$Data_2ToJson(Data_2 instance) => <String, dynamic>{
       'data': instance.data?.map((e) => e.toJson()).toList(),
-    };
-
-Data _$DataFromJson(Map<String, dynamic> json) => Data()
-  ..mType2 = json['m_type_2'] as String?
-  ..ssEps = json['ss_eps'] as String?
-  ..board = json['board'] as String?
-  ..boardId1 = json['board_id_1'] as String?
-  ..boardId2 = json['board_id_2'] as String?
-  ..mType = json['m_type'] as String?
-  ..views = json['views'] as String?
-  ..cover = json['cover'] as String?
-  ..id = json['id'] as String?
-  ..rate = json['rate'] as String?
-  ..stars = json['stars'] as String?
-  ..title = json['title'] as String?
-  ..pubDate = json['pub_date'] as String?
-  ..tags = json['tags'] as String?
-  ..order = json['order'] as int?
-  ..quality = json['quality'] as String?
-  ..update = json['update'] as String?;
-
-Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
-      'm_type_2': instance.mType2,
-      'ss_eps': instance.ssEps,
-      'board': instance.board,
-      'board_id_1': instance.boardId1,
-      'board_id_2': instance.boardId2,
-      'm_type': instance.mType,
-      'views': instance.views,
-      'cover': instance.cover,
-      'id': instance.id,
-      'rate': instance.rate,
-      'stars': instance.stars,
-      'title': instance.title,
-      'pub_date': instance.pubDate,
-      'tags': instance.tags,
-      'order': instance.order,
-      'quality': instance.quality,
-      'update': instance.update,
     };
 
 Data_3 _$Data_3FromJson(Map<String, dynamic> json) => Data_3()
@@ -224,43 +209,4 @@ Map<String, dynamic> _$Data_4ToJson(Data_4 instance) => <String, dynamic>{
       'open_mode': instance.openMode,
       'open_mode_value': instance.openModeValue,
       'order': instance.order,
-    };
-
-Data _$DataFromJson(Map<String, dynamic> json) => Data()
-  ..id = json['id'] as String?
-  ..title = json['title'] as String?
-  ..stars = json['stars'] as String?
-  ..cover = json['cover'] as String?
-  ..rate = json['rate'] as String?
-  ..pubDate = json['pub_date'] as String?
-  ..tags = json['tags'] as String?
-  ..mType = json['m_type'] as String?
-  ..mType2 = json['m_type_2'] as String?
-  ..order = json['order'] as int?
-  ..newFlag = json['new_flag'] as String?
-  ..nwFlag = json['nw_flag'] as String?
-  ..ssEps = json['ss_eps'] as String?
-  ..update = json['update'] as String?
-  ..cCnts = json['c_cnts'] as String?
-  ..description = json['description'] as String?
-  ..gif = json['gif'] as String?;
-
-Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
-      'id': instance.id,
-      'title': instance.title,
-      'stars': instance.stars,
-      'cover': instance.cover,
-      'rate': instance.rate,
-      'pub_date': instance.pubDate,
-      'tags': instance.tags,
-      'm_type': instance.mType,
-      'm_type_2': instance.mType2,
-      'order': instance.order,
-      'new_flag': instance.newFlag,
-      'nw_flag': instance.nwFlag,
-      'ss_eps': instance.ssEps,
-      'update': instance.update,
-      'c_cnts': instance.cCnts,
-      'description': instance.description,
-      'gif': instance.gif,
     };

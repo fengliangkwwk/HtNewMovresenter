@@ -101,6 +101,42 @@ class Data{
   @JsonKey(name: 'r18')
   String? r18;
 
+  @JsonKey(name: 'stars')
+  String? stars;
+
+  @JsonKey(name: 'm_type')
+  String? mType;
+
+  @JsonKey(name: 'm_type_2')
+  String? mType2;
+
+  @JsonKey(name: 'order')
+  int? order;
+
+  @JsonKey(name: 'new_flag')
+  String? newFlag;
+
+  @JsonKey(name: 'nw_flag')
+  String? nwFlag;
+
+  @JsonKey(name: 'ss_eps')
+  String? ssEps;
+
+  @JsonKey(name: 'update')
+  String? update;
+
+  @JsonKey(name: 'c_cnts')
+  String? cCnts;
+
+  @JsonKey(name: 'gif')
+  String? gif;
+
+  @JsonKey(name: 'views')
+  String? views;
+
+  @JsonKey(name: 'quality')
+  String? quality;
+
   Data();
 
   static Data fromJson(Map<String, dynamic> srcJson) => _$DataFromJson(srcJson);
@@ -163,68 +199,6 @@ class Data_2{
 
 }
 
-  
-@JsonSerializable(explicitToJson: true)
-class Data{
-
-  @JsonKey(name: 'm_type_2')
-  String? mType2;
-
-  @JsonKey(name: 'ss_eps')
-  String? ssEps;
-
-  @JsonKey(name: 'board')
-  String? board;
-
-  @JsonKey(name: 'board_id_1')
-  String? boardId1;
-
-  @JsonKey(name: 'board_id_2')
-  String? boardId2;
-
-  @JsonKey(name: 'm_type')
-  String? mType;
-
-  @JsonKey(name: 'views')
-  String? views;
-
-  @JsonKey(name: 'cover')
-  String? cover;
-
-  @JsonKey(name: 'id')
-  String? id;
-
-  @JsonKey(name: 'rate')
-  String? rate;
-
-  @JsonKey(name: 'stars')
-  String? stars;
-
-  @JsonKey(name: 'title')
-  String? title;
-
-  @JsonKey(name: 'pub_date')
-  String? pubDate;
-
-  @JsonKey(name: 'tags')
-  String? tags;
-
-  @JsonKey(name: 'order')
-  int? order;
-
-  @JsonKey(name: 'quality')
-  String? quality;
-
-  @JsonKey(name: 'update')
-  String? update;
-
-  Data();
-
-  static Data fromJson(Map<String, dynamic> srcJson) => _$DataFromJson(srcJson);
-
-  Map<String, dynamic> toJson() => _$DataToJson(this);
-
-}
 
   
 @JsonSerializable(explicitToJson: true)
@@ -280,68 +254,6 @@ class Data_3{
 
 }
 
-  
-@JsonSerializable(explicitToJson: true)
-class Data{
-
-  @JsonKey(name: 'm_type_2')
-  String? mType2;
-
-  @JsonKey(name: 'ss_eps')
-  String? ssEps;
-
-  @JsonKey(name: 'board')
-  String? board;
-
-  @JsonKey(name: 'board_id_1')
-  String? boardId1;
-
-  @JsonKey(name: 'board_id_2')
-  String? boardId2;
-
-  @JsonKey(name: 'm_type')
-  String? mType;
-
-  @JsonKey(name: 'views')
-  String? views;
-
-  @JsonKey(name: 'cover')
-  String? cover;
-
-  @JsonKey(name: 'id')
-  String? id;
-
-  @JsonKey(name: 'rate')
-  String? rate;
-
-  @JsonKey(name: 'stars')
-  String? stars;
-
-  @JsonKey(name: 'title')
-  String? title;
-
-  @JsonKey(name: 'pub_date')
-  String? pubDate;
-
-  @JsonKey(name: 'tags')
-  String? tags;
-
-  @JsonKey(name: 'order')
-  int? order;
-
-  @JsonKey(name: 'quality')
-  String? quality;
-
-  @JsonKey(name: 'update')
-  String? update;
-
-  Data();
-
-  static Data fromJson(Map<String, dynamic> srcJson) => _$DataFromJson(srcJson);
-
-  Map<String, dynamic> toJson() => _$DataToJson(this);
-
-}
 
   
 @JsonSerializable(explicitToJson: true)
@@ -397,67 +309,5 @@ class Data_4{
 
 }
 
-  
-@JsonSerializable(explicitToJson: true)
-class Data{
-
-  @JsonKey(name: 'id')
-  String? id;
-
-  @JsonKey(name: 'title')
-  String? title;
-
-  @JsonKey(name: 'stars')
-  String? stars;
-
-  @JsonKey(name: 'cover')
-  String? cover;
-
-  @JsonKey(name: 'rate')
-  String? rate;
-
-  @JsonKey(name: 'pub_date')
-  String? pubDate;
-
-  @JsonKey(name: 'tags')
-  String? tags;
-
-  @JsonKey(name: 'm_type')
-  String? mType;
-
-  @JsonKey(name: 'm_type_2')
-  String? mType2;
-
-  @JsonKey(name: 'order')
-  int? order;
-
-  @JsonKey(name: 'new_flag')
-  String? newFlag;
-
-  @JsonKey(name: 'nw_flag')
-  String? nwFlag;
-
-  @JsonKey(name: 'ss_eps')
-  String? ssEps;
-
-  @JsonKey(name: 'update')
-  String? update;
-
-  @JsonKey(name: 'c_cnts')
-  String? cCnts;
-
-  @JsonKey(name: 'description')
-  String? description;
-
-  @JsonKey(name: 'gif')
-  String? gif;
-
-  Data();
-
-  static Data fromJson(Map<String, dynamic> srcJson) => _$DataFromJson(srcJson);
-
-  Map<String, dynamic> toJson() => _$DataToJson(this);
-
-}
 
   
