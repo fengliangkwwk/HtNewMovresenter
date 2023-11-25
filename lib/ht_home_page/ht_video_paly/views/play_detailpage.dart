@@ -441,7 +441,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
   ///点击 more info 的更多内容
   Widget moreInfoWidget() {
-    var dataList = provider.videoDescBean?.data2?[0].data;
+    var dataList = provider.actionList();
     return Visibility(
         visible: _htVarInfoShown,
         child: Container(
@@ -469,7 +469,9 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 0.0, horizontal: 0.0),
                             child: Text(
-                              model?.title ?? '',
+                              provider.isTV()
+                                  ? model?.starName ?? ''
+                                  : model?.title ?? '',
                               maxLines: 2,
                               style: const TextStyle(
                                 color: Colors.white,
@@ -495,7 +497,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
             Container(
               margin: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
               child: Text(
-                provider.videoDescBean?.data?.description ?? '',
+                provider.info(),
                 style: const TextStyle(
                     color: Color(0xff999999), fontSize: 14.0, height: 1.5),
               ),

@@ -47,4 +47,11 @@ mixin HTVideoDescDataProviderMixin on HTVideoProviderMixin {
     }
     return videoDescBean?.data?.description ?? '';
   }
+
+  List? actionList() {
+    if (isTV()) {
+      return tv202Bean?.data?.casts;
+    }
+    return videoDescBean?.data2?[0].data;
+  }
 }
