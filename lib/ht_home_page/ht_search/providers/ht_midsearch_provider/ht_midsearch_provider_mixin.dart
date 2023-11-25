@@ -47,8 +47,15 @@ mixin HTMidSearchProviderMiXin on HTMidSearchProviderBase {
       
     }
     midSearchBean = ht_mid_search_bean.fromJson(stringMap);
-
-    /// 过滤数据（未做）
+    var _temList = <Data>[];
+    /// 过滤数据 ( mtype = [1,2,4])
+    for (var element in midSearchBean?.data ?? <Data>[]) {
+        if (['1','2','4'].contains(element.mtype ?? '')) {
+          _temList.add(element);
+        }
+    }
+    midSearchBean?.data = _temList;
+    
 
     print(' $midSearchBean');
     notifyListeners();
