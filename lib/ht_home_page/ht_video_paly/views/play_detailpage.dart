@@ -432,6 +432,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
   ///点击 more info 的更多内容
   Widget moreInfoWidget() {
+    var dataList = provider.videoDescBean?.data2?[0].data;
     return Visibility(
         visible: _htVarInfoShown,
         child: Container(
@@ -439,28 +440,36 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
           child: Column(children: [
             SizedBox(
                 height: 83.0,
-                child: ListView(
-                  padding: const EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
+                child: ListView.builder(
+                  itemCount: dataList?.length,
                   scrollDirection: Axis.horizontal,
-                  children: [1, 2, 3, 4, 5, 6, 7, 8]
-                      .map((index) => Container(
-                          margin: const EdgeInsets.only(right: 15.0),
-                          width: 50.0,
-                          child: Column(children: [
-                            const CircleAvatar(
-                                backgroundImage:
-                                    AssetImage("image/pic_banner_test.png"),
-                                radius: 25.0),
-                            Container(height: 5.0),
-                            Container(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 0.0, horizontal: 0.0),
-                                child: const Text("yanyuanmingzi",
-                                    maxLines: 2,
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 12.0)))
-                          ])))
-                      .toList(),
+                  itemBuilder: (context, index) {
+                    var model = dataList?[index];
+                    return Container(
+                        margin: const EdgeInsets.only(right: 15.0),
+                        width: 50.0,
+                        child: Column(children: [
+                          CircleAvatar(
+                            backgroundImage: CachedNetworkImageProvider(
+                              model?.cover ?? '',
+                            ),
+                            radius: 25.0,
+                          ),
+                          Container(height: 5.0),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 0.0, horizontal: 0.0),
+                            child: Text(
+                              model?.title ?? '',
+                              maxLines: 2,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12.0,
+                              ),
+                            ),
+                          ),
+                        ]));
+                  },
                 )),
             Container(
                 height: 1.0,
@@ -475,13 +484,13 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                       fontWeight: FontWeight.w600)),
             ]),
             Container(
-                margin: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-                child: const Text(
-                    "when van helsing’s mysterious invention,the “mons-terfiction ray,”goes haywire,drac and his monster palare when van helsing’s mysterious invention,the “monsterfiction ray,”goes haywire,drac and his monster pal arewhen van helsing’s mysterious invention,the “mons-terfiction ray,”goes haywire,drac and his monster palare when van helsing’s mysterious invention,the “monsterfiction ray,”goes haywire,drac and his monster pal arewhen van helsing’s mysterious invention,the “mons-terfiction ray,”goes haywire,drac and his monster palare when van helsing’s mysterious invention,the “monsterfiction ray,”goes haywire,drac and his monster pal are",
-                    style: TextStyle(
-                        color: Color(0xff999999),
-                        fontSize: 14.0,
-                        height: 1.5))),
+              margin: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+              child:  Text(
+                provider.videoDescBean?.data?.description ?? '',
+                style: const TextStyle(
+                    color: Color(0xff999999), fontSize: 14.0, height: 1.5),
+              ),
+            ),
             InkWell(
               onTap: () {
                 setState(() {
