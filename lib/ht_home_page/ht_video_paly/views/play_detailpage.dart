@@ -45,7 +45,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
     'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
     'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'
   ];
-  final HTVideoDescProvider videoDescProvider = HTVideoDescProvider();
+  final HTVideoDescProvider provider = HTVideoDescProvider();
 
   FijkPlayer player = FijkPlayer();
 
@@ -63,7 +63,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
   @override
   void initState() {
-    videoDescProvider.loadData(widget.m_type_2, widget.id);
+    provider.loadData(widget.m_type_2, widget.id);
     // if (videoList[2].contains("rtsp")) {
     //   //rtsp视频关键配置
     //   player.setOption(FijkOption.formatCategory, "rtsp_transport", "tcp");
@@ -85,7 +85,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
   Widget build(BuildContext context) {
     FijkPlugin.keepScreenOn(true);
     return ChangeNotifierProvider(
-      create: (context) => videoDescProvider,
+      create: (context) => provider,
       child: Scaffold(
           backgroundColor: Colors.black,
           body: Selector<HTVideoDescProvider, bool>(
@@ -104,7 +104,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                     visible: value,
                     child: const Expanded(child: AllEpisodesWidget()),
                   ),
-                  
+
                   Visibility(
                     visible: !value,
                     child: Expanded(
@@ -153,7 +153,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
   ///播放器
   Widget videoPlayerViewWidget() {
-    String videoUrl = videoDescProvider.videoDescBean?.data?.hd?.link ?? "";
+    String videoUrl = provider.videoDescBean?.data?.hd?.link ?? "";
     player.setDataSource(videoUrl, autoPlay: true);
     return Container(
         height: 220.0,
@@ -278,11 +278,14 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.only(top: 20.0, left: 10.0),
-      child: const Text(
-        "Riverdance:the animated adventure",
+      child: Text(
+        provider.videoDescBean?.data?.title ?? '',
         textAlign: TextAlign.left,
-        style: TextStyle(
-            color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.w600),
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 18.0,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }
@@ -294,7 +297,8 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         child: Row(children: [
           ///星级评分
           RatingBar(
-            initialRating: 3.5,
+            initialRating:
+                double.parse(provider.videoDescBean?.data?.rate ?? '0.0') / 2,
             direction: Axis.horizontal,
             allowHalfRating: true,
             itemCount: 5,
@@ -308,20 +312,37 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
             onRatingUpdate: (double value) {},
           ),
           Container(width: 8.0),
-          const Text("7.5",
-              style: TextStyle(fontSize: 14.0, color: Colors.white)),
+          Text(
+            provider.videoDescBean?.data?.rate ?? '0.0',
+            style: const TextStyle(
+              fontSize: 14.0,
+              color: Colors.white,
+            ),
+          ),
+          Container(width: 8.0),
+          const Text(
+            "|",
+            style: TextStyle(
+              fontSize: 14.0,
+              color: Color(0xff2D2F33),
+            ),
+          ),
+          Container(width: 8.0),
+          Text(provider.videoDescBean?.data?.pubDate ?? '',
+              style: const TextStyle(fontSize: 14.0, color: Colors.white)),
           Container(width: 8.0),
           const Text("|",
               style: TextStyle(fontSize: 14.0, color: Color(0xff2D2F33))),
           Container(width: 8.0),
-          const Text("2022",
-              style: TextStyle(fontSize: 14.0, color: Colors.white)),
-          Container(width: 8.0),
-          const Text("|",
-              style: TextStyle(fontSize: 14.0, color: Color(0xff2D2F33))),
-          Container(width: 8.0),
-          const Text("United States",
-              style: TextStyle(fontSize: 14.0, color: Colors.white)),
+          Expanded(
+            child: Text(
+              provider.videoDescBean?.data?.country ?? '',
+              style: const TextStyle(
+                fontSize: 14.0,
+                color: Colors.white,
+              ),
+            ),
+          ),
         ]));
   }
 

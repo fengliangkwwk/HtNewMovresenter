@@ -246,7 +246,7 @@ Data_2 _$Data_2FromJson(Map<String, dynamic> json) => Data_2()
       ?.map((e) => Data.fromJson(e as Map<String, dynamic>))
       .toList()
   ..displayType = json['display_type'] as String?
-  ..seeall = json['seeall'] as String?
+  ..seeall = json['seeall']
   ..seeallValue = json['seeall_value'] as String?
   ..openMode = json['open_mode'] as String?
   ..openModeValue = json['open_mode_value'] as String?
@@ -281,7 +281,7 @@ Data_3 _$Data_3FromJson(Map<String, dynamic> json) => Data_3()
       ?.map((e) => Data.fromJson(e as Map<String, dynamic>))
       .toList()
   ..displayType = json['display_type'] as String?
-  ..seeall = json['seeall'] as String?
+  ..seeall = json['seeall']
   ..seeallValue = json['seeall_value'] as String?
   ..openMode = json['open_mode'] as String?
   ..openModeValue = json['open_mode_value'] as String?

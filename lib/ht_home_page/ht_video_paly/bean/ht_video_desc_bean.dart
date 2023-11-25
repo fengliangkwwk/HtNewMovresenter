@@ -359,7 +359,7 @@ class Data_2 {
   String? displayType;
 
   @JsonKey(name: 'seeall')
-  String? seeall;
+  dynamic seeall;
 
   @JsonKey(name: 'seeall_value')
   String? seeallValue;
@@ -411,7 +411,7 @@ class Data_3 {
   String? displayType;
 
   @JsonKey(name: 'seeall')
-  String? seeall;
+  dynamic seeall;
 
   @JsonKey(name: 'seeall_value')
   String? seeallValue;
