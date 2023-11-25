@@ -228,8 +228,8 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
   List<Widget> itemWidget() {
     var result = <Widget>[];
     // Size screenSize =SysTools().getScreenSize(context) ;
-    Size screenSize = MediaQuery.of(context).size;
-    double w = (screenSize.width - 38) / 3;
+    // Size screenSize = MediaQuery.of(context).size;
+    // double w = (screenSize.width - 38) / 3;
     for (var i = 0;
         i < (midSearchProvider.midSearchBean?.data ?? <Data>[]).length;
         i++) {
@@ -237,67 +237,69 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
       final String imageUrl = itemData?.cover ?? "";
       result.add(
         GestureDetector(
-          onTap:(() {
-            Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return HTClassVideoDetailPage(m_type_2:(itemData?.mtype == '1'||itemData?.mtype == '4')?"myfx":"tt_mflx",id: itemData?.id??"",);
-                        }));
-            
+          onTap: (() {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return HTClassVideoDetailPage(
+                    m_type_2: (itemData?.mtype == '1' || itemData?.mtype == '4')
+                        ? "myfx"
+                        : "tt_mflx",
+                    id: itemData?.id ?? "",
+                  );
+                },
+              ),
+            );
           }),
           child: Column(
             children: [
-              Stack(
-                children: [
-                  Container(
-                    width: w,
-                    height: w * 160/112,
-                    // height: double.infinity,
-                    margin: const EdgeInsets.only(right: 5.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6.0), // 设置圆角
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: CachedNetworkImageProvider(imageUrl),
+              Expanded(
+                child: Stack(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(right: 5.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6.0), // 设置圆角
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: CachedNetworkImageProvider(imageUrl),
+                        ),
+                      ),
+                      child: const Center(
+                        child: Image(
+                          fit: BoxFit.cover,
+                          height: 31,
+                          width: 31,
+                          image: CachedNetworkImageProvider(ImageURL.url_268),
+                        ),
                       ),
                     ),
-                    child: const Center(
-                      child: Image(
-                        fit: BoxFit.cover,
-                        height: 31,
-                        width: 31,
-                        image: CachedNetworkImageProvider(ImageURL.url_268),
+
+                    ///左上角的序号
+                    Positioned(
+                      left: 0,
+                      top: 0,
+                      child: Container(
+                        child: KTClassUIUtils.htMethodGetRankingNumbers(i + 1),
                       ),
                     ),
-                  ),
-        
-                  ///左上角的序号
-                  Positioned(
-                    left: 0,
-                    top: 0,
-                    child: Container(
-                      child: KTClassUIUtils.htMethodGetRankingNumbers(i + 1),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-             
-        
-        //  Container(
-        //               child: Center(
-        //                 child: Text(
-        //                   itemData?.title ?? '',
-        //                   maxLines: 2,
-        //                   style: const TextStyle(
-        //                     color: Color(0xff828386),
-        //                     fontSize: 12.0,
-        //                     fontWeight: FontWeight.w600,
-        //                   ),
-        //                   // textAlign: TextAlign.center,
-        //                 ),
-        //               ),
-        //             )
-        
-        
+              const SizedBox(height: 5),
+              Center(
+                child: Text(
+                  itemData?.title ?? '',
+                  maxLines: 2,
+                  style: const TextStyle(
+                    color: Color(0xff828386),
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  // textAlign: TextAlign.center,
+                ),
+              )
             ],
           ),
         ),

@@ -604,15 +604,13 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                   .map((m20) => GestureDetector(
                       child: Column(
                         children: [
-                          Container(
+                          Expanded(
                             child: Stack(children: [
-                              Container(
-                                child: CachedNetworkImage(
-                                  width: double.infinity,
-                                  height: 160,
-                                  imageUrl: m20.cover ?? '',
-                                  fit: BoxFit.cover,
-                                ),
+                              CachedNetworkImage(
+                                width: double.infinity,
+                                height: double.infinity,
+                                imageUrl: m20.cover ?? '',
+                                fit: BoxFit.cover,
                               ),
                               Positioned(
                                   left: 5.0,
@@ -627,7 +625,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w600)),
                                       ])),
-
+                          
                               ///右上角
                               Visibility(
                                 visible: m20.quality == 'CAD' ? true : false,
@@ -688,15 +686,13 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                     (tt20) => GestureDetector(
                         child: Column(
                           children: [
-                            Container(
+                            Expanded(
                               child: Stack(children: [
-                                Container(
-                                  child: CachedNetworkImage(
-                                    width: double.infinity,
-                                    height: 160,
-                                    imageUrl: (tt20.cover ?? ''),
-                                    fit: BoxFit.cover,
-                                  ),
+                                CachedNetworkImage(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  imageUrl: (tt20.cover ?? ''),
+                                  fit: BoxFit.cover,
                                 ),
                                 Positioned(
                                     left: 5.0,
@@ -711,7 +707,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.w600)),
                                         ])),
-
+                            
                                 ///右下角
                                 Visibility(
                                   visible:
