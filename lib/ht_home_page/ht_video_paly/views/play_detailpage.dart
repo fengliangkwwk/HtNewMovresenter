@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_mixin.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_all_episodes.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_part.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
@@ -87,66 +88,72 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
       create: (context) => videoDescProvider,
       child: Scaffold(
           backgroundColor: Colors.black,
-          body: Column(
-            children: [
-              ///播放器
-              videoPlayerViewWidget(),
+          body: Selector<HTVideoDescProvider, bool>(
+            selector: (p0, p1) => p1.isAllEpisodes,
+            builder: (context, value, child) {
+              return Column(
+                children: [
+                  ///播放器
+                  videoPlayerViewWidget(),
 
-              ///带背景图的第一行
-              firstPartWidget(),
+                  ///带背景图的第一行
+                  firstPartWidget(),
 
-              ///AllEpisodes界面
-              Visibility(
-                visible: isAllEpisodes,
-                child: const Expanded(child: AllEpisodesWidget()),
-              ),
-              Visibility(
-                visible: !isAllEpisodes,
-                child: Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        ///第二行标题哪一行
-                        secondPartWidget(),
-
-                        ///第三行评分那一行
-                        scorePartWidget(),
-
-                        ///第四行moreInfo按钮那一行
-                        moreInfoClickPartWidget(),
-
-                        ///moreInfo内容那一行
-                        moreInfoWidget(),
-
-                        ///分享那一行
-                        sharePartWidget(),
-
-                        ///如果是电视剧播放页的话会有这部分
-                        (widget.m_type_2 == 'tt_mflx')
-                            ? TVPlayPartWidget(
-                                allEpisodesEvent: allEpisodesEvent)
-                            : Container(
-                                height: 0,
-                              ),
-
-                        ///专题 title 那一行
-                        specialSubjectTitleWidget(),
-
-                        ///专题列表那部分
-                        specialSubjectListWidget(),
-                      ],
-                    ),
+                  ///AllEpisodes界面
+                  Visibility(
+                    visible: value,
+                    child: const Expanded(child: AllEpisodesWidget()),
                   ),
-                ),
-              )
-            ],
+                  
+                  Visibility(
+                    visible: !value,
+                    child: Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            ///第二行标题哪一行
+                            secondPartWidget(),
+
+                            ///第三行评分那一行
+                            scorePartWidget(),
+
+                            ///第四行moreInfo按钮那一行
+                            moreInfoClickPartWidget(),
+
+                            ///moreInfo内容那一行
+                            moreInfoWidget(),
+
+                            ///分享那一行
+                            sharePartWidget(),
+
+                            ///如果是电视剧播放页的话会有这部分
+                            (widget.m_type_2 == 'tt_mflx')
+                                ? TVPlayPartWidget(
+                                    allEpisodesEvent: allEpisodesEvent)
+                                : Container(
+                                    height: 0,
+                                  ),
+
+                            ///专题 title 那一行
+                            specialSubjectTitleWidget(),
+
+                            ///专题列表那部分
+                            specialSubjectListWidget(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              );
+            },
           )),
     );
   }
 
   ///播放器
   Widget videoPlayerViewWidget() {
-    String videoUrl = videoDescProvider.videoDescBean?.data?.hd?.link??"";
+    String videoUrl = videoDescProvider.videoDescBean?.data?.hd?.link ?? "";
     player.setDataSource(videoUrl, autoPlay: true);
     return Container(
         height: 220.0,

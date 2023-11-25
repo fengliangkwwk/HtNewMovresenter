@@ -1,22 +1,25 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
-import 'package:quds_popup_menu/quds_popup_menu.dart';
+import 'package:provider/provider.dart';
+// import 'package:quds_popup_menu/quds_popup_menu.dart';
 
 class TVPlayPartWidget extends StatelessWidget {
-  final Function(bool)allEpisodesEvent;
-   TVPlayPartWidget({required this.allEpisodesEvent});
+  final void Function(bool) allEpisodesEvent;
+  const TVPlayPartWidget({
+    Key? key,
+    required this.allEpisodesEvent,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return tvPlayPartWidget();
+    return tvPlayPartWidget(context);
   }
-}
-Widget tvPlayPartWidget() {
-  return Container(
-    child: Column(
+
+  Widget tvPlayPartWidget(BuildContext context) {
+    return Column(
       children: [
         Row(
           children: [
@@ -38,12 +41,13 @@ Widget tvPlayPartWidget() {
                 ])),
             const Spacer(),
             GestureDetector(
-            onTap: (() {
-              if (kDebugMode) {
-                print('你好👋你好👋你好👋你好👋你好👋你好👋');
-              }
-              allEpisodesEvent(true);
-            }),
+              onTap: (() {
+                if (kDebugMode) {
+                  print('你好👋你好👋你好👋你好👋你好👋你好👋');
+                }
+                // allEpisodesEvent(true);
+                context.read<HTVideoDescProvider>().allEpisodesEvent();
+              }),
               child: Row(children: [
                 const Text("All Episodes",
                     style: TextStyle(color: Color(0xff999999), fontSize: 14.0)),
@@ -64,7 +68,7 @@ Widget tvPlayPartWidget() {
 
         ///横线下面的列表
         Container(
-            margin: const EdgeInsets.only(top: 5,left: 10),
+            margin: const EdgeInsets.only(top: 5, left: 10),
             height: 66.0,
             child: ListView(
               scrollDirection: Axis.horizontal,
@@ -94,9 +98,6 @@ Widget tvPlayPartWidget() {
                   .toList(),
             ))
       ],
-    ),
-  );
-}
-
-void allEpisodesEvent(bool bool) {
+    );
+  }
 }
