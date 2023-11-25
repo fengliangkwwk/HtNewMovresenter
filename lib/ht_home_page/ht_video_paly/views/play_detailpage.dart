@@ -5,12 +5,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_video_desc_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_mixin.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_all_episodes.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_part.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class HTClassVideoDetailPage extends StatefulWidget {
   // ignore: non_constant_identifier_names
@@ -47,8 +49,6 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
   ];
   final HTVideoDescProvider provider = HTVideoDescProvider();
 
-  FijkPlayer player = FijkPlayer();
-
   ///more info 是否展开
   var _htVarInfoShown = false;
 
@@ -71,25 +71,26 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
     //   player.setOption(FijkOption.playerCategory, 'packet-buffering', 0);
     //   player.setOption(FijkOption.playerCategory, 'framedrop', 1);
     // }
-    player.setOption(FijkOption.hostCategory, 'enable-position-notify', 1);
+
     super.initState();
   }
 
   @override
   void dispose() {
     super.dispose();
-    player.release();
+    // player.release();
+    provider.player.release();
   }
 
   @override
   Widget build(BuildContext context) {
-    FijkPlugin.keepScreenOn(true);
+    // FijkPlugin.keepScreenOn(true)
     return ChangeNotifierProvider(
       create: (context) => provider,
       child: Scaffold(
           backgroundColor: Colors.black,
-          body: Selector<HTVideoDescProvider, bool>(
-            selector: (p0, p1) => p1.isAllEpisodes,
+          body: Selector<HTVideoDescProvider, Tuple2<bool, HtVideoDescBean?>>(
+            selector: (p0, p1) => Tuple2(p1.isAllEpisodes, p1.videoDescBean),
             builder: (context, value, child) {
               return Column(
                 children: [
@@ -101,12 +102,12 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
                   ///AllEpisodes界面
                   Visibility(
-                    visible: value,
+                    visible: value.item1,
                     child: const Expanded(child: AllEpisodesWidget()),
                   ),
 
                   Visibility(
-                    visible: !value,
+                    visible: !value.item1,
                     child: Expanded(
                       child: SingleChildScrollView(
                         child: Column(
@@ -153,19 +154,23 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
   ///播放器
   Widget videoPlayerViewWidget() {
-    String videoUrl = provider.videoDescBean?.data?.hd?.link ?? "";
-    player.setDataSource(videoUrl, autoPlay: true);
+    // String videoUrl = 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4';
+    // provider.videoDescBean?.data?.hd?.link ?? "";
+    // player.setDataSource(videoUrl, autoPlay: true);
     return Container(
-        height: 220.0,
+        // height: 220.0,
         margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
         child: Stack(children: [
-          FijkView(
-            width: double.infinity,
-            height: 220,
-            player: player,
-            fit: FijkFit.fill,
-            fsFit: FijkFit.fill,
-            panelBuilder: fijkPanel2Builder(),
+          Container(
+            color: Colors.red,
+            child: FijkView(
+              width: double.infinity,
+              height: 220,
+              player: provider.player,
+              fit: FijkFit.fitWidth,
+              fsFit: FijkFit.fill,
+              panelBuilder: fijkPanel2Builder(),
+            ),
           ),
           Positioned(
               left: 10,
@@ -214,63 +219,65 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                   ImageURL.url_252,
                 ),
                 fit: BoxFit.fill)),
-        child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Container(width: 25.0),
-          Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CachedNetworkImage(
-                    imageUrl: ImageURL.url_260, width: 20.0, height: 20.0),
-                Container(
-                    margin: const EdgeInsets.only(top: 2.5),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 5.0, vertical: 0.0),
-                    child: const Text("Remove\r\nAll Ads",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Color(0xff685034), fontSize: 10.0)))
-              ]),
-          Container(width: 37.5),
-          Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CachedNetworkImage(
-                    imageUrl: ImageURL.url_261, width: 20.0, height: 20.0),
-                Container(
-                    margin: const EdgeInsets.only(top: 2.5),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 5.0, vertical: 0.0),
-                    child: const Text("Unlock\r\nAll Ads",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Color(0xff685034), fontSize: 10.0)))
-              ]),
-          Container(width: 37.5),
-          Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CachedNetworkImage(
-                    imageUrl: ImageURL.url_262, width: 20.0, height: 20.0),
-                Container(
-                    margin: const EdgeInsets.only(top: 2.5),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 5.0, vertical: 0.0),
-                    child: const Text("Unlimited\r\nScreen Casting",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Color(0xff685034), fontSize: 10.0)))
-              ]),
-          const Spacer(),
-          const Text("Get Premium",
-              style: TextStyle(
-                  color: Color(0xff685034),
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w600)),
-          Container(width: 20.0)
-        ]));
+        child: Row(
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            ///均等分
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              // Container(width: 25.0),
+              Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CachedNetworkImage(
+                        imageUrl: ImageURL.url_260, width: 20.0, height: 20.0),
+                    Container(
+                        margin: const EdgeInsets.only(top: 2.5),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 5.0, vertical: 0.0),
+                        child: const Text("Remove\r\nAll Ads",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Color(0xff685034), fontSize: 10.0)))
+                  ]),
+              // Container(width: 37.5),
+              Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CachedNetworkImage(
+                        imageUrl: ImageURL.url_261, width: 20.0, height: 20.0),
+                    Container(
+                        margin: const EdgeInsets.only(top: 2.5),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 5.0, vertical: 0.0),
+                        child: const Text("Unlock\r\nAll Ads",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Color(0xff685034), fontSize: 10.0)))
+                  ]),
+              // Container(width: 37.5),
+              Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CachedNetworkImage(
+                        imageUrl: ImageURL.url_262, width: 20.0, height: 20.0),
+                    Container(
+                        margin: const EdgeInsets.only(top: 2.5),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 5.0, vertical: 0.0),
+                        child: const Text("Unlimited\r\nScreen Casting",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Color(0xff685034), fontSize: 10.0)))
+                  ]),
+              const Text("Get Premium",
+                  style: TextStyle(
+                      color: Color(0xff685034),
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w600)),
+            ]));
   }
 
   ///第二行那部分
@@ -485,7 +492,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
             ]),
             Container(
               margin: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-              child:  Text(
+              child: Text(
                 provider.videoDescBean?.data?.description ?? '',
                 style: const TextStyle(
                     color: Color(0xff999999), fontSize: 14.0, height: 1.5),
@@ -517,91 +524,78 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
   Widget specialSubjectTitleWidget() {
     return Container(
       margin: const EdgeInsets.only(top: 20.0, left: 10.0, bottom: 0.0),
-      child: const Row(children: [
-        Text("Trending",
+      child: Row(children: [
+        Text(provider.videoDescBean?.data2?[2].name ?? '',
             textAlign: TextAlign.left,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 18.0,
                 color: Colors.white,
                 fontWeight: FontWeight.w600)),
-        Spacer(),
-        // CachedNetworkImage(
-        //     imageUrl: ImageURL.url_308, width: 24.0, height: 24.0),
       ]),
     );
   }
 
   ///专题列表
   Widget specialSubjectListWidget() {
+    var dataList = provider.videoDescBean?.data2?[2].data;
     return Container(
       height: 192.0,
       margin: const EdgeInsets.only(top: 11.0, bottom: 0.0, right: 0),
-      child: ListView(
+      child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        children: [1, 2, 3, 4, 5]
-            .map(
-              (index) => GestureDetector(
-                child: Container(
+        itemCount: dataList?.length,
+        itemBuilder: (context, index) {
+          var model = dataList?[index];
+          return Container(
+              width: 112.0,
+              margin: const EdgeInsets.only(right: 5.0),
+              child: Stack(children: [
+                CachedNetworkImage(
+                  imageUrl: model?.cover??'',
+                  height: 158.0,
+                  fit: BoxFit.fill,
+                ),
+                Positioned(
+                    left: 5.0,
+                    top: 5.0,
+                    child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(model?.rate ?? '',
+                              style: const TextStyle(
+                                  color: Color(0xffFF6D1C),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600)),
+                        ])),
+                Positioned(
+                    bottom: 34.0,
                     width: 112.0,
-                    margin: const EdgeInsets.only(right: 5.0),
-                    child: Stack(children: [
-                      CachedNetworkImage(
-                          imageUrl: imgList[2],
-                          height: 158.0,
-                          fit: BoxFit.fill),
-                      const Positioned(
-                          left: 5.0,
-                          top: 5.0,
-                          child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text("8.",
-                                    style: TextStyle(
-                                        color: Color(0xffFF6D1C),
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600)),
-                                Text("0",
-                                    style: TextStyle(
-                                        color: Color(0xffFF6D1C),
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600))
-                              ])),
-                      Positioned(
-                          bottom: 34.0,
-                          width: 112.0,
-                          child: Container(
-                              height: 24.0,
-                              decoration: const BoxDecoration(
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                    Colors.transparent,
-                                    Colors.black
-                                  ])),
-                              child: const Row(children: [
-                                Spacer(),
-                                Text("NEW",
-                                    style: TextStyle(
-                                        color: Color(0xffFF6D1C),
-                                        fontSize: 8.0)),
-                                Text("|S07 E08",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 8.0))
-                              ]))),
-                      const Positioned(
-                          top: 163.0,
-                          left: 5.0,
-                          right: 5.0,
-                          child: Text("Minions:The Rise of Gru",
-                              maxLines: 2,
+                    child: Container(
+                        height: 24.0,
+                        decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [Colors.transparent, Colors.black])),
+                        child: const Row(children: [
+                          Spacer(),
+                          Text("NEW",
                               style: TextStyle(
-                                  color: Color(0xff828386), fontSize: 12.0)))
-                    ])),
-                onTap: () {},
-              ),
-            )
-            .toList(),
+                                  color: Color(0xffFF6D1C), fontSize: 8.0)),
+                          Text("|S07 E08",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 8.0))
+                        ]))),
+                Positioned(
+                    top: 163.0,
+                    left: 5.0,
+                    right: 5.0,
+                    child: Text(model?.title ?? '',
+                        maxLines: 2,
+                        style: const TextStyle(
+                            color: Color(0xff828386), fontSize: 12.0)))
+              ]));
+        },
       ),
     );
   }
