@@ -5,7 +5,7 @@ part 'ht_video_desc_bean.g.dart';
 @JsonSerializable(explicitToJson: true)
 class HtVideoDescBean {
   @JsonKey(name: 'status')
-  int? status;
+  dynamic status;
 
   @JsonKey(name: 'msg')
   String? msg;

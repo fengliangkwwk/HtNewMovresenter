@@ -8,7 +8,7 @@ part of 'ht_video_desc_bean.dart';
 
 HtVideoDescBean _$HtVideoDescBeanFromJson(Map<String, dynamic> json) =>
     HtVideoDescBean()
-      ..status = json['status'] as int?
+      ..status = json['status']
       ..msg = json['msg'] as String?
       ..data = json['data'] == null
           ? null

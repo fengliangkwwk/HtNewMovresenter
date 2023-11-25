@@ -16,6 +16,8 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
 
   HtSetListBean? tv203Bean;
 
+  String? mType2;
+
   /// m_type_2:tt_mflx=电视剧   myfx:电影
   /// id:出入的视频id
 
@@ -27,6 +29,7 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
   ///api_ver 写死  ‘6’   电视剧的情况下才会加上此参数
 
   Future<void> apiRequest(String m_type_2, String id) async {
+    mType2 = m_type_2;
     if (m_type_2 == 'tt_mflx') {
       ///1.电视剧
       await request202(id);
@@ -39,7 +42,7 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
       await request144(id);
     }
 
-    print('object');
+    print('数据解析成功');
 
     notifyListeners();
   }
@@ -60,9 +63,11 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
         await HTNetUtils.htPost(apiUrl: Global.switchingSeasonsUrl, params: {
       'id': tv202Bean?.data?.ssnList?[0].id,
     });
+
+
     Map<String, dynamic> jsonMap =
-        jsonDecode(res?.data['data'].toString() ?? '');
-    tv203Bean = HtSetListBean.fromJson(jsonMap);
+        jsonDecode(res?.data.toString() ?? '');
+    tv203Bean = HtSetListBean.fromJson(jsonMap['data']);
   }
 
   ///151
@@ -72,7 +77,7 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
 
     ///参数
     String cutterntTimeStamp = SysTools().getSecondsTimeStamp();
-    htVarparams['id'] = id;
+    htVarparams['id'] = tv203Bean?.epsList?[0].id;
     htVarparams['sig2'] =
         'kevMvWzTjzlckLgckegcoeeRwdwlwEbejzjLvzvSod1UkEqVkEeOkWjS';
     htVarparams['unixtime1'] = cutterntTimeStamp;

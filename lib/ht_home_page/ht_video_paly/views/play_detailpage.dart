@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_and_episode_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_video_desc_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_mixin.dart';
@@ -89,8 +90,10 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
       create: (context) => provider,
       child: Scaffold(
           backgroundColor: Colors.black,
-          body: Selector<HTVideoDescProvider, Tuple2<bool, HtVideoDescBean?>>(
-            selector: (p0, p1) => Tuple2(p1.isAllEpisodes, p1.videoDescBean),
+          body: Selector<HTVideoDescProvider,
+              Tuple3<bool, HtVideoDescBean?, HtSeasonAndEpisodeBean?>>(
+            selector: (p0, p1) =>
+                Tuple3(p1.isAllEpisodes, p1.videoDescBean, p1.tv202Bean),
             builder: (context, value, child) {
               return Column(
                 children: [
@@ -304,8 +307,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         child: Row(children: [
           ///星级评分
           RatingBar(
-            initialRating:
-                double.parse(provider.videoDescBean?.data?.rate ?? '0.0') / 2,
+            initialRating: double.parse(provider.rate()) / 2,
             direction: Axis.horizontal,
             allowHalfRating: true,
             itemCount: 5,
@@ -320,7 +322,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
           ),
           Container(width: 8.0),
           Text(
-            provider.videoDescBean?.data?.rate ?? '0.0',
+            provider.rate(),
             style: const TextStyle(
               fontSize: 14.0,
               color: Colors.white,
@@ -335,7 +337,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
             ),
           ),
           Container(width: 8.0),
-          Text(provider.videoDescBean?.data?.pubDate ?? '',
+          Text(provider.year(),
               style: const TextStyle(fontSize: 14.0, color: Colors.white)),
           Container(width: 8.0),
           const Text("|",
@@ -343,7 +345,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
           Container(width: 8.0),
           Expanded(
             child: Text(
-              provider.videoDescBean?.data?.country ?? '',
+              provider.country(),
               style: const TextStyle(
                 fontSize: 14.0,
                 color: Colors.white,
@@ -551,7 +553,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
               margin: const EdgeInsets.only(right: 5.0),
               child: Stack(children: [
                 CachedNetworkImage(
-                  imageUrl: model?.cover??'',
+                  imageUrl: model?.cover ?? '',
                   height: 158.0,
                   fit: BoxFit.fill,
                 ),
