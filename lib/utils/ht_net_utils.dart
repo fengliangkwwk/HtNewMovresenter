@@ -18,11 +18,11 @@ class HTNetUtils {
     var formData = FormData.fromMap(htVarparams);
     var dio = Dio();
 
-  //  ///设置代理
+   //设置代理
     dio.httpClientAdapter = IOHttpClientAdapter()
       ..onHttpClientCreate = (client) {
         client.findProxy = (uri) {
-          return 'PROXY 192.168.156.126:8888';
+          return 'PROXY 172.20.10.2:8888';
         };
         return client;
       };
