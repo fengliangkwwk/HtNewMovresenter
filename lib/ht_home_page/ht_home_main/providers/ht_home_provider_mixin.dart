@@ -62,6 +62,11 @@ mixin HTHomeProviderMixin on HTHomeProviderBase {
       print('首页解析数据成功');
     }
     loading = false;
+
+    ///结束刷新状态
+    refreshController.refreshCompleted();
+    refreshController.loadComplete();
+
     notifyListeners();
   }
 

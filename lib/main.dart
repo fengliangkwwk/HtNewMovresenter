@@ -1,6 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_ad_lunch_page/views/home_launcherpage.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/views/home_mainpage.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/views/setting_mineinfo.dart';
@@ -27,7 +28,10 @@ class HTClassApp extends StatelessWidget {
       title: 'Flutter Demo',
       useInheritedMediaQuery: true,
       locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
+      // builder: EasyLoading.init(),
+      builder: (context, child) {
+        return DevicePreview.appBuilder(context, EasyLoading.init()(context,child));
+      },
       theme: ThemeData(
         // This is the theme of your application.
         //

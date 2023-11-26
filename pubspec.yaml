@@ -68,6 +68,12 @@ dependencies:
   tuple: ^2.0.2
   #设备预览
   device_preview: ^1.1.0
+
+  #loading
+  flutter_easyloading: ^3.0.5
+
+  #上拉刷新下拉加载
+  pull_to_refresh: ^2.0.0
     
 dev_dependencies:
   flutter_test:

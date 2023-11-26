@@ -15,6 +15,7 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detail
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tuple/tuple.dart';
 
 class HTClassHomeMainPage extends StatefulWidget {
@@ -50,21 +51,25 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
           selector: (p0, p1) =>
               Tuple3(p1.dataList, p1.droppingWaterDataList, p1.loading),
           builder: (context, value, child) {
-            return ModalProgressHUD(
-              inAsyncCall: false,
-              child: Scaffold(
-                backgroundColor: Colors.black,
-                body: EasyRefresh(
-                  onLoad: homeProvider.onLoad,
-                  onRefresh: homeProvider.onRefresh,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        HTTopSearchWidget(),
-                        ...mainListWidget(),
-                      ],
-                    ),
+            return Scaffold(
+              backgroundColor: Colors.black,
+              body: SmartRefresher(
+                controller: homeProvider.refreshController,
+                enablePullDown: true,
+                enablePullUp: true,
+                onLoading:() {
+                  homeProvider.onLoad();
+                },
+                onRefresh: () {
+                  homeProvider.onRefresh();
+                },
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      HTTopSearchWidget(),
+                      ...mainListWidget(),
+                    ],
                   ),
                 ),
               ),

@@ -1,3 +1,4 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_provider_base.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_provider_mixin.dart';
 
@@ -5,7 +6,11 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_
 ///数据逻辑
 class HTHomeProvider extends HTHomeProviderBase with HTHomeProviderMixin {
   Future<void> loadData() async {
-    apiRequest();
+    EasyLoading.show(status: 'loading...');
+
+    await apiRequest();
+
+    EasyLoading.dismiss();
   }
 
   ///下拉刷新
