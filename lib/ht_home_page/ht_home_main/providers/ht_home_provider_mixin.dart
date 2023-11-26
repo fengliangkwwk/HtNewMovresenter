@@ -72,8 +72,26 @@ mixin HTHomeProviderMixin on HTHomeProviderBase {
   }
 
   ///点击more
-  Future<void> moreNet() async {
-    await HTNetUtils.htPost(apiUrl: Global.homeMoreUrl, params: {});
+  Future<void> moreNet({
+    DataList? data,
+  }) async {
+    data?.page = (data.page ?? 0) + 1;
+    // EasyLoading.show();
+    var res = await HTNetUtils.htPost(apiUrl: Global.homeMoreUrl, params: {
+      'id': data?.playListId.toString(),
+      'page': data?.page.toString(),
+      'pageSize': data?.pageSize.toString(),
+      'filter_no': data?.filterNo.toString()
+    });
+    var json = jsonDecode(res?.data);
+
+    for (var element in json['data']['minfo'] ?? []) {
+      data?.itemData?[0].m20?.add(M20.fromJson(element));
+    }
+    loading = !loading;
+    // EasyLoading.dismiss();
+    selectData = null;
+    notifyListeners();
   }
 
   ///瀑布流接口

@@ -1,4 +1,5 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/home_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_provider_base.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_provider_mixin.dart';
 
@@ -29,4 +30,15 @@ class HTHomeProvider extends HTHomeProviderBase with HTHomeProviderMixin {
     apiRequest();
     print('上拉加载');
   }
+
+
+  ///点击more 
+void onTapMoreAction(DataList data) async{
+  selectData = data;
+  notifyListeners();
+  ///1.请求更多接口
+ await moreNet(data: data);
+
+}
+
 }

@@ -25,10 +25,12 @@ class HTClassHomeMainPage extends StatefulWidget {
   State<HTClassHomeMainPage> createState() => _HTClassHomeMainPageState();
 }
 
-class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
+class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
+    with SingleTickerProviderStateMixin {
   final HTHomeProvider homeProvider = HTHomeProvider();
 // 创建一个 CarouselController 以控制 CarouselSlider
   final CarouselController _controller = CarouselController();
+  late AnimationController _animationController;
 
   ///初始化provider
   @override
@@ -36,6 +38,9 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
     homeProvider.loadData();
     // _htVarDataController.imageList;
     super.initState();
+    _animationController = AnimationController(
+        duration: const Duration(seconds: 500), vsync: this);
+    _animationController.forward();
   }
 
   @override
@@ -57,7 +62,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                 controller: homeProvider.refreshController,
                 enablePullDown: true,
                 enablePullUp: true,
-                onLoading:() {
+                onLoading: () {
                   homeProvider.onLoad();
                 },
                 onRefresh: () {
@@ -203,53 +208,113 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
   Widget seeAllAndMoreButtoonWidget(DataList data) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
-      child: Row(children: [
-        Flexible(
-            flex: 1,
-            child: Container(
-                margin: const EdgeInsets.only(left: 10.0, right: 5.0),
-                height: 35.0,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.0),
-                    color: const Color(0xff23252A)),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  const Text("More",
-                      style:
-                          TextStyle(color: Color(0xffBCBDBE), fontSize: 15.0)),
-                  Container(width: 5.0),
-                  CachedNetworkImage(
-                      imageUrl: ImageURL.url_286, width: 18, height: 18),
-                ]))),
-        Flexible(
-            flex: 1,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return SecondLevelPage(
-                    titleStr: data.name ?? '',
-                    listId: data.open_mode_value.toString(),
-                  );
-                }));
-              },
-              child: Container(
-                  margin: const EdgeInsets.only(left: 0.0, right: 10.0),
-                  height: 35.0,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      color: const Color(0xff23252A)),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("See All",
-                            style: TextStyle(
-                                color: Color(0xffBCBDBE), fontSize: 15.0)),
-                        Container(width: 5.0),
-                        CachedNetworkImage(
-                            imageUrl: ImageURL.url_289, width: 18, height: 18),
-                      ])),
-            )),
-      ]),
+      child: Column(
+        children: [
+          ///1.more +  see all
+          Row(children: [
+            Flexible(
+                flex: 1,
+                child: GestureDetector(
+                  onTap: () {
+                    homeProvider.onTapMoreAction(data);
+                  },
+                  child: Container(
+                      margin: const EdgeInsets.only(left: 10.0, right: 5.0),
+                      height: 35.0,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.0),
+                          color: const Color(0xff23252A)),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("More",
+                                style: TextStyle(
+                                    color: Color(0xffBCBDBE), fontSize: 15.0)),
+                            Container(width: 5.0),
+                            CachedNetworkImage(
+                                imageUrl: ImageURL.url_286,
+                                width: 18,
+                                height: 18),
+                          ])),
+                )),
+            Flexible(
+                flex: 1,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return SecondLevelPage(
+                        titleStr: data.name ?? '',
+                        listId: data.open_mode_value.toString(),
+                      );
+                    }));
+                  },
+                  child: Container(
+                      margin: const EdgeInsets.only(left: 0.0, right: 10.0),
+                      height: 35.0,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.0),
+                          color: const Color(0xff23252A)),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("See All",
+                                style: TextStyle(
+                                    color: Color(0xffBCBDBE), fontSize: 15.0)),
+                            Container(width: 5.0),
+                            CachedNetworkImage(
+                                imageUrl: ImageURL.url_289,
+                                width: 18,
+                                height: 18),
+                          ])),
+                )),
+          ]),
+          const SizedBox(height: 10),
+
+          ///2. loading
+          Selector<HTHomeProvider, DataList?>(
+            selector: (p0, p1) => p1.selectData,
+            builder: (context, value, child) {
+              return Visibility(
+                visible: data == value,
+                child: child!,
+              );
+            },
+            child: Row(children: [
+              Flexible(
+                  flex: 1,
+                  child: Container(
+                      margin: const EdgeInsets.only(left: 10.0, right: 5.0),
+                      height: 35.0,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.0),
+                          color: const Color(0xff23252A)),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("loading",
+                                style: TextStyle(
+                                    color: Color(0xffBCBDBE), fontSize: 15.0)),
+                            Container(width: 5.0),
+                            RotationTransition(
+                              turns: Tween<double>(
+                                begin: 1,
+                                end: 300,
+                              ).animate(_animationController),
+                              child: CachedNetworkImage(
+                                  imageUrl: ImageURL.url_287,
+                                  width: 18,
+                                  height: 18),
+                            ),
+                          ]))),
+              Flexible(
+                flex: 1,
+                child: Container(),
+              ),
+            ]),
+          ),
+        ],
+      ),
     );
   }
 
@@ -410,7 +475,8 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                       return GestureDetector(
                         onTap: () {
                           // _controller.jumpToPage(entry.key);
-                          _controller.animateToPage(entry.key,duration: const Duration(milliseconds: 100));
+                          _controller.animateToPage(entry.key,
+                              duration: const Duration(milliseconds: 100));
                         },
                         child: Container(
                           width: 12.0,
@@ -420,7 +486,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: (homeProvider.carouselSliderCurrent ==
-                                              entry.key
+                                          entry.key
                                       ? Colors.white
                                       : Colors.red)
                                   .withOpacity(
@@ -616,7 +682,6 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
     }
   }
 
-  // ignore: non_constant_identifier_names
   ///样式三 九宫格 display_type = 1
   Widget HTGridStyleWidget(DataList data) {
     if (data.info_type_2 == 'mtype') {

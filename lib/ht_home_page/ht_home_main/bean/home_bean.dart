@@ -63,6 +63,9 @@ class DataList {
   @JsonKey(name: 'display_type')
   String? display_type;
 
+  @JsonKey(name: 'playlist_key')
+  String? playListId;
+
   @JsonKey(name: 'secname')
   String? secname;
 
@@ -86,6 +89,15 @@ class DataList {
 
   @JsonKey(name: 'info_type_2')
   String? info_type_2;
+
+  @JsonKey(includeToJson: true,defaultValue: 0)
+  int? page;
+
+  @JsonKey(includeToJson: true,defaultValue: 20)
+  int? pageSize ;
+
+  @JsonKey(includeToJson: true,defaultValue: 9)
+  int? filterNo ;
 
   DataList();
 
@@ -187,13 +199,11 @@ class ItemData {
   @JsonKey(name: 'status')
   String? status;
 
-
   @JsonKey(name: 'm20')
   List<M20>? m20;
 
- @JsonKey(name: 'tt20')
+  @JsonKey(name: 'tt20')
   List<TT20>? tt20;
-
 
   String iconImage() {
     if (cover2 == null || cover2?.isEmpty == true) {
@@ -202,14 +212,16 @@ class ItemData {
 
     return cover2 ?? '';
   }
-///右下角剧集更新  只有电视剧(tttype)才会显示 且new_flag==’NEW‘代表有更新时才会显示
+
+  ///右下角剧集更新  只有电视剧(tttype)才会显示 且new_flag==’NEW‘代表有更新时才会显示
   bool showRightBottom() {
     //  if (DataList.info_type_2 == 'tttype' && TT20.new_flag == 'NEW') {
     //    return true;
     //  }
     return false;
   }
-///右上角 CAD  只有电影，且是枪版电影（quality == 'CAD） 才会显示
+
+  ///右上角 CAD  只有电影，且是枪版电影（quality == 'CAD） 才会显示
   bool showRightTop() {
     // if (DataList.info_type_2 == 'mtype'&& M20.quality == 'CAD') {
     //   return true;
@@ -225,10 +237,8 @@ class ItemData {
   Map<String, dynamic> toJson() => _$ItemDataToJson(this);
 }
 
-
 @JsonSerializable(explicitToJson: true)
-class M20{
-
+class M20 {
   @JsonKey(name: 'order')
   int? order;
 
@@ -279,13 +289,10 @@ class M20{
   static M20 fromJson(Map<String, dynamic> srcJson) => _$M20FromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$M20ToJson(this);
-
 }
 
-
 @JsonSerializable(explicitToJson: true)
-class TT20{
-
+class TT20 {
   @JsonKey(name: 'id')
   String? id;
 
@@ -338,7 +345,7 @@ class TT20{
   String? gif;
 
   TT20();
-   
+
   static TT20 fromJson(Map<String, dynamic> srcJson) => _$TT20FromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$TT20ToJson(this);
