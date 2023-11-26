@@ -56,11 +56,20 @@ mixin HTVideoDescDataProviderMixin on HTVideoProviderMixin {
     return videoDescBean?.data2?[0].data;
   }
 
-  ///专题列表 provider.videoDescBean?.data2?[2].data
-  List? projectList() {
+  // ///专题列表 provider.videoDescBean?.data2?[2].data
+  // List? projectList() {
+  //   if (isTV()) {
+  //     return  tv202Bean?.data3?[0].data;
+  //   }
+  //   return videoDescBean?.data2?[2].data;
+  // }
+
+
+///获取专题列表
+List? projectList() {
     if (isTV()) {
-      return  tv202Bean?.data3?[0].data;
+      return  tv202Bean?.data3;
     }
-    return videoDescBean?.data2?[2].data;
+    return videoDescBean?.data2;
   }
 }

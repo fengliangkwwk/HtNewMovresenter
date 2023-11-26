@@ -5,7 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_and_episode_bean.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_and_episode_bean.dart'as desc;
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_video_desc_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_mixin.dart';
@@ -91,7 +91,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
       child: Scaffold(
           backgroundColor: Colors.black,
           body: Selector<HTVideoDescProvider,
-              Tuple3<bool, HtVideoDescBean?, HtSeasonAndEpisodeBean?>>(
+              Tuple3<bool, HtVideoDescBean?, desc.HtSeasonAndEpisodeBean?>>(
             selector: (p0, p1) =>
                 Tuple3(p1.isAllEpisodes, p1.videoDescBean, p1.tv202Bean),
             builder: (context, value, child) {
@@ -137,12 +137,10 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                                 : Container(
                                     height: 0,
                                   ),
-
-                            ///专题 title 那一行
-                            specialSubjectTitleWidget(),
-
+                            // ///专题 title 那一行
+                            // specialSubjectTitleWidget(),
                             ///专题列表那部分
-                            specialSubjectListWidget(),
+                            ...creatspecialSubjectListWidget(),
                           ],
                         ),
                       ),
@@ -458,14 +456,17 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                         margin: const EdgeInsets.only(right: 15.0),
                         width: 50.0,
                         child: Column(children: [
-                          CircleAvatar(
-                            backgroundImage: CachedNetworkImageProvider(
-                              model?.cover ?? '',
+                          Expanded(
+                            child: CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(
+                                model?.cover ?? '',
+                              ),
+                              radius: 25.0,
                             ),
-                            radius: 25.0,
                           ),
                           Container(height: 5.0),
                           Container(
+                            height: 30,
                             padding: const EdgeInsets.symmetric(
                                 vertical: 0.0, horizontal: 0.0),
                             child: Text(
@@ -524,22 +525,24 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         ));
   }
 
-// List<Widget>creatspecialSubjectListWidget(){
-//   var listRes = <Widget>[];
-//   var dataList = provider.projectList();
-
-//   for (var element in collection) {
-    
-//   }
-
-// }
+List<Widget>creatspecialSubjectListWidget(){
+  var listRes = <Widget>[];
+  var dataList = provider.projectList();
+  for (var element in dataList??[]) {
+    if (element.dataType == '1'&&element.data.length > 0||element.data != null) {
+      listRes.add(specialSubjectTitleWidget(element.name));
+      listRes.add(specialSubjectWidget(element));
+    }  
+  }
+  return listRes;
+}
 
   ///专题列表title那一部分
-  Widget specialSubjectTitleWidget() {
+  Widget specialSubjectTitleWidget(String titleName) {
     return Container(
       margin: const EdgeInsets.only(top: 20.0, left: 10.0, bottom: 0.0),
       child: Row(children: [
-        Text(provider.videoDescBean?.data2?[2].name ?? '',
+        Text(titleName,
             textAlign: TextAlign.left,
             style: const TextStyle(
                 fontSize: 18.0,
@@ -550,8 +553,8 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
   }
 
   ///专题列表
-  Widget specialSubjectListWidget() {
-    var dataList = provider.projectList();
+  Widget specialSubjectWidget(dynamic data) {
+    var dataList = data.data;
     return Container(
       height: 192.0,
       margin: const EdgeInsets.only(top: 11.0, bottom: 0.0, right: 0),
@@ -565,7 +568,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
               margin: const EdgeInsets.only(right: 5.0),
               child: Stack(children: [
                 CachedNetworkImage(
-                  imageUrl: model?.cover ?? '',
+                  imageUrl: model.cover ?? '',
                   height: 158.0,
                   fit: BoxFit.fill,
                 ),
@@ -575,7 +578,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                     child: Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(model?.rate ?? '',
+                          Text(model.rate ?? '',
                               style: const TextStyle(
                                   color: Color(0xffFF6D1C),
                                   fontSize: 20,
@@ -604,7 +607,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                     top: 163.0,
                     left: 5.0,
                     right: 5.0,
-                    child: Text(model?.title ?? '',
+                    child: Text(model.title ?? '',
                         maxLines: 2,
                         style: const TextStyle(
                             color: Color(0xff828386), fontSize: 12.0)))
