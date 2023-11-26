@@ -12,9 +12,11 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/views/second_level_page.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_middlepage.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage.dart';
+import 'package:ht_new_movpresenter/utils/ht_user_store.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tuple/tuple.dart';
 
 class HTClassHomeMainPage extends StatefulWidget {
@@ -24,10 +26,12 @@ class HTClassHomeMainPage extends StatefulWidget {
   State<HTClassHomeMainPage> createState() => _HTClassHomeMainPageState();
 }
 
-class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
+class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
+    with SingleTickerProviderStateMixin {
   final HTHomeProvider homeProvider = HTHomeProvider();
 // 创建一个 CarouselController 以控制 CarouselSlider
   final CarouselController _controller = CarouselController();
+  late AnimationController _animationController;
 
   ///初始化provider
   @override
@@ -35,6 +39,9 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
     homeProvider.loadData();
     // _htVarDataController.imageList;
     super.initState();
+    _animationController = AnimationController(
+        duration: const Duration(seconds: 500), vsync: this);
+    _animationController.forward();
   }
 
   @override
@@ -50,21 +57,25 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
           selector: (p0, p1) =>
               Tuple3(p1.dataList, p1.droppingWaterDataList, p1.loading),
           builder: (context, value, child) {
-            return ModalProgressHUD(
-              inAsyncCall: false,
-              child: Scaffold(
-                backgroundColor: Colors.black,
-                body: EasyRefresh(
-                  onLoad: homeProvider.onLoad,
-                  onRefresh: homeProvider.onRefresh,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        HTTopSearchWidget(),
-                        ...mainListWidget(),
-                      ],
-                    ),
+            return Scaffold(
+              backgroundColor: Colors.black,
+              body: SmartRefresher(
+                controller: homeProvider.refreshController,
+                enablePullDown: true,
+                enablePullUp: true,
+                onLoading: () {
+                  homeProvider.onLoad();
+                },
+                onRefresh: () {
+                  homeProvider.onRefresh();
+                },
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      HTTopSearchWidget(),
+                      ...mainListWidget(),
+                    ],
                   ),
                 ),
               ),
@@ -77,6 +88,8 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
     var result = <Widget>[];
     bool ishasAd = false;
     for (var element in homeProvider.dataList) {
+        var isHidden =  HTUserStore.list18.contains(element.playListId ?? '');
+
       ///专题 data_type 目前只支持 1（电视剧/电影） 和 4（18+）
       if (element.display_type == '3' && element.itemData?.isNotEmpty == true) {
         ///轮播图
@@ -84,7 +97,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
       }
 
       ///横向
-      if (element.display_type == '2') {
+      if (element.display_type == '2' && isHidden == false) {
         result.add(HTSideslipWiget(element));
         if (ishasAd == false) {
           result.add(adWidget());
@@ -93,7 +106,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
       }
 
       ///九宫格
-      if (element.display_type == '1') {
+      if (element.display_type == '1' && isHidden == false) {
         result.add(HTGridStyleWidget(element));
         if (element.moreflag == '1') {
           result.add(seeAllAndMoreButtoonWidget(element));
@@ -198,53 +211,113 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
   Widget seeAllAndMoreButtoonWidget(DataList data) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
-      child: Row(children: [
-        Flexible(
-            flex: 1,
-            child: Container(
-                margin: const EdgeInsets.only(left: 10.0, right: 5.0),
-                height: 35.0,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.0),
-                    color: const Color(0xff23252A)),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  const Text("More",
-                      style:
-                          TextStyle(color: Color(0xffBCBDBE), fontSize: 15.0)),
-                  Container(width: 5.0),
-                  CachedNetworkImage(
-                      imageUrl: ImageURL.url_286, width: 18, height: 18),
-                ]))),
-        Flexible(
-            flex: 1,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return SecondLevelPage(
-                    titleStr: data.name ?? '',
-                    listId: data.open_mode_value.toString(),
-                  );
-                }));
-              },
-              child: Container(
-                  margin: const EdgeInsets.only(left: 0.0, right: 10.0),
-                  height: 35.0,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      color: const Color(0xff23252A)),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("See All",
-                            style: TextStyle(
-                                color: Color(0xffBCBDBE), fontSize: 15.0)),
-                        Container(width: 5.0),
-                        CachedNetworkImage(
-                            imageUrl: ImageURL.url_289, width: 18, height: 18),
-                      ])),
-            )),
-      ]),
+      child: Column(
+        children: [
+          ///1.more +  see all
+          Row(children: [
+            Flexible(
+                flex: 1,
+                child: GestureDetector(
+                  onTap: () {
+                    homeProvider.onTapMoreAction(data);
+                  },
+                  child: Container(
+                      margin: const EdgeInsets.only(left: 10.0, right: 5.0),
+                      height: 35.0,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.0),
+                          color: const Color(0xff23252A)),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("More",
+                                style: TextStyle(
+                                    color: Color(0xffBCBDBE), fontSize: 15.0)),
+                            Container(width: 5.0),
+                            CachedNetworkImage(
+                                imageUrl: ImageURL.url_286,
+                                width: 18,
+                                height: 18),
+                          ])),
+                )),
+            Flexible(
+                flex: 1,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return SecondLevelPage(
+                        titleStr: data.name ?? '',
+                        listId: data.open_mode_value.toString(),
+                      );
+                    }));
+                  },
+                  child: Container(
+                      margin: const EdgeInsets.only(left: 0.0, right: 10.0),
+                      height: 35.0,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.0),
+                          color: const Color(0xff23252A)),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("See All",
+                                style: TextStyle(
+                                    color: Color(0xffBCBDBE), fontSize: 15.0)),
+                            Container(width: 5.0),
+                            CachedNetworkImage(
+                                imageUrl: ImageURL.url_289,
+                                width: 18,
+                                height: 18),
+                          ])),
+                )),
+          ]),
+          const SizedBox(height: 10),
+
+          ///2. loading
+          Selector<HTHomeProvider, DataList?>(
+            selector: (p0, p1) => p1.selectData,
+            builder: (context, value, child) {
+              return Visibility(
+                visible: data == value,
+                child: child!,
+              );
+            },
+            child: Row(children: [
+              Flexible(
+                  flex: 1,
+                  child: Container(
+                      margin: const EdgeInsets.only(left: 10.0, right: 5.0),
+                      height: 35.0,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.0),
+                          color: const Color(0xff23252A)),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("loading",
+                                style: TextStyle(
+                                    color: Color(0xffBCBDBE), fontSize: 15.0)),
+                            Container(width: 5.0),
+                            RotationTransition(
+                              turns: Tween<double>(
+                                begin: 1,
+                                end: 300,
+                              ).animate(_animationController),
+                              child: CachedNetworkImage(
+                                  imageUrl: ImageURL.url_287,
+                                  width: 18,
+                                  height: 18),
+                            ),
+                          ]))),
+              Flexible(
+                flex: 1,
+                child: Container(),
+              ),
+            ]),
+          ),
+        ],
+      ),
     );
   }
 
@@ -279,7 +352,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
               visible: data.data_type == '4' ? true : false,
               child: GestureDetector(
                 onTap: () {
-                  print('点击了 18 +');
+                  homeProvider.hiddenAction(data);
                 },
                 child: const Text(
                   'Hidden',
@@ -405,7 +478,8 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                       return GestureDetector(
                         onTap: () {
                           // _controller.jumpToPage(entry.key);
-                          _controller.animateToPage(entry.key,duration: const Duration(milliseconds: 100));
+                          _controller.animateToPage(entry.key,
+                              duration: const Duration(milliseconds: 100));
                         },
                         child: Container(
                           width: 12.0,
@@ -415,7 +489,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: (homeProvider.carouselSliderCurrent ==
-                                              entry.key
+                                          entry.key
                                       ? Colors.white
                                       : Colors.red)
                                   .withOpacity(
@@ -611,7 +685,6 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage> {
     }
   }
 
-  // ignore: non_constant_identifier_names
   ///样式三 九宫格 display_type = 1
   Widget HTGridStyleWidget(DataList data) {
     if (data.info_type_2 == 'mtype') {

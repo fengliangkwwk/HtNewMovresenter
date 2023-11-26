@@ -44,6 +44,7 @@ DataList _$DataListFromJson(Map<String, dynamic> json) => DataList()
       .toList()
   ..order = json['order'] as int?
   ..display_type = json['display_type'] as String?
+  ..playListId = json['playlist_key'] as String?
   ..secname = json['secname'] as String?
   ..data_type = json['data_type'] as String?
   ..open_mode_value = json['open_mode_value'] as String?
@@ -51,13 +52,17 @@ DataList _$DataListFromJson(Map<String, dynamic> json) => DataList()
   ..seeall = json['seeall'] as String?
   ..seeall_value = json['seeall_value'] as String?
   ..open_mode = json['open_mode'] as String?
-  ..info_type_2 = json['info_type_2'] as String?;
+  ..info_type_2 = json['info_type_2'] as String?
+  ..page = json['page'] as int? ?? 0
+  ..pageSize = json['pageSize'] as int? ?? 20
+  ..filterNo = json['filterNo'] as int? ?? 9;
 
 Map<String, dynamic> _$DataListToJson(DataList instance) => <String, dynamic>{
       'name': instance.name,
       'data': instance.itemData?.map((e) => e.toJson()).toList(),
       'order': instance.order,
       'display_type': instance.display_type,
+      'playlist_key': instance.playListId,
       'secname': instance.secname,
       'data_type': instance.data_type,
       'open_mode_value': instance.open_mode_value,
@@ -66,6 +71,9 @@ Map<String, dynamic> _$DataListToJson(DataList instance) => <String, dynamic>{
       'seeall_value': instance.seeall_value,
       'open_mode': instance.open_mode,
       'info_type_2': instance.info_type_2,
+      'page': instance.page,
+      'pageSize': instance.pageSize,
+      'filterNo': instance.filterNo,
     };
 
 ItemData _$ItemDataFromJson(Map<String, dynamic> json) => ItemData()

@@ -1,10 +1,9 @@
-import 'package:json_annotation/json_annotation.dart'; 
-      
-part 'user_bean.g.dart';
-    
-@JsonSerializable(explicitToJson: true)
-class UserBean{
+import 'package:json_annotation/json_annotation.dart';
 
+part 'user_bean.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class UserBean {
   @JsonKey(name: 'phone')
   String? phone;
 
@@ -34,10 +33,8 @@ class UserBean{
 
   UserBean();
 
-  static UserBean fromJson(Map<String, dynamic> srcJson) => _$UserBeanFromJson(srcJson);
+  static UserBean fromJson(Map<String, dynamic> srcJson) =>
+      _$UserBeanFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$UserBeanToJson(this);
-
 }
-
-  
