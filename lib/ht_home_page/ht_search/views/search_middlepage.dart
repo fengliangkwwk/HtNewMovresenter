@@ -432,7 +432,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return const HTClassSearchResultPage(title: "");
+                        return  HTClassSearchResultPage(keyWord: itemData[0] ?? "");
                       }));
                     },
                   );

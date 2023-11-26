@@ -22,7 +22,7 @@ class HTNetUtils {
     dio.httpClientAdapter = IOHttpClientAdapter()
       ..onHttpClientCreate = (client) {
         client.findProxy = (uri) {
-          return 'PROXY 172.20.10.2:8888';
+          return 'PROXY 192.168.156.126:8888';
         };
         return client;
       };

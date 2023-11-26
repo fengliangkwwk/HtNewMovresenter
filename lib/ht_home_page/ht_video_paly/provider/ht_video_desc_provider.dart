@@ -4,9 +4,7 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_mixin.dart';
 
 class HTVideoDescProvider extends HTVideoDescProviderBase
-    with HTVideoProviderMixin,
-    HTVideoDescDataProviderMixin
-     {
+    with HTVideoProviderMixin, HTVideoDescDataProviderMixin {
   /// mType2:tt_mflx:电视剧   myfx:电影
   /// id:传的视频id
   Future<void> loadData(String mType2, String id) async {
@@ -15,8 +13,12 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   }
 
   void initData() {
+    // player.setDataSource(
+    //   'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
+    //   autoPlay: true,
+    // );
     player.setDataSource(
-      'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
+      videoDescBean?.data?.hd?.link ?? 'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
       autoPlay: true,
     );
     player.setOption(FijkOption.hostCategory, 'enable-position-notify', 1);
