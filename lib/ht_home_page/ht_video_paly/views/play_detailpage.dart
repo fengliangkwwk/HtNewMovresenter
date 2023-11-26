@@ -524,6 +524,16 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         ));
   }
 
+// List<Widget>creatspecialSubjectListWidget(){
+//   var listRes = <Widget>[];
+//   var dataList = provider.projectList();
+
+//   for (var element in collection) {
+    
+//   }
+
+// }
+
   ///专题列表title那一部分
   Widget specialSubjectTitleWidget() {
     return Container(
