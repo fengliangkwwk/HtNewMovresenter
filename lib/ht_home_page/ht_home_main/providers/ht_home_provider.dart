@@ -7,14 +7,12 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_
 class HTHomeProvider extends HTHomeProviderBase with HTHomeProviderMixin {
   Future<void> loadData() async {
     EasyLoading.show(status: 'loading...');
-
-    await apiRequest();
-
-    EasyLoading.dismiss();
+     apiRequest();
   }
 
   ///下拉刷新
   void onRefresh() {
+    EasyLoading.show();
     loading = true;
     page = 1;
     droppingWaterPage = 1;
@@ -24,6 +22,7 @@ class HTHomeProvider extends HTHomeProviderBase with HTHomeProviderMixin {
 
   ///上拉加载
   void onLoad() async {
+    EasyLoading.show(status: 'loading...');
     page++;
     loading = true;
     notifyListeners();

@@ -7,6 +7,7 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_middlepa
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class SecondLevelPage extends StatefulWidget {
   final String titleStr;
@@ -40,12 +41,7 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
       child: Selector<HTHomeSecondLevelProvidr, bool>(
         selector: (p0, p1) => p1.loading,
         builder: (context, value, child) {
-          return ModalProgressHUD(
-            inAsyncCall: value,
-            child: child!,
-          );
-        },
-        child: Scaffold(
+          return Scaffold(
           backgroundColor: const Color(0xff36373C),
           body: Column(
             children: [
@@ -53,7 +49,8 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
               listWidget(),
             ],
           ),
-        ),
+        );
+        },
       ),
     );
   }
@@ -128,9 +125,11 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
             removeTop: true,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: EasyRefresh(
+              child: SmartRefresher(
+                controller: provider.refreshController,
+                enablePullUp: true,
                 onRefresh: provider.onRefresh,
-                onLoad: provider.onLoad,
+                onLoading: provider.onLoad,
                 child: GridView.builder(
                   itemCount: value.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

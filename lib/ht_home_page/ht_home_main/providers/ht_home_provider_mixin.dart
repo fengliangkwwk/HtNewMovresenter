@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/home_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/homedropping_water_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_provider_base.dart';
@@ -66,7 +67,7 @@ mixin HTHomeProviderMixin on HTHomeProviderBase {
     ///结束刷新状态
     refreshController.refreshCompleted();
     refreshController.loadComplete();
-
+    EasyLoading.dismiss();
     notifyListeners();
   }
 
