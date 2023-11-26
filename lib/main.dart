@@ -11,7 +11,7 @@ import 'package:ht_new_movpresenter/utils/ht_init_app.dart';
 
 void main() async{
   ///
-  //  await initApp();
+   await initApp();
   runApp(DevicePreview(
     enabled: !kReleaseMode,
     builder: (context) => const HTClassApp(), // Wrap your app

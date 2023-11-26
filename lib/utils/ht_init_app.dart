@@ -10,13 +10,16 @@ Future<void> initApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await userData();
 }
-///1. 判断是否登录 2.用户信息
+///1. 判断是否登录 2.用户信息 3.是否禁止 18+
 
 Future<void> userData() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  var list18 = prefs.getStringList(HTSharedKeys.htHomeHideKey);
   var userString = prefs.getString(HTSharedKeys.htPersonMesaage);
+  HTUserStore.list18 = list18 ?? [];
   if (userString != null) {
     HTUserStore.userBean = UserBean.fromJson(jsonDecode(userString));
+    
   }
 }
 

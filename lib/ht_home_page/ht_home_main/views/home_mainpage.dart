@@ -12,6 +12,7 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/views/second_level_page.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_middlepage.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage.dart';
+import 'package:ht_new_movpresenter/utils/ht_user_store.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
@@ -87,6 +88,8 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
     var result = <Widget>[];
     bool ishasAd = false;
     for (var element in homeProvider.dataList) {
+        var isHidden =  HTUserStore.list18.contains(element.playListId ?? '');
+
       ///专题 data_type 目前只支持 1（电视剧/电影） 和 4（18+）
       if (element.display_type == '3' && element.itemData?.isNotEmpty == true) {
         ///轮播图
@@ -94,7 +97,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
       }
 
       ///横向
-      if (element.display_type == '2') {
+      if (element.display_type == '2' && isHidden == false) {
         result.add(HTSideslipWiget(element));
         if (ishasAd == false) {
           result.add(adWidget());
@@ -103,7 +106,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
       }
 
       ///九宫格
-      if (element.display_type == '1') {
+      if (element.display_type == '1' && isHidden == false) {
         result.add(HTGridStyleWidget(element));
         if (element.moreflag == '1') {
           result.add(seeAllAndMoreButtoonWidget(element));
@@ -349,7 +352,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
               visible: data.data_type == '4' ? true : false,
               child: GestureDetector(
                 onTap: () {
-                  print('点击了 18 +');
+                  homeProvider.hiddenAction(data);
                 },
                 child: const Text(
                   'Hidden',
