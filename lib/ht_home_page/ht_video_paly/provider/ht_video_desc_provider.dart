@@ -17,11 +17,13 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     //   'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
     //   autoPlay: true,
     // );
+
     player.setDataSource(
+      // 'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
       videoDescBean?.data?.hd?.link ?? 'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
       autoPlay: true,
     );
-    player.setOption(FijkOption.hostCategory, 'enable-position-notify', 1);
+    playerOption();
   }
 
   void allEpisodesEvent() {

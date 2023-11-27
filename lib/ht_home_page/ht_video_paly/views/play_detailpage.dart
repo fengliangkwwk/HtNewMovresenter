@@ -46,12 +46,6 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
   /// isAllEpisodes 是否展开剧集详情
   var isAllEpisodes = false;
-  // // 回调函数，用于接收子widget传递的数据
-  // void allEpisodesEvent(bool isEpisodesDes) {
-  //   print('点击了大块头点击了大块头');
-  //   isAllEpisodes = isEpisodesDes;
-  //   setState(() {});
-  // }
 
   @override
   void initState() {
@@ -392,29 +386,44 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
       margin: const EdgeInsets.only(top: 20.0, left: 10.0, bottom: 0.0),
       child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Container(width: 15.0),
-        Column(children: [
-          ///ImageURL.url_258已收藏   ImageURL.url_259未收藏    
-          CachedNetworkImage(imageUrl: ImageURL.url_259, width: 22, height: 22),
-          Container(height: 5.0),
-          const Text("My List",
-              style: TextStyle(color: Colors.white, fontSize: 10.0)),
-        ]),
+        GestureDetector(
+          onTap: (() {
+            print('点击了收藏');
+          }),
+          child: Column(children: [
+            ///ImageURL.url_258已收藏   ImageURL.url_259未收藏    
+            CachedNetworkImage(imageUrl: ImageURL.url_259, width: 22, height: 22),
+            Container(height: 5.0),
+            const Text("My List",
+                style: TextStyle(color: Colors.white, fontSize: 10.0)),
+          ]),
+        ),
         Container(width: 40.0),
-        Column(children: [
-          CachedNetworkImage(imageUrl: ImageURL.url_105, width: 22, height: 22),
-
-          ///105
-          Container(height: 5.0),
-          const Text("Share",
-              style: TextStyle(color: Colors.white, fontSize: 10.0)),
-        ]),
+        GestureDetector(
+          onTap: (() {
+            print('点击了分享');
+          }),
+          child: Column(children: [
+            CachedNetworkImage(imageUrl: ImageURL.url_105, width: 22, height: 22),
+        
+            ///105
+            Container(height: 5.0),
+            const Text("Share",
+                style: TextStyle(color: Colors.white, fontSize: 10.0)),
+          ]),
+        ),
         Container(width: 40.0),
-        Column(children: [
-          CachedNetworkImage(imageUrl: ImageURL.url_100, width: 22, height: 22),
-          Container(height: 5.0),
-          const Text("Feedback",
-              style: TextStyle(color: Colors.white, fontSize: 10.0)),
-        ])
+        GestureDetector(
+          onTap: (() {
+            print("点击了跳转到按钮");
+          }),
+          child: Column(children: [
+            CachedNetworkImage(imageUrl: ImageURL.url_100, width: 22, height: 22),
+            Container(height: 5.0),
+            const Text("Feedback",
+                style: TextStyle(color: Colors.white, fontSize: 10.0)),
+          ]),
+        )
       ]),
     );
   }
