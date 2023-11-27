@@ -8,14 +8,16 @@ import 'package:ht_new_movpresenter/ht_mylibrary_page/views/setting_mineinfo.dar
 import 'package:ht_new_movpresenter/ht_premium_page/views/premium_indexerpage.dart';
 import 'package:ht_new_movpresenter/utils/ht_init_app.dart';
 
-
-void main() async{
+void main() async {
   ///
-   await initApp();
-  runApp(DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) => const HTClassApp(), // Wrap your app
-  ),);
+  await initApp();
+  runApp(
+    DevicePreview(
+      // enabled: !kReleaseMode,
+      enabled: false,
+      builder: (context) => const HTClassApp(), // Wrap your app
+    ),
+  );
 }
 
 class HTClassApp extends StatelessWidget {
@@ -30,7 +32,8 @@ class HTClassApp extends StatelessWidget {
       locale: DevicePreview.locale(context),
       // builder: EasyLoading.init(),
       builder: (context, child) {
-        return DevicePreview.appBuilder(context, EasyLoading.init()(context,child));
+        return DevicePreview.appBuilder(
+            context, EasyLoading.init()(context, child));
       },
       theme: ThemeData(
         // This is the theme of your application.
@@ -44,19 +47,20 @@ class HTClassApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const HTClassLauncherPage(title: ""),//正常进入启动页
+      home: const HTClassLauncherPage(title: ""), //正常进入启动页
       // home: const HTClassBtmNavPage(),
       // home: const HTClassPremiumLauncherPage(title: '',),
     );
   }
 }
+
 class HTClassBtmNavPage extends StatefulWidget {
   const HTClassBtmNavPage({Key? key}) : super(key: key);
   @override
   State<HTClassBtmNavPage> createState() => _HTClassBtmNavPageState();
 }
-class _HTClassBtmNavPageState extends State<HTClassBtmNavPage>{
 
+class _HTClassBtmNavPageState extends State<HTClassBtmNavPage> {
   int _htVarCurrentIndex = 0;
   final htBarPages = [
     HTClassHomeMainPage(title: ""),
@@ -65,36 +69,60 @@ class _HTClassBtmNavPageState extends State<HTClassBtmNavPage>{
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: htBarPages[_htVarCurrentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.black,
-          currentIndex: _htVarCurrentIndex,
-          unselectedItemColor: Color(0xff666666),
-          selectedItemColor: Colors.white,
-          onTap: (index) {
-            setState(() {
-              _htVarCurrentIndex = index;
-            });
-          },
-          type: BottomNavigationBarType.fixed,
-          items: [
-            BottomNavigationBarItem(                
-                // icon: Image.network("https://autoeq.top/img/ios/1@3x.png",width: 18.0,height: 18.0,),
-                // activeIcon: Image.network('https://autoeq.top/img/ios/1@3x.png',width: 39.0,height: 39.0,),
-                icon: Image.asset('assets/images/httabbar_images/icon_home_off@3x.png',width: 39.0, height: 39.0,),
-                activeIcon: Image.asset('assets/images/httabbar_images/icon_home_on@3x.png',width: 39.0, height: 39.0,),
-                label:'Home'),
-            BottomNavigationBarItem(
-                icon: Image.asset('assets/images/httabbar_images/icon_vip_off@3x.png',width: 39.0, height: 39.0,),
-                activeIcon: Image.asset('assets/images/httabbar_images/icon_vip_on@3x.png',width: 39.0, height: 39.0,),
+    return Scaffold(
+      body: htBarPages[_htVarCurrentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.black,
+        currentIndex: _htVarCurrentIndex,
+        unselectedItemColor: Color(0xff666666),
+        selectedItemColor: Colors.white,
+        onTap: (index) {
+          setState(() {
+            _htVarCurrentIndex = index;
+          });
+        },
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+              // icon: Image.network("https://autoeq.top/img/ios/1@3x.png",width: 18.0,height: 18.0,),
+              // activeIcon: Image.network('https://autoeq.top/img/ios/1@3x.png',width: 39.0,height: 39.0,),
+              icon: Image.asset(
+                'assets/images/httabbar_images/icon_home_off@3x.png',
+                width: 39.0,
+                height: 39.0,
+              ),
+              activeIcon: Image.asset(
+                'assets/images/httabbar_images/icon_home_on@3x.png',
+                width: 39.0,
+                height: 39.0,
+              ),
+              label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/images/httabbar_images/icon_vip_off@3x.png',
+                width: 39.0,
+                height: 39.0,
+              ),
+              activeIcon: Image.asset(
+                'assets/images/httabbar_images/icon_vip_on@3x.png',
+                width: 39.0,
+                height: 39.0,
+              ),
               label: 'Premlum'),
-            BottomNavigationBarItem(
-                icon: Image.asset('assets/images/httabbar_images/icon_library_off@3x.png',width: 39.0, height: 39.0,),
-                activeIcon: Image.asset('assets/images/httabbar_images/icon_library_on@3x.png',width: 39.0, height: 39.0,),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/images/httabbar_images/icon_library_off@3x.png',
+                width: 39.0,
+                height: 39.0,
+              ),
+              activeIcon: Image.asset(
+                'assets/images/httabbar_images/icon_library_on@3x.png',
+                width: 39.0,
+                height: 39.0,
+              ),
               label: 'My Library'),
-          ],
-        ),
+        ],
+      ),
     );
   }
-
 }

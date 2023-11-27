@@ -8,7 +8,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_and_episode_bean.dart'as desc;
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_video_desc_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider.dart';
-import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_mixin.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_all_episodes.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_part.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
@@ -33,14 +32,6 @@ class HTClassVideoDetailPage extends StatefulWidget {
 }
 
 class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
-  final List<String> imgList = [
-    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
-  ];
   final List<String> videoList = [
     'http://playertest.longtailvideo.com/adaptive/bipbop/gear4/prog_index.m3u8',
     'https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_20mb.mp4',
@@ -55,27 +46,19 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
   /// isAllEpisodes 是否展开剧集详情
   var isAllEpisodes = false;
-  // 回调函数，用于接收子widget传递的数据
-  void allEpisodesEvent(bool isEpisodesDes) {
-    print('点击了大块头点击了大块头');
-    isAllEpisodes = isEpisodesDes;
-    setState(() {});
-  }
+  // // 回调函数，用于接收子widget传递的数据
+  // void allEpisodesEvent(bool isEpisodesDes) {
+  //   print('点击了大块头点击了大块头');
+  //   isAllEpisodes = isEpisodesDes;
+  //   setState(() {});
+  // }
 
   @override
   void initState() {
     provider.loadData(widget.m_type_2, widget.id);
-    // if (videoList[2].contains("rtsp")) {
-    //   //rtsp视频关键配置
-    //   player.setOption(FijkOption.formatCategory, "rtsp_transport", "tcp");
-    //   // fijkPlayer 初始化不启用缓冲，避免画面卡死不动
-    //   player.setOption(FijkOption.playerCategory, 'packet-buffering', 0);
-    //   player.setOption(FijkOption.playerCategory, 'framedrop', 1);
-    // }
-
+    provider.playerOption();
     super.initState();
   }
-
   @override
   void dispose() {
     super.dispose();
@@ -106,7 +89,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                   ///AllEpisodes界面
                   Visibility(
                     visible: value.item1,
-                    child: const Expanded(child: AllEpisodesWidget()),
+                    child: Expanded(child: AllEpisodesWidget()),
                   ),
 
                   Visibility(
@@ -132,8 +115,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
                             ///如果是电视剧播放页的话会有这部分
                             (widget.m_type_2 == 'tt_mflx')
-                                ? TVPlayPartWidget(
-                                    allEpisodesEvent: allEpisodesEvent)
+                                ? const TVPlayPartWidget()
                                 : Container(
                                     height: 0,
                                   ),
@@ -281,13 +263,14 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
             ]));
   }
 
-  ///第二行那部分
+  ///第二行标题那部分
   Widget secondPartWidget() {
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.only(top: 20.0, left: 10.0),
       child: Text(
-        provider.videoDescBean?.data?.title ?? '',
+        
+        provider.title(),
         textAlign: TextAlign.left,
         style: const TextStyle(
           color: Colors.white,
@@ -410,9 +393,8 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
       child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Container(width: 15.0),
         Column(children: [
-          CachedNetworkImage(imageUrl: ImageURL.url_258, width: 22, height: 22),
-
-          ///258
+          ///ImageURL.url_258已收藏   ImageURL.url_259未收藏    
+          CachedNetworkImage(imageUrl: ImageURL.url_259, width: 22, height: 22),
           Container(height: 5.0),
           const Text("My List",
               style: TextStyle(color: Colors.white, fontSize: 10.0)),

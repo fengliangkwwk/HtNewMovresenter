@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:ht_new_movpresenter/utils/ui_utils.dart';
 import 'package:dio/io.dart';
+import 'package:ht_new_movpresenter/utils/ui_utils.dart';
 
 class HTNetUtils {
   void initAdapter() {}

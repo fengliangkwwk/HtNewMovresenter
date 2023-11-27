@@ -64,12 +64,28 @@ mixin HTVideoDescDataProviderMixin on HTVideoProviderMixin {
   //   return videoDescBean?.data2?[2].data;
   // }
 
-
-///获取专题列表
-List? projectList() {
+  ///获取专题列表
+  List? projectList() {
     if (isTV()) {
-      return  tv202Bean?.data3;
+      return tv202Bean?.data3;
     }
     return videoDescBean?.data2;
+  }
+
+  ///获取电视剧季列表
+  List? seasonList() {
+    print(tv202Bean?.data?.ssnList);
+    if (isTV()) {
+      return tv202Bean?.data?.ssnList ?? [];
+    }
+    return null;
+  }
+
+  ///获取电视剧集列表
+  List? setList() {
+    if (isTV()) {
+      return tv203Bean?.epsList ?? [];
+    }
+    return null;
   }
 }
