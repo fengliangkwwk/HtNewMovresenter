@@ -7,7 +7,6 @@ import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 import 'package:provider/provider.dart';
 
 class AllEpisodesWidget extends StatelessWidget {
-  // final HTVideoDescProvider provider = HTVideoDescProvider();
   AllEpisodesWidget({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,7 @@ class AllEpisodesWidget extends StatelessWidget {
         Container(
             // padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
             margin: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 9.0),
-            height: 30.0,
+            height: 40.0,
             // color: Colors.amber,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -79,7 +78,7 @@ class AllEpisodesWidget extends StatelessWidget {
                     context.read<HTVideoDescProvider>().setList()?[index];
                 return Container(
                   padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-                  height: 60,
+                  height: 70,
                   margin: const EdgeInsets.only(top: 10),
                   decoration: const BoxDecoration(
                     color: Color(0xff23252A),

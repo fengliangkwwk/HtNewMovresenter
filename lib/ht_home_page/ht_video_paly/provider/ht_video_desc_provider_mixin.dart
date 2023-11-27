@@ -43,8 +43,6 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
     }
 
     print('数据解析成功');
-
-    notifyListeners();
   }
 
   ///电视剧
@@ -55,6 +53,7 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
     });
     Map<String, dynamic> jsonMap = jsonDecode(res?.data.toString() ?? '');
     tv202Bean = HtSeasonAndEpisodeBean.fromJson(jsonMap);
+    notifyListeners();
   }
 
   ///203
@@ -66,7 +65,9 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
 
     Map<String, dynamic> jsonMap = jsonDecode(res?.data.toString() ?? '');
     tv203Bean = HtSetListBean.fromJson(jsonMap['data']);
+    notifyListeners();
   }
+
   ///151
   Future<void> request151(String id) async {
     // 创建一个空的字典
@@ -85,15 +86,13 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
     // 解析JSON数据为User对象
     Map<String, dynamic> jsonMap = jsonDecode(result?.data?.toString() ?? '');
     videoDescBean = HtVideoDescBean.fromJson(jsonMap);
+    notifyListeners();
   }
-
-
 
   ///电影
   ///144
   Future<void> request144(String id) async {
     String cutterntTimeStamp = SysTools().getSecondsTimeStamp();
-
     var res =
         await HTNetUtils.htPost(apiUrl: Global.movieLinksAndMoviesUrl, params: {
       'id': id,
@@ -104,5 +103,6 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
     });
     Map<String, dynamic> jsonMap = jsonDecode(res?.data.toString() ?? '');
     videoDescBean = HtVideoDescBean.fromJson(jsonMap);
+    notifyListeners();
   }
 }

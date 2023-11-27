@@ -5,7 +5,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_and_episode_bean.dart'as desc;
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_and_episode_bean.dart'
+    as desc;
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_video_desc_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_all_episodes.dart';
@@ -41,36 +42,32 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
   ];
   final HTVideoDescProvider provider = HTVideoDescProvider();
 
-  ///more info 是否展开
-  var _htVarInfoShown = false;
-
-  /// isAllEpisodes 是否展开剧集详情
-  var isAllEpisodes = false;
-
   @override
   void initState() {
     provider.loadData(widget.m_type_2, widget.id);
     provider.playerOption();
     super.initState();
   }
+
   @override
   void dispose() {
     super.dispose();
-    // player.release();
     provider.player.release();
   }
 
   @override
   Widget build(BuildContext context) {
-    // FijkPlugin.keepScreenOn(true)
+    FijkPlugin.keepScreenOn(true);
     return ChangeNotifierProvider(
       create: (context) => provider,
       child: Scaffold(
           backgroundColor: Colors.black,
-          body: Selector<HTVideoDescProvider,
-              Tuple3<bool, HtVideoDescBean?, desc.HtSeasonAndEpisodeBean?>>(
-            selector: (p0, p1) =>
-                Tuple3(p1.isAllEpisodes, p1.videoDescBean, p1.tv202Bean),
+          body: Selector<
+              HTVideoDescProvider,
+              Tuple4<bool, HtVideoDescBean?, desc.HtSeasonAndEpisodeBean?,
+                  bool>>(
+            selector: (p0, p1) => Tuple4(p1.isAllEpisodes, p1.videoDescBean,
+                p1.tv202Bean, p1.htVarInfoShown),
             builder: (context, value, child) {
               return Column(
                 children: [
@@ -113,8 +110,6 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                                 : Container(
                                     height: 0,
                                   ),
-                            // ///专题 title 那一行
-                            // specialSubjectTitleWidget(),
                             ///专题列表那部分
                             ...creatspecialSubjectListWidget(),
                           ],
@@ -263,7 +258,6 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
       width: double.infinity,
       margin: const EdgeInsets.only(top: 20.0, left: 10.0),
       child: Text(
-        
         provider.title(),
         textAlign: TextAlign.left,
         style: const TextStyle(
@@ -358,25 +352,20 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
               style: TextStyle(fontSize: 14.0, color: Color(0xff999999))),
           const Spacer(),
           Visibility(
-              visible: !_htVarInfoShown,
-              child: GestureDetector(
-                  child: Row(children: [
-                    const Text("More Info",
-                        style: TextStyle(
-                            fontSize: 14.0, color: Color(0xff999999))),
-                    Container(width: 2.0),
-                    CachedNetworkImage(
-                        imageUrl: ImageURL.url_302, width: 16.0, height: 16.0),
-                  ]),
-                  onTap: () {
-                    setState(() {
-                      if (_htVarInfoShown == false) {
-                        _htVarInfoShown = true;
-                      } else {
-                        _htVarInfoShown = false;
-                      }
-                    });
-                  })),
+            visible: !provider.htVarInfoShown,
+            child: GestureDetector(
+              child: Row(children: [
+                const Text("More Info",
+                    style: TextStyle(fontSize: 14.0, color: Color(0xff999999))),
+                Container(width: 2.0),
+                CachedNetworkImage(
+                    imageUrl: ImageURL.url_302, width: 16.0, height: 16.0),
+              ]),
+              onTap: () {
+                provider.moreInfoEvent();
+              },
+            ),
+          ),
         ]));
   }
 
@@ -391,8 +380,9 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
             print('点击了收藏');
           }),
           child: Column(children: [
-            ///ImageURL.url_258已收藏   ImageURL.url_259未收藏    
-            CachedNetworkImage(imageUrl: ImageURL.url_259, width: 22, height: 22),
+            ///ImageURL.url_258已收藏   ImageURL.url_259未收藏
+            CachedNetworkImage(
+                imageUrl: ImageURL.url_259, width: 22, height: 22),
             Container(height: 5.0),
             const Text("My List",
                 style: TextStyle(color: Colors.white, fontSize: 10.0)),
@@ -404,8 +394,9 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
             print('点击了分享');
           }),
           child: Column(children: [
-            CachedNetworkImage(imageUrl: ImageURL.url_105, width: 22, height: 22),
-        
+            CachedNetworkImage(
+                imageUrl: ImageURL.url_105, width: 22, height: 22),
+
             ///105
             Container(height: 5.0),
             const Text("Share",
@@ -418,7 +409,8 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
             print("点击了跳转到按钮");
           }),
           child: Column(children: [
-            CachedNetworkImage(imageUrl: ImageURL.url_100, width: 22, height: 22),
+            CachedNetworkImage(
+                imageUrl: ImageURL.url_100, width: 22, height: 22),
             Container(height: 5.0),
             const Text("Feedback",
                 style: TextStyle(color: Colors.white, fontSize: 10.0)),
@@ -432,48 +424,51 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
   Widget moreInfoWidget() {
     var dataList = provider.actionList();
     return Visibility(
-        visible: _htVarInfoShown,
+        visible:provider.htVarInfoShown,
         child: Container(
           margin: const EdgeInsets.only(top: 20.0, left: 10.0, bottom: 0.0),
           child: Column(children: [
-            SizedBox(
-                height: 83.0,
-                child: ListView.builder(
-                  itemCount: dataList?.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    var model = dataList?[index];
-                    return Container(
-                        margin: const EdgeInsets.only(right: 15.0),
-                        width: 50.0,
-                        child: Column(children: [
-                          Expanded(
-                            child: CircleAvatar(
-                              backgroundImage: CachedNetworkImageProvider(
-                                model?.cover ?? '',
-                              ),
-                              radius: 25.0,
-                            ),
-                          ),
-                          Container(height: 5.0),
-                          Container(
-                            height: 30,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 0.0, horizontal: 0.0),
-                            child: Text(
-                              provider.isTV()
-                                  ? model?.starName ?? ''
-                                  : model?.title ?? '',
-                              maxLines: 2,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 12.0,
+            Visibility(
+              visible: dataList!.isNotEmpty?true:false,
+              child: SizedBox(
+                  height: 83.0,
+                  child: ListView.builder(
+                    itemCount: dataList?.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      var model = dataList?[index];
+                      return Container(
+                          margin: const EdgeInsets.only(right: 15.0),
+                          width: 50.0,
+                          child: Column(children: [
+                            Expanded(
+                              child: CircleAvatar(
+                                backgroundImage: CachedNetworkImageProvider(
+                                  model?.cover ?? '',
+                                ),
+                                radius: 25.0,
                               ),
                             ),
-                          ),
-                        ]));
-                  },
-                )),
+                            Container(height: 5.0),
+                            Container(
+                              height: 30,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 0.0, horizontal: 0.0),
+                              child: Text(
+                                provider.isTV()
+                                    ? model?.starName ?? ''
+                                    : model?.title ?? '',
+                                maxLines: 2,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12.0,
+                                ),
+                              ),
+                            ),
+                          ]));
+                    },
+                  )),
+            ),
             Container(
                 height: 1.0,
                 margin: const EdgeInsets.fromLTRB(10.0, 19.0, 10.0, 20.0),
@@ -496,13 +491,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
             ),
             InkWell(
               onTap: () {
-                setState(() {
-                  if (_htVarInfoShown == false) {
-                    _htVarInfoShown = true;
-                  } else {
-                    _htVarInfoShown = false;
-                  }
-                });
+                provider.moreInfoEvent();
               },
               child: const Center(
                 child: Image(
@@ -516,17 +505,18 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         ));
   }
 
-List<Widget>creatspecialSubjectListWidget(){
-  var listRes = <Widget>[];
-  var dataList = provider.projectList();
-  for (var element in dataList??[]) {
-    if (element.dataType == '1'&&element.data.length > 0||element.data != null) {
-      listRes.add(specialSubjectTitleWidget(element.name));
-      listRes.add(specialSubjectWidget(element));
-    }  
+  List<Widget> creatspecialSubjectListWidget() {
+    var listRes = <Widget>[];
+    var dataList = provider.projectList();
+    for (var element in dataList ?? []) {
+      if (element.dataType == '1' && (element.data.length > 0 ||
+          element.data != null)) {
+        listRes.add(specialSubjectTitleWidget(element.name));
+        listRes.add(specialSubjectWidget(element));
+      }
+    }
+    return listRes;
   }
-  return listRes;
-}
 
   ///专题列表title那一部分
   Widget specialSubjectTitleWidget(String titleName) {
@@ -547,7 +537,7 @@ List<Widget>creatspecialSubjectListWidget(){
   Widget specialSubjectWidget(dynamic data) {
     var dataList = data.data;
     return Container(
-      height: 192.0,
+      height: 193.0,
       margin: const EdgeInsets.only(top: 11.0, bottom: 0.0, right: 0),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -575,25 +565,28 @@ List<Widget>creatspecialSubjectListWidget(){
                                   fontSize: 20,
                                   fontWeight: FontWeight.w600)),
                         ])),
-                Positioned(
-                    bottom: 34.0,
-                    width: 112.0,
-                    child: Container(
-                        height: 24.0,
-                        decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [Colors.transparent, Colors.black])),
-                        child: const Row(children: [
-                          Spacer(),
-                          Text("NEW",
-                              style: TextStyle(
-                                  color: Color(0xffFF6D1C), fontSize: 8.0)),
-                          Text("|S07 E08",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 8.0))
-                        ]))),
+                Visibility(
+                  visible:model.mType2 == 'tt_mflx'?true:false,
+                  child: Positioned(
+                      bottom: 34.0,
+                      width: 112.0,
+                      child: Container(
+                          height: 24.0,
+                          decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [Colors.transparent, Colors.black])),
+                          child: const Row(children: [
+                            Spacer(),
+                            Text("NEW",
+                                style: TextStyle(
+                                    color: Color(0xffFF6D1C), fontSize: 8.0)),
+                            Text("|S07 E08",
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 8.0))
+                          ]))),
+                ),
                 Positioned(
                     top: 163.0,
                     left: 5.0,

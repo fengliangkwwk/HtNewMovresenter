@@ -68,41 +68,44 @@ class TVPlayPartWidget extends StatelessWidget {
         ),
 
         ///横线下面的列表
-        Container(
-          margin: const EdgeInsets.only(top: 5, left: 10),
-          height: 66.0,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: context.read<HTVideoDescProvider>().setList()?.length,
-            itemBuilder: ((context, index) {
-              Eps_list model =
-                  context.read<HTVideoDescProvider>().setList()?[index];
-              return Container(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                margin: const EdgeInsets.only(right: 10.0),
-                width: 140.0,
-                height: 66.0,
-                decoration: BoxDecoration(
-                  color: const Color(0xff23252A),
-                  borderRadius: BorderRadius.circular(4.0),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(model.epsNum.toString(),
-                        style: const TextStyle(
-                            color: Color(0xff999999), fontSize: 10.0)),
-                    Container(height: 4.0),
-                    Text(
-                      model.title ?? "",
-                      style:
-                          const TextStyle(color: Colors.white, fontSize: 12.0),
-                      maxLines: 2,
-                    ),
-                  ],
-                ),
-              );
-            }),
+        Visibility(
+          visible: context.read<HTVideoDescProvider>().setList()!.isEmpty?false:true,
+          child: Container(
+            margin: const EdgeInsets.only(top: 5, left: 10),
+            height: 66.0,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: context.read<HTVideoDescProvider>().setList()?.length,
+              itemBuilder: ((context, index) {
+                Eps_list model =
+                    context.read<HTVideoDescProvider>().setList()?[index];
+                return Container(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  margin: const EdgeInsets.only(right: 10.0),
+                  width: 140.0,
+                  height: 66.0,
+                  decoration: BoxDecoration(
+                    color: const Color(0xff23252A),
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(model.epsNum.toString(),
+                          style: const TextStyle(
+                              color: Color(0xff999999), fontSize: 10.0)),
+                      Container(height: 4.0),
+                      Text(
+                        model.title ?? "",
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 12.0),
+                        maxLines: 2,
+                      ),
+                    ],
+                  ),
+                );
+              }),
+            ),
           ),
         ),
       ],

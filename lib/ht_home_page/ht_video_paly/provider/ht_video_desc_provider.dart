@@ -23,7 +23,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
       videoDescBean?.data?.hd?.link ?? 'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
       autoPlay: true,
     );
-    playerOption();
+    // playerOption();
   }
 
   void allEpisodesEvent() {
@@ -31,4 +31,10 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     isAllEpisodes = !isAllEpisodes;
     notifyListeners();
   }
+
+void moreInfoEvent() {
+  htVarInfoShown = !htVarInfoShown;
+    notifyListeners();
+}
+
 }

@@ -2,6 +2,9 @@ import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/material.dart';
 
 class HTVideoDescProviderBase extends ChangeNotifier {
+
+  ///more info 是否展开
+  var htVarInfoShown = false;
   ///是否展开详情
   var isAllEpisodes = false;
 
