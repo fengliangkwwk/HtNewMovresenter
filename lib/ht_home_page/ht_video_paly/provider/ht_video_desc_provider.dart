@@ -9,7 +9,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   /// id:传的视频id
   Future<void> loadData(String mType2, String id) async {
     await apiRequest(mType2, id);
-    // initData();
+    initData();
   }
 
   void initData() {
