@@ -5,7 +5,6 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:get/get.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/home_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/homedropping_water_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_provider.dart';
@@ -389,7 +388,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                 ///"new_conf_type": 7,// 5、movie；7、tv  (myfx电影，tt_mflx电视剧)
                 return HTClassVideoDetailPage(
                   m_type_2: (element.new_conf_type == 5 ? "myfx" : "tt_mflx"),
-                  id: element.id ?? "",
+                  id: element.new_conf_value ?? "",
                 );
               },
             ),

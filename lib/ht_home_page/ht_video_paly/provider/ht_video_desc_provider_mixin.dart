@@ -64,12 +64,9 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
       'id': tv202Bean?.data?.ssnList?[0].id,
     });
 
-
-    Map<String, dynamic> jsonMap =
-        jsonDecode(res?.data.toString() ?? '');
+    Map<String, dynamic> jsonMap = jsonDecode(res?.data.toString() ?? '');
     tv203Bean = HtSetListBean.fromJson(jsonMap['data']);
   }
-
   ///151
   Future<void> request151(String id) async {
     // 创建一个空的字典
@@ -89,6 +86,8 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
     Map<String, dynamic> jsonMap = jsonDecode(result?.data?.toString() ?? '');
     videoDescBean = HtVideoDescBean.fromJson(jsonMap);
   }
+
+
 
   ///电影
   ///144
