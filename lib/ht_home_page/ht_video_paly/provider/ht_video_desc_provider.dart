@@ -1,4 +1,3 @@
-import 'package:fijkplayer/fijkplayer.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_data_prvider_mixin.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_base.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_mixin.dart';
@@ -27,12 +26,13 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   }
 
   void allEpisodesEvent() {
-    print('点击了大块头点击了大块头');
+    print('点击了allEpisodes按钮');
     isAllEpisodes = !isAllEpisodes;
     notifyListeners();
   }
 
 void moreInfoEvent() {
+      print('moreInfo按钮');
   htVarInfoShown = !htVarInfoShown;
     notifyListeners();
 }

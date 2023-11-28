@@ -63,9 +63,9 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
       child: Scaffold(
           backgroundColor: Colors.black,
           body: Selector<HTVideoDescProvider,
-              Tuple3<bool, HtVideoDescBean?, desc.HtSeasonAndEpisodeBean?>>(
+              Tuple4<bool, HtVideoDescBean?, desc.HtSeasonAndEpisodeBean?,bool>>(
             selector: (p0, p1) =>
-                Tuple3(p1.isAllEpisodes, p1.videoDescBean, p1.tv202Bean),
+                Tuple4(p1.isAllEpisodes, p1.videoDescBean, p1.tv202Bean,p1.htVarInfoShown),
             builder: (context, value, child) {
               return Column(
                 children: [
