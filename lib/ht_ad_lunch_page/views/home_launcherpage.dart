@@ -6,8 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ht_new_movpresenter/ht_ad_lunch_page/views/InviteCodeController.dart';
 import 'package:ht_new_movpresenter/ht_ad_lunch_page/views/premium_launcherpage.dart';
 import 'package:ht_new_movpresenter/utils/ui_utils.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart' show ModalProgressHUD;
-
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart'
+    show ModalProgressHUD;
 
 class HTClassLauncherPage extends StatefulWidget {
   const HTClassLauncherPage({Key? key, required this.title}) : super(key: key);
@@ -26,7 +26,6 @@ class HTClassLauncherPage extends StatefulWidget {
 }
 
 class _HTClassLauncherPageState extends State<HTClassLauncherPage> {
-
   var _htVarSearchController = TextEditingController();
   var _htVarShowIndicator = false;
   var _htVarInviteCodeControl = InviteCodeController();
@@ -34,45 +33,71 @@ class _HTClassLauncherPageState extends State<HTClassLauncherPage> {
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     KTClassUIUtils.setDeviceResolution(context);
     return Scaffold(
         backgroundColor: Colors.white,
-        body: ModalProgressHUD(child:Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,children:[
-          const Text("APP",style: TextStyle(fontSize: 32.0,fontWeight: FontWeight.w600,color: Colors.green)),
-          Container(height: 50.0),
-          Container(margin: EdgeInsets.symmetric(horizontal: 110.0),height:44.0,padding:EdgeInsets.symmetric(horizontal: 10.0),decoration: BoxDecoration(border: Border.all(color: Colors.black)),child: TextField(controller:_htVarSearchController,decoration: InputDecoration(border: InputBorder.none),onEditingComplete: () async {
-            var htVarSearchText = _htVarSearchController.value.text;
-            setState(() {
-              _htVarShowIndicator = true;
-            });
-            var htVarinviteCodeBean = await _htVarInviteCodeControl.getInviteCode(_htVarSearchController.value.text);
-            setState(() {
-              _htVarShowIndicator = false;
-            });
-            if (kDebugMode) {
-              print(htVarinviteCodeBean);
-            }
-             Navigator.push(context,
-                  MaterialPageRoute(builder: (context) {
-                    return const HTClassPremiumLauncherPage(title: "");
-                  }));
-            if(htVarSearchText == "OPEN" || htVarSearchText== "open"){
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) {
-                    return const HTClassPremiumLauncherPage(title: "");
-                  }));
-            // ignore: unnecessary_null_comparison
-            }else if(htVarinviteCodeBean!=null  && htVarinviteCodeBean.resolution.toString() == "100"){
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) {
-                    return const HTClassPremiumLauncherPage(title: "");
-                  }));
-            }
-          }))
-        ]),inAsyncCall: _htVarShowIndicator)
-        );
+        body: ModalProgressHUD(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text("APP",
+                      style: TextStyle(
+                          fontSize: 32.0,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.green)),
+                  Container(height: 50.0),
+                  Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 110.0),
+                      height: 44.0,
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black)),
+                      child: TextField(
+                          controller: _htVarSearchController,
+                          decoration: const InputDecoration(border: InputBorder.none),
+                          onEditingComplete: () async {
+                            var htVarSearchText =
+                                _htVarSearchController.value.text;
+                            setState(() {
+                              _htVarShowIndicator = true;
+                            });
+                            var htVarinviteCodeBean =
+                                await _htVarInviteCodeControl.getInviteCode(
+                                    _htVarSearchController.value.text);
+                            setState(() {
+                              _htVarShowIndicator = false;
+                            });
+                            if (kDebugMode) {
+                              print(htVarinviteCodeBean);
+                            }
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return const HTClassPremiumLauncherPage(
+                                  title: "");
+                            }));
+                            if (htVarSearchText == "OPEN" ||
+                                htVarSearchText == "open") {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return const HTClassPremiumLauncherPage(
+                                    title: "");
+                              }));
+                              // ignore: unnecessary_null_comparison
+                            } else if (htVarinviteCodeBean != null &&
+                                htVarinviteCodeBean.resolution.toString() ==
+                                    "100") {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return const HTClassPremiumLauncherPage(
+                                    title: "");
+                              }));
+                            }
+                          }))
+                ]),
+            inAsyncCall: _htVarShowIndicator));
   }
 }
-

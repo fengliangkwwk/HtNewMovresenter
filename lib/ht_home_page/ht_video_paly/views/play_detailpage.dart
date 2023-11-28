@@ -45,7 +45,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
   @override
   void initState() {
     provider.loadData(widget.m_type_2, widget.id);
-    provider.playerOption();
+    // provider.playerOption();
     super.initState();
   }
 
@@ -57,23 +57,21 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    FijkPlugin.keepScreenOn(true);
+    // FijkPlugin.keepScreenOn(true);
     return ChangeNotifierProvider(
       create: (context) => provider,
       child: Scaffold(
           backgroundColor: Colors.black,
-          body: Selector<
-              HTVideoDescProvider,
-              Tuple4<bool, HtVideoDescBean?, desc.HtSeasonAndEpisodeBean?,
-                  bool>>(
-            selector: (p0, p1) => Tuple4(p1.isAllEpisodes, p1.videoDescBean,
-                p1.tv202Bean, p1.htVarInfoShown),
+          body: Selector<HTVideoDescProvider,
+              Tuple3<bool, HtVideoDescBean?, desc.HtSeasonAndEpisodeBean?>>(
+            selector: (p0, p1) =>
+                Tuple3(p1.isAllEpisodes, p1.videoDescBean, p1.tv202Bean),
             builder: (context, value, child) {
               return Column(
                 children: [
                   ///播放器
                   videoPlayerViewWidget(),
-
+                  
                   ///带背景图的第一行
                   firstPartWidget(),
 
@@ -110,6 +108,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                                 : Container(
                                     height: 0,
                                   ),
+
                             ///专题列表那部分
                             ...creatspecialSubjectListWidget(),
                           ],
@@ -424,12 +423,12 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
   Widget moreInfoWidget() {
     var dataList = provider.actionList();
     return Visibility(
-        visible:provider.htVarInfoShown,
+        visible: provider.htVarInfoShown,
         child: Container(
           margin: const EdgeInsets.only(top: 20.0, left: 10.0, bottom: 0.0),
           child: Column(children: [
             Visibility(
-              visible: dataList!.isNotEmpty?true:false,
+              visible: dataList!.isNotEmpty ? true : false,
               child: SizedBox(
                   height: 83.0,
                   child: ListView.builder(
@@ -509,8 +508,8 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
     var listRes = <Widget>[];
     var dataList = provider.projectList();
     for (var element in dataList ?? []) {
-      if (element.dataType == '1' && (element.data.length > 0 ||
-          element.data != null)) {
+      if (element.dataType == '1' &&
+          (element.data.length > 0 || element.data != null)) {
         listRes.add(specialSubjectTitleWidget(element.name));
         listRes.add(specialSubjectWidget(element));
       }
@@ -566,7 +565,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                                   fontWeight: FontWeight.w600)),
                         ])),
                 Visibility(
-                  visible:model.mType2 == 'tt_mflx'?true:false,
+                  visible: model.mType2 == 'tt_mflx' ? true : false,
                   child: Positioned(
                       bottom: 34.0,
                       width: 112.0,
@@ -583,8 +582,8 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                                 style: TextStyle(
                                     color: Color(0xffFF6D1C), fontSize: 8.0)),
                             Text("|S07 E08",
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 8.0))
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 8.0))
                           ]))),
                 ),
                 Positioned(
