@@ -57,7 +57,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   #本地存储
   shared_preferences: ^2.2.2
-  #
+  #网页
   webview_flutter: ^4.4.2
   
   json_annotation: ^4.7.0
@@ -74,6 +74,8 @@ dependencies:
 
   #上拉刷新下拉加载
   pull_to_refresh: ^2.0.0
+  #苹果原生分享
+  flutter_share: ^2.0.0
     
 dev_dependencies:
   flutter_test:

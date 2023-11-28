@@ -1,7 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -13,7 +12,6 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_middlepa
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage.dart';
 import 'package:ht_new_movpresenter/utils/ht_user_store.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tuple/tuple.dart';
@@ -458,6 +456,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                       enlargeStrategy: CenterPageEnlargeStrategy.height,
                       onPageChanged: (index, reason) {
                         homeProvider.carouselSliderCurrent = index;
+                        // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
                         homeProvider.notifyListeners();
                       }),
                   items: imageSliders,

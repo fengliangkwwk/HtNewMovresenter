@@ -4,6 +4,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fijkplayer/fijkplayer.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_and_episode_bean.dart'
     as desc;
@@ -11,6 +12,7 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_video_des
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_all_episodes.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_part.dart';
+import 'package:ht_new_movpresenter/utils/ht_share.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
@@ -52,6 +54,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
   @override
   void dispose() {
     super.dispose();
+    provider.dismissEasyLoading();
     provider.player.release();
   }
 
@@ -62,16 +65,18 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
       create: (context) => provider,
       child: Scaffold(
           backgroundColor: Colors.black,
-          body: Selector<HTVideoDescProvider,
-              Tuple4<bool, HtVideoDescBean?, desc.HtSeasonAndEpisodeBean?,bool>>(
-            selector: (p0, p1) =>
-                Tuple4(p1.isAllEpisodes, p1.videoDescBean, p1.tv202Bean,p1.htVarInfoShown),
+          body: Selector<
+              HTVideoDescProvider,
+              Tuple4<bool, HtVideoDescBean?, desc.HtSeasonAndEpisodeBean?,
+                  bool>>(
+            selector: (p0, p1) => Tuple4(p1.isAllEpisodes, p1.videoDescBean,
+                p1.tv202Bean, p1.htVarInfoShown),
             builder: (context, value, child) {
               return Column(
                 children: [
                   ///播放器
                   videoPlayerViewWidget(),
-                  
+
                   ///带背景图的第一行
                   firstPartWidget(),
 
@@ -390,6 +395,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         Container(width: 40.0),
         GestureDetector(
           onTap: (() {
+            HTShare().share();
             print('点击了分享');
           }),
           child: Column(children: [

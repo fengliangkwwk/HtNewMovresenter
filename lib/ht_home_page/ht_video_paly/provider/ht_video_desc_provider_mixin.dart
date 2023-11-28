@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_and_episode_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_set_list_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_video_desc_bean.dart';
@@ -18,6 +19,8 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
 
   String? mType2;
 
+  late EasyLoading easyLoading;
+
   /// m_type_2:tt_mflx=电视剧   myfx:电影
   /// id:出入的视频id
 
@@ -30,6 +33,7 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
 
   Future<void> apiRequest(String m_type_2, String id) async {
     mType2 = m_type_2;
+    EasyLoading.show(status: 'loading...');
     if (m_type_2 == 'tt_mflx') {
       ///1.电视剧
       await request202(id);
@@ -43,8 +47,13 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
     }
 
     print('数据解析成功');
+    EasyLoading.dismiss();
+    notifyListeners();
   }
-
+///退出当前页释放加载
+  void dismissEasyLoading(){
+    EasyLoading.dismiss();
+  }
   ///电视剧
   ///202
   Future<void> request202(String id) async {
@@ -53,7 +62,6 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
     });
     Map<String, dynamic> jsonMap = jsonDecode(res?.data.toString() ?? '');
     tv202Bean = HtSeasonAndEpisodeBean.fromJson(jsonMap);
-    notifyListeners();
   }
 
   ///203
@@ -61,11 +69,10 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
     var res =
         await HTNetUtils.htPost(apiUrl: Global.switchingSeasonsUrl, params: {
       'id': tv202Bean?.data?.ssnList?[0].id,
-    });
+    }).then((value) => null);
 
     Map<String, dynamic> jsonMap = jsonDecode(res?.data.toString() ?? '');
     tv203Bean = HtSetListBean.fromJson(jsonMap['data']);
-    notifyListeners();
   }
 
   ///151
@@ -86,7 +93,6 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
     // 解析JSON数据为User对象
     Map<String, dynamic> jsonMap = jsonDecode(result?.data?.toString() ?? '');
     videoDescBean = HtVideoDescBean.fromJson(jsonMap);
-    notifyListeners();
   }
 
   ///电影
@@ -103,6 +109,5 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
     });
     Map<String, dynamic> jsonMap = jsonDecode(res?.data.toString() ?? '');
     videoDescBean = HtVideoDescBean.fromJson(jsonMap);
-    notifyListeners();
   }
 }
