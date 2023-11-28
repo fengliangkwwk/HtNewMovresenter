@@ -428,7 +428,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
           margin: const EdgeInsets.only(top: 20.0, left: 10.0, bottom: 0.0),
           child: Column(children: [
             Visibility(
-              visible: dataList!.isNotEmpty ? true : false,
+              visible: dataList?.isNotEmpty == true,
               child: SizedBox(
                   height: 83.0,
                   child: ListView.builder(
