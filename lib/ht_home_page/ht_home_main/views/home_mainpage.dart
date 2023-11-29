@@ -10,6 +10,7 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/views/second_level_page.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_middlepage.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage.dart';
+import 'package:ht_new_movpresenter/utils/ht_share.dart';
 import 'package:ht_new_movpresenter/utils/ht_user_store.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 import 'package:provider/provider.dart';
@@ -85,7 +86,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
     var result = <Widget>[];
     bool ishasAd = false;
     for (var element in homeProvider.dataList) {
-        var isHidden =  HTUserStore.list18.contains(element.playListId ?? '');
+      var isHidden = HTUserStore.list18.contains(element.playListId ?? '');
 
       ///专题 data_type 目前只支持 1（电视剧/电影） 和 4（18+）
       if (element.display_type == '3' && element.itemData?.isNotEmpty == true) {
@@ -164,7 +165,13 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
         height: 56,
         child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Container(width: 10.0),
-          CachedNetworkImage(imageUrl: ImageURL.url_281, width: 24, height: 24),
+          InkWell(
+              onTap: (() {
+                HTShare().share("app", "", "0",
+                    "","");
+              }),
+              child: CachedNetworkImage(
+                  imageUrl: ImageURL.url_281, width: 24, height: 24)),
           Container(width: 6.0),
           Expanded(
               child: Container(
