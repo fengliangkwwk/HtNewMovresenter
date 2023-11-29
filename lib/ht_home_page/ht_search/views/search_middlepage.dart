@@ -139,6 +139,13 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
               Container(width: 8),
               Expanded(
                 child: TextField(
+                  onEditingComplete: (() {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return HTClassSearchResultPage(
+                          keyWord: _htVarSearchValue);
+                    }));
+                  }),
                   controller: midSearchProvider.htVarFieldController,
                   autofocus: true,
                   focusNode: _htVarFieldFocusNode,
@@ -352,19 +359,27 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                   textDirection: TextDirection.ltr,
                   children: midSearchProvider.searchDataList
                       .map(
-                        (value) => Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15.0, vertical: 5.0),
-                          child: Text(
-                            value,
-                            style: const TextStyle(
-                              color: Color(0xffBCBDBE),
-                              fontSize: 14.0,
+                        (value) => GestureDetector(
+                          onTap: (() {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return HTClassSearchResultPage(keyWord: value);
+                            }));
+                          }),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 15.0, vertical: 5.0),
+                            child: Text(
+                              value,
+                              style: const TextStyle(
+                                color: Color(0xffBCBDBE),
+                                fontSize: 14.0,
+                              ),
                             ),
-                          ),
-                          decoration: BoxDecoration(
-                            color: const Color(0xff23252A),
-                            borderRadius: BorderRadius.circular(15.0),
+                            decoration: BoxDecoration(
+                              color: const Color(0xff23252A),
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
                           ),
                         ),
                       )
@@ -432,7 +447,8 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return  HTClassSearchResultPage(keyWord: itemData[0] ?? "");
+                        return HTClassSearchResultPage(
+                            keyWord: itemData[0] ?? "");
                       }));
                     },
                   );
