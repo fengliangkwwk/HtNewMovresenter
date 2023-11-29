@@ -15,7 +15,21 @@ mixin HTVideoDescDataProviderMixin on HTVideoProviderMixin {
     }
     return videoDescBean?.data?.title ?? '';
   }
+  /// 分享使用的视频 id
+  String videoId() {
+    if (isTV()) {
+      return tv202Bean?.data?.id ?? '';
+    }
+    return videoDescBean?.data?.id ?? '';
+  }
 
+   /// 分享使用的视频 play_lock// 1锁电影，0不锁
+  String playLock() {
+    if (isTV()) {
+      return tv202Bean?.data?.playLock ?? '';
+    }
+    return videoDescBean?.data?.playLock ?? '';
+  }
   /// 分数
   String rate() {
     if (isTV()) {

@@ -20,15 +20,16 @@ import 'package:tuple/tuple.dart';
 class HTClassVideoDetailPage extends StatefulWidget {
   // ignore: non_constant_identifier_names
   const HTClassVideoDetailPage(
+      // ignore: non_constant_identifier_names
       {Key? key, required this.m_type_2, required this.id})
       : super(key: key);
-  // ignore: non_constant_identifier_names
-  final String m_type_2;
 
   ///"m_type_2": "myfx",// myfx电影，tt_mflx电视剧
+  // ignore: non_constant_identifier_names
+  final String m_type_2;
+  ///电影 id 或者 电视剧 id
   final String id;
 
-  ///电影 id 或者 电视剧 id
 
   @override
   State<HTClassVideoDetailPage> createState() => _HTClassVideoDetailPageState();
@@ -395,7 +396,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         Container(width: 40.0),
         GestureDetector(
           onTap: (() {
-            HTShare().share();
+            HTShare().share(widget.m_type_2, provider.playLock(), "1", provider.videoId(), provider.title());
             print('点击了分享');
           }),
           child: Column(children: [

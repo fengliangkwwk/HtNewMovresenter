@@ -19,11 +19,9 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
 
   String? mType2;
 
-  late EasyLoading easyLoading;
 
   /// m_type_2:tt_mflx=电视剧   myfx:电影
   /// id:出入的视频id
-
   ///电影参数
   ///id 电影 id
   ///sig2 写死'kevMvWzTjzlckLgckegcoeeRwdwlwEbejzjLvzvSod1UkEqVkEeOkWjS'
@@ -50,10 +48,12 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
     EasyLoading.dismiss();
     notifyListeners();
   }
-///退出当前页释放加载
-  void dismissEasyLoading(){
+
+  ///退出当前页释放加载
+  void dismissEasyLoading() {
     EasyLoading.dismiss();
   }
+
   ///电视剧
   ///202
   Future<void> request202(String id) async {

@@ -19,7 +19,8 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
 
     player.setDataSource(
       // 'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
-      videoDescBean?.data?.hd?.link ?? 'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
+      videoDescBean?.data?.hd?.link ??
+          'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
       autoPlay: true,
     );
     // playerOption();
@@ -31,10 +32,16 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     notifyListeners();
   }
 
-void moreInfoEvent() {
-      print('moreInfo按钮');
-  htVarInfoShown = !htVarInfoShown;
+  void moreInfoEvent() {
+    print('moreInfo按钮');
+    htVarInfoShown = !htVarInfoShown;
     notifyListeners();
-}
+  }
 
+  ///分享
+  /// m_type_2:tt_mflx=电视剧   myfx:电影
+  Future<void> shareEvent(String m_type_2) async {
+
+
+  }
 }
