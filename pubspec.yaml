@@ -76,6 +76,9 @@ dependencies:
   pull_to_refresh: ^2.0.0
   #苹果原生分享
   flutter_share: ^2.0.0
+  #视频播放器
+  video_player: ^2.8.1
+
     
 dev_dependencies:
   flutter_test:

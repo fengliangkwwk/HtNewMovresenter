@@ -1,13 +1,13 @@
 
 
 import 'dart:convert';
-import 'package:dio/dio.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_share_bean.dart';
 import 'package:ht_new_movpresenter/utils/ht_api.dart';
 import 'package:ht_new_movpresenter/utils/ht_net_utils.dart';
 
 class OtherRequest{
-   ///分享
+  HTShareBean? shareBean;
+///分享
 // p1:订阅ProductID
 // p2:订阅状态：0未订阅，1本地订阅，2服务器(账号)订阅
 // t1:订阅来源：0未订阅，1影视包订阅，2工具包订阅
@@ -19,8 +19,7 @@ class OtherRequest{
 // 参数app_id来源：接口326/和325/  server-t1
 // 参数p2来源：接口326/和325/  local-value=1时，传1；其他传2
 // 非VIP时，传默认值0
-
-  Future<HTShareBean?> shareRequest()async{
+  Future<void> shareRequest()async{
     var res = await HTNetUtils.htPost(apiUrl: Global.getShareUrl, params: {
       'p1': 'month',
       'p2': '0',
@@ -30,9 +29,7 @@ class OtherRequest{
       'subid': '0'
     });
     Map<String, dynamic> jsonMap = jsonDecode(res?.data ?? '');
-    HTShareBean shareBean = HTShareBean.fromJson(jsonMap["data"]);
-
-    print(shareBean.link);
-    return shareBean;
+    shareBean = HTShareBean.fromJson(jsonMap["data"]);
+    print(shareBean?.link);
   }
 }

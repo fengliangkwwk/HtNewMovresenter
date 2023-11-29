@@ -1,15 +1,8 @@
-// ignore: unused_import
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
-import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_share_bean.dart';
-import 'package:ht_new_movpresenter/utils/ht_api.dart';
-import 'package:ht_new_movpresenter/utils/ht_net_utils.dart';
 import 'package:ht_new_movpresenter/utils/ht_other_request.dart';
 
 class HTShare extends OtherRequest {
-  HTShareBean? shareBean;
+  // HTShareBean? shareBean;
   String? shareTitle; //分享标题
   String? shareText; //分享内容
   String? shareLinkUrl; //分享链接
@@ -21,7 +14,7 @@ class HTShare extends OtherRequest {
   // 判断哪个页面 pageFrom ‘1’播放页 风向电视剧和电影     else其他  分享app
   Future<void> share(String mType2, String playLock, String pageFrom, String ID,
       String videoName) async {
-    shareBean = await shareRequest();
+    await shareRequest();
     print("🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎${shareBean?.link}");
     //播放页面分享电影或者电视剧
     if (pageFrom == "1") {
@@ -38,9 +31,7 @@ class HTShare extends OtherRequest {
           shareText = shareBean?.text2 ?? "";
           shareLinkUrl = shareBean?.ttlocklink ?? "";
         }
-      }
-
-      if (mType2 == "mflx") {
+      }else{
         para2 = "2";
         print("经过了电影🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌");
         if (playLock == "0") {
@@ -79,7 +70,7 @@ class HTShare extends OtherRequest {
       shareLinkUrl = shareBean?.appmLink ?? "";
     }
 
-    print(newLinkUrl);
+    print("走到这✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋$newLinkUrl");
 
     FlutterShare.share(
       title: shareTitle ?? "",
