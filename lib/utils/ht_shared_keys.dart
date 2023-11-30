@@ -3,4 +3,6 @@ class HTSharedKeys {
   static var htPersonMesaage = 'personMessage';
   static var htSearch = 'htSearch';
   static var htHomeHideKey = 'htHomeHideKey';
+  static var isFirstInto = "isFirstInto";
+
 }

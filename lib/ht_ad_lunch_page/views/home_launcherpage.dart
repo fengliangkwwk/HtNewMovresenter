@@ -1,13 +1,19 @@
+//邀请码界面
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ht_new_movpresenter/ht_ad_lunch_page/beans/invite_code_bean.dart';
 // import 'package:ht_new_movpresenter/control/HomePageController.dart';
 import 'package:ht_new_movpresenter/ht_ad_lunch_page/views/InviteCodeController.dart';
 import 'package:ht_new_movpresenter/ht_ad_lunch_page/views/premium_launcherpage.dart';
+import 'package:ht_new_movpresenter/utils/ht_shared_keys.dart';
+import 'package:ht_new_movpresenter/utils/ht_user_store.dart';
 import 'package:ht_new_movpresenter/utils/ui_utils.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart'
     show ModalProgressHUD;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HTClassLauncherPage extends StatefulWidget {
   const HTClassLauncherPage({Key? key, required this.title}) : super(key: key);
@@ -27,7 +33,7 @@ class HTClassLauncherPage extends StatefulWidget {
 
 class _HTClassLauncherPageState extends State<HTClassLauncherPage> {
   var _htVarSearchController = TextEditingController();
-  var _htVarShowIndicator = false;
+  var _htVarShowIndicator = false; //加载指示器是否显示
   var _htVarInviteCodeControl = InviteCodeController();
   @override
   void initState() {
@@ -58,43 +64,33 @@ class _HTClassLauncherPageState extends State<HTClassLauncherPage> {
                           border: Border.all(color: Colors.black)),
                       child: TextField(
                           controller: _htVarSearchController,
-                          decoration: const InputDecoration(border: InputBorder.none),
+                          decoration:
+                              const InputDecoration(border: InputBorder.none),
                           onEditingComplete: () async {
-                            var htVarSearchText =
-                                _htVarSearchController.value.text;
                             setState(() {
                               _htVarShowIndicator = true;
                             });
-                            var htVarinviteCodeBean =
+                            InviteCodeBean? inviteCodeBean =
                                 await _htVarInviteCodeControl.getInviteCode(
                                     _htVarSearchController.value.text);
-                            setState(() {
-                              _htVarShowIndicator = false;
-                            });
-                            if (kDebugMode) {
-                              print(htVarinviteCodeBean);
-                            }
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return const HTClassPremiumLauncherPage(
-                                  title: "");
-                            }));
-                            if (htVarSearchText == "OPEN" ||
-                                htVarSearchText == "open") {
+
+                            if (inviteCodeBean?.resolution != "100") {
+                              setState(() {
+                                _htVarShowIndicator = false;
+                              });
+                              final SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.setBool(HTSharedKeys.isFirstInto,
+                                  false);
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 return const HTClassPremiumLauncherPage(
                                     title: "");
                               }));
-                              // ignore: unnecessary_null_comparison
-                            } else if (htVarinviteCodeBean != null &&
-                                htVarinviteCodeBean.resolution.toString() ==
-                                    "100") {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return const HTClassPremiumLauncherPage(
-                                    title: "");
-                              }));
+                            } else {
+                              setState(() {
+                                _htVarShowIndicator = false;
+                              });
                             }
                           }))
                 ]),
