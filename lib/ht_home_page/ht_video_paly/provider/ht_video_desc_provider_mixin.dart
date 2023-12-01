@@ -58,7 +58,7 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
   ///202
   Future<void> request202(String id) async {
     var res = await HTNetUtils.htPost(apiUrl: Global.tvPlayUrl, params: {
-      'tt_id': id,
+      'tt_id': id,//电视 id
     });
     Map<String, dynamic> jsonMap = jsonDecode(res?.data.toString() ?? '');
     tv202Bean = HtSeasonAndEpisodeBean.fromJson(jsonMap);
@@ -66,9 +66,10 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
 
   ///203
   Future<void> request203() async {
+    sid = (tv202Bean?.data?.ssnList?[0].id) as String?;
     var res =
         await HTNetUtils.htPost(apiUrl: Global.switchingSeasonsUrl, params: {
-      'id': tv202Bean?.data?.ssnList?[0].id,
+      'id': tv202Bean?.data?.ssnList?[0].id,//季id
     }).then((value) => null);
 
     Map<String, dynamic> jsonMap = jsonDecode(res?.data.toString() ?? '');
@@ -77,12 +78,12 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
 
   ///151
   Future<void> request151(String id) async {
+    eid = tv203Bean?.epsList?[0].id as String?;
     // 创建一个空的字典
     Map<String, dynamic> htVarparams = {};
-
     ///参数
     String cutterntTimeStamp = SysTools().getSecondsTimeStamp();
-    htVarparams['id'] = tv203Bean?.epsList?[0].id;
+    htVarparams['id'] = tv203Bean?.epsList?[0].id;//电视剧集 id
     htVarparams['sig2'] =
         'kevMvWzTjzlckLgckegcoeeRwdwlwEbejzjLvzvSod1UkEqVkEeOkWjS';
     htVarparams['unixtime1'] = cutterntTimeStamp;

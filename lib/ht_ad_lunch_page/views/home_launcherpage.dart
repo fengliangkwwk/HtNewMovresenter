@@ -80,8 +80,7 @@ class _HTClassLauncherPageState extends State<HTClassLauncherPage> {
                               });
                               final SharedPreferences prefs =
                                   await SharedPreferences.getInstance();
-                              prefs.setBool(HTSharedKeys.isFirstInto,
-                                  false);
+                              prefs.setBool(HTSharedKeys.isFirstInto, false);
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 return const HTClassPremiumLauncherPage(

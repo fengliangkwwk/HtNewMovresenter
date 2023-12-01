@@ -34,7 +34,6 @@ mixin HTSearchResultProviderMiXin on HTSearchResultProviderBase {
 
     resultData ??= temBen;
 
-
     var temp = <Mtt_list>[];
     for (var element in json['data']['mtt_list'] ?? []) {
       if (['1', '3'].contains(element['data_type'])) {

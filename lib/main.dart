@@ -11,9 +11,7 @@ import 'package:ht_new_movpresenter/utils/ht_init_app.dart';
 import 'package:ht_new_movpresenter/utils/ht_user_store.dart';
 
 void main() async {
-  ///
   await initApp();
-
   runApp(
     DevicePreview(
       // enabled: !kReleaseMode,
@@ -51,7 +49,9 @@ class HTClassApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:HTUserStore.isFirstInto?const HTClassLauncherPage(title: ""):const HTClassPremiumLauncherPage(title: ""), //正常进入启动页
+      home: HTUserStore.isFirstInto
+          ? const HTClassLauncherPage(title: "")
+          : const HTClassPremiumLauncherPage(title: ""), //正常进入启动页
       // home: const HTClassBtmNavPage(),
       // home: const HTClassPremiumLauncherPage(title: '',),
     );

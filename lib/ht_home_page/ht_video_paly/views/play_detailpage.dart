@@ -12,6 +12,7 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_video_des
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_all_episodes.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_part.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/feed_back/view/setting_feedback.dart';
 import 'package:ht_new_movpresenter/utils/ht_share.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 import 'package:provider/provider.dart';
@@ -21,15 +22,17 @@ class HTClassVideoDetailPage extends StatefulWidget {
   // ignore: non_constant_identifier_names
   const HTClassVideoDetailPage(
       // ignore: non_constant_identifier_names
-      {Key? key, required this.m_type_2, required this.id})
+      {Key? key,
+      required this.m_type_2,
+      required this.id})
       : super(key: key);
 
   ///"m_type_2": "myfx",// myfx电影，tt_mflx电视剧
   // ignore: non_constant_identifier_names
   final String m_type_2;
+
   ///电影 id 或者 电视剧 id
   final String id;
-
 
   @override
   State<HTClassVideoDetailPage> createState() => _HTClassVideoDetailPageState();
@@ -396,7 +399,8 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         Container(width: 40.0),
         GestureDetector(
           onTap: (() {
-            HTShare().share(widget.m_type_2, provider.playLock(), "1", provider.videoId(), provider.title());
+            HTShare().share(widget.m_type_2, provider.playLock(), "1",
+                provider.videoId(), provider.title());
             print('点击了分享');
           }),
           child: Column(children: [
@@ -411,8 +415,22 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         ),
         Container(width: 40.0),
         GestureDetector(
+          ///跳转到反馈界面
           onTap: (() {
-            print("点击了跳转到按钮");
+            print("🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻${provider.videoId()} ==============  ${widget.m_type_2}");
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return (widget.m_type_2 == 'tt_mflx')
+                  ? HTClassFeedbackPage(
+                      title: 'Feedback',
+                      vid: provider.videoId(),
+                      sid: provider.sid,
+                      eid: provider.eid,
+                    )
+                  : HTClassFeedbackPage(
+                      title: 'Feedback',
+                      vid: provider.videoId(),
+                    );
+            }));
           }),
           child: Column(children: [
             CachedNetworkImage(

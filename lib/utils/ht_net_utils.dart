@@ -18,7 +18,7 @@ class HTNetUtils {
     var formData = FormData.fromMap(htVarparams);
     var dio = Dio();
 
-   //设置代理
+    //设置代理
     dio.httpClientAdapter = IOHttpClientAdapter()
       // ignore: deprecated_member_use
       ..onHttpClientCreate = (client) {

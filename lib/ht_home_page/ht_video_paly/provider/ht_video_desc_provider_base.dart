@@ -7,6 +7,14 @@ class HTVideoDescProviderBase extends ChangeNotifier {
   ///是否展开详情
   var isAllEpisodes = false;
 
+
+  String? vid;//电影或电视剧ID（没有传0）
+  String? sid;//电视剧季ID（没有传0）
+  String? eid;//电视剧集ID（没有传0）
+
+
+
+
   ///视频播放器
   FijkPlayer player = FijkPlayer();
   void playerOption(){

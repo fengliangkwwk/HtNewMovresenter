@@ -50,7 +50,11 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
 
     super.initState();
   }
-
+  @override
+  void dispose() {
+    super.dispose();
+   FocusScope.of(context).unfocus();
+  }
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

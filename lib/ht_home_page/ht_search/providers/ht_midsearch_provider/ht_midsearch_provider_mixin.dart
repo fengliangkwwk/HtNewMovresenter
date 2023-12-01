@@ -1,6 +1,7 @@
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/beans/ht_mid_search_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/providers/ht_midsearch_provider/ht_midsearch_provider_base.dart';
 import 'package:ht_new_movpresenter/utils/ht_api.dart';
+import 'package:ht_new_movpresenter/utils/ht_net_utils.dart';
 import 'package:ht_new_movpresenter/utils/ui_utils.dart';
 import 'package:dio/dio.dart' as MidSearch;
 import "dart:convert";
@@ -22,40 +23,24 @@ mixin HTMidSearchProviderMiXin on HTMidSearchProviderBase {
     }
 
     Map<String, dynamic> htVarparams = {"type": type};
-
-
-    await KTClassUIUtils.htMethodPutRequestCommonParams(htVarparams);
-    var formData = MidSearch.FormData.fromMap(htVarparams);
-    var dio = MidSearch.Dio();
-    var res = await dio.post(
-      Global.midSearchUrl,
-      data: formData,
-    );
-    // var res =
-    //     HTNetUtils.htPost(apiUrl: Global.midSearchUrl, params: htVarparams,needCommon: true);
+    var res = await HTNetUtils.htPost(
+        apiUrl: Global.midSearchUrl, params: htVarparams, needCommon: true);
     print(res);
-    // Map map = jsonDecode(res.toString());
-    // Map<String, dynamic> stringMap =
-    //     map.map((key, value) => MapEntry(key.toString(), value));
-    Map<String, dynamic> stringMap =
-       jsonDecode(res.toString());
+    Map<String, dynamic> stringMap = jsonDecode(res.toString());
 
     for (var element in stringMap['data']) {
-      if (element['mtype'] == '3') {
-
-      }
-      
+      if (element['mtype'] == '3') {}
     }
     midSearchBean = ht_mid_search_bean.fromJson(stringMap);
     var _temList = <Data>[];
+
     /// 过滤数据 ( mtype = [1,2,4])
     for (var element in midSearchBean?.data ?? <Data>[]) {
-        if (['1','2','4'].contains(element.mtype ?? '')) {
-          _temList.add(element);
-        }
+      if (['1', '2', '4'].contains(element.mtype ?? '')) {
+        _temList.add(element);
+      }
     }
     midSearchBean?.data = _temList;
-    
 
     print(' $midSearchBean');
     notifyListeners();
