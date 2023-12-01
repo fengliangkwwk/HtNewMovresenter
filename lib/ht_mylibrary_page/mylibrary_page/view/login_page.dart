@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:ht_new_movpresenter/utils/ht_api.dart';
-import 'package:ht_new_movpresenter/utils/ui_utils.dart';
+import 'package:ht_new_movpresenter/utils/net_request/ht_api.dart';
+import 'package:ht_new_movpresenter/utils/net_request/ui_utils.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class LoginPage extends StatefulWidget {

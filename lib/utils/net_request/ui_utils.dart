@@ -2,7 +2,7 @@ import 'dart:io' as io;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:device_information/device_information.dart';
-import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 
 class KTClassUIUtils {
   static var defRes = "";

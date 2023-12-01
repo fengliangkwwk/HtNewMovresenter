@@ -5,9 +5,9 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_an
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_set_list_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_video_desc_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_base.dart';
-import 'package:ht_new_movpresenter/utils/ht_api.dart';
-import 'package:ht_new_movpresenter/utils/ht_net_utils.dart';
-import 'package:ht_new_movpresenter/utils/ht_sys_tool.dart';
+import 'package:ht_new_movpresenter/utils/net_request/ht_api.dart';
+import 'package:ht_new_movpresenter/utils/net_request/ht_net_utils.dart';
+import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 
 mixin HTVideoProviderMixin on HTVideoDescProviderBase {
   ///151

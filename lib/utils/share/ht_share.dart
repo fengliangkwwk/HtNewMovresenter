@@ -1,5 +1,5 @@
 import 'package:flutter_share/flutter_share.dart';
-import 'package:ht_new_movpresenter/utils/ht_other_request.dart';
+import 'package:ht_new_movpresenter/utils/share/ht_other_request.dart';
 
 class HTShare extends OtherRequest {
   // HTShareBean? shareBean;
@@ -15,7 +15,6 @@ class HTShare extends OtherRequest {
   Future<void> share(String mType2, String playLock, String pageFrom, String ID,
       String videoName) async {
     await shareRequest();
-    print("🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎${shareBean?.link}");
     //播放页面分享电影或者电视剧
     if (pageFrom == "1") {
       if (mType2 == "tt_mflx") {
@@ -33,9 +32,7 @@ class HTShare extends OtherRequest {
         }
       }else{
         para2 = "2";
-        print("经过了电影🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌");
         if (playLock == "0") {
-         print("经过了电影🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹");
           //不锁电影
           shareTitle = shareBean?.mtext ?? "";
           shareText = shareBean?.mtext ?? "";
@@ -69,9 +66,6 @@ class HTShare extends OtherRequest {
       shareText = shareBean?.appmText ?? "";
       shareLinkUrl = shareBean?.appmLink ?? "";
     }
-
-    print("走到这✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋✋$newLinkUrl");
-
     FlutterShare.share(
       title: shareTitle ?? "",
       text: shareText,

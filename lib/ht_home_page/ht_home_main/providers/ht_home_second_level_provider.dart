@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/home_second_level_bean.dart';
-import 'package:ht_new_movpresenter/utils/ht_api.dart';
-import 'package:ht_new_movpresenter/utils/ht_net_utils.dart';
+import 'package:ht_new_movpresenter/utils/net_request/ht_api.dart';
+import 'package:ht_new_movpresenter/utils/net_request/ht_net_utils.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HTHomeSecondLevelProvidr extends ChangeNotifier {

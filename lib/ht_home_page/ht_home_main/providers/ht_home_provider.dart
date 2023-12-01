@@ -2,8 +2,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/home_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_provider_base.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_provider_mixin.dart';
-import 'package:ht_new_movpresenter/utils/ht_shared_keys.dart';
-import 'package:ht_new_movpresenter/utils/ht_user_store.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 ///数据逻辑

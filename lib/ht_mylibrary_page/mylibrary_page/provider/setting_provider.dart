@@ -4,8 +4,8 @@ import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/provider/se
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/provider/settting_provider_base.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/view/login_page.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/personal_info_editing/view/setting_persondata.dart';
-import 'package:ht_new_movpresenter/utils/ht_shared_keys.dart';
-import 'package:ht_new_movpresenter/utils/ht_user_store.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 ///处理逻辑  model

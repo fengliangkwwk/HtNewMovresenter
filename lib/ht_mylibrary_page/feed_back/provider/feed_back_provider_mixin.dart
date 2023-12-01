@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/feed_back/provider/feed_back_provider_base.dart';
-import 'package:ht_new_movpresenter/utils/ht_api.dart';
-import 'package:ht_new_movpresenter/utils/ht_net_utils.dart';
-import 'package:ht_new_movpresenter/utils/ht_tools/toast_tool.dart';
+import 'package:ht_new_movpresenter/utils/net_request/ht_api.dart';
+import 'package:ht_new_movpresenter/utils/net_request/ht_net_utils.dart';
+import 'package:ht_new_movpresenter/utils/tools/toast_tool.dart';
 
 mixin FeedBackProviderMiXin on FeedBackProviderBase {
   ///数据请求接口你
@@ -30,12 +30,9 @@ mixin FeedBackProviderMiXin on FeedBackProviderBase {
     var json = jsonDecode(res?.data);
     if (json['status'] == 200) {
       // Submitted successfully
-      print('🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎');
       ToastUtil.showToast(msg: 'Submitted successfully');
     } else {
       // Submit failed.
-      print('🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐');
-
       ToastUtil.showToast(msg: 'Submit failed.');
     }
   }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/home_second_level_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_second_level_provider.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_middlepage.dart';
-import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

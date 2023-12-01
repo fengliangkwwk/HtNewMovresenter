@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/feed_back/provider/feed_back_provider.dart';
-import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:provider/provider.dart';
 
 class HTClassFeedbackPage extends StatefulWidget {

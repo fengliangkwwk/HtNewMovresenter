@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:quds_popup_menu/quds_popup_menu.dart';
 
 class HTClassDramaDetailPage extends StatefulWidget {

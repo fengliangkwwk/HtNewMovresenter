@@ -5,7 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/views/premium_family_noprojpage.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/views/premium_familypage.dart';
-import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 
 
 class HTClassUnPremiumPage extends StatefulWidget {

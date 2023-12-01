@@ -80,6 +80,8 @@ dependencies:
   video_player: ^2.8.1
   #吐司提示框
   fluttertoast: ^8.2.4
+  #数据库
+  sqflite: ^2.3.0
 
     
 dev_dependencies:

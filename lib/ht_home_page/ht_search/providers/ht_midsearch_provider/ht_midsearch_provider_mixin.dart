@@ -1,8 +1,8 @@
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/beans/ht_mid_search_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/providers/ht_midsearch_provider/ht_midsearch_provider_base.dart';
-import 'package:ht_new_movpresenter/utils/ht_api.dart';
-import 'package:ht_new_movpresenter/utils/ht_net_utils.dart';
-import 'package:ht_new_movpresenter/utils/ui_utils.dart';
+import 'package:ht_new_movpresenter/utils/net_request/ht_api.dart';
+import 'package:ht_new_movpresenter/utils/net_request/ht_net_utils.dart';
+import 'package:ht_new_movpresenter/utils/net_request/ui_utils.dart';
 import 'package:dio/dio.dart' as MidSearch;
 import "dart:convert";
 

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/providers/ht_midsearch_provider/ht_midsearch_provider_base.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/providers/ht_midsearch_provider/ht_midsearch_provider_mixin.dart';
-import 'package:ht_new_movpresenter/utils/ht_shared_keys.dart';
-import 'package:ht_new_movpresenter/utils/ui_utils.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
+import 'package:ht_new_movpresenter/utils/net_request/ui_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as Dio;
 

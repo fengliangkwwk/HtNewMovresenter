@@ -211,6 +211,7 @@ class Data {
   static Data fromJson(Map<String, dynamic> srcJson) => _$DataFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$DataToJson(this);
+
 }
 
 @JsonSerializable(explicitToJson: true)

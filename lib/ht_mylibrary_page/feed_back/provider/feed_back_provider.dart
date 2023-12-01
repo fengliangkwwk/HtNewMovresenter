@@ -1,6 +1,6 @@
 import 'package:ht_new_movpresenter/ht_mylibrary_page/feed_back/provider/feed_back_provider_base.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/feed_back/provider/feed_back_provider_mixin.dart';
-import 'package:ht_new_movpresenter/utils/ht_tools/toast_tool.dart';
+import 'package:ht_new_movpresenter/utils/tools/toast_tool.dart';
 
 class FeedBackProvider extends FeedBackProviderBase with FeedBackProviderMiXin {
   ///业务逻辑

@@ -2,7 +2,7 @@
 ///   @Author : feng liang
 ///   @Date   : 2023-11-08 14:18:25
 ///   @Desc   : 获取所有的图片的url
-import 'package:ht_new_movpresenter/utils/url_domain.dart';
+import 'package:ht_new_movpresenter/utils/net_request/url_domain.dart';
 
 class ImageURL {
   ///Home页

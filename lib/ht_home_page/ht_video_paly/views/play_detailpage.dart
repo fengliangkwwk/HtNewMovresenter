@@ -13,8 +13,8 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_all_episodes.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_part.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/feed_back/view/setting_feedback.dart';
-import 'package:ht_new_movpresenter/utils/ht_share.dart';
-import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/share/ht_share.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 

@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/feed_back/view/setting_feedback.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/history_playback/view/setting_play_history.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/provider/setting_provider.dart';
-import 'package:ht_new_movpresenter/utils/ht_share.dart';
-import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/share/ht_share.dart';
+import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:provider/provider.dart';
 
 class HTClassSettingInfoPage extends StatefulWidget {
@@ -209,9 +209,9 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   ///historyListView列表
   Widget historyList() {
     return Container(
-      // color: Colors.green,
+      margin: const EdgeInsets.only(left: 10,right: 10,top:10),
+      padding: const EdgeInsets.only(right: 5),
       height: 145,
-
       // width: double.infinity,
       child: ListView.builder(
         itemCount: 13,
@@ -227,9 +227,10 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
     return Column(
       children: [
         topPart(),
-        const SizedBox(
+         Container(
+          margin: const EdgeInsets.only(top: 5),
             height: 20,
-            child: Text("Minions:The Rise of Gru",
+            child: const Text("Minions:The Rise of Gru",
                 maxLines: 2,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Color(0xff828386), fontSize: 8.0)))
@@ -280,18 +281,21 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   ///watchList
   Widget watchListWidget() {
     return GestureDetector(
-        child: Row(children: [
-          Image.network(ImageURL.url_344, width: 16.0, height: 16.0),
-          Container(width: 5.0),
-          const Text("Watchlist",
-              style: TextStyle(
-                  fontSize: 15.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500)),
-          const Spacer(),
-          Image.network(ImageURL.url_289, width: 24.0, height: 24.0),
-          Container(width: 10.0)
-        ]),
+        child: Container(
+          margin: EdgeInsets.only(top: 30),
+          child: Row(children: [
+            Image.network(ImageURL.url_344, width: 16.0, height: 16.0),
+            Container(width: 5.0),
+            const Text("Watchlist",
+                style: TextStyle(
+                    fontSize: 15.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500)),
+            const Spacer(),
+            Image.network(ImageURL.url_289, width: 24.0, height: 24.0),
+            Container(width: 10.0)
+          ]),
+        ),
         onTap: () {});
   }
 

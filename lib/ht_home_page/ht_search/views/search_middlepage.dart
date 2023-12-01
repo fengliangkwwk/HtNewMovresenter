@@ -7,8 +7,8 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_search/beans/ht_mid_search_b
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/providers/ht_midsearch_provider/ht_midsearch_provider.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_resultpage.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage.dart';
-import 'package:ht_new_movpresenter/utils/ui_utils.dart';
-import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/net_request/ui_utils.dart';
+import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:provider/provider.dart';
 
 class HTClassSearchMidPage extends StatefulWidget {

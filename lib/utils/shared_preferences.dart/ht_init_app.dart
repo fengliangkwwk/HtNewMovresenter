@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/bean/user_bean.dart';
-import 'package:ht_new_movpresenter/utils/ht_shared_keys.dart';
-import 'package:ht_new_movpresenter/utils/ht_user_store.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> initApp() async {
@@ -15,12 +15,17 @@ Future<void> initApp() async {
 Future<void> userData() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   var list18 = prefs.getStringList(HTSharedKeys.htHomeHideKey);
+   HTUserStore.list18 = list18 ?? [];
+
   var userString = prefs.getString(HTSharedKeys.htPersonMesaage);
-  bool? isFirstInto = prefs.getBool(HTSharedKeys.isFirstInto);
-  HTUserStore.list18 = list18 ?? [];
-  HTUserStore.isFirstInto = isFirstInto??true;
-  if (userString != null) {
+   if (userString != null) {
     HTUserStore.userBean = UserBean.fromJson(jsonDecode(userString));
   }
+
+  bool? isFirstInto = prefs.getBool(HTSharedKeys.isFirstInto);
+  HTUserStore.isFirstInto = isFirstInto??true;
+ 
+  // var favoriteList = prefs.getStringList(HTSharedKeys.favoriteList);
+  // HTUserStore.favoriteList = favoriteList ?? [];
 }
 

@@ -2,8 +2,8 @@
 
 import 'dart:convert';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_share_bean.dart';
-import 'package:ht_new_movpresenter/utils/ht_api.dart';
-import 'package:ht_new_movpresenter/utils/ht_net_utils.dart';
+import 'package:ht_new_movpresenter/utils/net_request/ht_api.dart';
+import 'package:ht_new_movpresenter/utils/net_request/ht_net_utils.dart';
 
 class OtherRequest{
   HTShareBean? shareBean;

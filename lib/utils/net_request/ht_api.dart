@@ -3,7 +3,7 @@
 ///   @Date   : 2023-11-10 09:15:37
 ///   @Desc   : api接口
 
-import 'package:ht_new_movpresenter/utils/url_domain.dart';
+import 'package:ht_new_movpresenter/utils/net_request/url_domain.dart';
 class Global{
   ///未登录
   static const unLoginWebUrl = 'https://www.h5login.work';
