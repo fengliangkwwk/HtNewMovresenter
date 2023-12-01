@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ht_new_movpresenter/ht_mylibrary_page/beans/user_bean.dart';
-import 'package:ht_new_movpresenter/ht_mylibrary_page/providers/seting_provider_mixin.dart';
-import 'package:ht_new_movpresenter/ht_mylibrary_page/providers/settting_provider_base.dart';
-import 'package:ht_new_movpresenter/ht_mylibrary_page/views/login_page.dart';
-import 'package:ht_new_movpresenter/ht_mylibrary_page/views/setting_persondata.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/bean/user_bean.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/provider/setting_provider_mixin.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/provider/settting_provider_base.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/view/login_page.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/personal_info_editing/view/setting_persondata.dart';
 import 'package:ht_new_movpresenter/utils/ht_shared_keys.dart';
 import 'package:ht_new_movpresenter/utils/ht_user_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,8 +23,8 @@ class SettingProvider extends SettingProviderBase with SettingProviderMixin {
       }));
     } else {
       ///2. 未登录 -> 去登录
-      
-     await Navigator.push(context, MaterialPageRoute(builder: (context) {
+
+      await Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const LoginPage();
       }));
 
@@ -45,31 +45,31 @@ class SettingProvider extends SettingProviderBase with SettingProviderMixin {
       HTUserStore.userBean = UserBean.fromJson(res);
       if (state == true) {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return const HTClassPersondataPage(title: "");
-      }));
+          return const HTClassPersondataPage(title: "");
+        }));
       }
     }
   }
-  
+
   @override
   void addListener(VoidCallback listener) {
     // TODO: implement addListener
   }
-  
+
   @override
   void dispose() {
     // TODO: implement dispose
   }
-  
+
   @override
   // TODO: implement hasListeners
   bool get hasListeners => throw UnimplementedError();
-  
+
   @override
   void notifyListeners() {
     // TODO: implement notifyListeners
   }
-  
+
   @override
   void removeListener(VoidCallback listener) {
     // TODO: implement removeListener

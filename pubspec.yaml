@@ -78,6 +78,8 @@ dependencies:
   flutter_share: ^2.0.0
   #视频播放器
   video_player: ^2.8.1
+  #吐司提示框
+  fluttertoast: ^8.2.4
 
     
 dev_dependencies:

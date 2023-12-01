@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:ht_new_movpresenter/ht_mylibrary_page/beans/user_bean.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/bean/user_bean.dart';
 import 'package:ht_new_movpresenter/utils/ht_shared_keys.dart';
 import 'package:ht_new_movpresenter/utils/ht_user_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';

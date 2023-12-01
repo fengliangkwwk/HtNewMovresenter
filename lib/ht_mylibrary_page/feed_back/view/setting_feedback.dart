@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/utils/ht_user_store.dart';
+import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/ht_tools/toast_tool.dart';
 
 class HTClassFeedbackPage extends StatefulWidget {
   const HTClassFeedbackPage({Key? key, required this.title}) : super(key: key);
@@ -27,21 +30,28 @@ class _HTClassFeedbackPageState extends State<HTClassFeedbackPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-        resizeToAvoidBottomInset: false  ,
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
         appBar: AppBar(
             backgroundColor: Color(0xff1A1C21),
-            title: Text("Feedback",
+            title: const Text("Feedback",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
                     fontWeight: FontWeight.w600)),
             centerTitle: true,
             leadingWidth: 24.0,
-            leading: Image.asset("image/icon_setting_back_w.png",
-                width: 24.0, height: 24.0, fit: BoxFit.scaleDown)),
+            leading: GestureDetector(
+              onTap: (() {
+                Navigator.pop(context);
+              }),
+              child: CachedNetworkImage(
+                  imageUrl: ImageURL.url_291,
+                  width: 24.0,
+                  height: 24.0,
+                  fit: BoxFit.scaleDown),
+            )),
         body: Container(
             padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
             child: Column(children: [
@@ -55,7 +65,7 @@ class _HTClassFeedbackPageState extends State<HTClassFeedbackPage> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Question/Feedback",
+                        const Text("Question/Feedback",
                             style: TextStyle(
                                 fontSize: 16.0,
                                 color: Colors.white,
@@ -65,7 +75,7 @@ class _HTClassFeedbackPageState extends State<HTClassFeedbackPage> {
                                 controller: TextEditingController(),
                                 style: TextStyle(color: Colors.white),
                                 maxLines: 8,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     hintText:
                                         "please describe your problems or suggestions here",
                                     border: InputBorder.none,
@@ -84,7 +94,7 @@ class _HTClassFeedbackPageState extends State<HTClassFeedbackPage> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Question/Feedback",
+                        const Text("Question/Feedback",
                             style: TextStyle(
                                 fontSize: 16.0,
                                 color: Colors.white,
@@ -94,7 +104,7 @@ class _HTClassFeedbackPageState extends State<HTClassFeedbackPage> {
                                 controller: TextEditingController(),
                                 style: TextStyle(color: Colors.white),
                                 maxLines: 5,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     hintText:
                                         "please describe your problems or suggestions here",
                                     border: InputBorder.none,
@@ -103,19 +113,22 @@ class _HTClassFeedbackPageState extends State<HTClassFeedbackPage> {
                                         fontSize: 14.0))))
                       ])),
               Container(height: 40.0),
-              Container(
-                  alignment: Alignment.center,
-                  height: 40.0,
-                  margin: EdgeInsets.only(bottom: 20.0),
-                  child: Text(
-                    "Logout",
-                    style: TextStyle(fontSize: 15.0, color: Colors.white),
-                  ),
-                  decoration: BoxDecoration(
-                      color: Color(0xffB82450),
-                      borderRadius: BorderRadius.circular(6.0))),
+              GestureDetector(
+                onTap: (() {}),
+                child: Container(
+                    alignment: Alignment.center,
+                    height: 40.0,
+                    margin: EdgeInsets.only(bottom: 20.0),
+                    child: const Text(
+                      "Submit",
+                      style: TextStyle(fontSize: 15.0, color: Colors.white),
+                    ),
+                    decoration: BoxDecoration(
+                        color: Color(0xffB82450),
+                        borderRadius: BorderRadius.circular(6.0))),
+              ),
               Container(height: 31.5),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text("Or You Can Contact Us At: ",
                     style: TextStyle(color: Colors.white, fontSize: 12.0)),
                 Text("Xxx@Xxxx.com",

@@ -8,6 +8,9 @@ PODS:
   - Flutter (1.0.0)
   - flutter_share (0.0.1):
     - Flutter
+  - fluttertoast (0.0.2):
+    - Flutter
+    - Toast
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -22,6 +25,7 @@ PODS:
   - sqflite (0.0.3):
     - Flutter
     - FMDB (>= 2.7.5)
+  - Toast (4.0.0)
   - video_player_avfoundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -33,6 +37,7 @@ DEPENDENCIES:
   - fijkplayer (from `.symlinks/plugins/fijkplayer/ios`)
   - Flutter (from `Flutter`)
   - flutter_share (from `.symlinks/plugins/flutter_share/ios`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - modal_progress_hud_nsn (from `.symlinks/plugins/modal_progress_hud_nsn/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
@@ -44,6 +49,7 @@ SPEC REPOS:
   trunk:
     - BIJKPlayer
     - FMDB
+    - Toast
 
 EXTERNAL SOURCES:
   device_information:
@@ -54,6 +60,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_share:
     :path: ".symlinks/plugins/flutter_share/ios"
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
   modal_progress_hud_nsn:
     :path: ".symlinks/plugins/modal_progress_hud_nsn/ios"
   path_provider_foundation:
@@ -73,11 +81,13 @@ SPEC CHECKSUMS:
   fijkplayer: 8b6d864948dc28e6e07248ed4fce61a7467db4df
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_share: 4be0208963c60b537e6255ed2ce1faae61cd9ac2
+  fluttertoast: 31b00dabfa7fb7bacd9e7dbee580d7a2ff4bf265
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   modal_progress_hud_nsn: b66f99f02da7de83484e50dfe1fe2d71ac406e67
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   video_player_avfoundation: e9e6f9cae7d7a6d9b43519b0aab382bca60fcfd1
   webview_flutter_wkwebview: 2e2d318f21a5e036e2c3f26171342e95908bd60a
 

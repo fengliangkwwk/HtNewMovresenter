@@ -1,4 +1,5 @@
-import 'package:ht_new_movpresenter/ht_mylibrary_page/beans/user_bean.dart';
+
+import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/bean/user_bean.dart';
 
 class HTUserStore {
   static UserBean? userBean;

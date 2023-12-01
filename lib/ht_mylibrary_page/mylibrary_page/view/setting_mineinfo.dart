@@ -5,9 +5,10 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:ht_new_movpresenter/ht_mylibrary_page/providers/setting_provider.dart';
-import 'package:ht_new_movpresenter/ht_mylibrary_page/views/setting_feedback.dart';
-import 'package:ht_new_movpresenter/ht_mylibrary_page/views/setting_play_history.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/feed_back/view/setting_feedback.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/history_playback/view/setting_play_history.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/provider/setting_provider.dart';
+import 'package:ht_new_movpresenter/utils/ht_share.dart';
 import 'package:ht_new_movpresenter/utils/url_getImageurl.dart';
 import 'package:provider/provider.dart';
 
@@ -365,7 +366,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
         child: Row(children: [
           Image.network(ImageURL.url_345, width: 16.0, height: 16.0),
           Container(width: 5.0),
-          const Text("Feedback",
+          const Text("Share",
               style: TextStyle(
                   fontSize: 15.0,
                   color: Colors.white,
@@ -375,9 +376,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
           Container(width: 10.0)
         ]),
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const HTClassFeedbackPage(title: "");
-          }));
+          HTShare().share("app", "", "0", "", "");
         });
   }
 
