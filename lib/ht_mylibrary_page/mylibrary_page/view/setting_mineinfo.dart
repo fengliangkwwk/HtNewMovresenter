@@ -5,6 +5,7 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/view/setting_watch_list.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/feed_back/view/setting_feedback.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/history_playback/view/setting_play_history.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/provider/setting_provider.dart';
@@ -282,7 +283,8 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   Widget watchListWidget() {
     return GestureDetector(
         child: Container(
-          margin: EdgeInsets.only(top: 30),
+          margin: const EdgeInsets.only(top: 30),
+          color: Colors.transparent,
           child: Row(children: [
             Image.network(ImageURL.url_344, width: 16.0, height: 16.0),
             Container(width: 5.0),
@@ -296,7 +298,11 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
             Container(width: 10.0)
           ]),
         ),
-        onTap: () {});
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return const HTClassWatchListPage(title: "");
+          }));
+        },);
   }
 
   ///share
