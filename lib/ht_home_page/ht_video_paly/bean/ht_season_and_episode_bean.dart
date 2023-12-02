@@ -171,7 +171,7 @@ class Casts{
 class Ssn_list{
 
   @JsonKey(name: 'id')
-  int? id;
+  dynamic id;
 
   @JsonKey(name: 'title')
   String? title;
@@ -232,7 +232,7 @@ class Data_3{
   String? displayType;
 
   @JsonKey(name: 'seeall')
-  String? seeall;
+  dynamic seeall;
 
   @JsonKey(name: 'seeall_value')
   String? seeallValue;

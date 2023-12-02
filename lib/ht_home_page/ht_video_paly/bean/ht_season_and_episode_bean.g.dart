@@ -124,7 +124,7 @@ Map<String, dynamic> _$CastsToJson(Casts instance) => <String, dynamic>{
     };
 
 Ssn_list _$Ssn_listFromJson(Map<String, dynamic> json) => Ssn_list()
-  ..id = json['id'] as int?
+  ..id = json['id']
   ..title = json['title'] as String?;
 
 Map<String, dynamic> _$Ssn_listToJson(Ssn_list instance) => <String, dynamic>{
@@ -153,7 +153,7 @@ Data_3 _$Data_3FromJson(Map<String, dynamic> json) => Data_3()
       ?.map((e) => Data.fromJson(e as Map<String, dynamic>))
       .toList()
   ..displayType = json['display_type'] as String?
-  ..seeall = json['seeall'] as String?
+  ..seeall = json['seeall']
   ..seeallValue = json['seeall_value'] as String?
   ..openMode = json['open_mode'] as String?
   ..openModeValue = json['open_mode_value'] as String?
