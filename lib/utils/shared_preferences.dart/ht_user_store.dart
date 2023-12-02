@@ -1,4 +1,5 @@
 
+import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/bean/user_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_video_desc_bean.dart';
 class HTUserStore {
@@ -16,5 +17,5 @@ class HTUserStore {
 //是否是首次进入 app
   static bool isFirstInto = true;
 //收藏列表
-  static List<Data> favoriteList = [];
+  static List<HistoryBean> favoriteList = [];
 }

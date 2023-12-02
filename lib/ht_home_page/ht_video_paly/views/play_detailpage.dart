@@ -384,9 +384,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
       child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Container(width: 15.0),
         GestureDetector(
-          onTap: (() {
-            print('点击了收藏');
-          }),
+          onTap: provider.saveAction,
           child: Column(children: [
             ///ImageURL.url_258已收藏   ImageURL.url_259未收藏
             CachedNetworkImage(

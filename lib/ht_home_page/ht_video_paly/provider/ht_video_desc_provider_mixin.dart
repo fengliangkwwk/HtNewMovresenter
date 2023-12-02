@@ -18,6 +18,7 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
   HtSetListBean? tv203Bean;
 
   String? mType2;
+  String? dataId;
 
 
   /// m_type_2:tt_mflx=电视剧   myfx:电影
@@ -66,11 +67,11 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
 
   ///203
   Future<void> request203() async {
-    sid = (tv202Bean?.data?.ssnList?[0].id) as String?;
+    sid = (tv202Bean?.data?.ssnList?[0].id)?.toString();
     var res =
         await HTNetUtils.htPost(apiUrl: Global.switchingSeasonsUrl, params: {
       'id': tv202Bean?.data?.ssnList?[0].id,//季id
-    }).then((value) => null);
+    });
 
     Map<String, dynamic> jsonMap = jsonDecode(res?.data.toString() ?? '');
     tv203Bean = HtSetListBean.fromJson(jsonMap['data']);
@@ -78,7 +79,7 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
 
   ///151
   Future<void> request151(String id) async {
-    eid = tv203Bean?.epsList?[0].id as String?;
+    eid = tv203Bean?.epsList?[0].id.toString();
     // 创建一个空的字典
     Map<String, dynamic> htVarparams = {};
     ///参数
