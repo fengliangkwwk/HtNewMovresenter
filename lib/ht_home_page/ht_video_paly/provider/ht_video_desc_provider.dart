@@ -31,6 +31,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
       autoPlay: true,
     );
     // playerOption();
+    addHistoryAciton();
   }
 
   void allEpisodesEvent() {
@@ -75,13 +76,12 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
       ///1.未收藏,
       HTUserStore.favoriteList.add(model);
     }
-    var savaData  = [];
+    var savaData = [];
 
     for (var element in HTUserStore.favoriteList) {
-        savaData.add(element.toJson());
+      savaData.add(element.toJson());
     }
-    prefs.setString(
-        HTSharedKeys.favoriteList, jsonEncode(savaData));
+    prefs.setString(HTSharedKeys.favoriteList, jsonEncode(savaData));
   }
 
   ///是否收藏
@@ -94,5 +94,49 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     }
 
     return result;
+  }
+
+  ///是否浏览
+
+  Future<bool> isSaveHistory(String? id) async {
+    bool result = false;
+    for (var element in HTUserStore.historyList) {
+      if (element.id == id) {
+        result = true;
+      }
+    }
+
+    return result;
+  }
+
+  void addHistoryAciton() async {
+    var data = {
+      "id": dataId,
+      "title": videoDescBean?.data?.title,
+      "cover": videoDescBean?.data?.cover,
+      "rate": videoDescBean?.data?.rate,
+      "mType2": mType2,
+      "ssnId": tv202Bean?.data?.ssnList?[0].id,
+      "epsId": tv203Bean?.epsList?[0].id
+    };
+    var model = HistoryBean.fromJson(data);
+    bool isSaveState = await isSaveHistory(model.id);
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (isSaveState) {
+      ///已浏览
+      ///不同的id保留,删掉相同的id
+      var temList = HTUserStore.historyList
+          .where((element) => element.id != model.id)
+          .toList();
+      HTUserStore.historyList = temList;
+    }
+    HTUserStore.historyList.add(model);
+
+    var savaData = [];
+
+    for (var element in HTUserStore.historyList) {
+      savaData.add(element.toJson());
+    }
+    prefs.setString(HTSharedKeys.historyList, jsonEncode(savaData));
   }
 }

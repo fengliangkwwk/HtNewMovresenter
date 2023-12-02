@@ -11,12 +11,20 @@ class WatchProvider extends ChangeNotifier {
   int state = 2;
 
   ///数据源
-  List<HistoryBean>? dataList;
+  List<HistoryBean>? dataList = [];
 
-  WatchProvider({this.state = 2}) {
+  // WatchProvider({this.state = 2}) {
+  //   if (state == 2) {
+  //     dataList = HTUserStore.favoriteList;
+  //   } else {}
+  // }
+  void initData(int state) {
+    this.state = state;
     if (state == 2) {
       dataList = HTUserStore.favoriteList;
-    } else {}
+    } else {
+      dataList = HTUserStore.historyList;
+    }
   }
 
   ///编辑状态
@@ -117,7 +125,7 @@ class WatchProvider extends ChangeNotifier {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var savaData = [];
-    for (var element in HTUserStore.favoriteList) {
+    for (var element in dataList ??<HistoryBean>[]) {
       savaData.add(element.toJson());
     }
     if (state == 2) {

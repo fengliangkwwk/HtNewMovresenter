@@ -34,7 +34,7 @@ class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: provider..state = widget.state)
+        ChangeNotifierProvider.value(value: provider..initData(widget.state))
       ],
       child: Selector<WatchProvider, bool>(
         selector: (p0, p1) => p1.refresh,
@@ -174,7 +174,7 @@ class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
       builder: (context, value, child) {
         HistoryBean? model;
         if (value >= 0) {
-          model = HTUserStore.favoriteList[value];
+          model = provider.dataList?[value];
         }
         return AnimatedPositioned(
           duration: const Duration(milliseconds: 200),
@@ -284,7 +284,7 @@ class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
 
   ///
   Widget itemWidget(int index) {
-    var model = HTUserStore.favoriteList[index];
+    var model = provider.dataList?[index];
     return Selector<WatchProvider, bool>(
       selector: (p0, p1) => p1.editState,
       builder: (context, value, child) {
@@ -294,7 +294,7 @@ class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
               flex: 160,
               child: Stack(
                 children: [
-                  CachedNetworkImage(imageUrl: model.cover ?? ''),
+                  CachedNetworkImage(imageUrl: model?.cover ?? ''),
                 ],
               ),
             ),
@@ -307,7 +307,7 @@ class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
                       const SizedBox(width: 4),
                       Expanded(
                         child: Text(
-                          model.title ?? '',
+                          model?.title ?? '',
                           maxLines: 2,
                           style: const TextStyle(
                             color: Color(0xFF828386),
@@ -318,10 +318,10 @@ class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
                       ),
                       const SizedBox(width: 5),
                       GestureDetector(
-                        onTap: () => provider.selectItem(model, index),
+                        onTap: () => provider.selectItem(model!, index),
                         child: CachedNetworkImage(
                           imageUrl: value
-                              ? (model.selectState
+                              ? (model?.selectState == true
                                   ? ImageURL.url_81
                                   : ImageURL.url_82)
                               : ImageURL.url_304,

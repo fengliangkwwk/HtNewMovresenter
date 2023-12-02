@@ -36,5 +36,12 @@ Future<void> userData() async {
     }
   }
 
-  
+///浏览历史
+  var historyListString = prefs.getString(HTSharedKeys.historyList);
+  if (historyListString != null) {
+    List favoriteList = jsonDecode(historyListString);
+    for (var element in favoriteList) {
+      HTUserStore.historyList.add(HistoryBean.fromJson(element));
+    }
+  }
 }
