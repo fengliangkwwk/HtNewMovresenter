@@ -18,15 +18,15 @@ class HTNetUtils {
     var formData = FormData.fromMap(htVarparams);
     var dio = Dio();
 
-    //设置代理
-    dio.httpClientAdapter = IOHttpClientAdapter()
-      // ignore: deprecated_member_use
-      ..onHttpClientCreate = (client) {
-        client.findProxy = (uri) {
-          return 'PROXY 192.168.18.210:8888';
-        };
-        return client;
-      };
+    // //设置代理
+    // dio.httpClientAdapter = IOHttpClientAdapter()
+    //   // ignore: deprecated_member_use
+    //   ..onHttpClientCreate = (client) {
+    //     client.findProxy = (uri) {
+    //       return 'PROXY 172.20.10.2:8888';
+    //     };
+    //     return client;
+    //   };
 
     var res = await dio.post(
       apiUrl,
