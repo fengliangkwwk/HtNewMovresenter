@@ -3,14 +3,16 @@
 ///   @Date   : 2023-11-09 13:56:31
 ///   @Desc   : 个人中心页面
 
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/view/setting_watch_list.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/feed_back/view/setting_feedback.dart';
-import 'package:ht_new_movpresenter/ht_mylibrary_page/history_playback/view/setting_play_history.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/provider/setting_provider.dart';
 import 'package:ht_new_movpresenter/utils/share/ht_share.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:provider/provider.dart';
 
 class HTClassSettingInfoPage extends StatefulWidget {
@@ -200,7 +202,10 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
           child: Image.network(ImageURL.url_289, width: 24.0, height: 24.0),
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const HTClassWatchListPage(title: "Recently Played",state: 1,);
+              return const HTClassWatchListPage(
+                title: "Recently Played",
+                state: 1,
+              );
             }));
           }),
       Container(width: 10.0)
@@ -210,71 +215,70 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   ///historyListView列表
   Widget historyList() {
     return Container(
-      margin: const EdgeInsets.only(left: 10,right: 10,top:10),
+      margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
       padding: const EdgeInsets.only(right: 5),
       height: 145,
       // width: double.infinity,
       child: ListView.builder(
-        itemCount: 13,
+        itemCount: HTUserStore.historyList.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return historyListItem();
+          return historyListItem(index);
         },
       ),
     );
   }
 
-  Widget historyListItem() {
+  Widget historyListItem(int index) {
+    var model = HTUserStore.historyList[index];
     return Column(
       children: [
-        topPart(),
-         Container(
+        topPart(model),
+        Container(
           margin: const EdgeInsets.only(top: 5),
-            height: 20,
-            child: const Text("Minions:The Rise of Gru",
-                maxLines: 2,
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Color(0xff828386), fontSize: 8.0)))
+          height: 20,
+          child: Text(
+            model.title ?? '',
+            maxLines: 2,
+            textAlign: TextAlign.center,
+            style: const TextStyle(color: Color(0xff828386), fontSize: 8.0),
+          ),
+        ),
       ],
     );
   }
 
-  Widget topPart() {
+  Widget topPart(HistoryBean model) {
     return Container(
         height: 120,
         width: 84,
         // color:Colors.green,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             image: DecorationImage(
-          image: CachedNetworkImageProvider(
-              'https://autoeq.top/crm/banner/img_v2_33ac2d2a-4970-4d27-879a-17378796e6bg_1666775339_0x0.png'),
+          image: CachedNetworkImageProvider(model.cover ?? ''),
         )),
         margin: const EdgeInsets.only(right: 5.0),
         child: Stack(alignment: Alignment.center, children: [
-          Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: Image.network(ImageURL.url_254,
-                  height: 120.0, width: 84.0, fit: BoxFit.fill)),
+          // Positioned(
+          //     top: 0,
+          //     left: 0,
+          //     right: 0,
+          //     child: Image.network(ImageURL.url_254,
+          //         height: 120.0, width: 84.0, fit: BoxFit.fill)),
           Container(
               // padding:const EdgeIns ets.only(bottom: 45.0),
               child: Image.network(ImageURL.url_268,
                   width: 24.0, height: 24.0, fit: BoxFit.fill)),
-          const Positioned(
+           Positioned(
               left: 5.0,
               top: 5.0,
               child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                Text("8.",
-                    style: TextStyle(
+                Text(model.rate ??'',
+                    style: const TextStyle(
                         color: Color(0xffFF6D1C),
                         fontSize: 20,
                         fontWeight: FontWeight.w600)),
-                Text("0",
-                    style: TextStyle(
-                        color: Color(0xffFF6D1C),
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600))
+                
               ])),
         ]));
   }
@@ -282,27 +286,31 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   ///watchList
   Widget watchListWidget() {
     return GestureDetector(
-        child: Container(
-          margin: const EdgeInsets.only(top: 30),
-          color: Colors.transparent,
-          child: Row(children: [
-            Image.network(ImageURL.url_344, width: 16.0, height: 16.0),
-            Container(width: 5.0),
-            const Text("Watchlist",
-                style: TextStyle(
-                    fontSize: 15.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500)),
-            const Spacer(),
-            Image.network(ImageURL.url_289, width: 24.0, height: 24.0),
-            Container(width: 10.0)
-          ]),
-        ),
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const HTClassWatchListPage(title: "Watchlist",state: 2,);
-          }));
-        },);
+      child: Container(
+        margin: const EdgeInsets.only(top: 30),
+        color: Colors.transparent,
+        child: Row(children: [
+          Image.network(ImageURL.url_344, width: 16.0, height: 16.0),
+          Container(width: 5.0),
+          const Text("Watchlist",
+              style: TextStyle(
+                  fontSize: 15.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500)),
+          const Spacer(),
+          Image.network(ImageURL.url_289, width: 24.0, height: 24.0),
+          Container(width: 10.0)
+        ]),
+      ),
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return const HTClassWatchListPage(
+            title: "Watchlist",
+            state: 2,
+          );
+        }));
+      },
+    );
   }
 
   ///share
