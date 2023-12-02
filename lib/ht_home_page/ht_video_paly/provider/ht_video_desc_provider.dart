@@ -4,6 +4,7 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_base.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_mixin.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
+import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -133,7 +134,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     HTUserStore.historyList.add(model);
 
     var savaData = [];
-
+    mainProvider.historyRefreshAction();
     for (var element in HTUserStore.historyList) {
       savaData.add(element.toJson());
     }

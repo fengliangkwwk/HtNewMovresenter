@@ -10,6 +10,7 @@ import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/view/setting_watch_list.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/feed_back/view/setting_feedback.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/provider/setting_provider.dart';
+import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/share/ht_share.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
@@ -214,18 +215,23 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
 
   ///historyListView列表
   Widget historyList() {
-    return Container(
-      margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-      padding: const EdgeInsets.only(right: 5),
-      height: 145,
-      // width: double.infinity,
-      child: ListView.builder(
-        itemCount: HTUserStore.historyList.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return historyListItem(index);
-        },
-      ),
+    return Selector<MainPovider,bool>(
+      selector: (p0, p1) => p1.historyRefresh,
+      builder: (context, value, child) {
+        return Container(
+        margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+        padding: const EdgeInsets.only(right: 5),
+        height: 145,
+        // width: double.infinity,
+        child: ListView.builder(
+          itemCount: HTUserStore.historyList.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return historyListItem(index);
+          },
+        ),
+      );
+      },
     );
   }
 

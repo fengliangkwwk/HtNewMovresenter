@@ -7,8 +7,10 @@ import 'package:ht_new_movpresenter/ht_ad_lunch_page/views/premium_launcherpage.
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/views/home_mainpage.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/view/setting_mineinfo.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/views/premium_indexerpage.dart';
+import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_init_app.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   await initApp();
@@ -27,33 +29,38 @@ class HTClassApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      // ignore: deprecated_member_use
-      useInheritedMediaQuery: true,
-      locale: DevicePreview.locale(context),
-      // builder: EasyLoading.init(),
-      builder: (context, child) {
-        return DevicePreview.appBuilder(
-            context, EasyLoading.init()(context, child));
-      },
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => mainProvider)
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        // ignore: deprecated_member_use
+        useInheritedMediaQuery: true,
+        locale: DevicePreview.locale(context),
+        // builder: EasyLoading.init(),
+        builder: (context, child) {
+          return DevicePreview.appBuilder(
+              context, EasyLoading.init()(context, child));
+        },
+        theme: ThemeData(
+          // This is the theme of your application.
+          //
+          // Try running your application with "flutter run". You'll see the
+          // application has a blue toolbar. Then, without quitting the app, try
+          // changing the primarySwatch below to Colors.green and then invoke
+          // "hot reload" (press "r" in the console where you ran "flutter run",
+          // or simply save your changes to "hot reload" in a Flutter IDE).
+          // Notice that the counter didn't reset back to zero; the application
+          // is not restarted.
+          primarySwatch: Colors.blue,
+        ),
+        home: HTUserStore.isFirstInto
+            ? const HTClassLauncherPage(title: "")
+            : const HTClassPremiumLauncherPage(title: ""), //正常进入启动页
+        // home: const HTClassBtmNavPage(),
+        // home: const HTClassPremiumLauncherPage(title: '',),
       ),
-      home: HTUserStore.isFirstInto
-          ? const HTClassLauncherPage(title: "")
-          : const HTClassPremiumLauncherPage(title: ""), //正常进入启动页
-      // home: const HTClassBtmNavPage(),
-      // home: const HTClassPremiumLauncherPage(title: '',),
     );
   }
 }
