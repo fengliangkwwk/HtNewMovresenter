@@ -1,6 +1,7 @@
 
 
 import 'dart:convert';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_share_bean.dart';
 import 'package:ht_new_movpresenter/utils/net_request/ht_api.dart';
 import 'package:ht_new_movpresenter/utils/net_request/ht_net_utils.dart';
@@ -20,6 +21,7 @@ class OtherRequest{
 // 参数p2来源：接口326/和325/  local-value=1时，传1；其他传2
 // 非VIP时，传默认值0
   Future<void> shareRequest()async{
+    EasyLoading.show();
     var res = await HTNetUtils.htPost(apiUrl: Global.getShareUrl, params: {
       'p1': 'month',
       'p2': '0',
@@ -28,6 +30,7 @@ class OtherRequest{
       'sub2': '0',
       'subid': '0'
     });
+    EasyLoading.dismiss();
     Map<String, dynamic> jsonMap = jsonDecode(res?.data ?? '');
     shareBean = HTShareBean.fromJson(jsonMap["data"]);
     print(shareBean?.link);
