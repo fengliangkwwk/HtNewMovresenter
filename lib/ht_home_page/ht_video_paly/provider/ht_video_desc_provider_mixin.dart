@@ -18,6 +18,7 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
   HtSetListBean? tv203Bean;
 
   String? mType2;
+  String? dataId;
 
 
   /// m_type_2:tt_mflx=电视剧   myfx:电影
