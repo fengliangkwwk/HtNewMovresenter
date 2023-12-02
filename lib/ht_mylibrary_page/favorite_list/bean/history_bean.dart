@@ -1,10 +1,9 @@
-import 'package:json_annotation/json_annotation.dart'; 
-      
-part 'history_bean.g.dart';
-    
-@JsonSerializable(explicitToJson: true)
-class HistoryBean{
+import 'package:json_annotation/json_annotation.dart';
 
+part 'history_bean.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class HistoryBean {
   @JsonKey(name: 'id')
   String? id;
 
@@ -26,12 +25,14 @@ class HistoryBean{
   @JsonKey(name: 'epsId')
   String? epsId;
 
+  ///选中状态
+  @JsonKey(includeToJson: false)
+  bool selectState = false;
+
   HistoryBean();
 
-  factory HistoryBean.fromJson(Map<String, dynamic> srcJson) => _$HistoryBeanFromJson(srcJson);
+  factory HistoryBean.fromJson(Map<String, dynamic> srcJson) =>
+      _$HistoryBeanFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$HistoryBeanToJson(this);
-
 }
-
-  
