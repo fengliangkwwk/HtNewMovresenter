@@ -2,12 +2,12 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/provider/watch_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
+import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 import 'package:provider/provider.dart';
-import 'package:roundcheckbox/roundcheckbox.dart';
-import 'package:tuple/tuple.dart';
 
 class HTClassWatchListPage extends StatefulWidget {
   const HTClassWatchListPage({Key? key, required this.title}) : super(key: key);
@@ -30,113 +30,131 @@ class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [ChangeNotifierProvider.value(value: provider)],
-      child: Scaffold(
-        backgroundColor: Colors.black,
-        appBar: appBarWidget(),
-        body: Stack(
-          children: [
-            Column(
+      child: Selector<WatchProvider, bool>(
+        selector: (p0, p1) => p1.refresh,
+        builder: (context, value, child) {
+          return Scaffold(
+            backgroundColor: Colors.black,
+            appBar: appBarWidget(),
+            body: Stack(
               children: [
-                Expanded(
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: 112 / 200,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 9.5,
+                Column(
+                  children: [
+                    Expanded(
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          childAspectRatio: 112 / 200,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 9.5,
+                        ),
+                        itemCount: HTUserStore.favoriteList.length,
+                        itemBuilder: (context, index) {
+                          return itemWidget(index);
+                        },
+                      ),
                     ),
-                    itemCount: HTUserStore.favoriteList.length,
-                    itemBuilder: (context, index) {
-                      return itemWidget(index);
-                    },
-                  ),
+                  ],
                 ),
+
+                temWidget(),
+
+                ///删除提示
+                deleteWidget(),
               ],
             ),
-
-            temWidget(),
-            ///删除提示
-            deleteWidget(),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
 
-Widget temWidget() {
-  return Visibility(
-    visible: true,
-    child: GestureDetector(
-      onTap: () {
-        print('11');
+  Widget temWidget() {
+    return Selector<WatchProvider, int>(
+      selector: (p0, p1) => p1.selectIndex,
+      builder: (context, value, child) {
+        return Visibility(
+          visible: value >= 0,
+          child: GestureDetector(
+            onTap: provider.cancleDeleteSlectItem,
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: Colors.transparent,
+            ),
+          ),
+        );
       },
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: Colors.transparent,
-      ),
-    ),
-  );
-}
-
+    );
+  }
 
   ///删除提示
   Widget deleteWidget() {
-    return AnimatedPositioned(
-      duration: const Duration(milliseconds: 200),
-      bottom: 0,
-      child: SafeArea(
-          top: false,
-          child: Container(
-            color: const Color(0xFF1A1C21),
-            height: 133,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 20),
-                Container(
-                  height: 29,
-                  child: Text(
-                    '38273072983729038729038729837',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xffececce),
+    return Selector<WatchProvider, int>(
+      selector: (p0, p1) => p1.selectIndex,
+      builder: (context, value, child) {
+        HistoryBean? model;
+        if (value >= 0) {
+          model = HTUserStore.favoriteList[value];
+        }
+        return AnimatedPositioned(
+          duration: const Duration(milliseconds: 200),
+          bottom: value >= 0 ? 0 : -150,
+          child: SafeArea(
+            top: false,
+            child: Container(
+              color: const Color(0xFF1A1C21),
+              height: 133,
+              width: SysTools().getScreenSize(context).width,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: 29,
+                    child: Text(
+                      model?.title ?? '',
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xffececce),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                GestureDetector(
-                  onTap: () {
-                    print('11');
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Row(
-                      children: [
-                        CachedNetworkImage(
-                          imageUrl: ImageURL.url_306,
-                          width: 24.0,
-                          height: 24.0,
-                        ),
-                        const SizedBox(width: 10),
-                        const Text(
-                          'Remove From List',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                  const SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () {
+                      provider.deleteItem();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(
+                        children: [
+                          CachedNetworkImage(
+                            imageUrl: ImageURL.url_306,
+                            width: 24.0,
+                            height: 24.0,
                           ),
-                        )
-                      ],
+                          const SizedBox(width: 10),
+                          const Text(
+                            'Remove From List',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
-        ),
+        );
+      },
     );
   }
 
@@ -189,8 +207,8 @@ Widget temWidget() {
   ///
   Widget itemWidget(int index) {
     var model = HTUserStore.favoriteList[index];
-    return Selector<WatchProvider, Tuple2<bool, bool>>(
-      selector: (p0, p1) => Tuple2(p1.editState, p1.refresh),
+    return Selector<WatchProvider, bool>(
+      selector: (p0, p1) => p1.editState,
       builder: (context, value, child) {
         return Column(
           children: [
@@ -211,26 +229,28 @@ Widget temWidget() {
                       const SizedBox(width: 4),
                       Expanded(
                         child: Text(
-                          'dat2a983743987983709847098734098739087903847821219zzz',
+                          model.title ?? '',
                           maxLines: 2,
-                          style: TextStyle(color: Colors.amber),
+                          style: const TextStyle(color: Color(0xFF828386),
+                          fontWeight: FontWeight.bold,
+                          ),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       const SizedBox(width: 5),
                       GestureDetector(
-                        onTap: () => provider.selectItem(model),
+                        onTap: () => provider.selectItem(model, index),
                         child: CachedNetworkImage(
-                          imageUrl: value.item1
+                          imageUrl: value
                               ? (model.selectState
                                   ? ImageURL.url_81
                                   : ImageURL.url_82)
                               : ImageURL.url_304,
-                          width: value.item1 ? 18 : 24,
-                          height: value.item1 ? 18 : 24,
+                          width: value ? 18 : 24,
+                          height: value ? 18 : 24,
                         ),
                       ),
-                      SizedBox(width: 4),
+                      const SizedBox(width: 4),
                     ],
                   ),
                 ))

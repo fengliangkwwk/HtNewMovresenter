@@ -12,7 +12,9 @@ class WatchProvider extends ChangeNotifier {
 
   ///是否刷新
   bool refresh = false;
-  
+
+  ///选中index
+  int selectIndex = -1;
 
   String actionTitle() {
     if (editState == true) {
@@ -33,14 +35,28 @@ class WatchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void selectItem(HistoryBean model) {
+  void selectItem(HistoryBean model, int index) {
     if (editState == false) {
       ///1.更多
+      selectIndex = index;
     } else {
       ///编辑: 选中/取消
       refresh = !refresh;
       model.selectState = !model.selectState;
     }
+    notifyListeners();
+  }
+
+  void deleteItem() {
+    refresh = !refresh;
+    HTUserStore.favoriteList.removeAt(selectIndex);
+    selectIndex = -1;
+    notifyListeners();
+  }
+
+  ///取消删除弹窗
+  void cancleDeleteSlectItem() {
+    selectIndex = -1;
     notifyListeners();
   }
 }
