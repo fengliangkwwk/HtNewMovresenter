@@ -18,4 +18,6 @@ class HTUserStore {
   static bool isFirstInto = true;
 //收藏列表
   static List<HistoryBean> favoriteList = [];
+  ///浏览数据
+  
 }

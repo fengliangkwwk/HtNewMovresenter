@@ -10,26 +10,32 @@ import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 import 'package:provider/provider.dart';
 
 class HTClassWatchListPage extends StatefulWidget {
-  const HTClassWatchListPage({Key? key, required this.title}) : super(key: key);
+  const HTClassWatchListPage({
+    Key? key,
+    required this.title,
+    this.state = 2,
+  }) : super(key: key);
 
   final String title;
+  final int state;
 
   @override
   State<HTClassWatchListPage> createState() => _HTClassWatchListPageState();
 }
 
 class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
-  late WatchProvider provider;
+  WatchProvider provider = WatchProvider();
   @override
   void initState() {
     super.initState();
-    provider = WatchProvider();
   }
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider.value(value: provider)],
+      providers: [
+        ChangeNotifierProvider.value(value: provider..state = widget.state)
+      ],
       child: Selector<WatchProvider, bool>(
         selector: (p0, p1) => p1.refresh,
         builder: (context, value, child) {
@@ -49,7 +55,7 @@ class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
                           mainAxisSpacing: 10,
                           crossAxisSpacing: 9.5,
                         ),
-                        itemCount: HTUserStore.favoriteList.length,
+                        itemCount: provider.dataList?.length ?? 0,
                         itemBuilder: (context, index) {
                           return itemWidget(index);
                         },
@@ -62,6 +68,9 @@ class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
 
                 ///删除提示
                 deleteWidget(),
+
+                ///删除弹窗
+                deleteBoxWidget(),
               ],
             ),
           );
@@ -89,6 +98,75 @@ class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
     );
   }
 
+  Widget deleteBoxWidget() {
+    return Selector<WatchProvider, bool>(
+      selector: (p0, p1) => p1.editState,
+      builder: (context, value, child) {
+        return AnimatedPositioned(
+          duration: const Duration(milliseconds: 200),
+          bottom: value ? 0 : -100,
+          child: Container(
+            color: const Color(0xFF1A1C21),
+            height: 49 + MediaQuery.of(context).padding.bottom,
+            width: SysTools().getScreenSize(context).width,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 49,
+                  child: Row(
+                    children: [
+                      Flexible(
+                          child: GestureDetector(
+                        onTap: provider.selectAllAciton,
+                        child: Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          color: Colors.transparent,
+                          child: Center(
+                            child: Text(
+                              provider.selectNum() > 0
+                                  ? 'Deselect All'
+                                  : 'Select All',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )),
+                      Flexible(
+                          child: GestureDetector(
+                        onTap: provider.deleteAllSelectAction,
+                        child: Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          color: Colors.transparent,
+                          child: const Center(
+                            child: Text(
+                              'Delete',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFFEA4D3D),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )),
+                    ],
+                  ),
+                ),
+                SizedBox(height: MediaQuery.of(context).padding.bottom),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   ///删除提示
   Widget deleteWidget() {
     return Selector<WatchProvider, int>(
@@ -100,7 +178,7 @@ class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
         }
         return AnimatedPositioned(
           duration: const Duration(milliseconds: 200),
-          bottom: value >= 0 ? 0 : -150,
+          bottom: value >= 0 ? 0 : -170,
           child: SafeArea(
             top: false,
             child: Container(
@@ -161,9 +239,9 @@ class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
   PreferredSizeWidget appBarWidget() {
     return AppBar(
       backgroundColor: const Color(0xff1A1C21),
-      title: const Text(
-        "Watchlist",
-        style: TextStyle(
+      title: Text(
+        widget.title,
+        style: const TextStyle(
           color: Colors.white,
           fontSize: 18.0,
           fontWeight: FontWeight.w600,
@@ -231,8 +309,9 @@ class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
                         child: Text(
                           model.title ?? '',
                           maxLines: 2,
-                          style: const TextStyle(color: Color(0xFF828386),
-                          fontWeight: FontWeight.bold,
+                          style: const TextStyle(
+                            color: Color(0xFF828386),
+                            fontWeight: FontWeight.bold,
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),

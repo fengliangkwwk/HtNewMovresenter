@@ -25,12 +25,13 @@ class HTClassHomeMainPage extends StatefulWidget {
 }
 
 class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   final HTHomeProvider homeProvider = HTHomeProvider();
 // 创建一个 CarouselController 以控制 CarouselSlider
   final CarouselController _controller = CarouselController();
   late AnimationController _animationController;
-
+  @override
+  bool get wantKeepAlive => true;
   ///初始化provider
   @override
   void initState() {
@@ -38,12 +39,15 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
     // _htVarDataController.imageList;
     super.initState();
     _animationController = AnimationController(
-        duration: const Duration(seconds: 500), vsync: this);
+      duration: const Duration(seconds: 500),
+      vsync: this,
+    );
     _animationController.forward();
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(
@@ -167,8 +171,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
           Container(width: 10.0),
           InkWell(
               onTap: (() {
-                HTShare().share("app", "", "0",
-                    "","");
+                HTShare().share("app", "", "0", "", "");
               }),
               child: CachedNetworkImage(
                   imageUrl: ImageURL.url_281, width: 24, height: 24)),
@@ -1126,4 +1129,6 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
       ],
     );
   }
+
+  
 }

@@ -67,14 +67,17 @@ class HTClassBtmNavPage extends StatefulWidget {
 class _HTClassBtmNavPageState extends State<HTClassBtmNavPage> {
   int _htVarCurrentIndex = 0;
   final htBarPages = [
-    HTClassHomeMainPage(title: ""),
+    const HTClassHomeMainPage(title: ""),
     HTClassUnPremiumPage(title: ""),
     HTClassSettingInfoPage(title: ""),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: htBarPages[_htVarCurrentIndex],
+      body: IndexedStack(
+        children: htBarPages,
+        index: _htVarCurrentIndex,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
         currentIndex: _htVarCurrentIndex,

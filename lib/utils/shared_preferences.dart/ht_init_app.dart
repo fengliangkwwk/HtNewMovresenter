@@ -35,4 +35,6 @@ Future<void> userData() async {
       HTUserStore.favoriteList.add(HistoryBean.fromJson(element));
     }
   }
+
+  
 }

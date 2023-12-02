@@ -200,7 +200,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
           child: Image.network(ImageURL.url_289, width: 24.0, height: 24.0),
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const HTClassPresHistoryPage(title: "");
+              return const HTClassWatchListPage(title: "Recently Played");
             }));
           }),
       Container(width: 10.0)
@@ -300,7 +300,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
         ),
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const HTClassWatchListPage(title: "");
+            return const HTClassWatchListPage(title: "Watchlist");
           }));
         },);
   }
