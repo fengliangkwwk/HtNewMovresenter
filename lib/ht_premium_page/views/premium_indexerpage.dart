@@ -25,6 +25,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
 
   @override
   Widget build(BuildContext context) {
+    return Container();
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,

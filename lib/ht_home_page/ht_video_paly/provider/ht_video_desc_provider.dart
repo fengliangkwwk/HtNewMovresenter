@@ -1,21 +1,27 @@
 import 'dart:convert';
 
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_data_prvider_mixin.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_player_provider_mixin.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_base.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_mixin.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
 import 'package:ht_new_movpresenter/provider/main_provider.dart';
+import 'package:ht_new_movpresenter/utils/share/ht_share.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 
 class HTVideoDescProvider extends HTVideoDescProviderBase
-    with HTVideoProviderMixin, HTVideoDescDataProviderMixin {
+    with
+        HTVideoProviderMixin,
+        HTVideoDescDataProviderMixin,
+        HTVideoDescPlayerProviderMixin {
   /// mType2:tt_mflx:电视剧   myfx:电影
   /// id:传的视频id
   Future<void> loadData(String mType2, String id) async {
     dataId = id;
+    this.mType2 = mType2;
     await apiRequest(mType2, id);
     initData();
   }
@@ -26,25 +32,31 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     //   autoPlay: true,
     // );
     player.setDataSource(
-      'http://video.aiyayakids.com/ayy_videolist/hls/sd/ayy_m3u8_php/20210930/dMXHPJkJik-00015.ts',
+      'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
+      // 'http://video.aiyayakids.com/ayy_videolist/hls/sd/ayy_m3u8_php/20210930/dMXHPJkJik-00015.ts',
       // videoDescBean?.data?.hd?.link ??
       //     'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
       autoPlay: true,
     );
+    player.addListener(
+      () {
+        // print(
+        //     'zzs:${player.currentPos},${player.value.duration.inSeconds},${player.bufferPos}');
+      },
+    );
     // playerOption();
 
-  // videoPlayer = VideoPlayerController.networkUrl(Uri.parse(
-  //       'https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_20mb.mp4'))
-  //     ..initialize().then((_) {
-  //       // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-  //       // setState(() {});
-  //       // notifyListeners();
-  //       videoPlayer?.play();
-  //       print('播放视频');
-  //     });
+    // videoPlayer = VideoPlayerController.networkUrl(Uri.parse(
+    //       'https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_20mb.mp4'))
+    //     ..initialize().then((_) {
+    //       // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+    //       // setState(() {});
+    //       // notifyListeners();
+    //       videoPlayer?.play();
+    //       print('播放视频');
+    //     });
 
     addHistoryAciton();
-
   }
 
   void allEpisodesEvent() {
@@ -152,4 +164,12 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     }
     prefs.setString(HTSharedKeys.historyList, jsonEncode(savaData));
   }
+
+  void playerCallBack(int state) {
+    if (state == 1) {
+      HTShare().share(mType2 ?? '', playLock(), '1', videoId(), title());
+    }
+  }
+
+
 }

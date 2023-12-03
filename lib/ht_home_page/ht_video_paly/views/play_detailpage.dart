@@ -10,6 +10,7 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_an
     as desc;
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_video_desc_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/custom_player_view.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_all_episodes.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_part.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/feed_back/view/setting_feedback.dart';
@@ -144,21 +145,19 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         child: Stack(children: [
           Container(
             color: Colors.red,
-            child: 
-            FijkView(
+            child: FijkView(
               width: double.infinity,
               height: 220,
               player: provider.player,
               fit: FijkFit.fitWidth,
               fsFit: FijkFit.fill,
-              panelBuilder: fijkPanel2Builder(),
+              panelBuilder: fijkPanel2Builder1(
+                callBack: provider.playerCallBack,
+              ),
+              // panelBuilder: (player, data, context, viewSize, texturePos) {
+              //   return const CustomPlayerView();
+              // },
             ),
-            // provider.videoPlayer?.value.isInitialized == true
-            //   ? AspectRatio(
-            //       aspectRatio: provider.videoPlayer?.value.aspectRatio ?? 0,
-            //       child: VideoPlayer(provider.videoPlayer!),
-            //     )
-            //   : Container(),
           ),
           Positioned(
               left: 10,
@@ -174,25 +173,25 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                   fit: BoxFit.fill,
                 ),
               )),
-          Positioned(
-              right: 11.0,
-              top: 10.0,
-              child: Row(children: [
-                CachedNetworkImage(
-                    imageUrl: ImageURL.url_249, width: 100.0, height: 26.0),
+          // Positioned(
+          //     right: 11.0,
+          //     top: 10.0,
+          //     child: Row(children: [
+          //       CachedNetworkImage(
+          //           imageUrl: ImageURL.url_249, width: 100.0, height: 26.0),
 
-                ///remove ads 图标
-                Container(width: 10.0),
-                CachedNetworkImage(
-                    imageUrl: ImageURL.url_315, width: 24.0, height: 24.0),
+          //       ///remove ads 图标
+          //       Container(width: 10.0),
+          //       CachedNetworkImage(
+          //           imageUrl: ImageURL.url_315, width: 24.0, height: 24.0),
 
-                ///cc 图标
-                Container(width: 10.0),
-                CachedNetworkImage(
-                    imageUrl: ImageURL.url_329, width: 24.0, height: 24.0),
+          //       ///cc 图标
+          //       Container(width: 10.0),
+          //       CachedNetworkImage(
+          //           imageUrl: ImageURL.url_329, width: 24.0, height: 24.0),
 
-                ///投屏图标
-              ]))
+          //       ///投屏图标
+          //     ]))
         ]));
   }
 
@@ -424,7 +423,8 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         GestureDetector(
           ///跳转到反馈界面
           onTap: (() {
-            print("🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻${provider.videoId()} ==============  ${widget.m_type_2}");
+            print(
+                "🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻${provider.videoId()} ==============  ${widget.m_type_2}");
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return (widget.m_type_2 == 'tt_mflx')
                   ? HTClassFeedbackPage(
