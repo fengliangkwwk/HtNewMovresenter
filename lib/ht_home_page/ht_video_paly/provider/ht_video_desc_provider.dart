@@ -8,6 +8,7 @@ import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:video_player/video_player.dart';
 
 class HTVideoDescProvider extends HTVideoDescProviderBase
     with HTVideoProviderMixin, HTVideoDescDataProviderMixin {
@@ -24,15 +25,26 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     //   'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
     //   autoPlay: true,
     // );
-
-    player.setDataSource(
-      // 'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
-      videoDescBean?.data?.hd?.link ??
-          'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
-      autoPlay: true,
-    );
+    // player.setDataSource(
+    //   'http://video.aiyayakids.com/ayy_videolist/hls/sd/ayy_m3u8_php/20210930/dMXHPJkJik-00015.ts',
+    //   // videoDescBean?.data?.hd?.link ??
+    //   //     'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
+    //   autoPlay: true,
+    // );
     // playerOption();
+
+  videoPlayer = VideoPlayerController.networkUrl(Uri.parse(
+        'https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_20mb.mp4'))
+      ..initialize().then((_) {
+        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+        // setState(() {});
+        // notifyListeners();
+        videoPlayer?.play();
+        print('播放视频');
+      });
+
     addHistoryAciton();
+
   }
 
   void allEpisodesEvent() {

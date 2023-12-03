@@ -17,6 +17,7 @@ import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:ht_new_movpresenter/utils/share/ht_share.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
+import 'package:video_player/video_player.dart';
 
 class HTClassVideoDetailPage extends StatefulWidget {
   // ignore: non_constant_identifier_names
@@ -143,14 +144,21 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         child: Stack(children: [
           Container(
             color: Colors.red,
-            child: FijkView(
-              width: double.infinity,
-              height: 220,
-              player: provider.player,
-              fit: FijkFit.fitWidth,
-              fsFit: FijkFit.fill,
-              panelBuilder: fijkPanel2Builder(),
-            ),
+            child: 
+            // FijkView(
+            //   width: double.infinity,
+            //   height: 220,
+            //   player: provider.player,
+            //   fit: FijkFit.fitWidth,
+            //   fsFit: FijkFit.fill,
+            //   panelBuilder: fijkPanel2Builder(),
+            // ),
+            provider.videoPlayer?.value.isInitialized == true
+              ? AspectRatio(
+                  aspectRatio: provider.videoPlayer?.value.aspectRatio ?? 0,
+                  child: VideoPlayer(provider.videoPlayer!),
+                )
+              : Container(),
           ),
           Positioned(
               left: 10,

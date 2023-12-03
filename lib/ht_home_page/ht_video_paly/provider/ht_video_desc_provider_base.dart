@@ -1,5 +1,6 @@
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
 class HTVideoDescProviderBase extends ChangeNotifier {
   ///more info 是否展开
@@ -11,6 +12,11 @@ class HTVideoDescProviderBase extends ChangeNotifier {
   String? vid;//电影或电视剧ID（没有传0）
   String? sid;//电视剧季ID（没有传0）
   String? eid;//电视剧集ID（没有传0）
+
+
+  ///播放器
+   VideoPlayerController? videoPlayer;
+
 
 
 
