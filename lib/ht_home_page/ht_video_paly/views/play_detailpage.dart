@@ -294,7 +294,8 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
           RatingBar(
             initialRating: double.parse(provider.rate()) / 2,
             direction: Axis.horizontal,
-            allowHalfRating: true,
+            allowHalfRating: false,
+            ignoreGestures: true,
             itemCount: 5,
             itemSize: 19.0,
             ratingWidget: RatingWidget(
