@@ -113,6 +113,7 @@ flutter:
     - assets/images/
     # - assets/images/hthome_images/
     - assets/images/httabbar_images/
+    - assets/images/video/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

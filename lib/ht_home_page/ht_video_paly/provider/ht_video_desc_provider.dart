@@ -25,23 +25,23 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     //   'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
     //   autoPlay: true,
     // );
-    // player.setDataSource(
-    //   'http://video.aiyayakids.com/ayy_videolist/hls/sd/ayy_m3u8_php/20210930/dMXHPJkJik-00015.ts',
-    //   // videoDescBean?.data?.hd?.link ??
-    //   //     'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
-    //   autoPlay: true,
-    // );
+    player.setDataSource(
+      'http://video.aiyayakids.com/ayy_videolist/hls/sd/ayy_m3u8_php/20210930/dMXHPJkJik-00015.ts',
+      // videoDescBean?.data?.hd?.link ??
+      //     'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
+      autoPlay: true,
+    );
     // playerOption();
 
-  videoPlayer = VideoPlayerController.networkUrl(Uri.parse(
-        'https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_20mb.mp4'))
-      ..initialize().then((_) {
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-        // setState(() {});
-        // notifyListeners();
-        videoPlayer?.play();
-        print('播放视频');
-      });
+  // videoPlayer = VideoPlayerController.networkUrl(Uri.parse(
+  //       'https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_20mb.mp4'))
+  //     ..initialize().then((_) {
+  //       // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+  //       // setState(() {});
+  //       // notifyListeners();
+  //       videoPlayer?.play();
+  //       print('播放视频');
+  //     });
 
     addHistoryAciton();
 

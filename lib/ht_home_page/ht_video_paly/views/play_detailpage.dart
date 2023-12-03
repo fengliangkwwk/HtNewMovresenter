@@ -145,20 +145,20 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
           Container(
             color: Colors.red,
             child: 
-            // FijkView(
-            //   width: double.infinity,
-            //   height: 220,
-            //   player: provider.player,
-            //   fit: FijkFit.fitWidth,
-            //   fsFit: FijkFit.fill,
-            //   panelBuilder: fijkPanel2Builder(),
-            // ),
-            provider.videoPlayer?.value.isInitialized == true
-              ? AspectRatio(
-                  aspectRatio: provider.videoPlayer?.value.aspectRatio ?? 0,
-                  child: VideoPlayer(provider.videoPlayer!),
-                )
-              : Container(),
+            FijkView(
+              width: double.infinity,
+              height: 220,
+              player: provider.player,
+              fit: FijkFit.fitWidth,
+              fsFit: FijkFit.fill,
+              panelBuilder: fijkPanel2Builder(),
+            ),
+            // provider.videoPlayer?.value.isInitialized == true
+            //   ? AspectRatio(
+            //       aspectRatio: provider.videoPlayer?.value.aspectRatio ?? 0,
+            //       child: VideoPlayer(provider.videoPlayer!),
+            //     )
+            //   : Container(),
           ),
           Positioned(
               left: 10,
