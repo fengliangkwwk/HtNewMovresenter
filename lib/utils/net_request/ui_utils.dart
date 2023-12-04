@@ -57,7 +57,7 @@ class KTClassUIUtils {
             "apns_id",
             () =>
                 "8a983582effc3d97a8a8333eeeb790e187c2caeb3c3f88a48cd18ae7c84a3d93");
-        htVarParam.putIfAbsent("app_id", () => "266"); //app编号，测试用100默认是100
+        htVarParam.putIfAbsent("app_id", () => "93"); //app编号，测试用100默认是100
         htVarParam.putIfAbsent("app_ver", () => "1.0.0"); //app版本
         htVarParam.putIfAbsent("brand", () => "iPhone"); //系统名称
         htVarParam.putIfAbsent(
@@ -89,7 +89,7 @@ class KTClassUIUtils {
             "apns_id",
             () =>
                 "8a983582effc3d97a8a8333eeeb790e187c2caeb3c3f88a48cd18ae7c84a3d93");
-        htVarParam.putIfAbsent("app_id", () => "100"); //266
+        htVarParam.putIfAbsent("app_id", () => "93"); //266
         htVarParam.putIfAbsent("app_ver", () => "1.0.0");
         htVarParam.putIfAbsent("brand", () => "iPhone");
         htVarParam.putIfAbsent("country", () => "US");
@@ -117,7 +117,7 @@ class KTClassUIUtils {
           "apns_id",
           () =>
               "8a983582effc3d97a8a8333eeeb790e187c2caeb3c3f88a48cd18ae7c84a3d93");
-      htVarParam.putIfAbsent("app_id", () => "100"); //266
+      htVarParam.putIfAbsent("app_id", () => "93"); //266
       htVarParam.putIfAbsent("app_ver", () => "1.0.0");
       htVarParam.putIfAbsent("brand", () => "iPhone");
       htVarParam.putIfAbsent("country", () => "US");

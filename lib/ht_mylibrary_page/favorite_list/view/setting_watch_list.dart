@@ -1,11 +1,10 @@
-import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/provider/watch_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
-import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 import 'package:provider/provider.dart';
 
@@ -65,10 +64,8 @@ class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
                 ),
 
                 temWidget(),
-
                 ///删除提示
                 deleteWidget(),
-
                 ///删除弹窗
                 deleteBoxWidget(),
               ],
@@ -282,58 +279,73 @@ class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
     );
   }
 
-  ///
+  ///列表 Item
   Widget itemWidget(int index) {
     var model = provider.dataList?[index];
     return Selector<WatchProvider, bool>(
       selector: (p0, p1) => p1.editState,
       builder: (context, value, child) {
-        return Column(
-          children: [
-            Flexible(
-              flex: 160,
-              child: Stack(
-                children: [
-                  CachedNetworkImage(imageUrl: model?.cover ?? ''),
-                ],
+        return GestureDetector(
+          onTap: () {
+               Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return HTClassVideoDetailPage(
+                    m_type_2:model?.mType2??"",
+                    id: model?.id??"",
+                  );
+                },
               ),
-            ),
-            const SizedBox(height: 2),
-            Flexible(
-                flex: 38,
-                child: Center(
-                  child: Row(
-                    children: [
-                      const SizedBox(width: 4),
-                      Expanded(
-                        child: Text(
-                          model?.title ?? '',
-                          maxLines: 2,
-                          style: const TextStyle(
-                            color: Color(0xFF828386),
-                            fontWeight: FontWeight.bold,
+            );
+          },
+          child: Column(
+            children: [
+              Flexible(
+                flex: 160,
+                child: Stack(
+                  children: [
+                    CachedNetworkImage(imageUrl: model?.cover ?? ''),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 2),
+              Flexible(
+                  flex: 38,
+                  child: Center(
+                    child: Row(
+                      children: [
+                        const SizedBox(width: 4),
+                        Expanded(
+                          child: Text(
+                            model?.title ?? '',
+                            maxLines: 2,
+                            style: const TextStyle(
+                              color: Color(0xFF828386),
+                              fontWeight: FontWeight.bold,
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                      const SizedBox(width: 5),
-                      GestureDetector(
-                        onTap: () => provider.selectItem(model!, index),
-                        child: CachedNetworkImage(
-                          imageUrl: value
-                              ? (model?.selectState == true
-                                  ? ImageURL.url_81
-                                  : ImageURL.url_82)
-                              : ImageURL.url_304,
-                          width: value ? 18 : 24,
-                          height: value ? 18 : 24,
+                        const SizedBox(width: 5),
+                        GestureDetector(
+                          onTap: () => provider.selectItem(model!, index),
+                          child: CachedNetworkImage(
+                            imageUrl: value
+                                ? (model?.selectState == true
+                                    ? ImageURL.url_81
+                                    : ImageURL.url_82)
+                                : ImageURL.url_304,
+                            width: value ? 18 : 24,
+                            height: value ? 18 : 24,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 4),
-                    ],
-                  ),
-                ))
-          ],
+                        const SizedBox(width: 4),
+                      ],
+                    ),
+                  ))
+            ],
+          ),
         );
       },
     );

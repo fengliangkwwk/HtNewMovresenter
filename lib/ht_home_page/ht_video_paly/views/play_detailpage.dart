@@ -28,6 +28,7 @@ class HTClassVideoDetailPage extends StatefulWidget {
   ///"m_type_2": "myfx",// myfx电影，tt_mflx电视剧
   // ignore: non_constant_identifier_names
   final String m_type_2;
+
   ///电影 id 或者 电视剧 id
   final String id;
   @override
@@ -68,17 +69,19 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
           backgroundColor: Colors.black,
           body: Selector<
               HTVideoDescProvider,
-              Tuple5<bool, HtVideoDescBean?, desc.HtSeasonAndEpisodeBean?,
-                  bool,bool>>(
+              Tuple5<bool, HtVideoDescBean?, desc.HtSeasonAndEpisodeBean?, bool,
+                  bool>>(
             selector: (p0, p1) => Tuple5(p1.isAllEpisodes, p1.videoDescBean,
-                p1.tv202Bean, p1.htVarInfoShown,p1.isCollected),
+                p1.tv202Bean, p1.htVarInfoShown, p1.isCollected),
             builder: (context, value, child) {
               return Column(
                 children: [
                   ///播放器
                   videoPlayerViewWidget(),
+
                   ///带背景图的第一行
                   firstPartWidget(),
+
                   ///AllEpisodes界面
                   Visibility(
                     visible: value.item1,
@@ -104,6 +107,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
                             ///分享那一行
                             sharePartWidget(),
+
                             ///如果是电视剧播放页的话会有这部分
                             (widget.m_type_2 == 'tt_mflx')
                                 ? const TVPlayPartWidget()
@@ -353,6 +357,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
           ),
         ]));
   }
+
   ///第五行分享那一行
   Widget sharePartWidget() {
     return Container(
@@ -364,7 +369,10 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
           child: Column(children: [
             ///ImageURL.url_258已收藏   ImageURL.url_259未收藏
             CachedNetworkImage(
-                imageUrl:provider.isCollected?ImageURL.url_258:ImageURL.url_259, width: 22, height: 22),
+                imageUrl:
+                    provider.isCollected ? ImageURL.url_258 : ImageURL.url_259,
+                width: 22,
+                height: 22),
             Container(height: 5.0),
             const Text("My List",
                 style: TextStyle(color: Colors.white, fontSize: 10.0)),
@@ -375,7 +383,6 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
           onTap: (() {
             HTShare().share(widget.m_type_2, provider.playLock(), "1",
                 provider.videoId(), provider.title());
-            print('点击了分享');
           }),
           child: Column(children: [
             CachedNetworkImage(
@@ -391,8 +398,6 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         GestureDetector(
           ///跳转到反馈界面
           onTap: (() {
-            print(
-                "🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻🐻${provider.videoId()} ==============  ${widget.m_type_2}");
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return (widget.m_type_2 == 'tt_mflx')
                   ? HTClassFeedbackPage(
@@ -543,58 +548,66 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         itemCount: dataList?.length,
         itemBuilder: (context, index) {
           var model = dataList?[index];
-          return Container(
-              width: 112.0,
-              margin: const EdgeInsets.only(right: 5.0),
-              child: Stack(children: [
-                CachedNetworkImage(
-                  imageUrl: model.cover ?? '',
-                  height: 158.0,
-                  fit: BoxFit.fill,
-                ),
-                Positioned(
-                    left: 5.0,
-                    top: 5.0,
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(model.rate ?? '',
-                              style: const TextStyle(
-                                  color: Color(0xffFF6D1C),
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600)),
-                        ])),
-                Visibility(
-                  visible: model.mType2 == 'tt_mflx' ? true : false,
-                  child: Positioned(
-                      bottom: 34.0,
-                      width: 112.0,
-                      child: Container(
-                          height: 24.0,
-                          decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [Colors.transparent, Colors.black])),
-                          child: const Row(children: [
-                            Spacer(),
-                            Text("NEW",
-                                style: TextStyle(
-                                    color: Color(0xffFF6D1C), fontSize: 8.0)),
-                            Text("|S07 E08",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 8.0))
-                          ]))),
-                ),
-                Positioned(
-                    top: 163.0,
-                    left: 5.0,
-                    right: 5.0,
-                    child: Text(model.title ?? '',
-                        maxLines: 2,
-                        style: const TextStyle(
-                            color: Color(0xff828386), fontSize: 12.0)))
-              ]));
+          return GestureDetector(
+            // onTap: (() {
+            //   provider.loadData(model.mType2, model.id);
+            // }),
+            child: Container(
+                width: 112.0,
+                margin: const EdgeInsets.only(right: 5.0),
+                child: Stack(children: [
+                  CachedNetworkImage(
+                    imageUrl: model.cover ?? '',
+                    height: 158.0,
+                    fit: BoxFit.fill,
+                  ),
+                  Positioned(
+                      left: 5.0,
+                      top: 5.0,
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(model.rate ?? '',
+                                style: const TextStyle(
+                                    color: Color(0xffFF6D1C),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600)),
+                          ])),
+                  Visibility(
+                    visible: model.mType2 == 'tt_mflx' ? true : false,
+                    child: Positioned(
+                        bottom: 34.0,
+                        width: 112.0,
+                        child: Container(
+                            height: 24.0,
+                            decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                  Colors.transparent,
+                                  Colors.black
+                                ])),
+                            child: const Row(children: [
+                              Spacer(),
+                              Text("NEW",
+                                  style: TextStyle(
+                                      color: Color(0xffFF6D1C), fontSize: 8.0)),
+                              Text("|S07 E08",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 8.0))
+                            ]))),
+                  ),
+                  Positioned(
+                      top: 163.0,
+                      left: 5.0,
+                      right: 5.0,
+                      child: Text(model.title ?? '',
+                          maxLines: 2,
+                          style: const TextStyle(
+                              color: Color(0xff828386), fontSize: 12.0)))
+                ])),
+          );
         },
       ),
     );

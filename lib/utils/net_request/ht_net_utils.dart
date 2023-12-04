@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:dio/io.dart';
 import 'package:ht_new_movpresenter/utils/net_request/ui_utils.dart';
 
 class HTNetUtils {

@@ -30,11 +30,13 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   ///播放器赋值资源
   void initData() {
     player.setDataSource(
+      // 'http://playertest.longtailvideo.com/adaptive/bipbop/gear4/prog_index.m3u8',
       // 'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
       // 'http://video.aiyayakids.com/ayy_videolist/hls/sd/ayy_m3u8_php/20210930/dMXHPJkJik-00015.ts',
       videoDescBean?.data?.hd?.link ??
           'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
       autoPlay: true,
+      showCover: true
     );
     // player.addListener(
     //   () {

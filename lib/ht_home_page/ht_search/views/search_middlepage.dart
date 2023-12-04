@@ -405,7 +405,6 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
         if (value == null || (value.isEmpty)) {
           return Container();
         }
-
         return Offstage(
           offstage: _htVarSearchValue.isEmpty,
           child: Column(
@@ -474,45 +473,3 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
     );
   }
 }
-// Stack(
-//                 children: [
-//                   ///左上角的序号
-//                   Positioned(
-//                     left: 0,
-//                     top: 0,
-//                     child: Container(
-//                       child: KTClassUIUtils.htMethodGetRankingNumbers(i + 1),
-//                     ),
-//                   ),
-                    
-//                   ///中间的播放按钮
-//                   const Center(
-//                     child: Image(
-//                       fit: BoxFit.cover,
-//                       height: 31,
-//                       width: 31,
-//                       image: CachedNetworkImageProvider(ImageURL.url_268),
-//                     ),
-//                   ),
-                 
-//                  /// /标题
-//                   Positioned(
-//                     bottom: 0,
-//                     // top: 185.0,
-//                     left: 5.0,
-//                     right: 5.0,
-//                     child: Center(
-//                       child: Text(
-//                         itemData?.title ?? '',
-//                         maxLines: 2,
-//                         style: const TextStyle(
-//                           color: Color(0xff828386),
-//                           fontSize: 12.0,
-//                           fontWeight: FontWeight.w600,
-//                         ),
-//                         // textAlign: TextAlign.center,
-//                       ),
-//                     ),
-//                   ),
-//                 ],
-//               ),
