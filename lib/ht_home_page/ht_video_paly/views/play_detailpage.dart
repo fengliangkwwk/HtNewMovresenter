@@ -37,13 +37,6 @@ class HTClassVideoDetailPage extends StatefulWidget {
 
 class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
   bool isSaved = false;
-  final List<String> videoList = [
-    'http://playertest.longtailvideo.com/adaptive/bipbop/gear4/prog_index.m3u8',
-    'https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_20mb.mp4',
-    'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
-    'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
-    'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'
-  ];
   final HTVideoDescProvider provider = HTVideoDescProvider();
 
   @override

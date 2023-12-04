@@ -17,34 +17,47 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
         HTVideoProviderMixin,
         HTVideoDescDataProviderMixin,
         HTVideoDescPlayerProviderMixin {
+  List<String> videoList = [];
+
   /// mType2:tt_mflx:电视剧   myfx:电影
   /// id:传的视频id
   Future<void> loadData(String mType2, String id) async {
     dataId = id;
     this.mType2 = mType2;
     await apiRequest(mType2, id);
+    videoList = [
+      'rtsp://zephyr.rtsp.stream/pattern?streamKey=1fd73653a094b877b9bd78468c91adbf',
+      'http://kbs-dokdo.gscdn.com/dokdo_300/_definst_/dokdo_300.stream/playlist.m3u8',
+      'https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8',
+      'https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8',
+      'https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.mp4/.m3u8',
+      'https://sample-videos.com/video123/flv/720/big_buck_bunny_720p_1mb.flv',
+      'https://sample-videos.com/video123/mkv/720/big_buck_bunny_720p_1mb.mkv',
+      'https://sample-videos.com/video123/3gp/144/big_buck_bunny_144p_1mb.3gp',
+      'http://www.w3school.com.cn/i/movie.mp4'
+      'https://sample-videos.com/video123/3gp/144/big_buck_bunny_144p_1mb.3gp',
+      'https://sample-videos.com/video123/3gp/144/big_buck_bunny_144p_2mb.3gp',
+      'https://sample-videos.com/video123/3gp/144/big_buck_bunny_144p_5mb.3gp',
+      'https://sample-videos.com/video123/3gp/144/big_buck_bunny_144p_10mb.3gp',
+      'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
+    ];
     initData();
+    ///判断当前播放的视频是否处于收藏状态。
     isCollect();
   }
-
   ///播放器赋值资源
   void initData() {
-    player.setDataSource(
-      // 'http://playertest.longtailvideo.com/adaptive/bipbop/gear4/prog_index.m3u8',
-      // 'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
-      // 'http://video.aiyayakids.com/ayy_videolist/hls/sd/ayy_m3u8_php/20210930/dMXHPJkJik-00015.ts',
-      videoDescBean?.data?.hd?.link ??
-          'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
-      autoPlay: true,
-      showCover: true
-    );
+    player.setDataSource(videoList[11],
+        // videoDescBean?.data?.hd?.link ??
+        //     'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
+        autoPlay: true,
+        showCover: true);
     // player.addListener(
     //   () {
     //     // print(
     //     //     'zzs:${player.currentPos},${player.value.duration.inSeconds},${player.bufferPos}');
     //   },
     // );
-
     addHistoryAciton();
   }
 

@@ -32,6 +32,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
   late AnimationController _animationController;
   @override
   bool get wantKeepAlive => true;
+
   ///初始化provider
   @override
   void initState() {
@@ -121,7 +122,6 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
     }
 
     ///瀑布流
-
     if (homeProvider.droppingWaterDataList.isNotEmpty) {
       result.add(Container(
         margin: const EdgeInsets.only(top: 0, bottom: 10),
@@ -378,11 +378,11 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
       ),
     );
   }
+
 /**
  * 首页UI有3种类型，轮播图、横滑、九宫格
  * "display_type": 1、竖滑(九宫格)；2、横滑；3、轮播图
  */
-
   ///样式一 轮播图 display_type = 3
   Widget HTBannerWidget(DataList data) {
     var imageSliders = <Widget>[];
@@ -911,7 +911,6 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
               //         child: const Text("广告"),
               //       )
               //     :
-
               GestureDetector(
             onTap: () {
               Navigator.push(
@@ -923,8 +922,6 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                   );
                 }),
               );
-              // 添加点击事件逻辑
-              print('Item $index clicked!');
             },
             child: Container(
                 decoration: BoxDecoration(
@@ -1026,109 +1023,135 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
 
   ///广告
   Widget adWidget() {
-    return Column(
-      children: [
-        Container(
-            height: 60.0,
-            width: double.infinity,
-            margin: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
-            padding: const EdgeInsets.only(left: 16.0),
-            decoration: BoxDecoration(
-                image: const DecorationImage(
-                    image: CachedNetworkImageProvider(ImageURL.url_280),
-                    fit: BoxFit.fill),
-                borderRadius: BorderRadius.circular(6.0)),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text("special offer for you",
-                      style: TextStyle(
-                          color: Color(0xff222222),
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w600)),
-                  Container(height: 4.0),
-                  Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                    const Text("\$",
-                        style: TextStyle(
-                            color: Color(0xff222222),
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.w600)),
-                    const Text("2.99",
-                        style: TextStyle(
-                            color: Color(0xff222222),
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w600)),
-                    Container(width: 3.0),
-                    const Text("for the 1 Month",
-                        style: TextStyle(
-                            color: Color(0xff222222), fontSize: 10.0)),
-                  ])
-                ])),
-        Offstage(
-            offstage: false,
-            child: Container(
-                margin: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
-                height: 250.0,
-                decoration: BoxDecoration(
-                    color: const Color(0xff23252A),
-                    borderRadius: BorderRadius.circular(6.0)),
-                child: Stack(children: [
-                  Positioned(
-                      right: 15,
-                      top: 15,
-                      child: CachedNetworkImage(
-                          imageUrl: ImageURL.url_79, width: 24.0, height: 24.0))
-                ]))),
-        Offstage(
-            offstage: false,
-            child: Container(
-                margin: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
-                height: 250.0,
+    return Selector<HTHomeProvider, Tuple2<bool, bool>>(
+      selector: (p0, p1) =>
+          Tuple2(p1.isClickedDeleteAdBt, p1.isClickedCancelBt),
+      builder: (context, value, child) {
+        return Column(
+          children: [
+            Container(
+                height: 60.0,
                 width: double.infinity,
+                margin: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
+                padding: const EdgeInsets.only(left: 16.0),
                 decoration: BoxDecoration(
-                    color: const Color(0xff23252A),
+                    image: const DecorationImage(
+                        image: CachedNetworkImageProvider(ImageURL.url_280),
+                        fit: BoxFit.fill),
                     borderRadius: BorderRadius.circular(6.0)),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        alignment: Alignment.center,
-                        margin: const EdgeInsets.symmetric(horizontal: 52.0),
-                        height: 48.0,
+                      const Text("special offer for you",
+                          style: TextStyle(
+                              color: Color(0xff222222),
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w600)),
+                      Container(height: 4.0),
+                      Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            const Text("\$",
+                                style: TextStyle(
+                                    color: Color(0xff222222),
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w600)),
+                            const Text("2.99",
+                                style: TextStyle(
+                                    color: Color(0xff222222),
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w600)),
+                            Container(width: 3.0),
+                            const Text("for the 1 Month",
+                                style: TextStyle(
+                                    color: Color(0xff222222), fontSize: 10.0)),
+                          ])
+                    ])),
+            Stack(
+              children: [
+                Offstage(
+                    offstage: value.item2,
+                    child: Container(
+                        margin: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
+                        height: 250.0,
+                        width: double.infinity,
                         decoration: BoxDecoration(
-                          image: const DecorationImage(
-                            image: NetworkImage(ImageURL.url_280),
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius: BorderRadius.circular(6.0),
-                        ),
-                        child: const Text("Get Premium to remove ads",
-                            style: TextStyle(
-                                color: Color(0xff222222), fontSize: 15.0)),
+                            color: const Color(0xff23252A),
+                            borderRadius: BorderRadius.circular(6.0)),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                alignment: Alignment.center,
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 52.0),
+                                height: 48.0,
+                                decoration: BoxDecoration(
+                                  image: const DecorationImage(
+                                    image: NetworkImage(ImageURL.url_280),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  borderRadius: BorderRadius.circular(6.0),
+                                ),
+                                child: const Text("Get Premium to remove ads",
+                                    style: TextStyle(
+                                        color: Color(0xff222222),
+                                        fontSize: 15.0)),
+                              ),
+                              GestureDetector(
+                                onTap: homeProvider.cancelBtAction,
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  margin: const EdgeInsets.fromLTRB(
+                                      52.0, 30.0, 52.0, 0),
+                                  height: 48.0,
+                                  decoration: BoxDecoration(
+                                    image: const DecorationImage(
+                                      image: NetworkImage(ImageURL.url_285),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    // color: const Color(0xff3A3B40),
+                                    // borderRadius: BorderRadius.circular(6.0)
+                                  ),
+                                  child: const Text("Cancel",
+                                      style: TextStyle(
+                                          color: Color(0xffffffff),
+                                          fontSize: 15.0)),
+                                ),
+                              )
+                            ]))),
+                Offstage(
+                  offstage: value.item1,
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
+                    height: 250.0,
+                    decoration: BoxDecoration(
+                        color: const Color(0xff23252A),
+                        borderRadius: BorderRadius.circular(6.0)),
+                    child: GestureDetector(
+                      onTap: homeProvider.deleteBtAction,
+                      child: Stack(
+                        children: [
+                          Positioned(
+                              right: 15,
+                              top: 15,
+                              child: CachedNetworkImage(
+                                  imageUrl: ImageURL.url_79,
+                                  width: 24.0,
+                                  height: 24.0))
+                        ],
                       ),
-                      Container(
-                        alignment: Alignment.center,
-                        margin: const EdgeInsets.fromLTRB(52.0, 30.0, 52.0, 0),
-                        height: 48.0,
-                        decoration: BoxDecoration(
-                          image: const DecorationImage(
-                            image: NetworkImage(ImageURL.url_285),
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius: BorderRadius.circular(6.0),
-                          // color: const Color(0xff3A3B40),
-                          // borderRadius: BorderRadius.circular(6.0)
-                        ),
-                        child: const Text("Cancel",
-                            style: TextStyle(
-                                color: Color(0xffffffff), fontSize: 15.0)),
-                      )
-                    ]))),
-        Container(height: 21.0),
-      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Container(height: 21.0),
+          ],
+        );
+      },
     );
   }
-
-  
 }

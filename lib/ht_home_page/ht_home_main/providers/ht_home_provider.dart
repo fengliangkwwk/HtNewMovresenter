@@ -50,4 +50,16 @@ class HTHomeProvider extends HTHomeProviderBase with HTHomeProviderMixin {
     loading = !loading;
     notifyListeners();
   }
+
+  ///点击首页广告右上角的 x 按钮
+  void deleteBtAction() {
+    isClickedDeleteAdBt = !isClickedDeleteAdBt;
+    notifyListeners();
+  }
+
+  /// 点击了订阅引导广告上面的 cancel 按钮
+  void cancelBtAction() {
+    isClickedCancelBt = !isClickedCancelBt;
+    notifyListeners();
+  }
 }
