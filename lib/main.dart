@@ -1,5 +1,4 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_ad_lunch_page/views/home_launcherpage.dart';
@@ -74,9 +73,9 @@ class HTClassBtmNavPage extends StatefulWidget {
 class _HTClassBtmNavPageState extends State<HTClassBtmNavPage> {
   int _htVarCurrentIndex = 0;
   final htBarPages = [
-    const HTClassHomeMainPage(title: ""),
-    HTClassUnPremiumPage(title: ""),
-    HTClassSettingInfoPage(title: ""),
+   const HTClassHomeMainPage(title: ""),
+    const HTClassUnPremiumPage(title: ""),
+    const HTClassSettingInfoPage(title: ""),
   ];
   @override
   Widget build(BuildContext context) {

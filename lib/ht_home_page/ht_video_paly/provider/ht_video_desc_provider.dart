@@ -47,9 +47,9 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   }
   ///播放器赋值资源
   void initData() {
-    player.setDataSource(videoList[11],
-        // videoDescBean?.data?.hd?.link ??
-        //     'https://sample-videos.com/video123/flv/240/big_buck_bunny_240p_10mb.flv',
+    player.setDataSource(
+      // videoList[11],
+        videoDescBean?.data?.hd?.link ??'',
         autoPlay: true,
         showCover: true);
     // player.addListener(

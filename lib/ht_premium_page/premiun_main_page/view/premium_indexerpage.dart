@@ -1,11 +1,9 @@
-
 ///当前计划卡片  未订阅⽤⼾不显⽰当前计划卡⽚
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/views/premium_family_noprojpage.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/views/premium_familypage.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
-
 
 class HTClassUnPremiumPage extends StatefulWidget {
   const HTClassUnPremiumPage({Key? key, required this.title}) : super(key: key);
@@ -21,15 +19,14 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
   void initState() {
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
-    /// return Container();
+    // return Container();
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
         appBar: AppBar(
-            backgroundColor: Color(0xff1A1C21),
+            backgroundColor: const Color(0xff1A1C21),
             title: const Text("Premium",
                 style: TextStyle(
                     color: Colors.white,
@@ -37,46 +34,42 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                     fontWeight: FontWeight.w600)),
             centerTitle: true,
             leadingWidth: 24.0,
-            leading: InkWell(
-                // onTap: (){
-                //   Navigator.of(context).pop();
-                // },
-                // child: CachedNetworkImage(imageUrl:ImageURL.url_291,width: 24.0, height: 24.0,fit: BoxFit.contain,),
-                )),
+            leading: const InkWell()),
         body: Container(
-            color: Color(0xff11101e),
+            color: const Color(0xff11101e),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Offstage(
                       offstage: htVarTabselection == 1,
                       child: Container(
-                          margin: EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 0),
+                          margin:
+                              const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 0),
                           height: 69.0,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: CachedNetworkImageProvider(
                                       ImageURL.url_250),
                                   fit: BoxFit.fill)),
                           child: Row(children: [
                             Container(width: 10.0),
-                            Text("Current Plan",
+                            const Text("Current Plan",
                                 style: TextStyle(
                                     fontSize: 18.0,
                                     color: Color(0xff222222),
                                     fontWeight: FontWeight.w600)),
-                            Spacer(),
+                            const Spacer(),
                             Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text("Individual - Monthly",
+                                  const Text("Individual - Monthly",
                                       style: TextStyle(
                                           fontSize: 14.0,
                                           color: Color(0xff222222),
                                           fontWeight: FontWeight.w600)),
                                   Container(height: 6.0),
-                                  Text("Cancel On:July 3, 2023",
+                                  const Text("Cancel On:July 3, 2023",
                                       style: TextStyle(
                                           fontSize: 10.0,
                                           color: Color(0x80222222))),
@@ -86,9 +79,10 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                   Offstage(
                       offstage: htVarTabselection == 0,
                       child: Container(
-                          margin: EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 0),
+                          margin:
+                              const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 0),
                           height: 112.0,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: CachedNetworkImageProvider(
                                       ImageURL.url_339),
@@ -99,30 +93,30 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text("Current Plan",
+                                  const Text("Current Plan",
                                       style: TextStyle(
                                           fontSize: 18.0,
                                           color: Color(0xff222222),
                                           fontWeight: FontWeight.w600)),
                                   Container(height: 36.0),
-                                  Text("My Family",
+                                  const Text("My Family",
                                       style: TextStyle(
                                           fontSize: 14.0,
                                           color: Color(0xff222222))),
                                 ]),
-                            Spacer(),
+                            const Spacer(),
                             Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text("Family - Monthly",
+                                  const Text("Family - Monthly",
                                       style: TextStyle(
                                           fontSize: 14.0,
                                           color: Color(0xff222222),
                                           fontWeight: FontWeight.w600)),
                                   Column(children: [
                                     Container(height: 6.0),
-                                    Text("Cancel On:July 3, 2023",
+                                    const Text("Cancel On:July 3, 2023",
                                         style: TextStyle(
                                             fontSize: 10.0,
                                             color: Color(0x80222222))),
@@ -140,7 +134,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                               BorderRadius.circular(13.0),
                                           color: Colors.white),
                                       child: GestureDetector(
-                                          child: Text("View",
+                                          child: const Text("View",
                                               style: TextStyle(
                                                   color: Color(0xff222222),
                                                   fontSize: 12.0,
@@ -150,8 +144,10 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                                 MaterialPageRoute(
                                                     builder: (context) {
                                               return htVarHasFamilyProj == false
-                                                  ? HTClassFamilyPage(title: "")
-                                                  : HTClassFamilyNoProjPage(title: "");
+                                                  ? const HTClassFamilyPage(
+                                                      title: "")
+                                                  : const HTClassFamilyNoProjPage(
+                                                      title: "");
                                             }));
                                           }))
                                 ]),
@@ -160,14 +156,15 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                   Offstage(
                       offstage: false,
                       child: Container(
-                          margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 16.0),
+                          margin:
+                              const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 16.0),
                           height: 60.0,
                           decoration: BoxDecoration(
-                              color: Color(0xff1B1C20),
+                              color: const Color(0xff1B1C20),
                               borderRadius: BorderRadius.circular(8.0)),
                           child: Row(children: [
                             Container(width: 10.0),
-                            Column(
+                            const Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -177,7 +174,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                           color: Color(0xffececec),
                                           fontWeight: FontWeight.w600)),
                                 ]),
-                            Spacer(),
+                            const Spacer(),
                             CachedNetworkImage(
                                 imageUrl: ImageURL.url_181,
                                 width: 44.0,
@@ -192,13 +189,13 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                 alignment: Alignment.center,
                                 height: 48.0,
                                 color: htVarTabselection == 0
-                                    ? Color(0xff11101E)
-                                    : Color(0xff161A26),
+                                    ? const Color(0xff11101E)
+                                    : const Color(0xff161A26),
                                 child: Text("Individual Plan",
                                     style: TextStyle(
                                         color: htVarTabselection == 0
                                             ? Colors.white
-                                            : Color(0xff727682),
+                                            : const Color(0xff727682),
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.w600))),
                             onTap: () {
@@ -212,13 +209,13 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                 alignment: Alignment.center,
                                 height: 48.0,
                                 color: htVarTabselection == 1
-                                    ? Color(0xff11101E)
-                                    : Color(0xff161A26),
+                                    ? const Color(0xff11101E)
+                                    : const Color(0xff161A26),
                                 child: Text("Family Plan",
                                     style: TextStyle(
                                         color: htVarTabselection == 1
                                             ? Colors.white
-                                            : Color(0xff727682),
+                                            : const Color(0xff727682),
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.w600))),
                             onTap: () {
@@ -235,7 +232,8 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                             child: SingleChildScrollView(
                                 child: Column(children: [
                           Container(
-                              margin: EdgeInsets.fromLTRB(26.7, 20.0, 26.0, 0),
+                              margin: const EdgeInsets.fromLTRB(
+                                  26.7, 20.0, 26.0, 0),
                               child: Row(children: [
                                 Expanded(
                                     child: Row(children: [
@@ -244,7 +242,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                       width: 15.0,
                                       height: 15.0),
                                   Container(width: 9.3),
-                                  Text("Remove ADS",
+                                  const Text("Remove ADS",
                                       style: TextStyle(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w600,
@@ -258,7 +256,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                       width: 15.0,
                                       height: 15.0),
                                   Container(width: 9.3),
-                                  Text("Unlock All Movies",
+                                  const Text("Unlock All Movies",
                                       style: TextStyle(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w600,
@@ -267,7 +265,8 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                               ])),
                           Container(height: 24.0),
                           Container(
-                              margin: EdgeInsets.fromLTRB(26.7, 0.0, 26.0, 0),
+                              margin:
+                                  const EdgeInsets.fromLTRB(26.7, 0.0, 26.0, 0),
                               child: Row(children: [
                                 Expanded(
                                     child: Row(children: [
@@ -276,7 +275,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                       width: 15.0,
                                       height: 15.0),
                                   Container(width: 9.3),
-                                  Text("HD Resources",
+                                  const Text("HD Resources",
                                       style: TextStyle(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w600,
@@ -290,7 +289,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                       width: 15.0,
                                       height: 15.0),
                                   Container(width: 9.3),
-                                  Text("Watch On TV",
+                                  const Text("Watch On TV",
                                       style: TextStyle(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w600,
@@ -303,7 +302,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                             Expanded(
                                 child: Container(
                                     height: 136.0,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         image: DecorationImage(
                                             image: CachedNetworkImageProvider(
                                                 ImageURL.url_227),
@@ -316,20 +315,20 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                               width: 72.0,
                                               height: 24.0,
                                               alignment: Alignment.center,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                   image: DecorationImage(
                                                       image:
                                                           CachedNetworkImageProvider(
                                                               ImageURL
                                                                   .url_238))),
-                                              child: Text("Trial",
+                                              child: const Text("Trial",
                                                   style: TextStyle(
                                                       fontSize: 14.0,
                                                       color: Colors.white))),
                                           Container(height: 14.0),
                                           Container(
                                               alignment: Alignment.center,
-                                              child: Text("Monthly",
+                                              child: const Text("Monthly",
                                                   style: TextStyle(
                                                       color: Color(0xff222222),
                                                       fontSize: 12.0,
@@ -338,7 +337,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                           Container(height: 14.0),
                                           Container(
                                               alignment: Alignment.center,
-                                              child: Text("\$4.99",
+                                              child: const Text("\$4.99",
                                                   style: TextStyle(
                                                       color: Color(0xff222222),
                                                       fontSize: 28.0,
@@ -347,7 +346,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                           Container(height: 4.0),
                                           Container(
                                               alignment: Alignment.center,
-                                              child: Text("\$8.53",
+                                              child: const Text("\$8.53",
                                                   style: TextStyle(
                                                       color: Color(0xff222222),
                                                       fontSize: 11.0,
@@ -358,7 +357,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                             Expanded(
                               child: Container(
                                   height: 136.0,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       image: DecorationImage(
                                           image: CachedNetworkImageProvider(
                                               ImageURL.url_227),
@@ -371,19 +370,19 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                             width: 72.0,
                                             height: 24.0,
                                             alignment: Alignment.center,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                                 image: DecorationImage(
                                                     image:
                                                         CachedNetworkImageProvider(
                                                             ImageURL.url_238))),
-                                            child: Text("Trial",
+                                            child: const Text("Trial",
                                                 style: TextStyle(
                                                     fontSize: 14.0,
                                                     color: Colors.white))),
                                         Container(height: 14.0),
                                         Container(
                                             alignment: Alignment.center,
-                                            child: Text("Monthly",
+                                            child: const Text("Monthly",
                                                 style: TextStyle(
                                                     color: Color(0xff222222),
                                                     fontSize: 12.0,
@@ -392,7 +391,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                         Container(height: 14.0),
                                         Container(
                                             alignment: Alignment.center,
-                                            child: Text("\$4.99",
+                                            child: const Text("\$4.99",
                                                 style: TextStyle(
                                                     color: Color(0xff222222),
                                                     fontSize: 28.0,
@@ -401,7 +400,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                         Container(height: 4.0),
                                         Container(
                                             alignment: Alignment.center,
-                                            child: Text("\$8.53",
+                                            child: const Text("\$8.53",
                                                 style: TextStyle(
                                                     color: Color(0xff222222),
                                                     fontSize: 11.0,
@@ -413,7 +412,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                             Expanded(
                               child: Container(
                                   height: 136.0,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       image: DecorationImage(
                                           image: CachedNetworkImageProvider(
                                               ImageURL.url_227),
@@ -426,19 +425,19 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                             width: 72.0,
                                             height: 24.0,
                                             alignment: Alignment.center,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                                 image: DecorationImage(
                                                     image:
                                                         CachedNetworkImageProvider(
                                                             ImageURL.url_238))),
-                                            child: Text("Trial",
+                                            child: const Text("Trial",
                                                 style: TextStyle(
                                                     fontSize: 14.0,
                                                     color: Colors.white))),
                                         Container(height: 14.0),
                                         Container(
                                             alignment: Alignment.center,
-                                            child: Text("Monthly",
+                                            child: const Text("Monthly",
                                                 style: TextStyle(
                                                     color: Color(0xff222222),
                                                     fontSize: 12.0,
@@ -447,7 +446,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                         Container(height: 14.0),
                                         Container(
                                             alignment: Alignment.center,
-                                            child: Text("\$4.99",
+                                            child: const Text("\$4.99",
                                                 style: TextStyle(
                                                     color: Color(0xff222222),
                                                     fontSize: 28.0,
@@ -456,7 +455,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                         Container(height: 4.0),
                                         Container(
                                             alignment: Alignment.center,
-                                            child: Text("\$8.53",
+                                            child: const Text("\$8.53",
                                                 style: TextStyle(
                                                     color: Color(0xff222222),
                                                     fontSize: 11.0,
@@ -473,7 +472,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                 child: RichText(
                                     softWrap: true,
                                     maxLines: 2,
-                                    text: TextSpan(
+                                    text: const TextSpan(
                                         text:
                                             "*\$2.99 for 1st month trial, \$4.99/mo thereafter.",
                                         style: TextStyle(
@@ -490,12 +489,12 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                           ]),
                           GestureDetector(
                             child: Container(
-                                margin:
-                                    EdgeInsets.fromLTRB(23.5, 20.0, 23.5, 13.0),
+                                margin: const EdgeInsets.fromLTRB(
+                                    23.5, 20.0, 23.5, 13.0),
                                 height: 44.0,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(22.0),
-                                    gradient: LinearGradient(
+                                    gradient: const LinearGradient(
                                         begin: Alignment.centerLeft,
                                         end: Alignment.centerRight,
                                         stops: [
@@ -509,16 +508,16 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                 child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text("\$2.99",
+                                      const Text("\$2.99",
                                           style: TextStyle(
                                             color: Color(0xff685034),
                                             fontSize: 20.0,
                                             fontWeight: FontWeight.w600,
                                           )),
                                       Container(
-                                          padding: EdgeInsets.only(
+                                          padding: const EdgeInsets.only(
                                               top: 3.0, left: 2.0),
-                                          child: Text("1st month trial",
+                                          child: const Text("1st month trial",
                                               style: TextStyle(
                                                   color: Color(0xff685034),
                                                   fontSize: 14.0,
@@ -533,7 +532,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 RichText(
-                                    text: TextSpan(
+                                    text: const TextSpan(
                                         text: "If the ad still appears, tap ",
                                         style: TextStyle(
                                             fontSize: 12.0,
@@ -550,15 +549,16 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                               ]),
                           Container(
                               height: 0.3,
-                              color: Color(0xffECECEC),
-                              margin: EdgeInsets.only(top: 12.0)),
+                              color: const Color(0xffECECEC),
+                              margin: const EdgeInsets.only(top: 12.0)),
                           Container(height: 20.0),
                           Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(width: 15.7),
                                 Container(
-                                  margin: EdgeInsets.only(top: 6.0, right: 8.0),
+                                  margin: const EdgeInsets.only(
+                                      top: 6.0, right: 8.0),
                                   width: 6.0,
                                   height: 6.0,
                                   decoration: BoxDecoration(
@@ -568,7 +568,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                 Expanded(
                                     child: RichText(
                                         softWrap: true,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                             text:
                                                 "Subscription automatically renews ",
                                             style: TextStyle(
@@ -591,7 +591,8 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                               children: [
                                 Container(width: 15.7),
                                 Container(
-                                  margin: EdgeInsets.only(top: 6.0, right: 8.0),
+                                  margin: const EdgeInsets.only(
+                                      top: 6.0, right: 8.0),
                                   width: 6.0,
                                   height: 6.0,
                                   decoration: BoxDecoration(
@@ -601,7 +602,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                 Expanded(
                                     child: RichText(
                                         softWrap: true,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                             text:
                                                 "Subscriptions can be managed by the user and ",
                                             style: TextStyle(
@@ -632,7 +633,8 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                               children: [
                                 Container(width: 15.7),
                                 Container(
-                                  margin: EdgeInsets.only(top: 6.0, right: 8.0),
+                                  margin: const EdgeInsets.only(
+                                      top: 6.0, right: 8.0),
                                   width: 6.0,
                                   height: 6.0,
                                   decoration: BoxDecoration(
@@ -642,7 +644,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                 Expanded(
                                     child: RichText(
                                         softWrap: true,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                             text:
                                                 "You must confirm and pay the VIP subscription through the iTunes account in the purchase confirmation.",
                                             style: TextStyle(
@@ -651,13 +653,14 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                                 height: 1.5))))
                               ]),
                         ])))),
-                    new Offstage(
+                    Offstage(
                         offstage: htVarTabselection == 0,
                         child: Expanded(
                             child: SingleChildScrollView(
                                 child: Column(children: [
                           Container(
-                              margin: EdgeInsets.fromLTRB(26.7, 20.0, 26.0, 0),
+                              margin: const EdgeInsets.fromLTRB(
+                                  26.7, 20.0, 26.0, 0),
                               child: Row(children: [
                                 Expanded(
                                     child: Row(children: [
@@ -666,7 +669,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                       width: 15.0,
                                       height: 15.0),
                                   Container(width: 9.3),
-                                  Text("Remove ADS",
+                                  const Text("Remove ADS",
                                       style: TextStyle(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w600,
@@ -680,7 +683,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                       width: 15.0,
                                       height: 15.0),
                                   Container(width: 9.3),
-                                  Text("Unlock All Movies",
+                                  const Text("Unlock All Movies",
                                       style: TextStyle(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w600,
@@ -689,7 +692,8 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                               ])),
                           Container(height: 24.0),
                           Container(
-                              margin: EdgeInsets.fromLTRB(26.7, 0.0, 26.0, 0),
+                              margin:
+                                  const EdgeInsets.fromLTRB(26.7, 0.0, 26.0, 0),
                               child: Row(children: [
                                 Expanded(
                                     child: Row(children: [
@@ -698,7 +702,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                       width: 15.0,
                                       height: 15.0),
                                   Container(width: 9.3),
-                                  Text("HD Resources",
+                                  const Text("HD Resources",
                                       style: TextStyle(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w600,
@@ -712,7 +716,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                       width: 15.0,
                                       height: 15.0),
                                   Container(width: 9.3),
-                                  Text("Watch On TV",
+                                  const Text("Watch On TV",
                                       style: TextStyle(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w600,
@@ -720,7 +724,8 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                 ]))
                               ])),
                           Container(
-                              margin: EdgeInsets.fromLTRB(26.7, 20.0, 26.0, 0),
+                              margin: const EdgeInsets.fromLTRB(
+                                  26.7, 20.0, 26.0, 0),
                               child: Row(children: [
                                 Expanded(
                                     child: Row(children: [
@@ -729,7 +734,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                       width: 15.0,
                                       height: 15.0),
                                   Container(width: 9.3),
-                                  Text("Up To 5 Members",
+                                  const Text("Up To 5 Members",
                                       style: TextStyle(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w600,
@@ -743,7 +748,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                             Expanded(
                                 child: Container(
                                     height: 136.0,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         image: DecorationImage(
                                             image: CachedNetworkImageProvider(
                                                 ImageURL.url_227),
@@ -756,20 +761,20 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                               width: 72.0,
                                               height: 24.0,
                                               alignment: Alignment.center,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                   image: DecorationImage(
                                                       image:
                                                           CachedNetworkImageProvider(
                                                               ImageURL
                                                                   .url_238))),
-                                              child: Text("Trial",
+                                              child: const Text("Trial",
                                                   style: TextStyle(
                                                       fontSize: 14.0,
                                                       color: Colors.white))),
                                           Container(height: 14.0),
                                           Container(
                                               alignment: Alignment.center,
-                                              child: Text("Monthly",
+                                              child: const Text("Monthly",
                                                   style: TextStyle(
                                                       color: Color(0xff222222),
                                                       fontSize: 12.0,
@@ -778,7 +783,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                           Container(height: 14.0),
                                           Container(
                                               alignment: Alignment.center,
-                                              child: Text("\$4.99",
+                                              child: const Text("\$4.99",
                                                   style: TextStyle(
                                                       color: Color(0xff222222),
                                                       fontSize: 28.0,
@@ -787,7 +792,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                           Container(height: 4.0),
                                           Container(
                                               alignment: Alignment.center,
-                                              child: Text("\$8.53",
+                                              child: const Text("\$8.53",
                                                   style: TextStyle(
                                                       color: Color(0xff222222),
                                                       fontSize: 11.0,
@@ -798,7 +803,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                             Expanded(
                               child: Container(
                                   height: 136.0,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       image: DecorationImage(
                                           image: CachedNetworkImageProvider(
                                               ImageURL.url_227),
@@ -811,19 +816,19 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                             width: 72.0,
                                             height: 24.0,
                                             alignment: Alignment.center,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                                 image: DecorationImage(
                                                     image:
                                                         CachedNetworkImageProvider(
                                                             ImageURL.url_238))),
-                                            child: Text("Trial",
+                                            child: const Text("Trial",
                                                 style: TextStyle(
                                                     fontSize: 14.0,
                                                     color: Colors.white))),
                                         Container(height: 14.0),
                                         Container(
                                             alignment: Alignment.center,
-                                            child: Text("Monthly",
+                                            child: const Text("Monthly",
                                                 style: TextStyle(
                                                     color: Color(0xff222222),
                                                     fontSize: 12.0,
@@ -832,7 +837,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                         Container(height: 14.0),
                                         Container(
                                             alignment: Alignment.center,
-                                            child: Text("\$4.99",
+                                            child: const Text("\$4.99",
                                                 style: TextStyle(
                                                     color: Color(0xff222222),
                                                     fontSize: 28.0,
@@ -841,7 +846,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                         Container(height: 4.0),
                                         Container(
                                             alignment: Alignment.center,
-                                            child: Text("\$8.53",
+                                            child: const Text("\$8.53",
                                                 style: TextStyle(
                                                     color: Color(0xff222222),
                                                     fontSize: 11.0,
@@ -853,7 +858,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                             Expanded(
                               child: Container(
                                   height: 136.0,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       image: DecorationImage(
                                           image: CachedNetworkImageProvider(
                                               ImageURL.url_227),
@@ -866,19 +871,19 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                             width: 72.0,
                                             height: 24.0,
                                             alignment: Alignment.center,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                                 image: DecorationImage(
                                                     image:
                                                         CachedNetworkImageProvider(
                                                             ImageURL.url_238))),
-                                            child: Text("Trial",
+                                            child: const Text("Trial",
                                                 style: TextStyle(
                                                     fontSize: 14.0,
                                                     color: Colors.white))),
                                         Container(height: 14.0),
                                         Container(
                                             alignment: Alignment.center,
-                                            child: Text("Monthly",
+                                            child: const Text("Monthly",
                                                 style: TextStyle(
                                                     color: Color(0xff222222),
                                                     fontSize: 12.0,
@@ -887,7 +892,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                         Container(height: 14.0),
                                         Container(
                                             alignment: Alignment.center,
-                                            child: Text("\$4.99",
+                                            child: const Text("\$4.99",
                                                 style: TextStyle(
                                                     color: Color(0xff222222),
                                                     fontSize: 28.0,
@@ -896,7 +901,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                         Container(height: 4.0),
                                         Container(
                                             alignment: Alignment.center,
-                                            child: Text("\$8.53",
+                                            child: const Text("\$8.53",
                                                 style: TextStyle(
                                                     color: Color(0xff222222),
                                                     fontSize: 11.0,
@@ -913,7 +918,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                 child: RichText(
                                     softWrap: true,
                                     maxLines: 2,
-                                    text: TextSpan(
+                                    text: const TextSpan(
                                         text:
                                             "*\$2.99 for 1st month trial, \$4.99/mo thereafter.",
                                         style: TextStyle(
@@ -930,12 +935,12 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                           ]),
                           GestureDetector(
                               child: Container(
-                                  margin: EdgeInsets.fromLTRB(
+                                  margin: const EdgeInsets.fromLTRB(
                                       23.5, 20.0, 23.5, 13.0),
                                   height: 44.0,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(22.0),
-                                      gradient: LinearGradient(
+                                      gradient: const LinearGradient(
                                           begin: Alignment.centerLeft,
                                           end: Alignment.centerRight,
                                           stops: [
@@ -950,16 +955,16 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Text("\$2.99",
+                                        const Text("\$2.99",
                                             style: TextStyle(
                                               color: Color(0xff685034),
                                               fontSize: 20.0,
                                               fontWeight: FontWeight.w600,
                                             )),
                                         Container(
-                                            padding: EdgeInsets.only(
+                                            padding: const EdgeInsets.only(
                                                 top: 3.0, left: 2.0),
-                                            child: Text("1st month trial",
+                                            child: const Text("1st month trial",
                                                 style: TextStyle(
                                                     color: Color(0xff685034),
                                                     fontSize: 14.0,
@@ -973,7 +978,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 RichText(
-                                    text: TextSpan(
+                                    text: const TextSpan(
                                         text: "If the ad still appears, tap ",
                                         style: TextStyle(
                                             fontSize: 12.0,
@@ -990,15 +995,16 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                               ]),
                           Container(
                               height: 0.3,
-                              color: Color(0xffECECEC),
-                              margin: EdgeInsets.only(top: 12.0)),
+                              color: const Color(0xffECECEC),
+                              margin: const EdgeInsets.only(top: 12.0)),
                           Container(height: 20.0),
                           Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(width: 15.7),
                                 Container(
-                                  margin: EdgeInsets.only(top: 6.0, right: 8.0),
+                                  margin: const EdgeInsets.only(
+                                      top: 6.0, right: 8.0),
                                   width: 6.0,
                                   height: 6.0,
                                   decoration: BoxDecoration(
@@ -1008,7 +1014,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                 Expanded(
                                     child: RichText(
                                         softWrap: true,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                             text:
                                                 "Subscription automatically renews ",
                                             style: TextStyle(
@@ -1031,7 +1037,8 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                               children: [
                                 Container(width: 15.7),
                                 Container(
-                                  margin: EdgeInsets.only(top: 6.0, right: 8.0),
+                                  margin: const EdgeInsets.only(
+                                      top: 6.0, right: 8.0),
                                   width: 6.0,
                                   height: 6.0,
                                   decoration: BoxDecoration(
@@ -1041,7 +1048,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                 Expanded(
                                     child: RichText(
                                         softWrap: true,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                             text:
                                                 "Subscriptions can be managed by the user and ",
                                             style: TextStyle(
@@ -1072,7 +1079,8 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                               children: [
                                 Container(width: 15.7),
                                 Container(
-                                  margin: EdgeInsets.only(top: 6.0, right: 8.0),
+                                  margin: const EdgeInsets.only(
+                                      top: 6.0, right: 8.0),
                                   width: 6.0,
                                   height: 6.0,
                                   decoration: BoxDecoration(
@@ -1082,7 +1090,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                 Expanded(
                                     child: RichText(
                                         softWrap: true,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                             text:
                                                 "You must confirm and pay the VIP subscription through the iTunes account in the purchase confirmation.",
                                             style: TextStyle(
@@ -1132,13 +1140,13 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
               child: Container(
                   height: 422.0,
                   decoration: BoxDecoration(
-                      color: Color(0xff292A2F),
+                      color: const Color(0xff292A2F),
                       borderRadius: BorderRadius.circular(12.0)),
                   child: Column(children: [
                     Container(height: 45.4),
                     Stack(children: [
                       Container(
-                          margin: EdgeInsets.fromLTRB(33.0, 0, 29.0, 0),
+                          margin: const EdgeInsets.fromLTRB(33.0, 0, 29.0, 0),
                           height: 190.0),
                       Positioned(
                           left: 51.0,
@@ -1156,22 +1164,22 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                               "image/icon_premium_paydialog_header.png")),
                     ]),
                     Container(height: 28.6),
-                    Container(
-                        child: Text("Subscribe at XXX to become PREM",
-                            style: TextStyle(
-                                color: Color(0xffFFD29D),
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.bold))),
+                    const Text("Subscribe at XXX to become PREM",
+                        style: TextStyle(
+                            color: Color(0xffFFD29D),
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.bold)),
                     Container(height: 39.0),
                     GestureDetector(
                         child: Container(
-                          margin: EdgeInsets.fromLTRB(31.0, 0.0, 31.0, 0.0),
+                          margin:
+                              const EdgeInsets.fromLTRB(31.0, 0.0, 31.0, 0.0),
                           height: 44.0,
                           width: double.infinity,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(22.0),
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,
                                   stops: [
@@ -1182,7 +1190,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                                     Color(0xffedc391),
                                     Color(0xfffdddb7)
                                   ])),
-                          child: Text("Go Subscribe",
+                          child: const Text("Go Subscribe",
                               style: TextStyle(
                                 color: Color(0xff685034),
                                 fontSize: 16.0,
@@ -1194,7 +1202,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                         }),
                     Container(height: 16.0),
                     Container(
-                        child: Text("Later",
+                        child: const Text("Later",
                             style: TextStyle(
                                 color: Color(0xff999999),
                                 fontSize: 12.0,

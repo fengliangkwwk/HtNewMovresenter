@@ -1,5 +1,7 @@
+/**
+ * 家庭主账号页面
+ */
 
- ///家庭主账号页面
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';

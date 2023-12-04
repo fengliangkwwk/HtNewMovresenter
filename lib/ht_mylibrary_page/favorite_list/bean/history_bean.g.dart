@@ -13,7 +13,8 @@ HistoryBean _$HistoryBeanFromJson(Map<String, dynamic> json) => HistoryBean()
   ..rate = json['rate'] as String?
   ..mType2 = json['mType2'] as String?
   ..ssnId = json['ssnId'] as String?
-  ..epsId = json['epsId'] as String?;
+  ..epsId = json['epsId'] as String?
+  ..selectState = json['selectState'] as bool;
 
 Map<String, dynamic> _$HistoryBeanToJson(HistoryBean instance) =>
     <String, dynamic>{
