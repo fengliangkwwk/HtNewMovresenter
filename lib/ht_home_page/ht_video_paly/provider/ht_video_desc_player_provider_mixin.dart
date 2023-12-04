@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_base.dart';
 import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';

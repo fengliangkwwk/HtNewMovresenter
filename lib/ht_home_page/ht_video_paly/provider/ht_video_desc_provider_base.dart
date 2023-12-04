@@ -5,26 +5,24 @@ import 'package:video_player/video_player.dart';
 class HTVideoDescProviderBase extends ChangeNotifier {
   ///more info 是否展开
   var htVarInfoShown = false;
+
   ///是否展开详情
   var isAllEpisodes = false;
 
+  ///是否收藏
+  bool isCollected = false;
 
-  String? vid;//电影或电视剧ID（没有传0）
-  String? sid;//电视剧季ID（没有传0）
-  String? eid;//电视剧集ID（没有传0）
-
+  String? vid; //电影或电视剧ID（没有传0）
+  String? sid; //电视剧季ID（没有传0）
+  String? eid; //电视剧集ID（没有传0）
 
   ///播放器
-   VideoPlayerController? videoPlayer;
-
-
-
-
+  VideoPlayerController? videoPlayer;
 
   ///视频播放器
   FijkPlayer player = FijkPlayer();
-  void playerOption(){
- /*
+  void playerOption() {
+    /*
      1. mediacodec-hevc: 设置使用HEVC（High Efficiency Video Coding）硬件解码器。HEVC是一种视频编码标准，允许更高的视频质量和更低的比特率。
      2.framedrop: 启用帧丢弃，允许在视频渲染过程中丢弃一些帧，以减少延迟。
      3.start-on-prepared: 在调用prepared准备后立即开始播放。
@@ -85,6 +83,4 @@ class HTVideoDescProviderBase extends ChangeNotifier {
     player.setOption(FijkOption.codecCategory, "skip_loop_filter", 48);
     player.setOption(FijkOption.codecCategory, "skip_frame", 0);
   }
- 
 }
- 

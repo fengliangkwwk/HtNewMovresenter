@@ -3,7 +3,6 @@
 ///   @Date   : 2023-11-09 13:56:31
 ///   @Desc   : 个人中心页面
 
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
@@ -54,7 +53,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
           headerWidget(),
           secondWidget(),
           historyWidget(),
-          historyList(),
+          if (HTUserStore.historyList.isNotEmpty) historyList(),
           watchListWidget(),
           Container(
             height: 30,
@@ -69,35 +68,36 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
     );
   }
 
-  Widget totalWidget() {
-    return Container(
-        alignment: Alignment.center,
-        // height: 12.0,
-        // decoration: BoxDecoration(
-        //   image: DecorationImage(
-        //     image: NetworkImage(ImageURL.url_244),
-        //     fit: BoxFit.cover,
-        //   ),
-        // ),
-        child: Column(
-          children: [
-            Container(height: MediaQuery.of(context).padding.top + 0.0),
-            headerWidget(),
-            secondWidget(),
-            historyWidget(),
-            historyList(),
-            watchListWidget(),
-            Container(
-              height: 30,
-            ),
-            shareWidget(),
-            Container(
-              height: 30,
-            ),
-            feedbackWidget(),
-          ],
-        ));
-  }
+  // Widget totalWidget() {
+  //   return Container(
+  //     alignment: Alignment.center,
+  //     // height: 12.0,
+  //     // decoration: BoxDecoration(
+  //     //   image: DecorationImage(
+  //     //     image: NetworkImage(ImageURL.url_244),
+  //     //     fit: BoxFit.cover,
+  //     //   ),
+  //     // ),
+  //     child: Column(
+  //       children: [
+  //         Container(height: MediaQuery.of(context).padding.top + 0.0),
+  //         headerWidget(),
+  //         secondWidget(),
+  //         historyWidget(),
+  //         historyList(),
+  //         watchListWidget(),
+  //         Container(
+  //           height: 30,
+  //         ),
+  //         shareWidget(),
+  //         Container(
+  //           height: 30,
+  //         ),
+  //         feedbackWidget(),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   ///第一行
   Widget headerWidget() {
@@ -215,22 +215,22 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
 
   ///historyListView列表
   Widget historyList() {
-    return Selector<MainPovider,bool>(
+    return Selector<MainPovider, bool>(
       selector: (p0, p1) => p1.historyRefresh,
       builder: (context, value, child) {
         return Container(
-        margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-        padding: const EdgeInsets.only(right: 5),
-        height: 145,
-        // width: double.infinity,
-        child: ListView.builder(
-          itemCount: HTUserStore.historyList.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return historyListItem(index);
-          },
-        ),
-      );
+          margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+          padding: const EdgeInsets.only(right: 5),
+          height: 145,
+          // width: double.infinity,
+          child: ListView.builder(
+            itemCount: HTUserStore.historyList.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return historyListItem(index);
+            },
+          ),
+        );
       },
     );
   }
@@ -265,26 +265,19 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
         )),
         margin: const EdgeInsets.only(right: 5.0),
         child: Stack(alignment: Alignment.center, children: [
-          // Positioned(
-          //     top: 0,
-          //     left: 0,
-          //     right: 0,
-          //     child: Image.network(ImageURL.url_254,
-          //         height: 120.0, width: 84.0, fit: BoxFit.fill)),
           Container(
               // padding:const EdgeIns ets.only(bottom: 45.0),
               child: Image.network(ImageURL.url_268,
                   width: 24.0, height: 24.0, fit: BoxFit.fill)),
-           Positioned(
+          Positioned(
               left: 5.0,
               top: 5.0,
               child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                Text(model.rate ??'',
+                Text(model.rate ?? '',
                     style: const TextStyle(
                         color: Color(0xffFF6D1C),
                         fontSize: 20,
                         fontWeight: FontWeight.w600)),
-                
               ])),
         ]));
   }
@@ -293,7 +286,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   Widget watchListWidget() {
     return GestureDetector(
       child: Container(
-        margin: const EdgeInsets.only(top: 30),
+        margin: const EdgeInsets.only(top: 30, left: 10),
         color: Colors.transparent,
         child: Row(children: [
           Image.network(ImageURL.url_344, width: 16.0, height: 16.0),
@@ -322,18 +315,22 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   ///share
   Widget shareWidget() {
     return GestureDetector(
-        child: Row(children: [
-          Image.network(ImageURL.url_345, width: 16.0, height: 16.0),
-          Container(width: 5.0),
-          const Text("Share",
-              style: TextStyle(
-                  fontSize: 15.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500)),
-          const Spacer(),
-          Image.network(ImageURL.url_289, width: 24.0, height: 24.0),
-          Container(width: 10.0)
-        ]),
+        child: Container(
+          color: Colors.transparent,
+          margin: const EdgeInsets.only(left: 10),
+          child: Row(children: [
+            Image.network(ImageURL.url_345, width: 16.0, height: 16.0),
+            Container(width: 5.0),
+            const Text("Share",
+                style: TextStyle(
+                    fontSize: 15.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500)),
+            const Spacer(),
+            Image.network(ImageURL.url_289, width: 24.0, height: 24.0),
+            Container(width: 10.0)
+          ]),
+        ),
         onTap: () {
           HTShare().share("app", "", "0", "", "");
         });
@@ -342,18 +339,22 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   ///feedback
   Widget feedbackWidget() {
     return GestureDetector(
-        child: Row(children: [
-          Image.network(ImageURL.url_346, width: 16.0, height: 16.0),
-          Container(width: 5.0),
-          const Text("Feedback",
-              style: TextStyle(
-                  fontSize: 15.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500)),
-          const Spacer(),
-          Image.network(ImageURL.url_289, width: 24.0, height: 24.0),
-          Container(width: 10.0)
-        ]),
+        child: Container(
+          color: Colors.transparent,
+          margin: const EdgeInsets.only(left: 10),
+          child: Row(children: [
+            Image.network(ImageURL.url_346, width: 16.0, height: 16.0),
+            Container(width: 5.0),
+            const Text("Feedback",
+                style: TextStyle(
+                    fontSize: 15.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500)),
+            const Spacer(),
+            Image.network(ImageURL.url_289, width: 24.0, height: 24.0),
+            Container(width: 10.0)
+          ]),
+        ),
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return const HTClassFeedbackPage(title: "");

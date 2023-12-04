@@ -1,10 +1,7 @@
-/**
- * 电影播放页
- */
+///播放页面
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fijkplayer/fijkplayer.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_and_episode_bean.dart'
     as desc;
@@ -18,7 +15,6 @@ import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:ht_new_movpresenter/utils/share/ht_share.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
-import 'package:video_player/video_player.dart';
 
 class HTClassVideoDetailPage extends StatefulWidget {
   // ignore: non_constant_identifier_names
@@ -32,15 +28,14 @@ class HTClassVideoDetailPage extends StatefulWidget {
   ///"m_type_2": "myfx",// myfx电影，tt_mflx电视剧
   // ignore: non_constant_identifier_names
   final String m_type_2;
-
   ///电影 id 或者 电视剧 id
   final String id;
-
   @override
   State<HTClassVideoDetailPage> createState() => _HTClassVideoDetailPageState();
 }
 
 class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
+  bool isSaved = false;
   final List<String> videoList = [
     'http://playertest.longtailvideo.com/adaptive/bipbop/gear4/prog_index.m3u8',
     'https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_20mb.mp4',
@@ -73,25 +68,22 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
           backgroundColor: Colors.black,
           body: Selector<
               HTVideoDescProvider,
-              Tuple4<bool, HtVideoDescBean?, desc.HtSeasonAndEpisodeBean?,
-                  bool>>(
-            selector: (p0, p1) => Tuple4(p1.isAllEpisodes, p1.videoDescBean,
-                p1.tv202Bean, p1.htVarInfoShown),
+              Tuple5<bool, HtVideoDescBean?, desc.HtSeasonAndEpisodeBean?,
+                  bool,bool>>(
+            selector: (p0, p1) => Tuple5(p1.isAllEpisodes, p1.videoDescBean,
+                p1.tv202Bean, p1.htVarInfoShown,p1.isCollected),
             builder: (context, value, child) {
               return Column(
                 children: [
                   ///播放器
                   videoPlayerViewWidget(),
-
                   ///带背景图的第一行
                   firstPartWidget(),
-
                   ///AllEpisodes界面
                   Visibility(
                     visible: value.item1,
                     child: Expanded(child: AllEpisodesWidget()),
                   ),
-
                   Visibility(
                     visible: !value.item1,
                     child: Expanded(
@@ -112,7 +104,6 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
                             ///分享那一行
                             sharePartWidget(),
-
                             ///如果是电视剧播放页的话会有这部分
                             (widget.m_type_2 == 'tt_mflx')
                                 ? const TVPlayPartWidget()
@@ -136,9 +127,6 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
   ///播放器
   Widget videoPlayerViewWidget() {
-    // String videoUrl = 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4';
-    // provider.videoDescBean?.data?.hd?.link ?? "";
-    // player.setDataSource(videoUrl, autoPlay: true);
     return Container(
         // height: 220.0,
         margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
@@ -173,25 +161,6 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                   fit: BoxFit.fill,
                 ),
               )),
-          // Positioned(
-          //     right: 11.0,
-          //     top: 10.0,
-          //     child: Row(children: [
-          //       CachedNetworkImage(
-          //           imageUrl: ImageURL.url_249, width: 100.0, height: 26.0),
-
-          //       ///remove ads 图标
-          //       Container(width: 10.0),
-          //       CachedNetworkImage(
-          //           imageUrl: ImageURL.url_315, width: 24.0, height: 24.0),
-
-          //       ///cc 图标
-          //       Container(width: 10.0),
-          //       CachedNetworkImage(
-          //           imageUrl: ImageURL.url_329, width: 24.0, height: 24.0),
-
-          //       ///投屏图标
-          //     ]))
         ]));
   }
 
@@ -384,7 +353,6 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
           ),
         ]));
   }
-
   ///第五行分享那一行
   Widget sharePartWidget() {
     return Container(
@@ -396,7 +364,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
           child: Column(children: [
             ///ImageURL.url_258已收藏   ImageURL.url_259未收藏
             CachedNetworkImage(
-                imageUrl: ImageURL.url_259, width: 22, height: 22),
+                imageUrl:provider.isCollected?ImageURL.url_258:ImageURL.url_259, width: 22, height: 22),
             Container(height: 5.0),
             const Text("My List",
                 style: TextStyle(color: Colors.white, fontSize: 10.0)),
