@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'h_t_premium_bean.dart';
+part of 'ht_premium_bean.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

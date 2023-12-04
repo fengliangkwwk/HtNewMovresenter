@@ -1,0 +1,240 @@
+{
+    "status": 200,
+    "msg": "default",
+    "data": {
+        "trial": {
+            "cnt": "3",
+            "name": "month",
+            "show": "1"
+        },
+        "week": {
+            "id": "price_1KLewtJXk0w7oxceUSgSgwy0",
+            "price": "$2.99"
+        },
+        "month": {
+            "id": "price_1KLewJJXk0w7oxcew2g5jFCA",
+            "price": "$4.99"
+        },
+        "year": {
+            "id": "price_1KLexQJXk0w7oxcebjvq4tOH",
+            "price": "$29.99"
+        },
+        "data1": {
+            "person": {
+                "week": {
+                    "id": "week",
+                    "price": "$2.49"
+                },
+                "month": {
+                    "id": "month",
+                    "price": "$5.99"
+                },
+                "year": {
+                    "id": "year",
+                    "price": "$30.99"
+                }
+            },
+            "family": {
+                "week": {
+                    "id": "family_week",
+                    "price": "$3.49"
+                },
+                "month": {
+                    "id": "family_month",
+                    "price": "$9.49"
+                },
+                "year": {
+                    "id": "family_year",
+                    "price": "$61.49"
+                }
+            }
+        },
+        "k1": "0",
+        "k2": [
+            1,
+            600
+        ],
+        "k3": [
+            "0",
+            "",
+            ""
+        ],
+        "k4": "1",
+        "k5": "1",
+        "k6": "0",
+        "k12": "1",
+        "k13": "1",
+        "k14": {
+            "k1": "0",
+            "k2": "0",
+            "p1": "M-P1W",
+            "p2": "ppv_event_3",
+            "i1": "",
+            "i2": "",
+            "i3": "",
+            "i4": ""
+        },
+        "k15": {
+            "k1": "3",
+            "t1": "180",
+            "i1": "https://autoeq.top/crm/img/k15i1_gp_icon.png",
+            "n1": "",
+            "i2": ""
+        },
+        "k16": [
+            "0",
+            "https://t.me/+Iqsofq4OSj40OTBk"
+        ],
+        "family": 5,
+        "link": "https://www.downloader.world/",
+        "f1": {
+            "c1": "30",
+            "d1": "$",
+            "h1": "2.99",
+            "h2": "4.99",
+            "y1": "9.99",
+            "t1": "$2.99 first month trial, $4.99/mo thereafter."
+        },
+        "data2": {
+            "k1": "0",
+            "trial": {
+                "c1": "365",
+                "d1": "$",
+                "h1": "9.99",
+                "h2": "29.99",
+                "y1": "109.99",
+                "t1": "$9.99 1st year trial, Then $29.99/year after the trial ends"
+            },
+            "week": {
+                "c1": "7",
+                "d1": "$",
+                "h1": "1.99",
+                "h2": "1.99",
+                "y1": "2.99",
+                "t1": ""
+            },
+            "month": {
+                "c1": "30",
+                "d1": "$",
+                "h1": "2.99",
+                "h2": "4.99",
+                "y1": "9.99",
+                "t1": "$2.99 first month trial, $4.99/mo thereafter."
+            },
+            "month1": {
+                "c1": "30",
+                "d1": "$",
+                "h1": "0",
+                "h2": "4.99",
+                "y1": "9.99",
+                "t1": "14-day Free Trial,$4.99/mo thereafter,you can cancel anytime"
+            },
+            "year": {
+                "c1": "365",
+                "d1": "$",
+                "h1": "",
+                "h2": "29.99",
+                "y1": "109.99",
+                "t1": ""
+            },
+            "fw": {
+                "c1": "7",
+                "d1": "$",
+                "h1": "2.99",
+                "h2": "2.99",
+                "y1": "3.99",
+                "t1": ""
+            },
+            "fm": {
+                "c1": "30",
+                "d1": "$",
+                "h1": "4.99",
+                "h2": "7.99",
+                "y1": "15.99",
+                "t1": "$4.99 first month trial, $7.99/mo thereafter."
+            },
+            "fy": {
+                "c1": "365",
+                "d1": "$",
+                "h1": "49.99",
+                "h2": "49.99",
+                "y1": "149.99",
+                "t1": ""
+            }
+        },
+        "p1": {
+            "t5": "Only $2.99 First Month",
+            "t6": "Become PREM & Enjoy Uninterrupted Viewing",
+            "t7": [
+                "AD-Free",
+                "Screencasting"
+            ],
+            "t3": "$2.99 First Month",
+            "t4": "$2.99 At Castly+",
+            "t1": "Castly+",
+            "t2": "Only $0.99 First 2-Week Trial",
+            "gif": "https://autoeq.top/crm/gif/iOS_bw315.gif"
+        },
+        "p2": {
+            "t1": "$2.99",
+            "t2": "$0",
+            "gif": [
+                "https://autoeq.top/crm/gif/ww_ios_313_20230911.gif",
+                "https://autoeq.top/crm/gif/ww_android_410.gif"
+            ]
+        },
+        "h1": [
+            "fm",
+            "year",
+            "week",
+            "month",
+            "fw",
+            "fy"
+        ],
+        "i1": [
+            "https://autoeq.top/crm/iptv_cover/iptv_108235_1692610799.png",
+            "https://autoeq.top/crm/iptv_cover/iptv_108233_1681121987.png",
+            "https://autoeq.top/crm/iptv_cover/iptv_108232_1681122028.png",
+            "https://autoeq.top/crm/iptv_cover/iptv_108241_1682480760.png",
+            "https://autoeq.top/crm/iptv_cover/iptv_108245_1682674081.png",
+            "https://autoeq.top/crm/iptv_cover/iptv_108250_1686184618.png",
+            "https://autoeq.top/crm/iptv_cover/iptv_108251_1686902946.png",
+            "https://autoeq.top/crm/iptv_cover/iptv_108234_1681121953.png",
+            "https://autoeq.top/crm/iptv_cover/iptv_108244_1682588147.png",
+            "https://autoeq.top/crm/iptv_cover/iptv_108249_1684837974.jpeg",
+            "https://autoeq.top/crm/iptv_cover/iptv_108242_1682480683.png",
+            "https://autoeq.top/crm/iptv_cover/iptv_108236_1681121870.png",
+            "https://autoeq.top/crm/iptv_cover/iptv_108237_1681121814.png",
+            "https://autoeq.top/crm/iptv_cover/iptv_108239_1681121710.png",
+            "https://autoeq.top/crm/iptv_cover/iptv_108240_1681121603.png",
+            "https://autoeq.top/crm/iptv_cover/iptv_108247_1682588132.png",
+            "https://autoeq.top/crm/iptv_cover/iptv_108252_1689582847.png",
+            "https://autoeq.top/crm/iptv_cover/iptv_108253_1689841875.png",
+            "https://autoeq.top/crm/iptv_cover/iptv_108262_1694750695.png"
+        ],
+        "i2": [
+            "https://autoeq.top/crm/img/iptv_game_5_1688875200.png",
+            "https://autoeq.top/crm/img/iptv_game_6_1688875200.png",
+            "https://autoeq.top/crm/img/iptv_game_2_1688875200.png",
+            "https://autoeq.top/crm/img/iptv_game_3_1688875200.png",
+            "https://autoeq.top/crm/img/iptv_game_4_1688875200.png",
+            "https://autoeq.top/crm/img/iptv_game_1_1688875200.png",
+            "https://autoeq.top/crm/img/iptv_game_8_1688875200.png",
+            "https://autoeq.top/crm/img/iptv_game_9_1688875200.png",
+            "https://autoeq.top/crm/img/iptv_game_10_1688875200.png",
+            "https://autoeq.top/crm/img/iptv_game_7_1688875200.png",
+            "https://autoeq.top/crm/img/iptv_game_11_1688875200.png",
+            "https://autoeq.top/crm/img/iptv_game_12_1688875200.png"
+        ],
+        "i3": "https://autoeq.top/crm/cover/iptv_vip_callback_1696756219.jpg",
+        "p3": [],
+        "p4": [
+            "https://autoeq.top/crm/img/old_user_prom_1689149599.png",
+            "month_s2"
+        ],
+        "p5": [
+            "https://autoeq.top/crm/img/old_user_prom_1689149599.png",
+            "MS-P1M"
+        ]
+    }
+}

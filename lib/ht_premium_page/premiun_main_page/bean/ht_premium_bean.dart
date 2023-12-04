@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart'; 
       
-part 'h_t_premium_bean.g.dart';
+part 'ht_premium_bean.g.dart';
     
 @JsonSerializable(explicitToJson: true)
 class HTPremiumBean{
@@ -239,7 +239,7 @@ class Year{
 
   @JsonKey(name: 't1')
   String? t1;
-  
+
   Year();
 
   static Year fromJson(Map<String, dynamic> srcJson) => _$YearFromJson(srcJson);

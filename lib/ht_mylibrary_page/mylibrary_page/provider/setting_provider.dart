@@ -13,7 +13,6 @@ class SettingProvider extends SettingProviderBase with SettingProviderMixin {
   Future<void> loadData() async {
     api1Net();
   }
-
   /// 去登录
   void goLogin(BuildContext context) async {
     if (HTUserStore.login()) {

@@ -19,6 +19,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     // return Container();
@@ -77,110 +78,116 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                             Container(width: 10.0),
                           ]))),
                   Offstage(
-                      offstage: htVarTabselection == 0,
-                      child: Container(
-                          margin:
-                              const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 0),
-                          height: 112.0,
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: CachedNetworkImageProvider(
-                                      ImageURL.url_339),
-                                  fit: BoxFit.fill)),
-                          child: Row(children: [
-                            Container(width: 10.0),
-                            Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text("Current Plan",
+                    offstage: htVarTabselection == 0,
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 0),
+                      height: 112.0,
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image:
+                                  CachedNetworkImageProvider(ImageURL.url_339),
+                              fit: BoxFit.fill)),
+                      child: Row(
+                        children: [
+                          Container(width: 10.0),
+                          Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text("Current Plan",
+                                    style: TextStyle(
+                                        fontSize: 18.0,
+                                        color: Color(0xff222222),
+                                        fontWeight: FontWeight.w600)),
+                                Container(height: 36.0),
+                                const Text("My Family",
+                                    style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: Color(0xff222222))),
+                              ]),
+                          const Spacer(),
+                          Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text("Family - Monthly",
+                                    style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: Color(0xff222222),
+                                        fontWeight: FontWeight.w600)),
+                                Column(children: [
+                                  Container(height: 6.0),
+                                  const Text("Cancel On:July 3, 2023",
                                       style: TextStyle(
-                                          fontSize: 18.0,
-                                          color: Color(0xff222222),
-                                          fontWeight: FontWeight.w600)),
-                                  Container(height: 36.0),
-                                  const Text("My Family",
-                                      style: TextStyle(
-                                          fontSize: 14.0,
-                                          color: Color(0xff222222))),
+                                          fontSize: 10.0,
+                                          color: Color(0x80222222))),
+                                  Container(height: 26.0),
                                 ]),
-                            const Spacer(),
-                            Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text("Family - Monthly",
-                                      style: TextStyle(
-                                          fontSize: 14.0,
-                                          color: Color(0xff222222),
-                                          fontWeight: FontWeight.w600)),
-                                  Column(children: [
-                                    Container(height: 6.0),
-                                    const Text("Cancel On:July 3, 2023",
-                                        style: TextStyle(
-                                            fontSize: 10.0,
-                                            color: Color(0x80222222))),
-                                    Container(height: 26.0),
-                                  ]),
-                                  Offstage(
-                                      offstage: true,
-                                      child: Container(height: 33.0)),
-                                  Container(
-                                      alignment: Alignment.center,
-                                      width: 59.0,
-                                      height: 26.0,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(13.0),
-                                          color: Colors.white),
-                                      child: GestureDetector(
-                                          child: const Text("View",
-                                              style: TextStyle(
-                                                  color: Color(0xff222222),
-                                                  fontSize: 12.0,
-                                                  fontWeight: FontWeight.w600)),
-                                          onTap: () {
-                                            Navigator.push(context,
-                                                MaterialPageRoute(
-                                                    builder: (context) {
-                                              return htVarHasFamilyProj == false
-                                                  ? const HTClassFamilyPage(
-                                                      title: "")
-                                                  : const HTClassFamilyNoProjPage(
-                                                      title: "");
-                                            }));
-                                          }))
-                                ]),
-                            Container(width: 10.0),
-                          ]))),
+                                Offstage(
+                                    offstage: true,
+                                    child: Container(height: 33.0)),
+                                Container(
+                                    alignment: Alignment.center,
+                                    width: 59.0,
+                                    height: 26.0,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(13.0),
+                                        color: Colors.white),
+                                    child: GestureDetector(
+                                        child: const Text("View",
+                                            style: TextStyle(
+                                                color: Color(0xff222222),
+                                                fontSize: 12.0,
+                                                fontWeight: FontWeight.w600)),
+                                        onTap: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return htVarHasFamilyProj == false
+                                                ? const HTClassFamilyPage(
+                                                    title: "")
+                                                : const HTClassFamilyNoProjPage(
+                                                    title: "");
+                                          }));
+                                        }))
+                              ]),
+                          Container(width: 10.0),
+                        ],
+                      ),
+                    ),
+                  ),
                   Offstage(
-                      offstage: false,
-                      child: Container(
-                          margin:
-                              const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 16.0),
-                          height: 60.0,
-                          decoration: BoxDecoration(
-                              color: const Color(0xff1B1C20),
-                              borderRadius: BorderRadius.circular(8.0)),
-                          child: Row(children: [
-                            Container(width: 10.0),
-                            const Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("follow this link",
-                                      style: TextStyle(
-                                          fontSize: 14.0,
-                                          color: Color(0xffececec),
-                                          fontWeight: FontWeight.w600)),
-                                ]),
-                            const Spacer(),
-                            CachedNetworkImage(
-                                imageUrl: ImageURL.url_181,
-                                width: 44.0,
-                                height: 44.0),
-                            Container(width: 10.0)
-                          ]))),
+                    offstage: false,
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 16.0),
+                      height: 60.0,
+                      decoration: BoxDecoration(
+                          color: const Color(0xff1B1C20),
+                          borderRadius: BorderRadius.circular(8.0)),
+                      child: Row(
+                        children: [
+                          Container(width: 10.0),
+                          const Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("follow this link",
+                                    style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: Color(0xffececec),
+                                        fontWeight: FontWeight.w600)),
+                              ]),
+                          const Spacer(),
+                          CachedNetworkImage(
+                              imageUrl: ImageURL.url_181,
+                              width: 44.0,
+                              height: 44.0),
+                          Container(width: 10.0)
+                        ],
+                      ),
+                    ),
+                  ),
                   Row(children: [
                     //不需要分流开始
                     Expanded(
