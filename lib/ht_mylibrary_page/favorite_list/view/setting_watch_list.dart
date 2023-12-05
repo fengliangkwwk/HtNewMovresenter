@@ -105,7 +105,7 @@ class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
           child: Container(
             color: const Color(0xFF1A1C21),
             height: 49 + MediaQuery.of(context).padding.bottom,
-            width: SysTools().getScreenSize(context).width,
+            width: SysTools.getScreenSize(context).width,
             child: Column(
               children: [
                 SizedBox(
@@ -181,7 +181,7 @@ class _HTClassWatchListPageState extends State<HTClassWatchListPage> {
             child: Container(
               color: const Color(0xFF1A1C21),
               height: 133,
-              width: SysTools().getScreenSize(context).width,
+              width: SysTools.getScreenSize(context).width,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

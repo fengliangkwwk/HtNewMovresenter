@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SysTools {
   ///获取当前屏幕的宽高尺寸
-  Size getScreenSize(BuildContext context) {
+  static Size getScreenSize(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return screenSize;
   }

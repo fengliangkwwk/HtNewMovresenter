@@ -7,7 +7,7 @@ import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:provider/provider.dart';
 
 class AllEpisodesWidget extends StatelessWidget {
-  AllEpisodesWidget({Key? key}) : super(key: key);
+  const AllEpisodesWidget({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
