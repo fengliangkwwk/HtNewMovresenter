@@ -170,15 +170,16 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
   /// 订阅产品列表 List
   Widget productListWidget() {
     return Container(
-      margin: EdgeInsets.only(top: 10),
-        height: 136,
-        child: ListView.builder(
-          itemCount: 10,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return productItemWidget();
-          },
-        ));
+      margin: const EdgeInsets.only(top: 10),
+      height: 136,
+      child: ListView.builder(
+        itemCount: 10,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return productItemWidget();
+        },
+      ),
+    );
   }
 
   ///订阅产品列表Item.
@@ -187,7 +188,9 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
       width: 106,
       margin: const EdgeInsets.only(left: 16),
       decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
         //背景图
         image: DecorationImage(
             image: CachedNetworkImageProvider(ImageURL.url_227),
@@ -232,23 +235,18 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
                       fontWeight: FontWeight.w600))),
           Container(height: 4.0),
           Container(
-              alignment: Alignment.center,
-              child: const Text("\$8.53",
-                  style: TextStyle(
-                      color: Color(0xff222222),
-                      fontSize: 11.0,
-                      decoration: TextDecoration.lineThrough))),
+            alignment: Alignment.center,
+            child: const Text(
+              "\$8.53",
+              style: TextStyle(
+                  color: Color(0xff222222),
+                  fontSize: 11.0,
+                  decoration: TextDecoration.lineThrough),
+            ),
+          ),
         ],
       ),
     );
   }
-
-// Widget 
-
-
-
-
-
-
 
 }
