@@ -217,7 +217,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
   ///seeAll More 按钮
   Widget seeAllAndMoreButtoonWidget(DataList data) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         children: [
           ///1.more +  see all
@@ -1032,7 +1032,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
             Container(
                 height: 60.0,
                 width: double.infinity,
-                margin: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
+                margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0),
                 padding: const EdgeInsets.only(left: 16.0),
                 decoration: BoxDecoration(
                     image: const DecorationImage(
