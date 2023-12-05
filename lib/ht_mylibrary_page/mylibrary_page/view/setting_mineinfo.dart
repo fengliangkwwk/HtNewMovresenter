@@ -265,10 +265,8 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
         )),
         margin: const EdgeInsets.only(right: 5.0),
         child: Stack(alignment: Alignment.center, children: [
-          Container(
-              // padding:const EdgeIns ets.only(bottom: 45.0),
-              child: Image.network(ImageURL.url_268,
-                  width: 24.0, height: 24.0, fit: BoxFit.fill)),
+          Image.network(ImageURL.url_268,
+              width: 24.0, height: 24.0, fit: BoxFit.fill),
           Positioned(
               left: 5.0,
               top: 5.0,

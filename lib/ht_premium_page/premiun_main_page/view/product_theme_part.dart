@@ -140,7 +140,7 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
           children: list.map((name) => gridViewItemWidget(name)).toList()),
     );
   }
-  
+
   ///九宫格 item
   Widget gridViewItemWidget(String str) {
     return Row(
@@ -166,12 +166,89 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
       ],
     );
   }
+
   /// 订阅产品列表 List
-  Widget productListWidget(){
+  Widget productListWidget() {
     return Container(
-      height: 136,
-      color: Colors.amber,
-      // child: 
+      margin: EdgeInsets.only(top: 10),
+        height: 136,
+        child: ListView.builder(
+          itemCount: 10,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return productItemWidget();
+          },
+        ));
+  }
+
+  ///订阅产品列表Item.
+  Widget productItemWidget() {
+    return Container(
+      width: 106,
+      margin: const EdgeInsets.only(left: 16),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        //背景图
+        image: DecorationImage(
+            image: CachedNetworkImageProvider(ImageURL.url_227),
+            fit: BoxFit.fill),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ///trial 图标
+          Container(
+            width: 72.0,
+            height: 24.0,
+            alignment: Alignment.center,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(ImageURL.url_238),
+              ),
+            ),
+            child: const Text(
+              "Trial",
+              style: TextStyle(fontSize: 14.0, color: Colors.white),
+            ),
+          ),
+          Container(height: 14.0),
+          Container(
+            alignment: Alignment.center,
+            child: const Text(
+              "Monthly",
+              style: TextStyle(
+                  color: Color(0xff222222),
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w600),
+            ),
+          ),
+          Container(height: 14.0),
+          Container(
+              alignment: Alignment.center,
+              child: const Text("\$4.99",
+                  style: TextStyle(
+                      color: Color(0xff222222),
+                      fontSize: 28.0,
+                      fontWeight: FontWeight.w600))),
+          Container(height: 4.0),
+          Container(
+              alignment: Alignment.center,
+              child: const Text("\$8.53",
+                  style: TextStyle(
+                      color: Color(0xff222222),
+                      fontSize: 11.0,
+                      decoration: TextDecoration.lineThrough))),
+        ],
+      ),
     );
   }
+
+// Widget 
+
+
+
+
+
+
+
 }
