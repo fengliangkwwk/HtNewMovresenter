@@ -140,7 +140,7 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
           children: list.map((name) => gridViewItemWidget(name)).toList()),
     );
   }
-
+  
   ///九宫格 item
   Widget gridViewItemWidget(String str) {
     return Row(
@@ -166,13 +166,12 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
       ],
     );
   }
-
   /// 订阅产品列表 List
   Widget productListWidget(){
     return Container(
       height: 136,
       color: Colors.amber,
-
+      // child: 
     );
   }
 }
