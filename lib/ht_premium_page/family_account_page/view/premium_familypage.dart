@@ -1,7 +1,4 @@
-/**
- * 家庭主账号页面
- */
-
+///家庭主账号页面
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
@@ -38,7 +35,7 @@ class _HTClassFamilyPageState extends State<HTClassFamilyPage> {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
         appBar: AppBar(
-            backgroundColor: Color(0xff1A1C21),
+            backgroundColor: const Color(0xff1A1C21),
             title: const Text("Family Account",
                 style: TextStyle(
                     color: Colors.white,

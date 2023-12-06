@@ -19,7 +19,6 @@ class _PremiumBottomWidgetState extends State<PremiumBottomWidget> {
       'You must confirm and pay the VIP subscription through the iTunes account in the purchase confirmation.',
     ];
   }
-
   @override
   Widget build(BuildContext context) {
     return Container(

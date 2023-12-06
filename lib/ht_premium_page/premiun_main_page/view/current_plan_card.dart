@@ -1,20 +1,24 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/ht_premium_page/family_account_page/view/premium_familypage.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 
 ///当前计划卡片
 ///分三种：1️⃣ 个人计划   2️⃣家庭计划主账号版本   3️⃣ 家庭计划成员版本
-//  ignore: must_be_immutable
-class CurrentPlanCardWidget extends StatelessWidget {
+/// ignore: must_be_immutable
+class CurrentPlanCardWidget extends StatefulWidget {
+  CurrentPlanCardWidget({Key? key, this.typeStr}) : super(key: key);
   String? typeStr;
 
-  CurrentPlanCardWidget({Key? key, this.typeStr}) : super(key: key);
+  @override
+  State<CurrentPlanCardWidget> createState() => _CurrentPlanCardWidgetState();
+}
 
+class _CurrentPlanCardWidgetState extends State<CurrentPlanCardWidget> {
   @override
   Widget build(BuildContext context) {
     return currentPlanFamilyMainWidget();
   }
-
   ///个人计划背景图片 250
   Widget currentPlanPersonalWidget() {
     return Container(
@@ -55,7 +59,7 @@ class CurrentPlanCardWidget extends StatelessWidget {
   ///家庭计划主账号版本 / 家庭计划成员版本 背景 339
   Widget currentPlanFamilyMainWidget() {
     return Container(
-      margin: const EdgeInsets.only(left: 16, right: 16,top: 10),
+      margin: const EdgeInsets.only(left: 16, right: 16, top: 10),
       height: 112,
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -131,10 +135,26 @@ class CurrentPlanCardWidget extends StatelessWidget {
                         side: BorderSide(width: 0, color: Colors.white),
                       ),
                     ),
-                    child: const Text(
-                      "Manage",
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    child: InkWell(
+                      onTap: () {
+                        ///跳转到Family Account⻚面
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            //不携带参数
+                            return const HTClassFamilyPage(
+                              title: '',
+                            );
+                            //携带参数(例如带一个字符串参数)
+                            //return NewRoute("abc");
+                          }),
+                        );
+                      },
+                      child: const Text(
+                        "Manage",
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      ),
                     )),
                 Container(width: 10.0),
               ],
