@@ -1,8 +1,9 @@
 ///当前计划卡片  未订阅⽤⼾不显⽰当前计划卡⽚
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/view/current_plan_ccard.dart';
+import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/view/current_plan_card.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/view/follow_link.dart';
+import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/view/premium_bottom.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/view/product_theme_part.dart';
 // import 'package:ht_new_movpresenter/ht_premium_page/views/premium_family_noprojpage.dart';
 // import 'package:ht_new_movpresenter/ht_premium_page/views/premium_familypage.dart';

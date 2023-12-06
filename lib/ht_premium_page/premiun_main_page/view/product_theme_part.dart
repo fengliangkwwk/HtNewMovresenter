@@ -1,6 +1,7 @@
 ///订阅页面follow this link下面的部分
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/view/premium_bottom.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 
@@ -118,6 +119,7 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
           children: [
             equityGridWiget(),
             productListWidget(),
+            const PremiumBottomWidget(),
           ],
         ),
       ),
@@ -170,6 +172,7 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
   /// 订阅产品列表 List
   Widget productListWidget() {
     return Container(
+      padding: const EdgeInsets.only(right: 15),
       margin: const EdgeInsets.only(top: 10),
       height: 136,
       child: ListView.builder(
@@ -184,68 +187,73 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
 
   ///订阅产品列表Item.
   Widget productItemWidget() {
-    return Container(
-      width: 106,
-      margin: const EdgeInsets.only(left: 16),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(10),
+    return Row(
+      children: [
+        Container(width: 15,),
+        Container(
+        width: 106,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+          //背景图
+          image: DecorationImage(
+              image: CachedNetworkImageProvider(ImageURL.url_227),
+              fit: BoxFit.fill),
         ),
-        //背景图
-        image: DecorationImage(
-            image: CachedNetworkImageProvider(ImageURL.url_227),
-            fit: BoxFit.fill),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ///trial 图标
-          Container(
-            width: 72.0,
-            height: 24.0,
-            alignment: Alignment.center,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: CachedNetworkImageProvider(ImageURL.url_238),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ///trial 图标
+            Container(
+              width: 72.0,
+              height: 24.0,
+              alignment: Alignment.center,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: CachedNetworkImageProvider(ImageURL.url_238),
+                ),
+              ),
+              child: const Text(
+                "Trial",
+                style: TextStyle(fontSize: 14.0, color: Colors.white),
               ),
             ),
-            child: const Text(
-              "Trial",
-              style: TextStyle(fontSize: 14.0, color: Colors.white),
-            ),
-          ),
-          Container(height: 14.0),
-          Container(
-            alignment: Alignment.center,
-            child: const Text(
-              "Monthly",
-              style: TextStyle(
-                  color: Color(0xff222222),
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.w600),
-            ),
-          ),
-          Container(height: 14.0),
-          Container(
+            Container(height: 14.0),
+            Container(
               alignment: Alignment.center,
-              child: const Text("\$4.99",
-                  style: TextStyle(
-                      color: Color(0xff222222),
-                      fontSize: 28.0,
-                      fontWeight: FontWeight.w600))),
-          Container(height: 4.0),
-          Container(
-            alignment: Alignment.center,
-            child: const Text(
-              "\$8.53",
-              style: TextStyle(
-                  color: Color(0xff222222),
-                  fontSize: 11.0,
-                  decoration: TextDecoration.lineThrough),
+              child: const Text(
+                "Monthly",
+                style: TextStyle(
+                    color: Color(0xff222222),
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w600),
+              ),
             ),
-          ),
-        ],
+            Container(height: 14.0),
+            Container(
+                alignment: Alignment.center,
+                child: const Text("\$4.99",
+                    style: TextStyle(
+                        color: Color(0xff222222),
+                        fontSize: 28.0,
+                        fontWeight: FontWeight.w600))),
+            Container(height: 4.0),
+            Container(
+              alignment: Alignment.center,
+              child: const Text(
+                "\$8.53",
+                style: TextStyle(
+                    color: Color(0xff222222),
+                    fontSize: 11.0,
+                    decoration: TextDecoration.lineThrough),
+              ),
+            ),
+          ],
+        ),
       ),
+
+      ],
     );
   }
 
