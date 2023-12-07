@@ -1,7 +1,10 @@
 ///家庭主账号页面
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/ht_premium_page/family_account_page/provider/family_account_provider.dart';
+import 'package:ht_new_movpresenter/ht_premium_page/premium_second_page/view/premium_second_page.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
+import 'package:provider/provider.dart';
 
 class HTClassFamilyPage extends StatefulWidget {
   const HTClassFamilyPage({Key? key, required this.title}) : super(key: key);
@@ -16,22 +19,27 @@ class HTClassFamilyPage extends StatefulWidget {
   // always marked "final".
 
   final String title;
-
   @override
   State<HTClassFamilyPage> createState() => _HTClassFamilyPageState();
 }
 
 class _HTClassFamilyPageState extends State<HTClassFamilyPage> {
+  FamilyAccountProvider provider = FamilyAccountProvider();
   var htVarIsEditMode = false;
 
   @override
   void initState() {
     super.initState();
+    provider.loadData();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => provider),
+      ],
+      child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
         appBar: AppBar(
@@ -59,40 +67,40 @@ class _HTClassFamilyPageState extends State<HTClassFamilyPage> {
             actions: [
               GestureDetector(
                 child: Container(
-                    margin: EdgeInsets.only(right: 15.0, top: 3.0),
-                    child: CachedNetworkImage(
-                      imageUrl: ImageURL.url_346,
-                      width: 24.0,
-                      height: 24.0,
-                    )),
+                  margin: const EdgeInsets.only(right: 15.0, top: 3.0),
+                  child: Image.asset(
+                    "assets/images/httabbar_images/icon_family_quit@3x.png",
+                    width: 24.0,
+                    height: 24.0,
+                  ),
+                ),
                 onTap: () {
-                  setState(() {
-                    if (htVarIsEditMode = true) {
-                      htVarIsEditMode = true;
-                    } else {
-                      htVarIsEditMode = false;
-                    }
-                  });
-
-                  //  if(htVarIsEditMode = true){
-                  //     htVarIsEditMode = false;
-                  //   }else{
-                  //   htVarIsEditMode = true;
-                  //   }
+                  htMethodShowDelConfirmDialog(context);
                 },
               )
             ]),
-        body: SingleChildScrollView(
-            child: Column(children: [
+        body: provider.familyAccountBean?.data?.isEmpty == false
+            ? familyListWidget()
+            : noFamilyMemberWiget(),
+      ),
+    );
+  }
+
+  Widget familyListWidget() {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
           ListView(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              children: [1, 2, 3, 4]
-                  .map((e) => Container(
-                      height: 74.0,
-                      child: Column(children: [
-                        Container(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            children: [1, 2, 3, 4]
+                .map(
+                  (e) => SizedBox(
+                    height: 74.0,
+                    child: Column(
+                      children: [
+                        SizedBox(
                             height: 73.5,
                             child: Row(children: [
                               Container(width: 20.0),
@@ -114,7 +122,8 @@ class _HTClassFamilyPageState extends State<HTClassFamilyPage> {
 
                                       ///订阅状态 url_341     为订阅状态   url_342
                                       Container(
-                                          padding: EdgeInsets.only(top: 3.0),
+                                          padding:
+                                              const EdgeInsets.only(top: 3.0),
                                           child: CachedNetworkImage(
                                               imageUrl: ImageURL.url_341,
                                               width: 20.0,
@@ -126,28 +135,32 @@ class _HTClassFamilyPageState extends State<HTClassFamilyPage> {
                                             color: Color(0xff999999),
                                             fontSize: 14.0))
                                   ]),
-                              Spacer(),
+                              const Spacer(),
                               Visibility(
-                                  visible: htVarIsEditMode,
+                                  visible: !htVarIsEditMode,
                                   child: GestureDetector(
                                       child: CachedNetworkImage(
                                           imageUrl: ImageURL.url_83,
                                           width: 24.0,
                                           height: 24.0),
-                                      onTap: () {
-                                        htMethodShowDelConfirmDialog(context);
-                                      })),
+                                      onTap: () {})),
                               Container(width: 25.0)
                             ])),
                         Container(
-                            height: 0.5,
-                            color: Color(0x23ffffff),
-                            margin: EdgeInsets.only(left: 20.0))
-                      ])))
-                  .toList()),
+                          height: 0.5,
+                          color: const Color(0x23ffffff),
+                          margin: const EdgeInsets.only(left: 20.0),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+                .toList(),
+          ),
           Offstage(
               offstage: !htVarIsEditMode,
               child: Container(
+                // color: Colors.black,
                 margin: const EdgeInsets.fromLTRB(37.7, 96.0, 37.3, 0.0),
                 height: 44.0,
                 width: double.infinity,
@@ -159,31 +172,38 @@ class _HTClassFamilyPageState extends State<HTClassFamilyPage> {
                         end: Alignment.centerRight,
                         stops: [0.0, 1.0],
                         colors: [Color(0xffedc391), Color(0xfffdddb7)])),
-                child: const Text("Buy Family Plan",
-                    style: TextStyle(
-                      color: Color(0xff685034),
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w600,
-                    )),
+                child: const Text(
+                  "Buy Family Plan",
+                  style: TextStyle(
+                    color: Color(0xff685034),
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               )),
           Offstage(
-              offstage:htVarIsEditMode,
-              child: Container(
-                margin: const EdgeInsets.fromLTRB(37.7, 202.0, 37.3, 0.0),
-                height: 44.0,
-                width: double.infinity,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(22.0),
-                    color: Colors.white),
-                child: const Text("Quit Family Account",
-                    style: TextStyle(
-                      color: Color(0xff222222),
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w600,
-                    )),
-              )),
-        ])));
+            offstage: htVarIsEditMode,
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(37.7, 202.0, 37.3, 0.0),
+              height: 44.0,
+              width: double.infinity,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(22.0),
+                  color: Colors.white),
+              child: const Text(
+                "Quit Family Account",
+                style: TextStyle(
+                  color: Color(0xff222222),
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   void htMethodShowDelConfirmDialog(BuildContext ctx) {
@@ -191,50 +211,115 @@ class _HTClassFamilyPageState extends State<HTClassFamilyPage> {
         context: ctx,
         builder: (context1) {
           return Dialog(
-              backgroundColor: Colors.transparent,
-              child: Container(
-                  height: 213.0,
-                  decoration: BoxDecoration(
-                      color: Color(0xff292A2F),
-                      borderRadius: BorderRadius.circular(12.0)),
-                  child: Column(children: [
-                    Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 34.0, 20.0, 0),
-                        child: const Text(
-                            "Are you sure you want delete this \nfamily account?",
-                            style: TextStyle(
-                                color: Colors.white, fontSize: 16.0))),
-                    Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.fromLTRB(20.0, 24.0, 20.0, 18.0),
-                        height: 44.0,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(22.0),
-                            gradient: const LinearGradient(
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                                stops: [
-                                  0.0,
-                                  1.0
-                                ],
-                                colors: [
-                                  Color(0xfff27f7f),
-                                  Color(0xffd93b3a)
-                                ])),
-                        child: const Text("Delete",
-                            style: TextStyle(
-                                fontSize: 16.0,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600))),
-                    Container(
-                        child: const Text("Cancel",
-                            style: TextStyle(
-                                color: Color(0xff999999),
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w600,
-                                decoration: TextDecoration.underline))),
-                  ])));
+            backgroundColor: Colors.transparent,
+            child: Container(
+              height: 213.0,
+              decoration: BoxDecoration(
+                  color: const Color(0xff292A2F),
+                  borderRadius: BorderRadius.circular(12.0)),
+              child: Column(
+                children: [
+                  Container(
+                      margin: const EdgeInsets.fromLTRB(20.0, 34.0, 20.0, 0),
+                      child: const Text(
+                          "Are you sure you want delete this \nfamily account?",
+                          style:
+                              TextStyle(color: Colors.white, fontSize: 16.0))),
+                  Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.fromLTRB(20.0, 24.0, 20.0, 18.0),
+                      height: 44.0,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(22.0),
+                          gradient: const LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              stops: [0.0, 1.0],
+                              colors: [Color(0xfff27f7f), Color(0xffd93b3a)])),
+                      child: const Text("Delete",
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600))),
+                  const Text("Cancel",
+                      style: TextStyle(
+                          color: Color(0xff999999),
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600,
+                          decoration: TextDecoration.underline)),
+                ],
+              ),
+            ),
+          );
         });
+  }
+
+  ///没有家庭计划时的空页面。
+  Widget noFamilyMemberWiget() {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(left: 63, right: 63, top: 49),
+          child: const Text(
+            "you have not purchased or joined any family plan",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              height: 1.5,
+              fontSize: 13,
+              color: Color(0xff999999),
+              // fontWeight: FontWeight.bold,
+            ),
+            maxLines: null,
+            overflow: TextOverflow.visible,
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 50, bottom: 20),
+          width: 328,
+          height: 44,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(22),
+            ),
+            image: DecorationImage(
+              image: CachedNetworkImageProvider(ImageURL.url_264),
+            ),
+          ),
+          child: InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return const PremiumSecondPageWidget();
+                }),
+              );
+            },
+            child: const Center(
+              child: Text(
+                'buy family plan',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff685034),
+                ),
+              ),
+            ),
+          ),
+        ),
+        const Text(
+          "or wait for invitation",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            height: 1.5,
+            fontSize: 13,
+            color: Color(0xff999999),
+            // fontWeight: FontWeight.bold,
+          ),
+          maxLines: null,
+          overflow: TextOverflow.visible,
+        ),
+      ],
+    );
   }
 }

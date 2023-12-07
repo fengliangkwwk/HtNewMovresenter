@@ -89,6 +89,7 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^2.3.3
   json_serializable: ^6.5.4
+
 #跨平台适配的解决方案，目的是让你的flutter应用可以灵活高效的自动适配各种平台，实现UI最大化复用，业务逻辑代码在不同平台间能够共享
 #  flutter_adapter: ^1.0.4
 

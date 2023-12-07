@@ -186,21 +186,26 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                 Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
               Container(width: 20.0),
               Expanded(
-                  child: TextField(
-                      controller: TextEditingController(),
-                      enableInteractiveSelection: false,
-                      readOnly: true,
-                      decoration: const InputDecoration(
-                          hintText: "Search for Movies,TV",
-                          border: InputBorder.none,
-                          hintStyle: TextStyle(
-                              color: Color(0xffAEAFB1), fontSize: 15.0)),
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return const HTClassSearchMidPage(title: "");
-                        }));
-                      })),
+                child: TextField(
+                    controller: TextEditingController(),
+                    enableInteractiveSelection: false,
+                    readOnly: true,
+                    decoration: const InputDecoration(
+                        hintText: "Search for Movies,TV",
+                        border: InputBorder.none,
+                        hintStyle: TextStyle(
+                            color: Color(0xffAEAFB1), fontSize: 15.0)),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const HTClassSearchMidPage(title: "");
+                          },
+                        ),
+                      );
+                    }),
+              ),
               CachedNetworkImage(
                   imageUrl: ImageURL.url_283, width: 16, height: 16),
               Container(width: 10.0),
@@ -229,55 +234,60 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                     homeProvider.onTapMoreAction(data);
                   },
                   child: Container(
-                      margin: const EdgeInsets.only(left: 10.0, right: 5.0),
-                      height: 35.0,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.0),
-                          color: const Color(0xff23252A)),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text("More",
-                                style: TextStyle(
-                                    color: Color(0xffBCBDBE), fontSize: 15.0)),
-                            Container(width: 5.0),
-                            CachedNetworkImage(
-                                imageUrl: ImageURL.url_286,
-                                width: 18,
-                                height: 18),
-                          ])),
+                    margin: const EdgeInsets.only(left: 10.0, right: 5.0),
+                    height: 35.0,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.0),
+                        color: const Color(0xff23252A)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("More",
+                            style: TextStyle(
+                                color: Color(0xffBCBDBE), fontSize: 15.0)),
+                        Container(width: 5.0),
+                        CachedNetworkImage(
+                            imageUrl: ImageURL.url_286, width: 18, height: 18),
+                      ],
+                    ),
+                  ),
                 )),
             Flexible(
-                flex: 1,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return SecondLevelPage(
-                        titleStr: data.name ?? '',
-                        listId: data.open_mode_value.toString(),
-                      );
-                    }));
-                  },
-                  child: Container(
-                      margin: const EdgeInsets.only(left: 0.0, right: 10.0),
-                      height: 35.0,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.0),
-                          color: const Color(0xff23252A)),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text("See All",
-                                style: TextStyle(
-                                    color: Color(0xffBCBDBE), fontSize: 15.0)),
-                            Container(width: 5.0),
-                            CachedNetworkImage(
-                                imageUrl: ImageURL.url_289,
-                                width: 18,
-                                height: 18),
-                          ])),
-                )),
+              flex: 1,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return SecondLevelPage(
+                          titleStr: data.name ?? '',
+                          listId: data.open_mode_value.toString(),
+                        );
+                      },
+                    ),
+                  );
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(left: 0.0, right: 10.0),
+                  height: 35.0,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: const Color(0xff23252A)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("See All",
+                          style: TextStyle(
+                              color: Color(0xffBCBDBE), fontSize: 15.0)),
+                      Container(width: 5.0),
+                      CachedNetworkImage(
+                          imageUrl: ImageURL.url_289, width: 18, height: 18),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ]),
           const SizedBox(height: 10),
 
@@ -340,7 +350,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
         }));
       },
       child: Container(
-        padding: EdgeInsets.only(top: 2, bottom: 2),
+        padding: const EdgeInsets.only(top: 2, bottom: 2),
         color: Colors.transparent,
         child: Row(children: [
           Container(width: 10.0),

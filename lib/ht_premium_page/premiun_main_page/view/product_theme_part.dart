@@ -1,9 +1,11 @@
 ///订阅页面follow this link下面的部分
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/view/premium_bottom.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
+import 'package:provider/provider.dart';
 
 class ProductThemePartWidget extends StatefulWidget {
   const ProductThemePartWidget({Key? key}) : super(key: key);
@@ -13,36 +15,17 @@ class ProductThemePartWidget extends StatefulWidget {
 }
 
 class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
-  int? htVarTabselection = 0;
+
   List<String> list = [
-    "Remove ADS",
+    "Remove All Ads",
     "Unlock All Movies",
-    "HD resources",
-    "Watch on TV",
-    // "Watch on TV",
-    // "Remove ADS",
-    // "Unlock All Movies",
-    // "HD resources",
-    // "Watch on TV",
-    // "Watch on TV",
-    // "Remove ADS",
-    // "Unlock All Movies",
-    // "HD resources",
-    // "Watch on TV",
-    // "Watch on TV",
-    // "Remove ADS",
-    // "Unlock All Movies",
-    // "HD resources",
-    // "Watch on TV",
-    // "Watch on TV",
-    // "Remove ADS",
-    // "Unlock All Movies",
-    // "HD resources",
-    // "Watch on TV",
-    // "Watch on TV"
+    "Unlimited Casting",
+    "High-definition",
+    "Up To 5 Members",
   ];
   @override
   Widget build(BuildContext context) {
+
     return productThemePartWidget();
   }
 
@@ -56,9 +39,9 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
       ),
     );
   }
-
   ///individual plan / family plan 切换按钮
   Widget sectonSelectWidget() {
+    print(context.read<PremiumProvider>().isFamilyOrIndividual);
     return Container(
       margin: const EdgeInsets.only(top: 16),
       height: 48,
@@ -68,20 +51,18 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
             child: GestureDetector(
               child: Container(
                   alignment: Alignment.center,
-                  color: htVarTabselection == 0
+                  color:  context.read<PremiumProvider>().isFamilyOrIndividual == 0
                       ? const Color(0xff11101E)
                       : const Color(0xff161A26),
                   child: Text("Individual Plan",
                       style: TextStyle(
-                          color: htVarTabselection == 0
+                          color:  context.read<PremiumProvider>().isFamilyOrIndividual == 1
                               ? Colors.white
                               : const Color(0xff727682),
                           fontSize: 14.0,
                           fontWeight: FontWeight.w600))),
               onTap: () {
-                setState(() {
-                  htVarTabselection = 0;
-                });
+                 context.read<PremiumProvider>().clickIndividualOrFamily(0);
               },
             ),
           ),
@@ -89,20 +70,18 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
             child: GestureDetector(
               child: Container(
                   alignment: Alignment.center,
-                  color: htVarTabselection == 1
+                  color:  context.read<PremiumProvider>().isFamilyOrIndividual == 1
                       ? const Color(0xff11101E)
                       : const Color(0xff161A26),
                   child: Text("Family Plan",
                       style: TextStyle(
-                          color: htVarTabselection == 1
+                          color:  context.read<PremiumProvider>().isFamilyOrIndividual == 0
                               ? Colors.white
                               : const Color(0xff727682),
                           fontSize: 14.0,
                           fontWeight: FontWeight.w600))),
               onTap: () {
-                setState(() {
-                  htVarTabselection = 1;
-                });
+                 context.read<PremiumProvider>().clickIndividualOrFamily(1);
               },
             ),
           )
@@ -129,6 +108,9 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
   ///权益九宫格列表Remove ADS   Unlock All Movies等
   // ignore: dead_code
   Widget equityGridWiget() {
+    List<String> equityList =  context.read<PremiumProvider>().isFamilyOrIndividual == 0
+        ? list.sublist(0, list.length - 1)
+        : list;
     return Container(
       color: Colors.transparent,
       child: GridView.count(
@@ -139,7 +121,8 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
           mainAxisSpacing: 10.0,
           crossAxisSpacing: 9.5,
-          children: list.map((name) => gridViewItemWidget(name)).toList()),
+          children:
+              equityList.map((name) => gridViewItemWidget(name)).toList()),
     );
   }
 
@@ -189,72 +172,72 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
   Widget productItemWidget() {
     return Row(
       children: [
-        Container(width: 15,),
         Container(
-        width: 106,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
-          ),
-          //背景图
-          image: DecorationImage(
-              image: CachedNetworkImageProvider(ImageURL.url_227),
-              fit: BoxFit.fill),
+          width: 15,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ///trial 图标
-            Container(
-              width: 72.0,
-              height: 24.0,
-              alignment: Alignment.center,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: CachedNetworkImageProvider(ImageURL.url_238),
+        Container(
+          width: 106,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+            //背景图
+            image: DecorationImage(
+                image: CachedNetworkImageProvider(ImageURL.url_227),
+                fit: BoxFit.fill),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ///trial 图标
+              Container(
+                width: 72.0,
+                height: 24.0,
+                alignment: Alignment.center,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: CachedNetworkImageProvider(ImageURL.url_238),
+                  ),
+                ),
+                child: const Text(
+                  "Trial",
+                  style: TextStyle(fontSize: 14.0, color: Colors.white),
                 ),
               ),
-              child: const Text(
-                "Trial",
-                style: TextStyle(fontSize: 14.0, color: Colors.white),
-              ),
-            ),
-            Container(height: 14.0),
-            Container(
-              alignment: Alignment.center,
-              child: const Text(
-                "Monthly",
-                style: TextStyle(
-                    color: Color(0xff222222),
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-            Container(height: 14.0),
-            Container(
+              Container(height: 14.0),
+              Container(
                 alignment: Alignment.center,
-                child: const Text("\$4.99",
-                    style: TextStyle(
-                        color: Color(0xff222222),
-                        fontSize: 28.0,
-                        fontWeight: FontWeight.w600))),
-            Container(height: 4.0),
-            Container(
-              alignment: Alignment.center,
-              child: const Text(
-                "\$8.53",
-                style: TextStyle(
-                    color: Color(0xff222222),
-                    fontSize: 11.0,
-                    decoration: TextDecoration.lineThrough),
+                child: const Text(
+                  "Monthly",
+                  style: TextStyle(
+                      color: Color(0xff222222),
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.w600),
+                ),
               ),
-            ),
-          ],
+              Container(height: 14.0),
+              Container(
+                  alignment: Alignment.center,
+                  child: const Text("\$4.99",
+                      style: TextStyle(
+                          color: Color(0xff222222),
+                          fontSize: 28.0,
+                          fontWeight: FontWeight.w600))),
+              Container(height: 4.0),
+              Container(
+                alignment: Alignment.center,
+                child: const Text(
+                  "\$8.53",
+                  style: TextStyle(
+                      color: Color(0xff222222),
+                      fontSize: 11.0,
+                      decoration: TextDecoration.lineThrough),
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-
       ],
     );
   }
-
 }

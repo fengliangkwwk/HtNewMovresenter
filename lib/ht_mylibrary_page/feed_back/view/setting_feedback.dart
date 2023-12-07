@@ -47,7 +47,7 @@ class _HTClassFeedbackPageState extends State<HTClassFeedbackPage> {
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.black,
             appBar: AppBar(
-                backgroundColor: Color(0xff1A1C21),
+                backgroundColor: const Color(0xff1A1C21),
                 title: Text(widget.title,
                     style: const TextStyle(
                         color: Colors.white,
@@ -66,15 +66,15 @@ class _HTClassFeedbackPageState extends State<HTClassFeedbackPage> {
                       fit: BoxFit.scaleDown),
                 )),
             body: Container(
-                padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
+                padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
                 child: Column(children: [
                   Container(
                     height: 223.0,
                     width: double.infinity,
-                    padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
+                    padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.0),
-                        color: Color(0xff23252A)),
+                        color: const Color(0xff23252A)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -108,7 +108,7 @@ class _HTClassFeedbackPageState extends State<HTClassFeedbackPage> {
                       padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(6.0),
-                          color: Color(0xff23252A)),
+                          color: const Color(0xff23252A)),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -148,13 +148,13 @@ class _HTClassFeedbackPageState extends State<HTClassFeedbackPage> {
                     child: Container(
                         alignment: Alignment.center,
                         height: 40.0,
-                        margin: EdgeInsets.only(bottom: 20.0),
+                        margin: const EdgeInsets.only(bottom: 20.0),
                         child: const Text(
                           "Submit",
                           style: TextStyle(fontSize: 15.0, color: Colors.white),
                         ),
                         decoration: BoxDecoration(
-                            color: Color(0xffB82450),
+                            color: const Color(0xffB82450),
                             borderRadius: BorderRadius.circular(6.0))),
                   ),
                   Container(height: 31.5),

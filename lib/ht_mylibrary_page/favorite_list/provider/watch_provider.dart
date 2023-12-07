@@ -28,7 +28,6 @@ class WatchProvider extends ChangeNotifier {
   }
 
   ///编辑状态
-
   bool editState = false;
 
   ///是否刷新

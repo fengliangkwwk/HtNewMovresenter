@@ -1,11 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/home_second_level_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_second_level_provider.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_middlepage.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -44,8 +42,8 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
           return Scaffold(
           backgroundColor: const Color(0xff36373C),
           body: Column(
-            children: [
-              HTTopSearchWidget(),
+            children:[
+              hTTopSearchWidget(),
               listWidget(),
             ],
           ),
@@ -56,7 +54,7 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
   }
 
   ///上面的搜索框
-  Widget HTTopSearchWidget() {
+  Widget hTTopSearchWidget() {
     return SafeArea(
       bottom: false,
       child: SizedBox(

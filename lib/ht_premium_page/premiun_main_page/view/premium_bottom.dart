@@ -17,6 +17,11 @@ class _PremiumBottomWidgetState extends State<PremiumBottomWidget> {
       'Subscription automatically renews unless auto-renewal is disabled at least 24 hours before the end of the current period.',
       'Subscriptions can be managed by the user and automatic renewal can be disabled by going to the User Account Settings after purchase.',
       'You must confirm and pay the VIP subscription through the iTunes account in the purchase confirmation.',
+      'Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable.',
+      'The VIP subscription is automatically renewed.',
+      'Subscriptions length: Weekly,Monthly,Annually.',
+      'terms of service:',
+      'privacy policy:'
     ];
   }
   @override
@@ -153,16 +158,20 @@ class _PremiumBottomWidgetState extends State<PremiumBottomWidget> {
   Widget descWiget(String desStr) {
     return Column(
       children: [
-        Text(
-          desStr,
-          style: const TextStyle(
-            height: 1.5,
-            fontSize: 12,
-            color: Color(0xffececec),
-            // fontWeight: FontWeight.bold,
+        SizedBox(
+          width: double.infinity,
+          child: Text(
+            desStr,
+            style: const TextStyle(
+              height: 1.5,
+              fontSize: 12,
+              color: Color(0xffececec),
+              // fontWeight: FontWeight.bold,
+            ),
+            maxLines: null,
+            textAlign: TextAlign.left,
+            // overflow: TextOverflow.visible,
           ),
-          maxLines: null,
-          overflow: TextOverflow.visible,
         ),
         Container(
           height: 10,
