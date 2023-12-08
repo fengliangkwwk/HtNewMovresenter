@@ -21,6 +21,7 @@ class HTClassVideoDetailPage extends StatefulWidget {
   const HTClassVideoDetailPage(
       // ignore: non_constant_identifier_names
       {Key? key,
+      // ignore: non_constant_identifier_names
       required this.m_type_2,
       required this.id})
       : super(key: key);
@@ -78,7 +79,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                   ///AllEpisodes界面
                   Visibility(
                     visible: value.item1,
-                    child: Expanded(child: AllEpisodesWidget()),
+                    child: const Expanded(child: AllEpisodesWidget()),
                   ),
                   Visibility(
                     visible: !value.item1,
@@ -163,74 +164,82 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
   ///带背景图的第一行
   Widget firstPartWidget() {
-    return Container(
-        height: 60.0,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: CachedNetworkImageProvider(
-                  ImageURL.url_252,
-                ),
-                fit: BoxFit.fill)),
-        child: Row(
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            ///均等分
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              // Container(width: 25.0),
-              Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CachedNetworkImage(
-                        imageUrl: ImageURL.url_260, width: 20.0, height: 20.0),
-                    Container(
-                        margin: const EdgeInsets.only(top: 2.5),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 5.0, vertical: 0.0),
-                        child: const Text("Remove\r\nAll Ads",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Color(0xff685034), fontSize: 10.0)))
-                  ]),
-              // Container(width: 37.5),
-              Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CachedNetworkImage(
-                        imageUrl: ImageURL.url_261, width: 20.0, height: 20.0),
-                    Container(
-                        margin: const EdgeInsets.only(top: 2.5),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 5.0, vertical: 0.0),
-                        child: const Text("Unlock\r\nAll Ads",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Color(0xff685034), fontSize: 10.0)))
-                  ]),
-              // Container(width: 37.5),
-              Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CachedNetworkImage(
-                        imageUrl: ImageURL.url_262, width: 20.0, height: 20.0),
-                    Container(
-                        margin: const EdgeInsets.only(top: 2.5),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 5.0, vertical: 0.0),
-                        child: const Text("Unlimited\r\nScreen Casting",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Color(0xff685034), fontSize: 10.0)))
-                  ]),
-              const Text("Get Premium",
-                  style: TextStyle(
-                      color: Color(0xff685034),
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w600)),
-            ]));
+    return GestureDetector(
+      onTap: () => provider.jumpToPremiumPage(context),
+      child: Container(
+          height: 60.0,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: CachedNetworkImageProvider(
+                    ImageURL.url_252,
+                  ),
+                  fit: BoxFit.fill)),
+          child: Row(
+
+              ///均等分
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CachedNetworkImage(
+                          imageUrl: ImageURL.url_260,
+                          width: 20.0,
+                          height: 20.0),
+                      Container(
+                          margin: const EdgeInsets.only(top: 2.5),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5.0, vertical: 0.0),
+                          child: const Text("Remove\r\nAll Ads",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Color(0xff685034), fontSize: 10.0)))
+                    ]),
+                // Container(width: 37.5),
+                Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CachedNetworkImage(
+                          imageUrl: ImageURL.url_261,
+                          width: 20.0,
+                          height: 20.0),
+                      Container(
+                          margin: const EdgeInsets.only(top: 2.5),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5.0, vertical: 0.0),
+                          child: const Text("Unlock\r\nAll Ads",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Color(0xff685034), fontSize: 10.0)))
+                    ]),
+                // Container(width: 37.5),
+                Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CachedNetworkImage(
+                          imageUrl: ImageURL.url_262,
+                          width: 20.0,
+                          height: 20.0),
+                      Container(
+                          margin: const EdgeInsets.only(top: 2.5),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5.0, vertical: 0.0),
+                          child: const Text("Unlimited\r\nScreen Casting",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Color(0xff685034), fontSize: 10.0)))
+                    ]),
+                const Text("Get Premium",
+                    style: TextStyle(
+                        color: Color(0xff685034),
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w600)),
+              ])),
+    );
   }
 
   ///第二行标题那部分

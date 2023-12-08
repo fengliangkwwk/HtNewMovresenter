@@ -1,14 +1,20 @@
 ///当前计划卡片  未订阅⽤⼾不显⽰当前计划卡⽚
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/view/current_plan_card.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/view/follow_link.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/view/product_theme_part.dart';
+import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:provider/provider.dart';
 
 class HTClassUnPremiumPage extends StatefulWidget {
-  const HTClassUnPremiumPage({Key? key, required this.title}) : super(key: key);
-  final String title;
+  final String? title;
+  final bool? isFromFullScreen;
+  final Function()? backToFullSreen;
+  const HTClassUnPremiumPage(
+      {Key? key, this.title, this.isFromFullScreen, this.backToFullSreen})
+      : super(key: key);
   @override
   State<HTClassUnPremiumPage> createState() => _HTClassUnPremiumPageState();
 }
@@ -27,34 +33,48 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
     // return Container();
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => provider)],
-      child: Selector<PremiumProvider,int>(
+      child: Selector<PremiumProvider, int>(
         selector: (p0, p1) => p1.isFamilyOrIndividual,
         builder: (context, value, child) {
-          return  Scaffold(
-          resizeToAvoidBottomInset: false,
-          backgroundColor: Colors.black,
-          appBar: AppBar(
-              backgroundColor: const Color(0xff1A1C21),
-              title: const Text("Premium",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w600)),
-              centerTitle: true,
-              leadingWidth: 24.0,
-              leading: const InkWell()),
-          body: Column(
-            children: [
-              CurrentPlanCardWidget(),
-              const FollowLinkWidget(),
-              const ProductThemePartWidget(),
-            ],
-          ),
-        );
-
+          return Scaffold(
+            resizeToAvoidBottomInset: false,
+            backgroundColor: Colors.black,
+            appBar: AppBar(
+                backgroundColor: const Color(0xff1A1C21),
+                title: const Text("Premium",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w600)),
+                centerTitle: true,
+                leadingWidth: 24.0,
+                leading: Visibility(
+                  visible: widget.title?.isNotEmpty == true ? true : false,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      if (widget.isFromFullScreen == true) {
+                        print('到此一游');
+                        widget.backToFullSreen!();
+                      }
+                    },
+                    child: CachedNetworkImage(
+                      imageUrl: ImageURL.url_291,
+                      width: 24.0,
+                      height: 24.0,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                )),
+            body: Column(
+              children: [
+                CurrentPlanCardWidget(),
+                const FollowLinkWidget(),
+                 ProductThemePartWidget(),
+              ],
+            ),
+          );
         },
-
-       
       ),
     );
   }

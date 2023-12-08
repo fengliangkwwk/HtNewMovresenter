@@ -2,7 +2,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/family_account_page/provider/family_account_provider.dart';
-import 'package:ht_new_movpresenter/ht_premium_page/premium_second_page/view/premium_second_page.dart';
+import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/view/premium_indexerpage.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:provider/provider.dart';
 
@@ -291,7 +291,7 @@ class _HTClassFamilyPageState extends State<HTClassFamilyPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) {
-                  return const PremiumSecondPageWidget();
+                  return const HTClassUnPremiumPage();
                 }),
               );
             },

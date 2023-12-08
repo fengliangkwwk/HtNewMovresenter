@@ -1,27 +1,22 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/material.dart';
-import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
-import 'package:ht_new_movpresenter/utils/share/ht_share.dart';
 import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
-import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
 
-FijkPanelWidgetBuilder fijkPanel2Builder1(
-    {Key? key,
-    final bool fill = false,
-    final int duration = 4000,
-    final bool doubleTap = true,
-    final bool snapShot = false,
-    final VoidCallback? onBack,
-    ///1 分享  2.投屏 3.收藏  4.vip 5.字幕
-    final void Function(int state)? callBack,
-    
-    }) {
+FijkPanelWidgetBuilder fijkPanel2Builder1({
+  Key? key,
+  final bool fill = false,
+  final int duration = 4000,
+  final bool doubleTap = true,
+  final bool snapShot = false,
+  final VoidCallback? onBack,
+
+  ///1 分享  2.投屏 3.收藏  4.vip 5.字幕 6.返回按钮
+  final void Function(int state, BuildContext context)? callBack,
+}) {
   return (FijkPlayer player, FijkData data, BuildContext context, Size viewSize,
       Rect texturePos) {
     return _FijkPanel2(
@@ -50,22 +45,21 @@ class _FijkPanel2 extends StatefulWidget {
   final bool doubleTap;
   final bool snapShot;
   final int hideDuration;
-  final void Function(int state)? callBack;
+  final void Function(int state, BuildContext context)? callBack;
 
-  const _FijkPanel2(
-      {Key? key,
-      required this.player,
-      required this.data,
-      this.fill = false,
-      this.onBack,
-      required this.viewSize,
-      this.hideDuration = 4000,
-      this.doubleTap = false,
-      this.snapShot = false,
-      required this.texPos,
-      required this.callBack,
-      })
-      : assert(hideDuration > 0 && hideDuration < 10000),
+  const _FijkPanel2({
+    Key? key,
+    required this.player,
+    required this.data,
+    this.fill = false,
+    this.onBack,
+    required this.viewSize,
+    this.hideDuration = 4000,
+    this.doubleTap = false,
+    this.snapShot = false,
+    required this.texPos,
+    required this.callBack,
+  })  : assert(hideDuration > 0 && hideDuration < 10000),
         super(key: key);
 
   @override
@@ -294,13 +288,13 @@ class __FijkPanel2State extends State<_FijkPanel2> {
 
   Widget buildPlayButton(BuildContext context, double height) {
     Icon icon = (player.state == FijkState.started)
-        ? Icon(Icons.pause)
-        : Icon(Icons.play_arrow);
+        ? const Icon(Icons.pause)
+        : const Icon(Icons.play_arrow);
     bool fullScreen = player.value.fullScreen;
     return IconButton(
-      padding: EdgeInsets.all(0),
+      padding: const EdgeInsets.all(0),
       iconSize: fullScreen ? height : height * 0.8,
-      color: Color(0xFFFFFFFF),
+      color: const Color(0xFFFFFFFF),
       icon: icon,
       onPressed: playOrPause,
     );
@@ -308,13 +302,13 @@ class __FijkPanel2State extends State<_FijkPanel2> {
 
   Widget buildFullScreenButton(BuildContext context, double height) {
     Icon icon = player.value.fullScreen
-        ? Icon(Icons.fullscreen_exit)
-        : Icon(Icons.fullscreen);
+        ? const Icon(Icons.fullscreen_exit)
+        : const Icon(Icons.fullscreen);
     bool fullScreen = player.value.fullScreen;
     return IconButton(
-      padding: EdgeInsets.all(0),
+      padding: const EdgeInsets.all(0),
       iconSize: fullScreen ? height : height * 0.8,
-      color: Color(0xFFFFFFFF),
+      color: const Color(0xFFFFFFFF),
       icon: icon,
       onPressed: () {
         player.value.fullScreen
@@ -328,12 +322,12 @@ class __FijkPanel2State extends State<_FijkPanel2> {
     // String text =
     //     "${_duration2String(_currentPos)}" + "/${_duration2String(_duration)}";
     return Text(SysTools.formatDuration(player.currentPos),
-        style: TextStyle(fontSize: 12, color: Color(0xFFFFFFFF)));
+        style: const TextStyle(fontSize: 12, color: Color(0xFFFFFFFF)));
   }
 
   Widget buildAllTimeText() {
     return Text(SysTools.formatDuration(player.value.duration),
-        style: TextStyle(fontSize: 12, color: Color(0xFFFFFFFF)));
+        style: const TextStyle(fontSize: 12, color: Color(0xFFFFFFFF)));
   }
 
   Widget buildSlider(BuildContext context) {
@@ -346,7 +340,7 @@ class __FijkPanel2State extends State<_FijkPanel2> {
     bufferPos = bufferPos.clamp(0.0, duration);
 
     return Padding(
-      padding: EdgeInsets.only(left: 3),
+      padding: const EdgeInsets.only(left: 3),
       child: FijkSlider(
         colors: sliderColors,
         value: currentValue,
@@ -405,7 +399,10 @@ class __FijkPanel2State extends State<_FijkPanel2> {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.of(context).pop();
+              if (widget.callBack != null) {
+                widget.callBack!(6, context);
+              }
+              // Navigator.of(context).pop();
             },
             child: const Icon(
               Icons.arrow_back_ios,
@@ -422,29 +419,72 @@ class __FijkPanel2State extends State<_FijkPanel2> {
                 children: [
                   const SizedBox(),
                   Row(children: [
-                    CachedNetworkImage(
-                      imageUrl: ImageURL.url_249,
-                      width: 100.0,
-                      height: 26.0,
+                    GestureDetector(
+                      ///vip
+                      onTap: () {
+                        if (widget.callBack != null) {
+                          widget.callBack!(4, context);
+                        }
+                      },
+                      child: CachedNetworkImage(
+                        imageUrl: ImageURL.url_249,
+                        width: 100.0,
+                        height: 26.0,
+                      ),
                     ),
                     Container(width: 10.0),
-                    CachedNetworkImage(
-                      imageUrl: ImageURL.url_315,
-                      width: 24.0,
-                      height: 24.0,
-                    ),
-                    const SizedBox(width: 10.0),
-                    CachedNetworkImage(
-                      imageUrl: ImageURL.url_329,
-                      width: 24.0,
-                      height: 24.0,
+                    if (player.value.fullScreen == false) ...[
+                      GestureDetector(
+                        ///cc
+                        onTap: () {
+                          if (widget.callBack != null) {
+                            widget.callBack!(5, context);
+                          }
+                        },
+                        child: CachedNetworkImage(
+                          imageUrl: ImageURL.url_315,
+                          width: 24.0,
+                          height: 24.0,
+                        ),
+                      ),
+                      const SizedBox(width: 10.0),
+                    ],
+                    GestureDetector(
+                      ///tv
+                      onTap: () {
+                        if (widget.callBack != null) {
+                          widget.callBack!(2, context);
+                        }
+                      },
+                      child: CachedNetworkImage(
+                        imageUrl: ImageURL.url_329,
+                        width: 24.0,
+                        height: 24.0,
+                      ),
                     ),
                     const SizedBox(width: 10.0),
                     if (player.value.fullScreen) ...[
                       GestureDetector(
+                        ///collection
                         onTap: () {
                           if (widget.callBack != null) {
-                            widget.callBack!(1);
+                            widget.callBack!(3, context);
+                          }
+                        },
+                        child: CachedNetworkImage(
+                          imageUrl: ImageURL.url_259,
+                          width: 24.0,
+                          height: 24.0,
+                        ),
+                      ),
+                      const SizedBox(width: 10.0),
+                    ],
+                    if (player.value.fullScreen) ...[
+                      GestureDetector(
+                        ///share
+                        onTap: () {
+                          if (widget.callBack != null) {
+                            widget.callBack!(1, context);
                           }
                         },
                         child: CachedNetworkImage(
@@ -453,7 +493,7 @@ class __FijkPanel2State extends State<_FijkPanel2> {
                           height: 24.0,
                         ),
                       ),
-                      const SafeArea(left: false,child: SizedBox(width: 10.0)),
+                      const SafeArea(left: false, child: SizedBox(width: 10.0)),
                     ]
                   ])
                 ],
@@ -484,11 +524,11 @@ class __FijkPanel2State extends State<_FijkPanel2> {
 
     bool fullScreen = player.value.fullScreen;
     Widget centerWidget = Container(
-      color: Color(0x00000000),
+      color: const Color(0x00000000),
     );
 
     Widget centerChild = Container(
-      color: Color(0x00000000),
+      color: const Color(0x00000000),
     );
 
     if (fullScreen && widget.snapShot) {
@@ -496,7 +536,8 @@ class __FijkPanel2State extends State<_FijkPanel2> {
         children: <Widget>[
           Expanded(child: centerChild),
           Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10, top: 8, bottom: 8),
+            padding:
+                const EdgeInsets.only(left: 10, right: 10, top: 8, bottom: 8),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[

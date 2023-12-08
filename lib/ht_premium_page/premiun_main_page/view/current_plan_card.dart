@@ -17,7 +17,7 @@ class CurrentPlanCardWidget extends StatefulWidget {
 class _CurrentPlanCardWidgetState extends State<CurrentPlanCardWidget> {
   @override
   Widget build(BuildContext context) {
-    return currentPlanFamilyMainWidget();
+    return currentPlanPersonalWidget();
   }
   ///个人计划背景图片 250
   Widget currentPlanPersonalWidget() {
@@ -84,7 +84,7 @@ class _CurrentPlanCardWidgetState extends State<CurrentPlanCardWidget> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Individual - Monthly",
+                  const Text("Family - Monthly",
                       style: TextStyle(
                           fontSize: 14.0,
                           color: Color(0xff222222),

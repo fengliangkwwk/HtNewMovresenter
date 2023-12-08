@@ -1,9 +1,11 @@
 import 'package:fijkplayer/fijkplayer.dart';
+import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_base.dart';
 import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 
 mixin HTVideoDescPlayerProviderMixin on HTVideoDescProviderBase {
   bool refreshPlayer = false;
+  bool isFullScreen = false;
 
   void playerAddListener() {
     player.addListener(() {
@@ -18,7 +20,7 @@ mixin HTVideoDescPlayerProviderMixin on HTVideoDescProviderBase {
       notify();
     });
 
-    player.onCurrentPosUpdate.listen((event) { 
+    player.onCurrentPosUpdate.listen((event) {
       notify();
     });
   }
@@ -58,11 +60,17 @@ mixin HTVideoDescPlayerProviderMixin on HTVideoDescProviderBase {
     }
   }
 
-  ///全屏/退出全屏
+  ///全屏/
   void fullScreenAction() {
     player.enterFullScreen();
+    isFullScreen = true;
   }
 
+  ///退出全屏
+  void exitFullScreen() {
+    player.exitFullScreen();
+    isFullScreen = false;
+  }
 
   void notify() {
     refreshPlayer = !refreshPlayer;
@@ -79,9 +87,5 @@ mixin HTVideoDescPlayerProviderMixin on HTVideoDescProviderBase {
     return SysTools.formatDuration(player.value.duration);
   }
 
-
-  void playerCallBack(int state) {}
-
-
-
+  void playerCallBack(int state, BuildContext context) {}
 }

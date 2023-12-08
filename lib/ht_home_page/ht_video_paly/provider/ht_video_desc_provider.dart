@@ -1,10 +1,12 @@
 import 'dart:convert';
-
+import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_data_prvider_mixin.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_player_provider_mixin.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_base.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_mixin.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
+import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/view/premium_indexerpage.dart';
 import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/share/ht_share.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
@@ -18,7 +20,10 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
         HTVideoDescDataProviderMixin,
         HTVideoDescPlayerProviderMixin {
   List<String> videoList = [];
+  void _backFromPremiumPageToFullScreen() {
 
+    player.enterFullScreen();
+  }
   /// mType2:tt_mflx:电视剧   myfx:电影
   /// id:传的视频id
   Future<void> loadData(String mType2, String id) async {
@@ -35,7 +40,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
       'https://sample-videos.com/video123/mkv/720/big_buck_bunny_720p_1mb.mkv',
       'https://sample-videos.com/video123/3gp/144/big_buck_bunny_144p_1mb.3gp',
       'http://www.w3school.com.cn/i/movie.mp4'
-      'https://sample-videos.com/video123/3gp/144/big_buck_bunny_144p_1mb.3gp',
+          'https://sample-videos.com/video123/3gp/144/big_buck_bunny_144p_1mb.3gp',
       'https://sample-videos.com/video123/3gp/144/big_buck_bunny_144p_2mb.3gp',
       'https://sample-videos.com/video123/3gp/144/big_buck_bunny_144p_5mb.3gp',
       'https://sample-videos.com/video123/3gp/144/big_buck_bunny_144p_10mb.3gp',
@@ -45,11 +50,12 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     ///判断当前播放的视频是否处于收藏状态。
     isCollect();
   }
+
   ///播放器赋值资源
   void initData() {
     player.setDataSource(
-      // videoList[11],
-        videoDescBean?.data?.hd?.link ??'',
+        // videoList[11],
+        videoDescBean?.data?.hd?.link ?? '',
         autoPlay: true,
         showCover: true);
     // player.addListener(
@@ -59,6 +65,18 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     //   },
     // );
     addHistoryAciton();
+  }
+
+  ///点击订阅广告跳转到订阅页面事件
+  void jumpToPremiumPage(BuildContext context) {
+    isFullScreen = (MediaQuery.of(context).size.width > MediaQuery.of(context).size.height)?true:false;
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        print(isFullScreen);
+        return HTClassUnPremiumPage(title: "Premium",isFromFullScreen: isFullScreen,backToFullSreen: _backFromPremiumPageToFullScreen);
+      }),
+    );
   }
 
   void allEpisodesEvent() {
@@ -78,7 +96,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
 
   ///分享
   /// m_type_2:tt_mflx=电视剧   myfx:电影
-  Future<void> shareEvent(String m_type_2) async {}
+  Future<void> shareEvent(String mType2) async {}
 
   ///收藏 //取消收藏
   void saveAction() async {
@@ -170,9 +188,23 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   }
 
   ///控制器界面上的点击事件
-  void playerCallBack(int state) {
+  @override
+  Future<void> playerCallBack(int state,BuildContext context) async {
+    ///1 分享  2.投屏 3.收藏  4.vip 5.字幕 6.返回
     if (state == 1) {
       HTShare().share(mType2 ?? '', playLock(), '1', videoId(), title());
+    }
+    if (state == 2) {}
+    if (state == 3) {
+      saveAction();
+    }
+    if (state == 4) {
+      exitFullScreen();
+      jumpToPremiumPage(context);
+    }
+    if (state == 5) {}
+    if (state == 6) {
+      Navigator.of(context).pop();
     }
   }
 }
