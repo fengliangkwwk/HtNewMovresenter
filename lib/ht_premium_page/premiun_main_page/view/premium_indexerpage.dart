@@ -69,7 +69,7 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
             body: Column(
               children: [
                 CurrentPlanCardWidget(),
-                const FollowLinkWidget(),
+                 FollowLinkWidget(),
                  ProductThemePartWidget(),
               ],
             ),

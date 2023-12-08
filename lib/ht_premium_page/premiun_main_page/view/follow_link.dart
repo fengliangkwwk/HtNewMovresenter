@@ -12,7 +12,7 @@ import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 //   }
 
 class FollowLinkWidget extends StatelessWidget {
-  const FollowLinkWidget({Key? key}) : super(key: key);
+ FollowLinkWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class FollowLinkWidget extends StatelessWidget {
       width: double.infinity,
       margin: const EdgeInsets.only(left: 16, top: 16, right: 16),
       decoration: BoxDecoration(
-        color: Color(0xff1B1C20),
+        color: const Color(0xff1B1C20),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(

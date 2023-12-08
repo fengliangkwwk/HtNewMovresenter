@@ -8,7 +8,7 @@ import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 import 'package:provider/provider.dart';
 
 class ProductThemePartWidget extends StatefulWidget {
-  const ProductThemePartWidget({Key? key}) : super(key: key);
+ ProductThemePartWidget({Key? key}) : super(key: key);
 
   @override
   State<ProductThemePartWidget> createState() => _ProductThemePartWidgetState();
