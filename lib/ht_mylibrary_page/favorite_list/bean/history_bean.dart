@@ -26,7 +26,7 @@ class HistoryBean {
   String? epsId;
 
   ///选中状态
-  @JsonKey(includeToJson: false)
+  @JsonKey(includeFromJson: false)
   bool selectState = false;
 
   HistoryBean();

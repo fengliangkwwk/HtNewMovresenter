@@ -90,7 +90,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   }
 
   void isCollect() async {
-    isCollected = await isSave(videoId());
+    isCollected =  isSave(videoId());
     notifyListeners();
   }
 
@@ -110,7 +110,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
       "epsId": tv203Bean?.epsList?[0].id
     };
     var model = HistoryBean.fromJson(data);
-    bool isSaveState = await isSave(model.id);
+    bool isSaveState =  isSave(model.id);
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     if (isSaveState) {
       ///1.已收藏
@@ -135,7 +135,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   }
 
   ///是否收藏
-  Future<bool> isSave(String? id) async {
+  bool isSave(String? id)  {
     bool result = false;
     for (var element in HTUserStore.favoriteList) {
       if (element.id == id) {

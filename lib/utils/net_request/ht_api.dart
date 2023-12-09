@@ -60,7 +60,7 @@ class Global{
   ///购买绑定接口
   static const purchaseBindingUrl =  HTReqestDomainClass.htRequestDomain + portNO + '325' + lastStr;
   ///restore验证接口
-  static const restoreUrl =  HTReqestDomainClass.htRequestDomain + portNO + '325' + lastStr;
+  static const restoreUrl =  HTReqestDomainClass.htRequestDomain + portNO + '326' + lastStr;
   ///订阅引导等相关配置
   static const subscriptionBootConfigurationUrl =  HTReqestDomainClass.htRequestDomain + portNO + '300' + lastStr;
   ///添加家庭成员接口

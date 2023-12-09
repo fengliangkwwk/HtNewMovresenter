@@ -82,6 +82,8 @@ dependencies:
   fluttertoast: ^8.2.4
   #数据库
   sqflite: ^2.3.0
+  #订阅
+  in_app_purchase: ^3.1.11
 
     
 dev_dependencies:

@@ -12,6 +12,9 @@ FijkPanelWidgetBuilder fijkPanel2Builder1({
   final int duration = 4000,
   final bool doubleTap = true,
   final bool snapShot = false,
+  final bool isSave = false,
+
+  ///是否收藏
   final VoidCallback? onBack,
 
   ///1 分享  2.投屏 3.收藏  4.vip 5.字幕 6.返回按钮
@@ -31,6 +34,7 @@ FijkPanelWidgetBuilder fijkPanel2Builder1({
       snapShot: snapShot,
       hideDuration: duration,
       callBack: callBack,
+      isSave: isSave,
     );
   };
 }
@@ -45,6 +49,7 @@ class _FijkPanel2 extends StatefulWidget {
   final bool doubleTap;
   final bool snapShot;
   final int hideDuration;
+  final bool isSave;
   final void Function(int state, BuildContext context)? callBack;
 
   const _FijkPanel2({
@@ -59,6 +64,7 @@ class _FijkPanel2 extends StatefulWidget {
     this.snapShot = false,
     required this.texPos,
     required this.callBack,
+    this.isSave = false,
   })  : assert(hideDuration > 0 && hideDuration < 10000),
         super(key: key);
 
@@ -92,6 +98,7 @@ class __FijkPanel2State extends State<_FijkPanel2> {
   // snapshot
   ImageProvider? _imageProvider;
   Timer? _snapshotTimer;
+  bool _isSave = false;
 
   // Is it needed to clear seek data in FijkData (widget.data)
   bool _needClearSeekData = true;
@@ -112,6 +119,7 @@ class __FijkPanel2State extends State<_FijkPanel2> {
     _duration = player.value.duration;
     _currentPos = player.currentPos;
     _bufferPos = player.bufferPos;
+    _isSave = widget.isSave;
 
     _currentPosSubs = player.onCurrentPosUpdate.listen((v) {
       if (_hideStuff == false) {
@@ -469,10 +477,14 @@ class __FijkPanel2State extends State<_FijkPanel2> {
                         onTap: () {
                           if (widget.callBack != null) {
                             widget.callBack!(3, context);
+                            setState(() {
+                              _isSave = !_isSave;
+                            });
                           }
                         },
                         child: CachedNetworkImage(
-                          imageUrl: ImageURL.url_259,
+                          imageUrl:
+                              _isSave ? ImageURL.url_258 : ImageURL.url_259,
                           width: 24.0,
                           height: 24.0,
                         ),

@@ -1,10 +1,13 @@
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/bean/user_bean.dart';
-import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_video_desc_bean.dart';
+import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/bean/vip_info_bean.dart';
 
 class HTUserStore {
+  ///用户信息
   static UserBean? userBean;
-
+  ///VIP信息
+  static VipInfoBean? vipInfoBean;
+  
   static List<String> list18 = [];
 
   static bool login() {
