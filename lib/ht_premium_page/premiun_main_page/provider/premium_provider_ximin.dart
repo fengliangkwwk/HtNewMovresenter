@@ -47,6 +47,7 @@ mixin PremiumProviderMixin on PremiumProviderBase {
     if (json["status"] == 200) {
       HTUserStore.vipInfoBean = VipInfoBean.fromJson(json['data']);
       MainPovider.saveVipInfoAction();
+      print('解析326成功');
     } else {
       ToastUtil.showToast(msg: json["msg"]);
     }

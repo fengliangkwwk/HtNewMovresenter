@@ -4,6 +4,7 @@ import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/p
 class PremiumProvider extends PremiumProviderBase with PremiumProviderMixin {
 ///数据请求
 Future<void> loadData()async{
+  await requesCheckVipApi();
   await requestPremiumApi();
   notifyListeners();
 }
