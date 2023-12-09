@@ -139,6 +139,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
               fsFit: FijkFit.fill,
               panelBuilder: fijkPanel2Builder1(
                 callBack: provider.playerCallBack,
+                isSave: provider.isSave(provider.dataId)
               ),
               // panelBuilder: (player, data, context, viewSize, texturePos) {
               //   return const CustomPlayerView();
