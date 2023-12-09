@@ -144,7 +144,7 @@ class Family{
   String? isInIntroOfferPeriod;
 
   @JsonKey(name: 'master')
-  String? master;
+  dynamic master;
 
   @JsonKey(name: 'val')
   String? val;
