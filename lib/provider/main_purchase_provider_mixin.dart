@@ -76,7 +76,7 @@ mixin MainPurchaseProviderMixin {
 
     ///待销售商品
     products = productDetailResponse.productDetails;
-
+  print('内购待销售商品:${products.length}');
     // await finishIAPTransaction();
   }
 
