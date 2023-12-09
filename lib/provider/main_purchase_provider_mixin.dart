@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:ht_new_movpresenter/provider/main_provider_base.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 
-mixin MainPurchaseProviderMixin {
+mixin MainPurchaseProviderMixin on MainProviderBase {
   ///产品id
   List<String> kProductIds = <String>[
     'week',
@@ -28,6 +29,9 @@ mixin MainPurchaseProviderMixin {
 
 // 内购实例
   var inAppPurchase = InAppPurchase.instance;
+
+  ///刷新订阅
+  bool purchaseRefresh = false;
 
   initInAppPurchase() async {
     //创建监听:
@@ -76,7 +80,12 @@ mixin MainPurchaseProviderMixin {
 
     ///待销售商品
     products = productDetailResponse.productDetails;
-  print('内购待销售商品:${products.length}');
+
+    purchaseRefresh != purchaseRefresh;
+
+    notifyListeners();
+
+    print('内购待销售商品:${products.length}');
     // await finishIAPTransaction();
   }
 
@@ -113,6 +122,21 @@ mixin MainPurchaseProviderMixin {
       result.add(element.productID);
     }
     return result.isEmpty ? '0' : result.first;
+  }
+
+  ///获取商品列表  1 家庭  0 个人 , 默认0
+  List<ProductDetails> productDataList({int type = 0}) {
+    var result = <ProductDetails>[];
+
+    for (var element in products) {
+      if (element.title.contains('family') == true && type == 1) {
+        result.add(element);
+      }
+      if (element.title.contains('family') == false && type == 0) {
+        result.add(element);
+      }
+    }
+    return result;
   }
 }
 

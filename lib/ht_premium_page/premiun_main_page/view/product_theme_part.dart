@@ -3,18 +3,21 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/view/premium_bottom.dart';
+import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:provider/provider.dart';
 
 class ProductThemePartWidget extends StatefulWidget {
- const ProductThemePartWidget({Key? key}) : super(key: key);
+  const ProductThemePartWidget({Key? key}) : super(key: key);
 
   @override
   State<ProductThemePartWidget> createState() => _ProductThemePartWidgetState();
 }
 
 class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
+  late PremiumProvider provider;
 
   List<String> list = [
     "Remove All Ads",
@@ -23,27 +26,34 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
     "High-definition",
     "Up To 5 Members",
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    provider = context.read<PremiumProvider>();
+  }
+
   @override
   Widget build(BuildContext context) {
-
     return productThemePartWidget();
   }
 
   Widget productThemePartWidget() {
     return Expanded(
-      child: Selector<PremiumProvider,int>(
+      child: Selector<PremiumProvider, int>(
         selector: (p0, p1) => p1.isFamilyOrIndividual,
         builder: (context, value, child) {
           return Column(
-          children: [
-            sectonSelectWidget(),
-            productSingleScrollWidget(),
-          ],
-        );
+            children: [
+              sectonSelectWidget(),
+              productSingleScrollWidget(),
+            ],
+          );
         },
       ),
     );
   }
+
   ///individual plan / family plan 切换按钮
   Widget sectonSelectWidget() {
     print(context.read<PremiumProvider>().isFamilyOrIndividual);
@@ -56,18 +66,22 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
             child: GestureDetector(
               child: Container(
                   alignment: Alignment.center,
-                  color:  context.read<PremiumProvider>().isFamilyOrIndividual == 0
-                      ? const Color(0xff11101E)
-                      : const Color(0xff161A26),
+                  color:
+                      context.read<PremiumProvider>().isFamilyOrIndividual == 1
+                          ? const Color(0xff11101E)
+                          : const Color(0xff161A26),
                   child: Text("Individual Plan",
                       style: TextStyle(
-                          color:  context.read<PremiumProvider>().isFamilyOrIndividual == 1
+                          color: context
+                                      .read<PremiumProvider>()
+                                      .isFamilyOrIndividual ==
+                                  0
                               ? Colors.white
                               : const Color(0xff727682),
                           fontSize: 14.0,
                           fontWeight: FontWeight.w600))),
               onTap: () {
-                 context.read<PremiumProvider>().clickIndividualOrFamily(0);
+                context.read<PremiumProvider>().clickIndividualOrFamily(0);
               },
             ),
           ),
@@ -75,18 +89,22 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
             child: GestureDetector(
               child: Container(
                   alignment: Alignment.center,
-                  color:  context.read<PremiumProvider>().isFamilyOrIndividual == 1
-                      ? const Color(0xff11101E)
-                      : const Color(0xff161A26),
+                  color:
+                      context.read<PremiumProvider>().isFamilyOrIndividual == 0
+                          ? const Color(0xff11101E)
+                          : const Color(0xff161A26),
                   child: Text("Family Plan",
                       style: TextStyle(
-                          color:  context.read<PremiumProvider>().isFamilyOrIndividual == 0
+                          color: context
+                                      .read<PremiumProvider>()
+                                      .isFamilyOrIndividual ==
+                                  1
                               ? Colors.white
                               : const Color(0xff727682),
                           fontSize: 14.0,
                           fontWeight: FontWeight.w600))),
               onTap: () {
-                 context.read<PremiumProvider>().clickIndividualOrFamily(1);
+                context.read<PremiumProvider>().clickIndividualOrFamily(1);
               },
             ),
           )
@@ -113,9 +131,10 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
   ///权益九宫格列表Remove ADS   Unlock All Movies等
   // ignore: dead_code
   Widget equityGridWiget() {
-    List<String> equityList =  context.read<PremiumProvider>().isFamilyOrIndividual == 0
-        ? list.sublist(0, list.length - 1)
-        : list;
+    List<String> equityList =
+        context.read<PremiumProvider>().isFamilyOrIndividual == 0
+            ? list.sublist(0, list.length - 1)
+            : list;
     return Container(
       color: Colors.transparent,
       child: GridView.count(
@@ -159,22 +178,31 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
 
   /// 订阅产品列表 List
   Widget productListWidget() {
-    return Container(
-      padding: const EdgeInsets.only(right: 15),
-      margin: const EdgeInsets.only(top: 10),
-      height: 136,
-      child: ListView.builder(
-        itemCount: 10,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return productItemWidget();
-        },
-      ),
+
+    var dataList = mainProvider.productDataList(type: provider.isFamilyOrIndividual);
+
+    return Selector<MainPovider,bool>(
+      selector: (p0, p1) => p1.purchaseRefresh,
+      builder: (context, value, child) {
+        return Container(
+        padding: const EdgeInsets.only(right: 15),
+        margin: const EdgeInsets.only(top: 10),
+        height: 136,
+        child: ListView.builder(
+          itemCount: dataList.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            var model  = dataList[index];
+            return productItemWidget(model);
+          },
+        ),
+      );
+      },
     );
   }
 
   ///订阅产品列表Item.
-  Widget productItemWidget() {
+  Widget productItemWidget(ProductDetails model) {
     return Row(
       children: [
         Container(
@@ -212,9 +240,11 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
               Container(height: 14.0),
               Container(
                 alignment: Alignment.center,
-                child: const Text(
-                  "Monthly",
-                  style: TextStyle(
+                height: 30,
+                child:  Text(
+                  model.title,
+                  textAlign:TextAlign.center,
+                  style: const TextStyle(
                       color: Color(0xff222222),
                       fontSize: 12.0,
                       fontWeight: FontWeight.w600),
@@ -223,8 +253,8 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
               Container(height: 14.0),
               Container(
                   alignment: Alignment.center,
-                  child: const Text("\$4.99",
-                      style: TextStyle(
+                  child:  Text(model.price,
+                      style: const TextStyle(
                           color: Color(0xff222222),
                           fontSize: 28.0,
                           fontWeight: FontWeight.w600))),
