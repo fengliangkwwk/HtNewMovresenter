@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider.dart';
 import 'package:ht_new_movpresenter/provider/main_provider_base.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -91,16 +92,21 @@ mixin MainPurchaseProviderMixin on MainProviderBase {
   }
 
   ///监听商品回调
-  void listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) async{
+  void listenToPurchaseUpdated(
+      List<PurchaseDetails> purchaseDetailsList) async {
     for (var element in purchaseDetailsList) {
       if (element.status == PurchaseStatus.purchased) {
         purchases.add(element);
         await PremiumProvider().requesCheckVipApi(flag: '1');
         inAppPurchase.completePurchase(element);
+        EasyLoading.dismiss();
       } else if (element.status == PurchaseStatus.pending) {
       } else if (element.status == PurchaseStatus.error) {
+        EasyLoading.dismiss();
       } else if (element.status == PurchaseStatus.restored) {
-      } else if (element.status == PurchaseStatus.canceled) {}
+      } else if (element.status == PurchaseStatus.canceled) {
+        EasyLoading.dismiss();
+      }
     }
   }
 

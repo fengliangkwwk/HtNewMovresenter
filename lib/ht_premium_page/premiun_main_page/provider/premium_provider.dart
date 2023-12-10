@@ -113,9 +113,9 @@ class PremiumProvider extends PremiumProviderBase
     var purchaseParam = PurchaseParam(productDetails: model);
 
     EasyLoading.show();
-     await mainProvider.inAppPurchase
+    mainProvider.inAppPurchase
         .buyNonConsumable(purchaseParam: purchaseParam);
-    EasyLoading.dismiss();
+    
 
   }
 }
