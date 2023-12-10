@@ -113,13 +113,9 @@ class PremiumProvider extends PremiumProviderBase
     var purchaseParam = PurchaseParam(productDetails: model);
 
     EasyLoading.show();
-
-    bool resutl = await mainProvider.inAppPurchase
+     await mainProvider.inAppPurchase
         .buyNonConsumable(purchaseParam: purchaseParam);
+    EasyLoading.dismiss();
 
-    if (resutl == true) {
-          print('订阅完成:$resutl');
-        requesCheckVipApi(flag: '1');
-    }
   }
 }

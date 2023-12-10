@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider.dart';
 import 'package:ht_new_movpresenter/provider/main_provider_base.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
@@ -91,7 +92,15 @@ mixin MainPurchaseProviderMixin on MainProviderBase {
 
   ///监听商品回调
   void listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
-    purchases = purchaseDetailsList;
+    for (var element in purchaseDetailsList) {
+      if (element.status == PurchaseStatus.purchased) {
+        purchases.add(element);
+        PremiumProvider().requesCheckVipApi(flag: '1');
+      } else if (element.status == PurchaseStatus.pending) {
+      } else if (element.status == PurchaseStatus.error) {
+      } else if (element.status == PurchaseStatus.restored) {
+      } else if (element.status == PurchaseStatus.canceled) {}
+    }
   }
 
   ///是否订阅
@@ -140,9 +149,6 @@ mixin MainPurchaseProviderMixin on MainProviderBase {
   }
 
   ///
-
-
-
 }
 
 class ExamplePaymentQueueDelegate implements SKPaymentQueueDelegateWrapper {
