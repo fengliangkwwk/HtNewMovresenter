@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider.dart';
+import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
@@ -32,20 +34,25 @@ class _PremiumBottomWidgetState extends State<PremiumBottomWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 15),
-      // color: Colors.amberAccent,
-      child: Column(
-        children: <Widget>[
-          priceDesTextWidget(),
-          //订阅按钮
-          preiumButtonWidget(),
-          //restore那行
-          restoreButtonWidget(),
-          lineWiget(),
-          ...creatDescListWidget()
-        ],
-      ),
+    return Selector<MainPovider, bool>(
+      selector: (p0, p1) => p1.purchaseRefresh,
+      builder: (context, value, child) {
+        return Container(
+          margin: const EdgeInsets.only(top: 15),
+          // color: Colors.amberAccent,
+          child: Column(
+            children: <Widget>[
+              priceDesTextWidget(),
+              //订阅按钮
+              preiumButtonWidget(),
+              //restore那行
+              restoreButtonWidget(),
+              lineWiget(),
+              ...creatDescListWidget()
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -99,10 +106,9 @@ class _PremiumBottomWidgetState extends State<PremiumBottomWidget> {
               child: Text(
                 provider.selectProductPrice(),
                 style: const TextStyle(
-                  fontSize: 14,
-                  color: Color(0xff685034),
-                  fontWeight: FontWeight.bold
-                ),
+                    fontSize: 14,
+                    color: Color(0xff685034),
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -140,7 +146,9 @@ class _PremiumBottomWidgetState extends State<PremiumBottomWidget> {
               ),
             ),
             onTap: () {
-              print('点击了 Restore 按钮');
+              // print('点击了 Restore 按钮');
+              EasyLoading.show();
+              mainProvider.inAppPurchase.restorePurchases();
             },
           ),
           const Spacer(),

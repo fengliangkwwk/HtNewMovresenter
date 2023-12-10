@@ -29,23 +29,32 @@ class MainPovider extends MainProviderBase with MainPurchaseProviderMixin {
   ///是否是vip  1 family -  2 server - 3 local - 4 device,  其他非vip
   ///
   static int isVip() {
+    var nowTime = DateTime.now().microsecond;
+
     if (HTUserStore.vipInfoBean?.family?.val == '1') {
-      return 1;
+      return nowTime < int.parse((HTUserStore.vipInfoBean?.family?.k6 ?? '0'))
+          ? 1
+          : -1;
     }
     if (HTUserStore.vipInfoBean?.server?.val2 == '1') {
-      return 2;
+      return nowTime < int.parse((HTUserStore.vipInfoBean?.server?.k6 ?? '0'))
+          ? 2
+          : -1;
     }
     if (HTUserStore.vipInfoBean?.local?.value == 1) {
-      return 3;
+      return nowTime < (HTUserStore.vipInfoBean?.local?.k6 ?? 0)
+          ? 3
+          : -1;
     }
     if (HTUserStore.vipInfoBean?.device?.val == '1') {
-      return 4;
+      return nowTime < int.parse((HTUserStore.vipInfoBean?.device?.k6 ?? '0'))
+          ? 4
+          : -1;
     }
     return -1;
   }
 
-void notify() {
-  notifyListeners();
-}
-
+  void notify() {
+    notifyListeners();
+  }
 }

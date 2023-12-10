@@ -96,14 +96,19 @@ mixin MainPurchaseProviderMixin on MainProviderBase {
       List<PurchaseDetails> purchaseDetailsList) async {
     for (var element in purchaseDetailsList) {
       if (element.status == PurchaseStatus.purchased) {
-        purchases.add(element);
-        await PremiumProvider().requesCheckVipApi(flag: '1');
-        inAppPurchase.completePurchase(element);
         EasyLoading.dismiss();
+        purchases.add(element);
+        await PremiumProvider().requesBindVipApi();
+        await inAppPurchase.completePurchase(element);
+        purchases.remove(element);
+        purchaseRefresh = !purchaseRefresh;
+        notifyListeners();
       } else if (element.status == PurchaseStatus.pending) {
       } else if (element.status == PurchaseStatus.error) {
         EasyLoading.dismiss();
       } else if (element.status == PurchaseStatus.restored) {
+        await PremiumProvider().requesCheckVipApi();
+        EasyLoading.dismiss();
       } else if (element.status == PurchaseStatus.canceled) {
         EasyLoading.dismiss();
       }

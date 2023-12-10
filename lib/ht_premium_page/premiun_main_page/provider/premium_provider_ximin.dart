@@ -42,6 +42,7 @@ mixin PremiumProviderMixin on PremiumProviderBase {
     });
 
     var json = jsonDecode(res?.data);
+    // var json = res?.data;
     if (json["status"] == 200) {
       HTUserStore.vipInfoBean = VipInfoBean.fromJson(json['data']);
       MainPovider.saveVipInfoAction();
@@ -52,6 +53,50 @@ mixin PremiumProviderMixin on PremiumProviderBase {
       ToastUtil.showToast(msg: json["msg"]);
     }
   }
+
+
+  Future<void> requesBindVipApi() async {
+    var res = await HTNetUtils.htPost(apiUrl: Global.purchaseBindingUrl, params: {
+      ///家庭id
+
+      'fid': HTUserStore.vipInfoBean?.family?.fid ?? '0',
+
+      ///0 restore  1购买
+
+      'flag':  '1',
+
+      ///订阅id
+
+      'pid': mainProvider.purChaseProductId(),
+
+      ///支付凭证
+
+      'receipt': mainProvider.verificationList(),
+
+      ///用户id
+
+      'uid': HTUserStore.userBean?.uid ?? '0',
+
+      ///是否本地订阅
+
+      'vp': mainProvider.subscriptionPurchaseState() ? '1' : '0',
+    });
+
+    var json = jsonDecode(res?.data);
+    // var json = res?.data;
+    if (json["status"] == 200) {
+      HTUserStore.vipInfoBean = VipInfoBean.fromJson(json['data']);
+      MainPovider.saveVipInfoAction();
+      mainProvider.purchaseRefresh = !mainProvider.purchaseRefresh;
+      mainProvider.notify();
+      print('解析325成功');
+    } else {
+      ToastUtil.showToast(msg: json["msg"]);
+    }
+  }
+
+
+
 
   Future<void> requestPremiumApi() async {
     EasyLoading.show();
@@ -69,7 +114,7 @@ mixin PremiumProviderMixin on PremiumProviderBase {
     );
     EasyLoading.dismiss();
     var json = jsonDecode(res?.data);
-
+    // var json = res?.data;
     if (json["status"] == 200) {
       HTUserStore.premiumBean = HTPremiumBean.fromJson(json['data']);
     } else {

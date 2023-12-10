@@ -12,7 +12,7 @@ class PremiumProvider extends PremiumProviderBase
   ///数据请求
   Future<void> loadData() async {
     await requestPremiumApi();
-    await requesCheckVipApi();
+    // await requesCheckVipApi();
     notifyListeners();
   }
 
