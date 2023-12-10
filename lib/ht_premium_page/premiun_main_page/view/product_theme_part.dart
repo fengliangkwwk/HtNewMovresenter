@@ -186,7 +186,7 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
         return Container(
           padding: const EdgeInsets.only(right: 15),
           margin: const EdgeInsets.only(top: 10),
-          height: 136,
+          height: 136 + 6,
           child: ListView.builder(
             itemCount: dataList.length,
             scrollDirection: Axis.horizontal,
@@ -252,7 +252,7 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
                     child: Container(
                       height: 24,
                     )),
-                Container(height: 14.0),
+                // Container(height: 14.0),
                 Container(
                   alignment: Alignment.center,
                   height: 30,
@@ -265,7 +265,7 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
                         fontWeight: FontWeight.w600),
                   ),
                 ),
-                Container(height: 14.0),
+                // Container(height: 14.0),
                 Container(
                     alignment: Alignment.center,
                     child: Text(provider.productPrice(model),

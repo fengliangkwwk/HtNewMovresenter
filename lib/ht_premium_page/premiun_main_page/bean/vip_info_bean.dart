@@ -45,13 +45,13 @@ class Local{
   int? appleServerStatus;
 
   @JsonKey(name: 'is_trial_period')
-  int? isTrialPeriod;
+  dynamic isTrialPeriod;
 
   @JsonKey(name: 'is_in_intro_offer_period')
-  int? isInIntroOfferPeriod;
+  dynamic isInIntroOfferPeriod;
 
   @JsonKey(name: 'auto_renew_status')
-  int? autoRenewStatus;
+  dynamic autoRenewStatus;
 
   @JsonKey(name: 'tbu')
   String? tbu;

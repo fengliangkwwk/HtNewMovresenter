@@ -34,9 +34,9 @@ Local _$LocalFromJson(Map<String, dynamic> json) => Local()
   ..k6 = json['k6']
   ..k7 = json['k7']
   ..appleServerStatus = json['apple_server_status'] as int?
-  ..isTrialPeriod = json['is_trial_period'] as int?
-  ..isInIntroOfferPeriod = json['is_in_intro_offer_period'] as int?
-  ..autoRenewStatus = json['auto_renew_status'] as int?
+  ..isTrialPeriod = json['is_trial_period']
+  ..isInIntroOfferPeriod = json['is_in_intro_offer_period']
+  ..autoRenewStatus = json['auto_renew_status']
   ..tbu = json['tbu'] as String?;
 
 Map<String, dynamic> _$LocalToJson(Local instance) => <String, dynamic>{
