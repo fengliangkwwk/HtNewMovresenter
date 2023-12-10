@@ -1,18 +1,13 @@
 //邀请码界面
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ht_new_movpresenter/ht_ad_lunch_page/beans/invite_code_bean.dart';
-// import 'package:ht_new_movpresenter/control/HomePageController.dart';
 import 'package:ht_new_movpresenter/ht_ad_lunch_page/views/InviteCodeController.dart';
 import 'package:ht_new_movpresenter/ht_ad_lunch_page/views/premium_launcherpage.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
-import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:ht_new_movpresenter/utils/net_request/ui_utils.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart'
     show ModalProgressHUD;
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HTClassLauncherPage extends StatefulWidget {
@@ -38,6 +33,42 @@ class _HTClassLauncherPageState extends State<HTClassLauncherPage> {
   @override
   void initState() {
     super.initState();
+    _checkAndRequestPermission();
+
+  }
+ // 请求网络访问权限
+    Future<void> _checkAndRequestPermission() async {
+    var status = await Permission.location.status;
+    if (status.isPermanentlyDenied) {
+      ///被永久拒绝
+      // If permission is undetermined, request it
+      var result = await Permission.location.request();
+      if (result == PermissionStatus.granted) {
+        // User granted permission, handle accordingly
+        _onPermissionGranted();
+      } else {
+        // User denied permission, handle accordingly
+        _onPermissionDenied();
+      }
+    } else if (status.isGranted) {
+      ///同意
+      // Permission is already granted, handle accordingly
+      _onPermissionGranted();
+    } else {
+      ///拒绝
+      // Permission is denied, handle accordingly
+      _onPermissionDenied();
+    }
+  }
+
+  void _onPermissionGranted() {
+    // Handle actions when permission is granted
+    print('Permission granted. You can now access the location.');
+  }
+
+  void _onPermissionDenied() {
+    // Handle actions when permission is denied
+    print('Permission denied. You cannot access the location.');
   }
 
   @override

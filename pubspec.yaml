@@ -76,14 +76,14 @@ dependencies:
   pull_to_refresh: ^2.0.0
   #苹果原生分享
   flutter_share: ^2.0.0
-  #视频播放器
-  video_player: ^2.8.1
   #吐司提示框
   fluttertoast: ^8.2.4
   #数据库
   sqflite: ^2.3.0
   #订阅
   in_app_purchase: ^3.1.11
+  #请求网络访问权限插件
+  permission_handler: ^11.1.0
 
     
 dev_dependencies:
