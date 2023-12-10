@@ -91,11 +91,12 @@ mixin MainPurchaseProviderMixin on MainProviderBase {
   }
 
   ///监听商品回调
-  void listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
+  void listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) async{
     for (var element in purchaseDetailsList) {
       if (element.status == PurchaseStatus.purchased) {
         purchases.add(element);
-        PremiumProvider().requesCheckVipApi(flag: '1');
+        await PremiumProvider().requesCheckVipApi(flag: '1');
+        inAppPurchase.completePurchase(element);
       } else if (element.status == PurchaseStatus.pending) {
       } else if (element.status == PurchaseStatus.error) {
       } else if (element.status == PurchaseStatus.restored) {
