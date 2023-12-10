@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider_base.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider_data_mixin.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider_ximin.dart';
@@ -111,9 +112,14 @@ class PremiumProvider extends PremiumProviderBase
     ///本地订阅
     var purchaseParam = PurchaseParam(productDetails: model);
 
+    EasyLoading.show();
+
     bool resutl = await mainProvider.inAppPurchase
         .buyNonConsumable(purchaseParam: purchaseParam);
 
-    print('订阅完成:$resutl');
+    if (resutl == true) {
+          print('订阅完成:$resutl');
+        requesCheckVipApi(flag: '1');
+    }
   }
 }
