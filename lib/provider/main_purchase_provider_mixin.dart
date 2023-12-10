@@ -81,7 +81,7 @@ mixin MainPurchaseProviderMixin on MainProviderBase {
     ///待销售商品
     products = productDetailResponse.productDetails;
 
-    purchaseRefresh != purchaseRefresh;
+    purchaseRefresh = !purchaseRefresh;
 
     notifyListeners();
 
@@ -138,6 +138,11 @@ mixin MainPurchaseProviderMixin on MainProviderBase {
     }
     return result;
   }
+
+  ///
+
+
+
 }
 
 class ExamplePaymentQueueDelegate implements SKPaymentQueueDelegateWrapper {

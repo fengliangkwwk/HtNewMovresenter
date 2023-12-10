@@ -11,8 +11,6 @@ import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.
 import 'package:ht_new_movpresenter/utils/tools/toast_tool.dart';
 
 mixin PremiumProviderMixin on PremiumProviderBase {
-  HTPremiumBean? premiumBean;
-
   ///校验vip
   Future<void> requesCheckVipApi({
     String? flag,
@@ -47,6 +45,8 @@ mixin PremiumProviderMixin on PremiumProviderBase {
     if (json["status"] == 200) {
       HTUserStore.vipInfoBean = VipInfoBean.fromJson(json['data']);
       MainPovider.saveVipInfoAction();
+      mainProvider.purchaseRefresh = !mainProvider.purchaseRefresh;
+      mainProvider.notify();
       print('解析326成功');
     } else {
       ToastUtil.showToast(msg: json["msg"]);
@@ -71,7 +71,7 @@ mixin PremiumProviderMixin on PremiumProviderBase {
     var json = jsonDecode(res?.data);
 
     if (json["status"] == 200) {
-      premiumBean = HTPremiumBean.fromJson(json['data']);
+      HTUserStore.premiumBean = HTPremiumBean.fromJson(json['data']);
     } else {
       ToastUtil.showToast(msg: json["msg"]);
     }

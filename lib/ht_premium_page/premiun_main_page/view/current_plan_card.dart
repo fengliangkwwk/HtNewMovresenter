@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/family_account_page/view/premium_familypage.dart';
+import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
+import 'package:provider/provider.dart';
 
 ///当前计划卡片
 ///分三种：1️⃣ 个人计划   2️⃣家庭计划主账号版本   3️⃣ 家庭计划成员版本
@@ -15,10 +17,37 @@ class CurrentPlanCardWidget extends StatefulWidget {
 }
 
 class _CurrentPlanCardWidgetState extends State<CurrentPlanCardWidget> {
+  String? typeStr;
+
+  @override
+  void initState() {
+    super.initState();
+    typeStr = widget.typeStr;
+  }
+
+  @override
+  void didUpdateWidget(covariant CurrentPlanCardWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    typeStr = widget.typeStr;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return currentPlanPersonalWidget();
+    return Selector<MainPovider, bool>(
+      selector: (p0, p1) => p1.purchaseRefresh,
+      builder: (context, value, child) {
+        if (MainPovider.isVip() == 1) {
+          return currentPlanFamilyMainWidget();
+        }
+
+        if (MainPovider.isVip() > 1) {
+          return currentPlanPersonalWidget();
+        }
+        return Container();
+      },
+    );
   }
+
   ///个人计划背景图片 250
   Widget currentPlanPersonalWidget() {
     return Container(

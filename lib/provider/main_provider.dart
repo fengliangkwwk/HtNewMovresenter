@@ -43,4 +43,9 @@ class MainPovider extends MainProviderBase with MainPurchaseProviderMixin {
     }
     return -1;
   }
+
+void notify() {
+  notifyListeners();
+}
+
 }

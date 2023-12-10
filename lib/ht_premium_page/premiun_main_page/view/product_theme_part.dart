@@ -178,31 +178,31 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
 
   /// 订阅产品列表 List
   Widget productListWidget() {
-
-    var dataList = mainProvider.productDataList(type: provider.isFamilyOrIndividual);
-
-    return Selector<MainPovider,bool>(
+    return Selector<MainPovider, bool>(
       selector: (p0, p1) => p1.purchaseRefresh,
       builder: (context, value, child) {
+        var dataList =
+            mainProvider.productDataList(type: provider.isFamilyOrIndividual);
+
         return Container(
-        padding: const EdgeInsets.only(right: 15),
-        margin: const EdgeInsets.only(top: 10),
-        height: 136,
-        child: ListView.builder(
-          itemCount: dataList.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            var model  = dataList[index];
-            return productItemWidget(model);
-          },
-        ),
-      );
+          padding: const EdgeInsets.only(right: 15),
+          margin: const EdgeInsets.only(top: 10),
+          height: 136,
+          child: ListView.builder(
+            itemCount: dataList.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              var model = dataList[index];
+              return productItemWidget(model);
+            },
+          ),
+        );
       },
     );
   }
 
   ///订阅产品列表Item.
-  Widget productItemWidget(ProductDetails model) {
+  Widget productItemWidget(dynamic model) {
     return Row(
       children: [
         Container(
@@ -241,9 +241,9 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
               Container(
                 alignment: Alignment.center,
                 height: 30,
-                child:  Text(
-                  model.title,
-                  textAlign:TextAlign.center,
+                child: Text(
+                  provider.productTitle(model),
+                  textAlign: TextAlign.center,
                   style: const TextStyle(
                       color: Color(0xff222222),
                       fontSize: 12.0,
@@ -253,7 +253,8 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
               Container(height: 14.0),
               Container(
                   alignment: Alignment.center,
-                  child:  Text(model.price,
+                  child: Text(
+                    provider.productPrice(model),
                       style: const TextStyle(
                           color: Color(0xff222222),
                           fontSize: 28.0,
@@ -261,9 +262,9 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
               Container(height: 4.0),
               Container(
                 alignment: Alignment.center,
-                child: const Text(
-                  "\$8.53",
-                  style: TextStyle(
+                child:  Text(
+                  provider.skProductPrice(model),
+                  style: const TextStyle(
                       color: Color(0xff222222),
                       fontSize: 11.0,
                       decoration: TextDecoration.lineThrough),

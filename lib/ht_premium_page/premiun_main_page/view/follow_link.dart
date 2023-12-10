@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
+import 'package:provider/provider.dart';
 
 ///follow This Link 模块
 // class FollowLinkWidget extends StatelessWidget {
@@ -12,11 +14,19 @@ import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 //   }
 
 class FollowLinkWidget extends StatelessWidget {
- FollowLinkWidget({Key? key}) : super(key: key);
+  const FollowLinkWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return followLinkWidget();
+    return Selector<MainPovider, bool>(
+      selector: (p0, p1) => p1.purchaseRefresh,
+      builder: (context, value, child) {
+        if (MainPovider.isVip() > 0) {
+          return followLinkWidget();
+        }
+        return Container();
+      },
+    );
   }
 
   Widget followLinkWidget() {
@@ -54,7 +64,7 @@ class FollowLinkWidget extends StatelessWidget {
           ),
           const Spacer(),
           GestureDetector(
-            onTap:(() {
+            onTap: (() {
               print('link');
             }),
             child: CachedNetworkImage(

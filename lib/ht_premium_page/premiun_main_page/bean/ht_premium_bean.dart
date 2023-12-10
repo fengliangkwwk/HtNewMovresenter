@@ -1,10 +1,9 @@
-import 'package:json_annotation/json_annotation.dart'; 
-      
-part 'ht_premium_bean.g.dart';
-    
-@JsonSerializable(explicitToJson: true)
-class HTPremiumBean{
+import 'package:json_annotation/json_annotation.dart';
 
+part 'ht_premium_bean.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class HTPremiumBean {
   @JsonKey(name: 'trial')
   Trial? trial;
 
@@ -92,18 +91,24 @@ class HTPremiumBean{
   @JsonKey(name: 'p5')
   List<String>? p5;
 
+  ///是否走工具包
+  bool isK12() {
+    if (k12 == '1') {
+      return true;
+    }
+    return false;
+  }
+
   HTPremiumBean();
 
-  static HTPremiumBean fromJson(Map<String, dynamic> srcJson) => _$HTPremiumBeanFromJson(srcJson);
+  static HTPremiumBean fromJson(Map<String, dynamic> srcJson) =>
+      _$HTPremiumBeanFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$HTPremiumBeanToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Trial{
-
+class Trial {
   @JsonKey(name: 'cnt')
   String? cnt;
 
@@ -113,7 +118,7 @@ class Trial{
   @JsonKey(name: 'show')
   String? show;
 
-    @JsonKey(name: 'c1')
+  @JsonKey(name: 'c1')
   String? c1;
 
   @JsonKey(name: 'd1')
@@ -133,23 +138,21 @@ class Trial{
 
   Trial();
 
-  static Trial fromJson(Map<String, dynamic> srcJson) => _$TrialFromJson(srcJson);
+  static Trial fromJson(Map<String, dynamic> srcJson) =>
+      _$TrialFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$TrialToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Week{
-
+class Week {
   @JsonKey(name: 'id')
   String? id;
 
   @JsonKey(name: 'price')
   String? price;
 
-@JsonKey(name: 'c1')
+  @JsonKey(name: 'c1')
   String? c1;
 
   @JsonKey(name: 'd1')
@@ -172,20 +175,17 @@ class Week{
   static Week fromJson(Map<String, dynamic> srcJson) => _$WeekFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$WeekToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Month{
-
+class Month {
   @JsonKey(name: 'id')
   String? id;
 
   @JsonKey(name: 'price')
   String? price;
 
-   @JsonKey(name: 'c1')
+  @JsonKey(name: 'c1')
   String? c1;
 
   @JsonKey(name: 'd1')
@@ -203,26 +203,23 @@ class Month{
   @JsonKey(name: 't1')
   String? t1;
 
-
   Month();
 
-  static Month fromJson(Map<String, dynamic> srcJson) => _$MonthFromJson(srcJson);
+  static Month fromJson(Map<String, dynamic> srcJson) =>
+      _$MonthFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$MonthToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Year{
-
+class Year {
   @JsonKey(name: 'id')
   String? id;
 
   @JsonKey(name: 'price')
   String? price;
 
-@JsonKey(name: 'c1')
+  @JsonKey(name: 'c1')
   String? c1;
 
   @JsonKey(name: 'd1')
@@ -245,13 +242,10 @@ class Year{
   static Year fromJson(Map<String, dynamic> srcJson) => _$YearFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$YearToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Data1{
-
+class Data1 {
   @JsonKey(name: 'person')
   Person? person;
 
@@ -260,16 +254,14 @@ class Data1{
 
   Data1();
 
-  static Data1 fromJson(Map<String, dynamic> srcJson) => _$Data1FromJson(srcJson);
+  static Data1 fromJson(Map<String, dynamic> srcJson) =>
+      _$Data1FromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$Data1ToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Person{
-
+class Person {
   @JsonKey(name: 'week')
   Week? week;
 
@@ -281,17 +273,14 @@ class Person{
 
   Person();
 
-  static Person fromJson(Map<String, dynamic> srcJson) => _$PersonFromJson(srcJson);
+  static Person fromJson(Map<String, dynamic> srcJson) =>
+      _$PersonFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$PersonToJson(this);
-
 }
 
-
-  
 @JsonSerializable(explicitToJson: true)
-class Family{
-
+class Family {
   @JsonKey(name: 'week')
   Week? week;
 
@@ -303,16 +292,14 @@ class Family{
 
   Family();
 
-  static Family fromJson(Map<String, dynamic> srcJson) => _$FamilyFromJson(srcJson);
+  static Family fromJson(Map<String, dynamic> srcJson) =>
+      _$FamilyFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$FamilyToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class K14{
-
+class K14 {
   @JsonKey(name: 'k1')
   String? k1;
 
@@ -342,13 +329,10 @@ class K14{
   static K14 fromJson(Map<String, dynamic> srcJson) => _$K14FromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$K14ToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class K15{
-
+class K15 {
   @JsonKey(name: 'k1')
   String? k1;
 
@@ -369,13 +353,10 @@ class K15{
   static K15 fromJson(Map<String, dynamic> srcJson) => _$K15FromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$K15ToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class F1{
-
+class F1 {
   @JsonKey(name: 'c1')
   String? c1;
 
@@ -399,13 +380,10 @@ class F1{
   static F1 fromJson(Map<String, dynamic> srcJson) => _$F1FromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$F1ToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Data2{
-
+class Data2 {
   @JsonKey(name: 'k1')
   String? k1;
 
@@ -435,17 +413,14 @@ class Data2{
 
   Data2();
 
-  static Data2 fromJson(Map<String, dynamic> srcJson) => _$Data2FromJson(srcJson);
+  static Data2 fromJson(Map<String, dynamic> srcJson) =>
+      _$Data2FromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$Data2ToJson(this);
-
 }
 
-
-  
 @JsonSerializable(explicitToJson: true)
-class Month1{
-
+class Month1 {
   @JsonKey(name: 'c1')
   String? c1;
 
@@ -466,16 +441,14 @@ class Month1{
 
   Month1();
 
-  static Month1 fromJson(Map<String, dynamic> srcJson) => _$Month1FromJson(srcJson);
+  static Month1 fromJson(Map<String, dynamic> srcJson) =>
+      _$Month1FromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$Month1ToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Fw{
-
+class Fw {
   @JsonKey(name: 'c1')
   String? c1;
 
@@ -499,13 +472,10 @@ class Fw{
   static Fw fromJson(Map<String, dynamic> srcJson) => _$FwFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$FwToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Fm{
-
+class Fm {
   @JsonKey(name: 'c1')
   String? c1;
 
@@ -529,13 +499,10 @@ class Fm{
   static Fm fromJson(Map<String, dynamic> srcJson) => _$FmFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$FmToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Fy{
-
+class Fy {
   @JsonKey(name: 'c1')
   String? c1;
 
@@ -559,13 +526,10 @@ class Fy{
   static Fy fromJson(Map<String, dynamic> srcJson) => _$FyFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$FyToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class P1{
-
+class P1 {
   @JsonKey(name: 't5')
   String? t5;
 
@@ -595,13 +559,10 @@ class P1{
   static P1 fromJson(Map<String, dynamic> srcJson) => _$P1FromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$P1ToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class P2{
-
+class P2 {
   @JsonKey(name: 't1')
   String? t1;
 
@@ -616,7 +577,4 @@ class P2{
   static P2 fromJson(Map<String, dynamic> srcJson) => _$P2FromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$P2ToJson(this);
-
 }
-
-  

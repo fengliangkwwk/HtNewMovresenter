@@ -24,6 +24,7 @@ class _PremiumBottomWidgetState extends State<PremiumBottomWidget> {
       'privacy policy:'
     ];
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -158,24 +159,34 @@ class _PremiumBottomWidgetState extends State<PremiumBottomWidget> {
   Widget descWiget(String desStr) {
     return Column(
       children: [
-        SizedBox(
-          width: double.infinity,
-          child: Text(
-            desStr,
-            style: const TextStyle(
-              height: 1.5,
-              fontSize: 12,
-              color: Color(0xffececec),
-              // fontWeight: FontWeight.bold,
+        Row(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 7, left: 0, right: 10),
+              height: 6,
+              width: 6,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(3),
+              ),
             ),
-            maxLines: null,
-            textAlign: TextAlign.left,
-            // overflow: TextOverflow.visible,
-          ),
+            Expanded(
+              child: Text(
+                desStr,
+                style: const TextStyle(
+                  height: 1.5,
+                  fontSize: 12,
+                  color: Color(0xffececec),
+                ),
+                maxLines: null,
+                textAlign: TextAlign.left,
+              ),
+            )
+          ],
         ),
-        Container(
-          height: 10,
-        )
+        Container(height: 10)
       ],
     );
   }
