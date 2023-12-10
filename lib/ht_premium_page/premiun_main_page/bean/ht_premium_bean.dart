@@ -99,6 +99,44 @@ class HTPremiumBean {
     return false;
   }
 
+  ///个人可订阅产品
+  List personDataList() {
+    var result = [];
+    result.add(data2?.week);
+    result.add(data2?.month);
+    result.add(data2?.year);
+    return result;
+  }
+
+  ///家庭可订阅产品
+  List familyDataList() {
+    var result = [];
+    result.add(data2?.fw);
+    result.add(data2?.fm);
+    result.add(data2?.fy);
+    return result;
+  }
+
+  ///是否是优惠的产品
+  bool discountProduct(dynamic model) {
+    if (k3?[0] == '1' && model.runtimeType.toString().toLowerCase() == k3?[2]) {
+      model?.h1 = data2?.trial?.h1;
+      model?.h2 = data2?.trial?.h2;
+      model?.y1 = data2?.trial?.y1;
+      model?.t1 = data2?.trial?.t1;
+      return true;
+    }
+    return false;
+  }
+
+  ///优惠的类型(开启情况下)
+  String? discountType() {
+    if (k3?[0] == '1') {
+      return k3?[2];
+    }
+    return null;
+  }
+
   HTPremiumBean();
 
   static HTPremiumBean fromJson(Map<String, dynamic> srcJson) =>

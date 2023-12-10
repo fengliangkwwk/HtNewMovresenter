@@ -5,6 +5,7 @@ import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/p
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/view/premium_bottom.dart';
 import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:provider/provider.dart';
@@ -181,9 +182,7 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
     return Selector<MainPovider, bool>(
       selector: (p0, p1) => p1.purchaseRefresh,
       builder: (context, value, child) {
-        var dataList =
-            mainProvider.productDataList(type: provider.isFamilyOrIndividual);
-
+        var dataList = provider.productDataList();
         return Container(
           padding: const EdgeInsets.only(right: 15),
           margin: const EdgeInsets.only(top: 10),
@@ -223,20 +222,30 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ///trial 图标
-              Container(
-                width: 72.0,
-                height: 24.0,
-                alignment: Alignment.center,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: CachedNetworkImageProvider(ImageURL.url_238),
+              Visibility(
+                visible:
+                    HTUserStore.premiumBean?.discountProduct(model) ?? false,
+                child: Container(
+                  width: 72.0,
+                  height: 24.0,
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: CachedNetworkImageProvider(ImageURL.url_238),
+                    ),
+                  ),
+                  child: const Text(
+                    "Trial",
+                    style: TextStyle(fontSize: 14.0, color: Colors.white),
                   ),
                 ),
-                child: const Text(
-                  "Trial",
-                  style: TextStyle(fontSize: 14.0, color: Colors.white),
-                ),
               ),
+              Visibility(
+                  visible: !(HTUserStore.premiumBean?.discountProduct(model) ??
+                      false),
+                  child: Container(
+                    height: 24,
+                  )),
               Container(height: 14.0),
               Container(
                 alignment: Alignment.center,
@@ -253,8 +262,7 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
               Container(height: 14.0),
               Container(
                   alignment: Alignment.center,
-                  child: Text(
-                    provider.productPrice(model),
+                  child: Text(provider.productPrice(model),
                       style: const TextStyle(
                           color: Color(0xff222222),
                           fontSize: 28.0,
@@ -262,7 +270,7 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
               Container(height: 4.0),
               Container(
                 alignment: Alignment.center,
-                child:  Text(
+                child: Text(
                   provider.skProductPrice(model),
                   style: const TextStyle(
                       color: Color(0xff222222),
