@@ -36,10 +36,10 @@ class Local{
   int? value;
 
   @JsonKey(name: 'k6')
-  int? k6;
+  dynamic k6;
 
   @JsonKey(name: 'k7')
-  int? k7;
+  dynamic k7;
 
   @JsonKey(name: 'apple_server_status')
   int? appleServerStatus;
