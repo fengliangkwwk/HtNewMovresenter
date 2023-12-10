@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider_base.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider_data_mixin.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider_ximin.dart';
+import 'package:ht_new_movpresenter/provider/main_provider.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 class PremiumProvider extends PremiumProviderBase
     with PremiumProviderMixin, PremiumProviderDataMixin {
@@ -58,4 +61,59 @@ class PremiumProvider extends PremiumProviderBase
     return const Color(0xff999999);
   }
 
+  ///选中产品的描述
+
+  String selectProductDis() {
+    ///1.获取数据源
+    var dataList = productDataList();
+    if (dataList.isEmpty) return '';
+
+    ///获取选中数据
+    var model =
+        dataList[isFamilyOrIndividual == 1 ? selectFamaily : selectPerson];
+
+    ///3.判断是否是优惠项
+    if (HTUserStore.premiumBean?.discountProduct(model) == true) {
+      return model?.t1 ?? '';
+    }
+    return 'You can cancel anytime';
+  }
+
+  String selectProductPrice() {
+    ///1.获取数据源
+    var dataList = productDataList();
+    if (dataList.isEmpty) return '';
+
+    ///获取选中数据
+    var model =
+        dataList[isFamilyOrIndividual == 1 ? selectFamaily : selectPerson];
+
+    ///3.判断是否是优惠项
+    if (HTUserStore.premiumBean?.discountProduct(model) == true) {
+      return '${model?.h1 ?? ''}/${titleMap[model?.c1 ?? ''] ?? ''}';
+    }
+    return 'Pay \$${productPrice(model)}';
+  }
+
+  ///去订阅
+  void go2Pay() async {
+    var dataList = productDataList();
+    if (dataList.isEmpty) return;
+
+    ///获取选中数据
+    var model =
+        dataList[isFamilyOrIndividual == 1 ? selectFamaily : selectPerson];
+    if (HTUserStore.premiumBean?.isK12() == true) {
+      ///服务器订阅
+      return;
+    }
+
+    ///本地订阅
+    var purchaseParam = PurchaseParam(productDetails: model);
+
+    bool resutl = await mainProvider.inAppPurchase
+        .buyNonConsumable(purchaseParam: purchaseParam);
+
+    print('订阅完成:$resutl');
+  }
 }

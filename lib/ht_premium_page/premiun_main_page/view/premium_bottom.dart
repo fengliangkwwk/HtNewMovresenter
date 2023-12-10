@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
+import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class PremiumBottomWidget extends StatefulWidget {
   const PremiumBottomWidget({Key? key}) : super(key: key);
@@ -9,6 +12,7 @@ class PremiumBottomWidget extends StatefulWidget {
 }
 
 class _PremiumBottomWidgetState extends State<PremiumBottomWidget> {
+  late PremiumProvider provider;
   List<String> list = [];
   @override
   void initState() {
@@ -23,6 +27,7 @@ class _PremiumBottomWidgetState extends State<PremiumBottomWidget> {
       'terms of service:',
       'privacy policy:'
     ];
+    provider = context.read<PremiumProvider>();
   }
 
   @override
@@ -46,58 +51,63 @@ class _PremiumBottomWidgetState extends State<PremiumBottomWidget> {
 
   ///订阅按钮上面的说明
   Widget priceDesTextWidget() {
-    return Container(
-      margin: const EdgeInsets.only(left: 15, right: 15),
-      child: const Text(
-        '123786hjkslakhhflshjahdhasdjaskdjakjfkldjalkfdlkal;skfldkal;kfdlkalskldnasbnjdbcasnndkcasmdklmasklmldl;kasldfkalkfl;dakl;dkl;aksl;dkal;kfdl;aklfklaskfl;dkas',
-        style: TextStyle(
-          fontSize: 12,
-          color: Color(0xff3cdef4),
-          fontWeight: FontWeight.bold,
-        ),
-        maxLines: null,
-        overflow: TextOverflow.visible,
-      ),
+    return Selector<PremiumProvider, Tuple3<int, int, int>>(
+      selector: (p0, p1) =>
+          Tuple3(p1.isFamilyOrIndividual, p1.selectFamaily, p1.selectPerson),
+      builder: (context, value, child) {
+        return Container(
+          margin: const EdgeInsets.only(left: 15, right: 15),
+          width: double.infinity,
+          child: Text(
+            provider.selectProductDis(),
+            style: const TextStyle(
+              fontSize: 12,
+              color: Color(0xff3cdef4),
+              fontWeight: FontWeight.bold,
+            ),
+            maxLines: null,
+            overflow: TextOverflow.visible,
+          ),
+        );
+      },
     );
   }
 
   ///订阅按钮
   Widget preiumButtonWidget() {
-    return Container(
-      margin: const EdgeInsets.only(top: 20),
-      width: 328,
-      height: 44,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(22),
-        ),
-        image: DecorationImage(
-          image: CachedNetworkImageProvider(ImageURL.url_264),
-        ),
-      ),
-      child: const Center(
-        child: Row(
-          children: [
-            Spacer(),
-            Text(
-              '¥' + '12.87',
-              style: TextStyle(
-                fontSize: 20,
-                color: Color(0xff685034),
-                fontWeight: FontWeight.bold,
+    return Selector<PremiumProvider, Tuple3<int, int, int>>(
+      selector: (p0, p1) =>
+          Tuple3(p1.isFamilyOrIndividual, p1.selectFamaily, p1.selectPerson),
+      builder: (context, value, child) {
+        return GestureDetector(
+          onTap: () {
+            provider.go2Pay();
+          },
+          child: Container(
+            margin: const EdgeInsets.only(top: 20),
+            width: 328,
+            height: 44,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(22),
+              ),
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(ImageURL.url_264),
               ),
             ),
-            Text(
-              '1st Month Trial',
-              style: TextStyle(
-                fontSize: 14,
-                color: Color(0xff685034),
+            child: Center(
+              child: Text(
+                provider.selectProductPrice(),
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Color(0xff685034),
+                  fontWeight: FontWeight.bold
+                ),
               ),
             ),
-            Spacer(),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 

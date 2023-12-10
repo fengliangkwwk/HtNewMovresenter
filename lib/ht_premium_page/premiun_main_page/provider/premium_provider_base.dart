@@ -5,7 +5,7 @@ class PremiumProviderBase extends ChangeNotifier {
   bool isloading = false;
 
   ///个人选中
-  int selectPerson = -1;
+  int selectPerson = 0;
   ///家庭选中
-  int selectFamaily = -1;
+  int selectFamaily = 0;
 }
