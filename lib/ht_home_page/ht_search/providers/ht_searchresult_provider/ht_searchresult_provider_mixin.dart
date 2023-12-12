@@ -27,11 +27,8 @@ mixin HTSearchResultProviderMiXin on HTSearchResultProviderBase {
     var res =
         await HTNetUtils.htPost(apiUrl: Global.searchUrl, params: htVarparams);
     var json = jsonDecode(res?.data);
-
     ht_search_result_bean? temBen;
-    
     temBen = ht_search_result_bean.fromJson(json);
-
     resultData ??= temBen;
 
     var temp = <Mtt_list>[];
@@ -44,7 +41,7 @@ mixin HTSearchResultProviderMiXin on HTSearchResultProviderBase {
     if (isRefresh == true) {
       resultData?.data?.mttList = [];
       resultData?.data?.mttList = temp;
-    }else {
+    } else {
       resultData?.data?.mttList?.addAll(temp);
     }
 

@@ -82,8 +82,11 @@ dependencies:
   sqflite: ^2.3.0
   #订阅
   in_app_purchase: ^3.1.11
-  #请求网络访问权限插件
+  #权限插件
   permission_handler: ^11.0.1
+  #本地通知权限
+  flutter_local_notifications: ^16.2.0
+
 
     
 dev_dependencies:

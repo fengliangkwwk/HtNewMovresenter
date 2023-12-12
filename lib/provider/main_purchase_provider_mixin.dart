@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider.dart';
 import 'package:ht_new_movpresenter/provider/main_provider_base.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-
 import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 
@@ -46,8 +44,10 @@ mixin MainPurchaseProviderMixin on MainProviderBase {
       listenToPurchaseUpdated(purchaseDetailsList);
     }, onDone: () {
       subscription.cancel();
+      EasyLoading.dismiss();
     }, onError: (Object error) {
       // handle error here.
+      EasyLoading.dismiss();
     });
 
     // _kProductIds = <String>['com.xxxx.week', 'com.xxxx.year'];
@@ -104,10 +104,19 @@ mixin MainPurchaseProviderMixin on MainProviderBase {
         purchaseRefresh = !purchaseRefresh;
         notifyListeners();
       } else if (element.status == PurchaseStatus.pending) {
+        EasyLoading.show();
       } else if (element.status == PurchaseStatus.error) {
+         print('购买错误: ${element.error}');
+      if (element.error is SKError) {
+        SKError skError = element.error as SKError;
+        print('SKError code: ${skError.code}');
+        print('SKError domain: ${skError.domain}');
+        // 处理其他 SKError 相关信息
+      }
         EasyLoading.dismiss();
       } else if (element.status == PurchaseStatus.restored) {
         print('object');
+        EasyLoading.show();
         await PremiumProvider().requesCheckVipApi();
         EasyLoading.dismiss();
       } else if (element.status == PurchaseStatus.canceled) {
@@ -119,7 +128,6 @@ mixin MainPurchaseProviderMixin on MainProviderBase {
   ///是否订阅
   bool subscriptionPurchaseState() {
     bool result = false;
-
     for (var element in purchases) {
       if (element.status == PurchaseStatus.purchased) {
         result = true;

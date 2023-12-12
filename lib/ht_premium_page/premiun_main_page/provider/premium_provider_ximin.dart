@@ -11,7 +11,7 @@ import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.
 import 'package:ht_new_movpresenter/utils/tools/toast_tool.dart';
 
 mixin PremiumProviderMixin on PremiumProviderBase {
-  ///校验vip
+  ///校验vip326
   Future<void> requesCheckVipApi({
     String? flag,
   }) async {
@@ -54,7 +54,7 @@ mixin PremiumProviderMixin on PremiumProviderBase {
     }
   }
 
-
+///325
   Future<void> requesBindVipApi() async {
     var res = await HTNetUtils.htPost(apiUrl: Global.purchaseBindingUrl, params: {
       ///家庭id
@@ -97,7 +97,7 @@ mixin PremiumProviderMixin on PremiumProviderBase {
 
 
 
-
+///300
   Future<void> requestPremiumApi() async {
     EasyLoading.show();
     var res = await HTNetUtils.htPost(

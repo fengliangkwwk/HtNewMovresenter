@@ -76,83 +76,83 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
   }
 
   // Future<void> htMethodShowPayProptDialog(BuildContext ctx) async {
-  //   await showDialog(
-  //       context: context,
-  //       builder: (context1) {
-  //         return Dialog(
-  //             backgroundColor: Colors.transparent,
-  //             child: Container(
-  //                 height: 422.0,
-  //                 decoration: BoxDecoration(
-  //                     color: const Color(0xff292A2F),
-  //                     borderRadius: BorderRadius.circular(12.0)),
-  //                 child: Column(children: [
-  //                   Container(height: 45.4),
-  //                   Stack(children: [
-  //                     Container(
-  //                         margin: const EdgeInsets.fromLTRB(33.0, 0, 29.0, 0),
-  //                         height: 190.0),
-  //                     Positioned(
-  //                         left: 51.0,
-  //                         right: 54.0,
-  //                         height: 190.0,
-  //                         top: 0.0,
-  //                         child: Image.asset(
-  //                             "image/img_premium_paydialog_body.png")),
-  //                     Positioned(
-  //                         left: 33.0,
-  //                         right: 29.0,
-  //                         top: 0.0,
-  //                         height: 44.0,
-  //                         child: Image.asset(
-  //                             "image/icon_premium_paydialog_header.png")),
-  //                   ]),
-  //                   Container(height: 28.6),
-  //                   const Text("Subscribe at XXX to become PREM",
-  //                       style: TextStyle(
-  //                           color: Color(0xffFFD29D),
-  //                           fontSize: 14.0,
-  //                           fontWeight: FontWeight.bold)),
-  //                   Container(height: 39.0),
-  //                   GestureDetector(
-  //                       child: Container(
-  //                         margin:
-  //                             const EdgeInsets.fromLTRB(31.0, 0.0, 31.0, 0.0),
-  //                         height: 44.0,
-  //                         width: double.infinity,
-  //                         alignment: Alignment.center,
-  //                         decoration: BoxDecoration(
-  //                             borderRadius: BorderRadius.circular(22.0),
-  //                             gradient: const LinearGradient(
-  //                                 begin: Alignment.centerLeft,
-  //                                 end: Alignment.centerRight,
-  //                                 stops: [
-  //                                   0.0,
-  //                                   1.0
-  //                                 ],
-  //                                 colors: [
-  //                                   Color(0xffedc391),
-  //                                   Color(0xfffdddb7)
-  //                                 ])),
-  //                         child: const Text("Go Subscribe",
-  //                             style: TextStyle(
-  //                               color: Color(0xff685034),
-  //                               fontSize: 16.0,
-  //                               fontWeight: FontWeight.w600,
-  //                             )),
-  //                       ),
-  //                       onTap: () {
-  //                         Navigator.pop(context1);
-  //                       }),
-  //                   Container(height: 16.0),
-  //                   Container(
-  //                       child: const Text("Later",
-  //                           style: TextStyle(
-  //                               color: Color(0xff999999),
-  //                               fontSize: 12.0,
-  //                               decoration: TextDecoration.underline))),
-  //                 ])));
-  //       });
+    // await showDialog(
+    //     context: context,
+    //     builder: (context1) {
+    //       return Dialog(
+    //           backgroundColor: Colors.transparent,
+    //           child: Container(
+    //               height: 422.0,
+    //               decoration: BoxDecoration(
+    //                   color: const Color(0xff292A2F),
+    //                   borderRadius: BorderRadius.circular(12.0)),
+    //               child: Column(children: [
+    //                 Container(height: 45.4),
+    //                 Stack(children: [
+    //                   Container(
+    //                       margin: const EdgeInsets.fromLTRB(33.0, 0, 29.0, 0),
+    //                       height: 190.0),
+    //                   Positioned(
+    //                       left: 51.0,
+    //                       right: 54.0,
+    //                       height: 190.0,
+    //                       top: 0.0,
+    //                       child: Image.asset(
+    //                           "image/img_premium_paydialog_body.png")),
+    //                   Positioned(
+    //                       left: 33.0,
+    //                       right: 29.0,
+    //                       top: 0.0,
+    //                       height: 44.0,
+    //                       child: Image.asset(
+    //                           "image/icon_premium_paydialog_header.png")),
+    //                 ]),
+    //                 Container(height: 28.6),
+    //                 const Text("Subscribe at XXX to become PREM",
+    //                     style: TextStyle(
+    //                         color: Color(0xffFFD29D),
+    //                         fontSize: 14.0,
+    //                         fontWeight: FontWeight.bold)),
+    //                 Container(height: 39.0),
+    //                 GestureDetector(
+    //                     child: Container(
+    //                       margin:
+    //                           const EdgeInsets.fromLTRB(31.0, 0.0, 31.0, 0.0),
+    //                       height: 44.0,
+    //                       width: double.infinity,
+    //                       alignment: Alignment.center,
+    //                       decoration: BoxDecoration(
+    //                           borderRadius: BorderRadius.circular(22.0),
+    //                           gradient: const LinearGradient(
+    //                               begin: Alignment.centerLeft,
+    //                               end: Alignment.centerRight,
+    //                               stops: [
+    //                                 0.0,
+    //                                 1.0
+    //                               ],
+    //                               colors: [
+    //                                 Color(0xffedc391),
+    //                                 Color(0xfffdddb7)
+    //                               ])),
+    //                       child: const Text("Go Subscribe",
+    //                           style: TextStyle(
+    //                             color: Color(0xff685034),
+    //                             fontSize: 16.0,
+    //                             fontWeight: FontWeight.w600,
+    //                           )),
+    //                     ),
+    //                     onTap: () {
+    //                       Navigator.pop(context1);
+    //                     }),
+    //                 Container(height: 16.0),
+    //                 Container(
+    //                     child: const Text("Later",
+    //                         style: TextStyle(
+    //                             color: Color(0xff999999),
+    //                             fontSize: 12.0,
+    //                             decoration: TextDecoration.underline))),
+    //               ])));
+    //     });
   // }
 }
           // Container(

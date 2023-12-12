@@ -6,6 +6,8 @@ PODS:
     - BIJKPlayer (~> 0.7.16)
     - Flutter
   - Flutter (1.0.0)
+  - flutter_local_notifications (0.0.1):
+    - Flutter
   - flutter_share (0.0.1):
     - Flutter
   - fluttertoast (0.0.2):
@@ -38,6 +40,7 @@ DEPENDENCIES:
   - device_information (from `.symlinks/plugins/device_information/ios`)
   - fijkplayer (from `.symlinks/plugins/fijkplayer/ios`)
   - Flutter (from `Flutter`)
+  - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_share (from `.symlinks/plugins/flutter_share/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - in_app_purchase_storekit (from `.symlinks/plugins/in_app_purchase_storekit/darwin`)
@@ -61,6 +64,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/fijkplayer/ios"
   Flutter:
     :path: Flutter
+  flutter_local_notifications:
+    :path: ".symlinks/plugins/flutter_local_notifications/ios"
   flutter_share:
     :path: ".symlinks/plugins/flutter_share/ios"
   fluttertoast:
@@ -85,6 +90,7 @@ SPEC CHECKSUMS:
   device_information: d652f6dcea86bdc5300ffd495486de1d5047bf4f
   fijkplayer: 8b6d864948dc28e6e07248ed4fce61a7467db4df
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   flutter_share: 4be0208963c60b537e6255ed2ce1faae61cd9ac2
   fluttertoast: 31b00dabfa7fb7bacd9e7dbee580d7a2ff4bf265
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a

@@ -33,42 +33,6 @@ class _HTClassLauncherPageState extends State<HTClassLauncherPage> {
   @override
   void initState() {
     super.initState();
-    _checkAndRequestPermission();
-
-  }
- // 请求网络访问权限
-    Future<void> _checkAndRequestPermission() async {
-    var status = await Permission.location.status;
-    if (status.isPermanentlyDenied) {
-      ///被永久拒绝
-      // If permission is undetermined, request it
-      var result = await Permission.location.request();
-      if (result == PermissionStatus.granted) {
-        // User granted permission, handle accordingly
-        _onPermissionGranted();
-      } else {
-        // User denied permission, handle accordingly
-        _onPermissionDenied();
-      }
-    } else if (status.isGranted) {
-      ///同意
-      // Permission is already granted, handle accordingly
-      _onPermissionGranted();
-    } else {
-      ///拒绝
-      // Permission is denied, handle accordingly
-      _onPermissionDenied();
-    }
-  }
-
-  void _onPermissionGranted() {
-    // Handle actions when permission is granted
-    print('Permission granted. You can now access the location.');
-  }
-
-  void _onPermissionDenied() {
-    // Handle actions when permission is denied
-    print('Permission denied. You cannot access the location.');
   }
 
   @override
@@ -122,6 +86,7 @@ class _HTClassLauncherPageState extends State<HTClassLauncherPage> {
                                 _htVarShowIndicator = false;
                               });
                             }
+
                           }))
                 ]),
             inAsyncCall: _htVarShowIndicator));
