@@ -6,8 +6,10 @@ import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/bean/vip_i
 class HTUserStore {
   ///用户信息
   static UserBean? userBean;
+
   ///VIP信息
   static VipInfoBean? vipInfoBean;
+
   ///订阅配置信息
   static HTPremiumBean? premiumBean;
   static List<String> list18 = [];
@@ -21,6 +23,8 @@ class HTUserStore {
 
 //是否是首次进入 app
   static bool isFirstInto = true;
+//订阅页面点击支付之后的弹窗次数记录
+  static int popUps = 0;
 //收藏列表
   static List<HistoryBean> favoriteList = [];
 

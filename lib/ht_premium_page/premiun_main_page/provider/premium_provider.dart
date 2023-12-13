@@ -63,12 +63,10 @@ class PremiumProvider extends PremiumProviderBase
   }
 
   ///选中产品的描述
-
   String selectProductDis() {
     ///1.获取数据源
     var dataList = productDataList();
     if (dataList.isEmpty) return '';
-
     ///获取选中数据
     var model =
         dataList[isFamilyOrIndividual == 1 ? selectFamaily : selectPerson];

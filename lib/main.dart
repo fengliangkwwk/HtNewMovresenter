@@ -29,9 +29,7 @@ class HTClassApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => mainProvider)
-      ],
+      providers: [ChangeNotifierProvider(create: (context) => mainProvider)],
       child: MaterialApp(
         title: 'Flutter Demo',
         // ignore: deprecated_member_use
@@ -73,7 +71,7 @@ class HTClassBtmNavPage extends StatefulWidget {
 class _HTClassBtmNavPageState extends State<HTClassBtmNavPage> {
   int _htVarCurrentIndex = 0;
   final htBarPages = [
-   const HTClassHomeMainPage(title: ""),
+    const HTClassHomeMainPage(title: ""),
     const HTClassUnPremiumPage(title: ""),
     const HTClassSettingInfoPage(title: ""),
   ];

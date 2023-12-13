@@ -52,7 +52,6 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage> {
                 onTap: () {
                   Navigator.of(context).pop();
                   if (widget.isFromFullScreen == true) {
-                    print('到此一游');
                     widget.backToFullSreen!();
                   }
                 },

@@ -5,11 +5,13 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/view/setting_watch_list.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/feed_back/view/setting_feedback.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/provider/setting_provider.dart';
 import 'package:ht_new_movpresenter/provider/main_provider.dart';
+import 'package:ht_new_movpresenter/utils/net_request/global.dart';
 import 'package:ht_new_movpresenter/utils/share/ht_share.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
@@ -28,6 +30,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   @override
   void initState() {
     super.initState();
+    provider.api1Net();
   }
 
   @override
@@ -101,50 +104,60 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
 
   ///第一行
   Widget headerWidget() {
-    return Container(
-      height: 54 + MediaQuery.of(context).padding.top + 20,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(ImageURL.url_244),
-          fit: BoxFit.cover,
-        ),
-        color: Colors.white,
-      ),
-      child: GestureDetector(
-        child: Column(
-          children: [
-            const Expanded(child: SizedBox()),
-            SizedBox(
-              height: 54,
-              child: Row(children: [
-                Container(width: 10.0),
-                Container(
-                  width: 54.0,
-                  height: 54.0,
-                  decoration: BoxDecoration(
-                      image: const DecorationImage(
-                          image: NetworkImage(ImageURL.url_347)),
-                      borderRadius: BorderRadius.circular(27.0),
-                      border: Border.all(color: Colors.white)),
-                ),
-                Container(width: 15.0),
-                const Text("Login/Signup",
-                    style: TextStyle(
-                        fontSize: 16.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600)),
-                const Spacer(),
-                Image.network(ImageURL.url_289, width: 24.0, height: 24.0),
-                Container(width: 10.0),
-              ]),
+    return Selector<SettingProvider, bool>(
+      selector: ((p0, p1) => p1.isReloadHeader),
+      builder: ((context, value, child) {
+        return Container(
+          height: 54 + MediaQuery.of(context).padding.top + 20,
+          decoration: const BoxDecoration(
+            ///顶部背景
+            image: DecorationImage(
+              image: CachedNetworkImageProvider(ImageURL.url_244),
+              fit: BoxFit.cover,
             ),
-            const SizedBox(
-              height: 20,
-            )
-          ],
-        ),
-        onTap: () => provider.goLogin(context),
-      ),
+            color: Colors.white,
+          ),
+          child: GestureDetector(
+            child: Column(
+              children: [
+                const Expanded(child: SizedBox()),
+                SizedBox(
+                  height: 54,
+                  child: Row(children: [
+                    Container(width: 10.0),
+                    Container(
+                      width: 54.0,
+                      height: 54.0,
+                      decoration: BoxDecoration(
+                          //头像
+                          image: DecorationImage(
+                            image: CachedNetworkImageProvider(
+                                provider.userBean?.userFace ??
+                                    ImageURL.url_347),
+                          ),
+                          borderRadius: BorderRadius.circular(27.0),
+                          border: Border.all(color: Colors.white)),
+                    ),
+                    Container(width: 15.0),
+                    const Text("Login/Signup",
+                        style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600)),
+                    const Spacer(),
+                    CachedNetworkImage(imageUrl:ImageURL.url_289, width: 24.0, height: 24.0),
+                    Container(width: 10.0),
+                  ]),
+                ),
+                const SizedBox(
+                  height: 20,
+                )
+              ],
+            ),
+            onTap: () => provider.goLogin(context),
+          ),
+        );
+      }),
     );
   }
 
@@ -157,7 +170,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
         padding: const EdgeInsets.only(left: 16.0),
         decoration: BoxDecoration(
             image: const DecorationImage(
-                image: NetworkImage(ImageURL.url_280), fit: BoxFit.fill),
+                image: CachedNetworkImageProvider(ImageURL.url_280), fit: BoxFit.fill),
             borderRadius: BorderRadius.circular(6.0)),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -191,7 +204,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   Widget historyWidget() {
     return Row(children: [
       Container(width: 10.0),
-      Image.network(ImageURL.url_343, width: 16.0, height: 16.0),
+      CachedNetworkImage(imageUrl:ImageURL.url_343, width: 16.0, height: 16.0),
       Container(width: 5.0),
       const Text("History",
           style: TextStyle(
@@ -200,7 +213,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
               fontWeight: FontWeight.w600)),
       const Spacer(),
       GestureDetector(
-          child: Image.network(ImageURL.url_289, width: 24.0, height: 24.0),
+          child: CachedNetworkImage(imageUrl:ImageURL.url_289, width: 24.0, height: 24.0),
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return const HTClassWatchListPage(
@@ -265,7 +278,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
         )),
         margin: const EdgeInsets.only(right: 5.0),
         child: Stack(alignment: Alignment.center, children: [
-          Image.network(ImageURL.url_268,
+          CachedNetworkImage(imageUrl:ImageURL.url_268,
               width: 24.0, height: 24.0, fit: BoxFit.fill),
           Positioned(
               left: 5.0,
@@ -287,7 +300,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
         margin: const EdgeInsets.only(top: 30, left: 10),
         color: Colors.transparent,
         child: Row(children: [
-          Image.network(ImageURL.url_344, width: 16.0, height: 16.0),
+          CachedNetworkImage(imageUrl:ImageURL.url_344, width: 16.0, height: 16.0),
           Container(width: 5.0),
           const Text("Watchlist",
               style: TextStyle(
@@ -295,7 +308,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
                   color: Colors.white,
                   fontWeight: FontWeight.w500)),
           const Spacer(),
-          Image.network(ImageURL.url_289, width: 24.0, height: 24.0),
+          CachedNetworkImage(imageUrl:ImageURL.url_289, width: 24.0, height: 24.0),
           Container(width: 10.0)
         ]),
       ),
@@ -317,7 +330,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
           color: Colors.transparent,
           margin: const EdgeInsets.only(left: 10),
           child: Row(children: [
-            Image.network(ImageURL.url_345, width: 16.0, height: 16.0),
+            CachedNetworkImage(imageUrl:ImageURL.url_345, width: 16.0, height: 16.0),
             Container(width: 5.0),
             const Text("Share",
                 style: TextStyle(
@@ -325,7 +338,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
                     color: Colors.white,
                     fontWeight: FontWeight.w500)),
             const Spacer(),
-            Image.network(ImageURL.url_289, width: 24.0, height: 24.0),
+            CachedNetworkImage(imageUrl:ImageURL.url_289, width: 24.0, height: 24.0),
             Container(width: 10.0)
           ]),
         ),
@@ -341,7 +354,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
           color: Colors.transparent,
           margin: const EdgeInsets.only(left: 10),
           child: Row(children: [
-            Image.network(ImageURL.url_346, width: 16.0, height: 16.0),
+            CachedNetworkImage(imageUrl:ImageURL.url_346, width: 16.0, height: 16.0),
             Container(width: 5.0),
             const Text("Feedback",
                 style: TextStyle(
@@ -349,7 +362,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
                     color: Colors.white,
                     fontWeight: FontWeight.w500)),
             const Spacer(),
-            Image.network(ImageURL.url_289, width: 24.0, height: 24.0),
+            CachedNetworkImage(imageUrl:ImageURL.url_289, width: 24.0, height: 24.0),
             Container(width: 10.0)
           ]),
         ),

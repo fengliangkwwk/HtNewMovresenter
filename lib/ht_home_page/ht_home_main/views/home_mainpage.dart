@@ -10,6 +10,8 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/views/second_level_page.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_middlepage.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/view/setting_watch_list.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/history_playback/view/setting_play_history.dart';
 import 'package:ht_new_movpresenter/utils/share/ht_share.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
@@ -212,7 +214,17 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
             ]),
           )),
           Container(width: 6.0),
-          CachedNetworkImage(imageUrl: ImageURL.url_282, width: 24, height: 24),
+          GestureDetector(
+            onTap: () =>  Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const HTClassWatchListPage(title: "");
+                          },
+                        ),
+                      ),
+              child: CachedNetworkImage(
+                  imageUrl: ImageURL.url_282, width: 24, height: 24)),
           Container(width: 10.0),
         ]),
       ),

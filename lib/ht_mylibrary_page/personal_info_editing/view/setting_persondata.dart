@@ -1,14 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_date_picker_fork/flutter_cupertino_date_picker_fork.dart';
 import 'package:flutter_pickers/pickers.dart';
 import 'package:flutter_pickers/style/picker_style.dart';
+import 'package:get/route_manager.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/bean/user_bean.dart';
+import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
+import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HTClassPersondataPage extends StatefulWidget {
-  const HTClassPersondataPage({Key? key, required this.title})
+  const HTClassPersondataPage({Key? key, this.title, this.userbean})
       : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -20,7 +25,8 @@ class HTClassPersondataPage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
+  final String? title;
+  final UserBean? userbean;
 
   @override
   State<HTClassPersondataPage> createState() => _HTClassPersondataPageState();
@@ -29,6 +35,7 @@ class HTClassPersondataPage extends StatefulWidget {
 class _HTClassPersondataPageState extends State<HTClassPersondataPage> {
   var htVarSelectedBirth = "";
   var htVarSelectedGender = "";
+  final TextEditingController _nameEditingController = TextEditingController();
 
   @override
   void initState() {
@@ -36,62 +43,111 @@ class _HTClassPersondataPageState extends State<HTClassPersondataPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _nameEditingController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
-            backgroundColor: Color(0xff1A1C21),
-            title: Text("Personal Data",
+            backgroundColor: const Color(0xff1A1C21),
+            title: const Text("Personal Data",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
                     fontWeight: FontWeight.w600)),
             centerTitle: true,
             leadingWidth: 24.0,
-            leading: Image.asset("image/icon_setting_back_w.png",
-                width: 24.0, height: 24.0, fit: BoxFit.scaleDown)),
+            leading: GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: CachedNetworkImage(
+                ///返回按钮
+                imageUrl: ImageURL.url_291,
+                width: 24.0,
+                height: 24.0,
+                fit: BoxFit.scaleDown,
+              ),
+            )),
         body: Container(
-            padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 0.0),
+            padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 0.0),
             width: double.infinity,
             child: Column(children: [
               Container(height: 15.0),
               Row(children: [
-                Text("Profile image",
+                const Text("Profile image",
                     style: TextStyle(fontSize: 14.0, color: Color(0xff828386))),
-                Spacer(),
+                const Spacer(),
                 Container(
                     width: 40.0,
                     height: 40.0,
                     decoration: BoxDecoration(
+
+                        ///头像
                         image: const DecorationImage(
-                            image: AssetImage(
-                                "image/icon_setting_header_def.png")),
+                            image:
+                                CachedNetworkImageProvider(ImageURL.url_347)),
                         borderRadius: BorderRadius.circular(20.0),
                         border: Border.all(color: Colors.white))),
               ]),
               Container(
                   margin: const EdgeInsets.only(top: 14.5, bottom: 14.5),
-                  color: Color(0xff2D2F33),
+                  color: const Color(0xff2D2F33),
                   height: 0.5),
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text("Name",
-                    style: TextStyle(fontSize: 14.0, color: Color(0xff828386))),
-                Container(height: 15.0),
-                Row(children: [
-                  Text("Visitor12357",
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("Name",
                       style:
                           TextStyle(fontSize: 14.0, color: Color(0xff828386))),
-                  Spacer(),
-                  Image.asset("image/icon_setting_edit.png",
-                      width: 18.0, height: 18.0),
-                ]),
-              ]),
+                  Container(height: 15.0),
+
+                  ///姓名
+                  Row(children: [
+                    const SizedBox(
+                      width: 200,
+                      height: 25,
+                      child: TextField(
+                        enabled: false,
+                        style: TextStyle(
+                          color: Color(0xff828386),
+                          fontSize: 14.0,
+                        ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText:
+                              'Enter your text hereajkenkljwkelqwkl;keqwkrl;wql;r',
+                          hintStyle: TextStyle(
+                            color: Color(0xff828386), // 自定义占位符文本颜色
+                            fontSize: 14.0, // 自定义占位符文本字体大小
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    // const Text(
+                    //   "Visitor12357",
+                    //   style: TextStyle(
+                    //     fontSize: 14.0,
+                    //     color: Color(0xff828386),
+                    //   ),
+                    // ),
+                    const Spacer(),
+                    CachedNetworkImage(
+                        imageUrl: ImageURL.url_346, width: 18.0, height: 18.0),
+                  ]),
+                ],
+              ),
               Container(
-                  margin: EdgeInsets.only(top: 14.5, bottom: 14.5),
-                  color: Color(0xff2D2F33),
+                  margin: const EdgeInsets.only(top: 0, bottom: 14.5),
+                  color: const Color(0xff2D2F33),
                   height: 0.5),
+
+              ///性别
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text("Gender",
+                const Text("Gender",
                     style: TextStyle(fontSize: 14.0, color: Color(0xff828386))),
                 Container(height: 15.0),
                 Row(children: [
@@ -99,12 +155,14 @@ class _HTClassPersondataPageState extends State<HTClassPersondataPage> {
                       htVarSelectedGender == ""
                           ? "Tap to Edit Gender"
                           : htVarSelectedGender,
-                      style:
-                          TextStyle(fontSize: 14.0, color: Color(0xff828386))),
-                  Spacer(),
+                      style: const TextStyle(
+                          fontSize: 14.0, color: Color(0xff828386))),
+                  const Spacer(),
                   GestureDetector(
-                      child: Image.asset("image/icon_setting_edit.png",
-                          width: 18.0, height: 18.0),
+                      child: CachedNetworkImage(
+                          imageUrl: ImageURL.url_346,
+                          width: 18.0,
+                          height: 18.0),
                       onTap: () {
                         Pickers.showSinglePicker(context,
                             data: ['Female', 'Male'],
@@ -113,12 +171,12 @@ class _HTClassPersondataPageState extends State<HTClassPersondataPage> {
                               textColor: Colors.white,
                               textSize: 20.0,
                               headDecoration:
-                                  BoxDecoration(color: Colors.black),
+                                  const BoxDecoration(color: Colors.black),
                               title: Container(color: Colors.black),
-                              commitButton: Text("OK",
+                              commitButton: const Text("OK",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 15.0)),
-                              cancelButton: Text("Cancel",
+                              cancelButton: const Text("Cancel",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 15.0)),
                             ), onConfirm: (val, index) {
@@ -130,11 +188,13 @@ class _HTClassPersondataPageState extends State<HTClassPersondataPage> {
                 ]),
               ]),
               Container(
-                  margin: EdgeInsets.only(top: 14.5, bottom: 14.5),
-                  color: Color(0xff2D2F33),
+                  margin: const EdgeInsets.only(top: 10.5, bottom: 14.5),
+                  color: const Color(0xff2D2F33),
                   height: 0.5),
+
+              ///出生日期
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text("Date of Birth",
+                const Text("Date of Birth",
                     style: TextStyle(fontSize: 14.0, color: Color(0xff828386))),
                 Container(height: 15.0),
                 Row(children: [
@@ -142,12 +202,14 @@ class _HTClassPersondataPageState extends State<HTClassPersondataPage> {
                       htVarSelectedBirth == ""
                           ? "Tap to edit DoB"
                           : htVarSelectedBirth,
-                      style:
-                          TextStyle(fontSize: 14.0, color: Color(0xff828386))),
-                  Spacer(),
+                      style: const TextStyle(
+                          fontSize: 14.0, color: Color(0xff828386))),
+                  const Spacer(),
                   GestureDetector(
-                      child: Image.asset("image/icon_setting_edit.png",
-                          width: 18.0, height: 18.0),
+                      child: CachedNetworkImage(
+                          imageUrl: ImageURL.url_346,
+                          width: 18.0,
+                          height: 18.0),
                       onTap: () {
                         DatePicker.showDatePicker(context,
                             onConfirm: (dateTime, selectedIndex) {
@@ -156,7 +218,7 @@ class _HTClassPersondataPageState extends State<HTClassPersondataPage> {
                                 "${dateTime.year}-${dateTime.month}-${dateTime.day}";
                           });
                         },
-                            pickerTheme: DateTimePickerTheme(
+                            pickerTheme: const DateTimePickerTheme(
                                 backgroundColor: Colors.black,
                                 confirm: Text("OK",
                                     style: TextStyle(
@@ -170,29 +232,29 @@ class _HTClassPersondataPageState extends State<HTClassPersondataPage> {
                 ]),
               ]),
               Container(
-                  margin: EdgeInsets.only(top: 14.5, bottom: 14.5),
-                  color: Color(0xff2D2F33),
+                  margin: const EdgeInsets.only(top: 10.5, bottom: 14.5),
+                  color: const Color(0xff2D2F33),
                   height: 0.5),
-              Spacer(),
+              const Spacer(),
               GestureDetector(
-                onTap: () async{
+                onTap: () async {
                   ///1.删除本地信息 2.清除数据
-                    final SharedPreferences prefs = await SharedPreferences.getInstance();
-                   await prefs.remove(HTSharedKeys.htPersonMesaage);
-                    HTUserStore.userBean = null;
+                  final SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  await prefs.remove(HTSharedKeys.htPersonMesaage);
+                  HTUserStore.userBean = null;
                   Navigator.of(context).pop();
-
                 },
                 child: Container(
                   alignment: Alignment.center,
                   height: 44.0,
-                  margin: EdgeInsets.only(bottom: 20.0),
-                  child: Text(
+                  margin: const EdgeInsets.only(bottom: 20.0),
+                  child: const Text(
                     "Logout",
                     style: TextStyle(fontSize: 15.0, color: Colors.white),
                   ),
                   decoration: BoxDecoration(
-                      color: Color(0xfff4473c),
+                      color: const Color(0xfff4473c),
                       borderRadius: BorderRadius.circular(6.0)),
                 ),
               )

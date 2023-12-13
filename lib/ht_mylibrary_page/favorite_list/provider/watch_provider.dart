@@ -122,7 +122,6 @@ class WatchProvider extends ChangeNotifier {
   ///存本地磁盘
   void saveDisk() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-
     var savaData = [];
     for (var element in dataList ??<HistoryBean>[]) {
       savaData.add(element.toJson());

@@ -58,12 +58,6 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
         videoDescBean?.data?.hd?.link ?? '',
         autoPlay: true,
         showCover: true);
-    // player.addListener(
-    //   () {
-    //     // print(
-    //     //     'zzs:${player.currentPos},${player.value.duration.inSeconds},${player.bufferPos}');
-    //   },
-    // );
     addHistoryAciton();
   }
 

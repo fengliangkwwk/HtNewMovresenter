@@ -5,9 +5,13 @@ import 'package:get/route_manager.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider.dart';
 import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_init_app.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
+import 'package:ht_new_movpresenter/utils/tools/toast_tool.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tuple/tuple.dart';
 
 class PremiumBottomWidget extends StatefulWidget {
@@ -91,7 +95,11 @@ class _PremiumBottomWidgetState extends State<PremiumBottomWidget> {
       builder: (context, value, child) {
         return GestureDetector(
           onTap: () {
-            htMethodShowPayProptDialog(context);
+            int num = HTUserStore.popUps;
+            print('🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐$num');
+            HTUserStore.popUps < 3
+                ? htMethodShowPayProptDialog(context)
+                : ToastUtil.showToast(msg: "已经超过三次了");
             // provider.go2Pay();
           },
           child: Container(
@@ -212,162 +220,162 @@ class _PremiumBottomWidgetState extends State<PremiumBottomWidget> {
     );
   }
 
-  Future<void> htMethodShowPayProptDialog(BuildContext ctx) async {
-    return showDialog(
-      context: ctx,
-      builder: (BuildContext ctx) {
-        return GestureDetector(
-          onTap: (() => Navigator.pop(context)),
-          child: Stack(
-            children: [
-              Container(
-                color: const Color(0xff292a2f),
-                width: double.infinity,
-                height: double.infinity,
-              ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                child: Container(
-                  width: SysTools.getScreenSize(ctx).width,
-                  height: 350,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(24),
-                        topRight: Radius.circular(24)),
-                    gradient: LinearGradient(
-                      colors: [
-                        const Color(0xff000000).withAlpha(100),
-                        const Color(0xff000000).withAlpha(110),
-                        const Color(0xff000000).withAlpha(120),
-                        const Color(0xff000000).withAlpha(130),
-                        const Color(0xff000000).withAlpha(140),
-                        const Color(0xff000000).withAlpha(170),
-                        const Color(0xff000000).withAlpha(255)
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 300,
-                right: 15,
-                child: GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: CachedNetworkImage(
-                    imageUrl: ImageURL.url_350,
-                    width: 24,
-                    height: 24,
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 95,
-                left: 60,
-                right: 60,
-                child: CachedNetworkImage(
-                    imageUrl: (HTUserStore.premiumBean?.p1?.gif) ?? ""),
-              ),
-              const Positioned(
-                bottom: 55,
-                left: 20,
-                right: 20,
-                child: Text(                
-                  "12333435326546563",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight:FontWeight.bold,
-                    color: Color(0xffffd770),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
   // Future<void> htMethodShowPayProptDialog(BuildContext ctx) async {
-  //   await showDialog(
-  //       context: context,
-  //       builder: (context1) {
-  //         return Dialog(
-  //             backgroundColor: Colors.transparent,
-  //             child: Container(
-  //                 height: 422.0,
+  //   var title = HTUserStore.premiumBean?.p1?.t1 ?? "";
+  //   return showDialog(
+  //     context: ctx,
+  //     builder: (BuildContext ctx) {
+  //       return GestureDetector(
+  //         onTap: (() => Navigator.pop(context)),
+  //         child: Stack(
+  //           children: [
+  //             Container(
+  //               color: const Color(0xff292a2f),
+  //               width: double.infinity,
+  //               height: double.infinity,
+  //             ),
+  //             Positioned(
+  //               bottom: 0,
+  //               left: 0,
+  //               child: Container(
+  //                 width: SysTools.getScreenSize(ctx).width,
+  //                 height: 350,
   //                 decoration: BoxDecoration(
-  //                     color: const Color(0xff292A2F),
-  //                     borderRadius: BorderRadius.circular(12.0)),
-  //                 child: Column(children: [
-  //                   Container(height: 45.4),
-  //                   Stack(children: [
-  //                     Container(
-  //                         margin: const EdgeInsets.fromLTRB(33.0, 0, 29.0, 0),
-  //                         height: 190.0),
-  //                     Positioned(
-  //                         left: 51.0,
-  //                         right: 54.0,
-  //                         height: 190.0,
-  //                         top: 0.0,
-  //                         child: Image.asset(
-  //                             "image/img_premium_paydialog_body.png")),
-  //                     Positioned(
-  //                         left: 33.0,
-  //                         right: 29.0,
-  //                         top: 0.0,
-  //                         height: 44.0,
-  //                         child: Image.asset(
-  //                             "image/icon_premium_paydialog_header.png")),
-  //                   ]),
-  //                   Container(height: 28.6),
-  //                   const Text("Subscribe at XXX to become PREM",
-  //                       style: TextStyle(
-  //                           color: Color(0xffFFD29D),
-  //                           fontSize: 14.0,
-  //                           fontWeight: FontWeight.bold)),
-  //                   Container(height: 39.0),
-  //                   GestureDetector(
-  //                       child: Container(
-  //                         margin:
-  //                             const EdgeInsets.fromLTRB(31.0, 0.0, 31.0, 0.0),
-  //                         height: 44.0,
-  //                         width: double.infinity,
-  //                         alignment: Alignment.center,
-  //                         decoration: BoxDecoration(
-  //                             borderRadius: BorderRadius.circular(22.0),
-  //                             gradient: const LinearGradient(
-  //                                 begin: Alignment.centerLeft,
-  //                                 end: Alignment.centerRight,
-  //                                 stops: [
-  //                                   0.0,
-  //                                   1.0
-  //                                 ],
-  //                                 colors: [
-  //                                   Color(0xffedc391),
-  //                                   Color(0xfffdddb7)
-  //                                 ])),
-  //                         child: const Text("Go Subscribe",
-  //                             style: TextStyle(
-  //                               color: Color(0xff685034),
-  //                               fontSize: 16.0,
-  //                               fontWeight: FontWeight.w600,
-  //                             )),
-  //                       ),
-  //                       onTap: () {
-  //                         Navigator.pop(context1);
-  //                       }),
-  //                   Container(height: 16.0),
-  //                   Container(
-  //                       child: const Text("Later",
-  //                           style: TextStyle(
-  //                               color: Color(0xff999999),
-  //                               fontSize: 12.0,
-  //                               decoration: TextDecoration.underline))),
-  //                 ])));
-  //       });
+  //                   borderRadius: const BorderRadius.only(
+  //                       topLeft: Radius.circular(24),
+  //                       topRight: Radius.circular(24)),
+  //                   gradient: LinearGradient(
+  //                     colors: [
+  //                       const Color(0xff000000).withAlpha(100),
+  //                       const Color(0xff000000).withAlpha(110),
+  //                       const Color(0xff000000).withAlpha(120),
+  //                       const Color(0xff000000).withAlpha(130),
+  //                       const Color(0xff000000).withAlpha(140),
+  //                       const Color(0xff000000).withAlpha(170),
+  //                       const Color(0xff000000).withAlpha(255)
+  //                     ],
+  //                     begin: Alignment.topCenter,
+  //                     end: Alignment.bottomCenter,
+  //                   ),
+  //                 ),
+  //               ),
+  //             ),
+  //             Positioned(
+  //               bottom: 300,
+  //               right: 15,
+  //               child: GestureDetector(
+  //                 onTap: () => Navigator.pop(context),
+  //                 child: CachedNetworkImage(
+  //                   imageUrl: ImageURL.url_350,
+  //                   width: 24,
+  //                   height: 24,
+  //                 ),
+  //               ),
+  //             ),
+  //             Positioned(
+  //               bottom: 95,
+  //               left: 60,
+  //               right: 60,
+  //               child: CachedNetworkImage(
+  //                   imageUrl: (HTUserStore.premiumBean?.p1?.gif) ?? ""),
+  //             ),
+  //             Positioned(
+  //               bottom: 55,
+  //               left: 20,
+  //               right: 20,
+  //               child: Text(
+  //                 "Proceeding to $title complete payment",
+  //                 style: const TextStyle(
+  //                   fontSize: 14,
+  //                   fontWeight: FontWeight.bold,
+  //                   color: Color(0xffffd770),
+  //                 ),
+  //                 textAlign: TextAlign.center,
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
   // }
+
+  Future<void> htMethodShowPayProptDialog(BuildContext ctx) async {
+    var title = HTUserStore.premiumBean?.p1?.t1 ?? "";
+    int num = HTUserStore.popUps;
+    num++;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt(HTSharedKeys.popUps, num);
+    await userData();
+    await showDialog(
+        context: context,
+        builder: (context1) {
+          return Dialog(
+              child: Container(
+                  height: 422.0,
+                  decoration: BoxDecoration(
+                      color: const Color(0xff292A2F),
+                      borderRadius: BorderRadius.circular(12.0)),
+                  child: Column(children: [
+                    Container(height: 45.4),
+                    Stack(children: [
+                      Container(
+                          margin: const EdgeInsets.fromLTRB(33.0, 0, 29.0, 0),
+                          height: 190.0),
+                      Positioned(
+                        left: 51.0,
+                        right: 54.0,
+                        height: 190.0,
+                        top: 0.0,
+                        child: CachedNetworkImage(
+                            imageUrl: (HTUserStore.premiumBean?.p1?.gif) ?? ""),
+                      ),
+                    ]),
+                    Container(height: 28.6),
+                    Text("Proceeding to $title complete payment",
+                        style: const TextStyle(
+                            color: Color(0xffFFD29D),
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.bold)),
+                    Container(height: 39.0),
+                    GestureDetector(
+                        child: Container(
+                          margin:
+                              const EdgeInsets.fromLTRB(31.0, 0.0, 31.0, 0.0),
+                          height: 44.0,
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(22.0),
+                              gradient: const LinearGradient(
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                  stops: [
+                                    0.0,
+                                    1.0
+                                  ],
+                                  colors: [
+                                    Color(0xffedc391),
+                                    Color(0xfffdddb7)
+                                  ])),
+                          child: const Text("Go Subscribe",
+                              style: TextStyle(
+                                color: Color(0xff685034),
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w600,
+                              )),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context1);
+                        }),
+                    Container(height: 16.0),
+                    Container(
+                        child: const Text("Later",
+                            style: TextStyle(
+                                color: Color(0xff999999),
+                                fontSize: 12.0,
+                                decoration: TextDecoration.underline))),
+                  ])));
+        });
+  }
 }
