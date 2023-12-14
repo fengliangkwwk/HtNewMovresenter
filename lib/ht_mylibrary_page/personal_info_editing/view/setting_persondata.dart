@@ -6,24 +6,17 @@ import 'package:flutter_pickers/pickers.dart';
 import 'package:flutter_pickers/style/picker_style.dart';
 import 'package:get/route_manager.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/bean/user_bean.dart';
+import 'package:ht_new_movpresenter/ht_mylibrary_page/personal_info_editing/provider/setting_info_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HTClassPersondataPage extends StatefulWidget {
   const HTClassPersondataPage({Key? key, this.title, this.userbean})
       : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String? title;
   final UserBean? userbean;
@@ -33,9 +26,12 @@ class HTClassPersondataPage extends StatefulWidget {
 }
 
 class _HTClassPersondataPageState extends State<HTClassPersondataPage> {
+  SettingInfoProvider provider = SettingInfoProvider();
   var htVarSelectedBirth = "";
   var htVarSelectedGender = "";
+  bool _isEditName = false;
   final TextEditingController _nameEditingController = TextEditingController();
+  FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
@@ -76,22 +72,24 @@ class _HTClassPersondataPageState extends State<HTClassPersondataPage> {
             width: double.infinity,
             child: Column(children: [
               Container(height: 15.0),
-              Row(children: [
-                const Text("Profile image",
-                    style: TextStyle(fontSize: 14.0, color: Color(0xff828386))),
-                const Spacer(),
-                Container(
-                    width: 40.0,
-                    height: 40.0,
-                    decoration: BoxDecoration(
-
-                        ///头像
-                        image: const DecorationImage(
-                            image:
-                                CachedNetworkImageProvider(ImageURL.url_347)),
-                        borderRadius: BorderRadius.circular(20.0),
-                        border: Border.all(color: Colors.white))),
-              ]),
+              GestureDetector(
+                onTap: () => provider.takePhotosAction(context),
+                child: Row(children: [
+                  const Text("Profile image",
+                      style: TextStyle(fontSize: 14.0, color: Color(0xff828386))),
+                  const Spacer(),
+                  Container(
+                      width: 40.0,
+                      height: 40.0,
+                      decoration: BoxDecoration(
+                          ///头像
+                          image: const DecorationImage(
+                              image:
+                                  CachedNetworkImageProvider(ImageURL.url_347)),
+                          borderRadius: BorderRadius.circular(20.0),
+                          border: Border.all(color: Colors.white))),
+                ]),
+              ),
               Container(
                   margin: const EdgeInsets.only(top: 14.5, bottom: 14.5),
                   color: const Color(0xff2D2F33),
@@ -102,20 +100,20 @@ class _HTClassPersondataPageState extends State<HTClassPersondataPage> {
                   const Text("Name",
                       style:
                           TextStyle(fontSize: 14.0, color: Color(0xff828386))),
-                  Container(height: 15.0),
 
                   ///姓名
                   Row(children: [
-                    const SizedBox(
-                      width: 200,
-                      height: 25,
+                    Expanded(
                       child: TextField(
-                        enabled: false,
-                        style: TextStyle(
+                        // autofocus: true,
+                        controller: _nameEditingController,
+                        focusNode: _focusNode,
+                        // enabled: _isEditName,
+                        style: const TextStyle(
                           color: Color(0xff828386),
                           fontSize: 14.0,
                         ),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText:
                               'Enter your text hereajkenkljwkelqwkl;keqwkrl;wql;r',
@@ -124,19 +122,30 @@ class _HTClassPersondataPageState extends State<HTClassPersondataPage> {
                             fontSize: 14.0, // 自定义占位符文本字体大小
                           ),
                         ),
+                        onEditingComplete: () {
+                           provider.commitPersonData(name: _nameEditingController.text);
+                          _focusNode.unfocus();
+                        },
                       ),
                     ),
-
-                    // const Text(
-                    //   "Visitor12357",
-                    //   style: TextStyle(
-                    //     fontSize: 14.0,
-                    //     color: Color(0xff828386),
-                    //   ),
-                    // ),
                     const Spacer(),
-                    CachedNetworkImage(
-                        imageUrl: ImageURL.url_346, width: 18.0, height: 18.0),
+                    GestureDetector(
+                      onTap: () {
+                        _isEditName = !_isEditName;
+                        setState(() {
+                          if (_isEditName == true) {
+                            // 手动获取焦点，弹出键盘
+                            FocusScope.of(context).requestFocus(_focusNode);
+                          } else {
+                            _focusNode.unfocus();
+                          }
+                        });
+                      },
+                      child: CachedNetworkImage(
+                          imageUrl: ImageURL.url_346,
+                          width: 18.0,
+                          height: 18.0),
+                    ),
                   ]),
                 ],
               ),
