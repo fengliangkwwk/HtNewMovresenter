@@ -174,7 +174,7 @@ class _HTClassPersondataPageState extends State<HTClassPersondataPage> {
                           height: 18.0),
                       onTap: () {
                         Pickers.showSinglePicker(context,
-                            data: ['Female', 'Male'],
+                            data: ['Male','Female','other'],
                             pickerStyle: PickerStyle(
                               backgroundColor: Colors.black,
                               textColor: Colors.white,
@@ -188,7 +188,10 @@ class _HTClassPersondataPageState extends State<HTClassPersondataPage> {
                               cancelButton: const Text("Cancel",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 15.0)),
-                            ), onConfirm: (val, index) {
+                            ), 
+                            onConfirm: (val, index) {
+                              var sexValue = (index == 0?1:(index == 1?2:-1));
+                              provider.commitPersonData(gender:sexValue.toString());
                           setState(() {
                             htVarSelectedGender = val;
                           });

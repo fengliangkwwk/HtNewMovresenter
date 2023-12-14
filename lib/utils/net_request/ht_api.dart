@@ -7,8 +7,8 @@ import 'package:ht_new_movpresenter/utils/net_request/url_domain.dart';
 class Global{
   ///未登录
   static const unLoginWebUrl = 'https://www.h5login.work';
-  ///登录
-  static const loginWebUrl = 'https://www.h5login.work/user';
+  ///已登录(用户信息页面)
+  static const userInfoWebUrl = 'https://www.h5login.work/user';
 // class Api {
   // static const portNO = ':4523/';
   static const portNO = '';

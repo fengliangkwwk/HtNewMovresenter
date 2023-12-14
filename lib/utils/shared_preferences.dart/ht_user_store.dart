@@ -27,7 +27,6 @@ class HTUserStore {
   static int popUps = 0;
 //收藏列表
   static List<HistoryBean> favoriteList = [];
-
   ///浏览数据
   static List<HistoryBean> historyList = [];
 }

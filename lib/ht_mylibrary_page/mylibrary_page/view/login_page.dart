@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/utils/net_request/ht_api.dart';
 import 'package:ht_new_movpresenter/utils/net_request/ui_utils.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class LoginPage extends StatefulWidget {
@@ -25,9 +27,12 @@ class _LoginPageState extends State<LoginPage> {
         NavigationDelegate(
           onProgress: (int progress) {
             // Update loading bar.
+            EasyLoading.show();
           },
           onPageStarted: (String url) {},
           onPageFinished: (String url) {
+            EasyLoading.dismiss();
+
             ///flutter调用js
             controller.runJavaScript('getNativeParam({"name":"zz",})');
 
@@ -35,7 +40,6 @@ class _LoginPageState extends State<LoginPage> {
             controller.addJavaScriptChannel(
               'iOS',
               onMessageReceived: (p0) {
-
                 if (p0.message.isEmpty) {
                   return;
                 }
@@ -45,11 +49,12 @@ class _LoginPageState extends State<LoginPage> {
                   ///退出页面
                   Navigator.of(context).pop();
                 }
-                
               },
             );
           },
-          onWebResourceError: (WebResourceError error) {},
+          onWebResourceError: (WebResourceError error) {
+            EasyLoading.dismiss();
+          },
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith('https://www.youtube.com/')) {
               return NavigationDecision.prevent;
@@ -63,22 +68,20 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void loadWeb() async {
-    var params = <String, dynamic>{};
+    var params = <String, dynamic>{"force":HTUserStore.premiumBean?.k13};
     await KTClassUIUtils.htMethodPutRequestCommonParams(params);
-
     Uri url = Uri.parse(Global.unLoginWebUrl + '?param=' + jsonEncode(params));
-
     controller.loadRequest(url);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: SafeArea(
         child: WebViewWidget(
-        controller: controller,
-          ),
-      ),);
+          controller: controller,
+        ),
+      ),
+    );
   }
 }

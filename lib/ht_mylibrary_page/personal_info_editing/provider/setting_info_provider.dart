@@ -16,7 +16,7 @@ class SettingInfoProvider extends SettingInfoProviderBase
     String? name,
     String? birth,
     String? gender,
-    String? faceflag,
+    String? faceflag = "0",
     String? face,
   }) async {
     await setPersonData(

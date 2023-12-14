@@ -58,49 +58,14 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
           historyWidget(),
           if (HTUserStore.historyList.isNotEmpty) historyList(),
           watchListWidget(),
-          Container(
-            height: 30,
-          ),
+          Container(height: 30),
           shareWidget(),
-          Container(
-            height: 30,
-          ),
+          Container(height: 30),
           feedbackWidget(),
         ],
       ),
     );
   }
-
-  // Widget totalWidget() {
-  //   return Container(
-  //     alignment: Alignment.center,
-  //     // height: 12.0,
-  //     // decoration: BoxDecoration(
-  //     //   image: DecorationImage(
-  //     //     image: NetworkImage(ImageURL.url_244),
-  //     //     fit: BoxFit.cover,
-  //     //   ),
-  //     // ),
-  //     child: Column(
-  //       children: [
-  //         Container(height: MediaQuery.of(context).padding.top + 0.0),
-  //         headerWidget(),
-  //         secondWidget(),
-  //         historyWidget(),
-  //         historyList(),
-  //         watchListWidget(),
-  //         Container(
-  //           height: 30,
-  //         ),
-  //         shareWidget(),
-  //         Container(
-  //           height: 30,
-  //         ),
-  //         feedbackWidget(),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   ///第一行
   Widget headerWidget() {
@@ -117,13 +82,13 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
             ),
             color: Colors.white,
           ),
-          child: GestureDetector(
-            child: Column(
-              children: [
-                const Expanded(child: SizedBox()),
-                SizedBox(
-                  height: 54,
-                  child: Row(children: [
+          child: Column(
+            children: [
+              const Expanded(child: SizedBox()),
+              SizedBox(
+                height: 54,
+                child: Row(
+                  children: [
                     Container(width: 10.0),
                     Container(
                       width: 54.0,
@@ -139,22 +104,49 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
                           border: Border.all(color: Colors.white)),
                     ),
                     Container(width: 15.0),
-                    const Text("Login/Signup",
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600)),
+                    HTUserStore.login()
+                        ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Spacer(),
+                            Text(
+                              HTUserStore.userBean?.userName ?? "",
+                              style: const TextStyle(
+                                  fontSize: 16.0,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            const Text(
+                              "Family Account>",
+                              style: TextStyle(
+                                  fontSize: 12.0,
+                                  color: Color(0xff999999)),
+                            )
+                          ],
+                        )
+                        : const Text(
+                            "Login/Signup",
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600),
+                          ),
                     const Spacer(),
-                    CachedNetworkImage(imageUrl:ImageURL.url_289, width: 24.0, height: 24.0),
+                    GestureDetector(
+                      onTap: () => provider.goLogin(context),
+                      child: CachedNetworkImage(
+                          imageUrl: ImageURL.url_289,
+                          width: 24.0,
+                          height: 24.0),
+                    ),
                     Container(width: 10.0),
-                  ]),
+                  ],
                 ),
-                const SizedBox(
-                  height: 20,
-                )
-              ],
-            ),
-            onTap: () => provider.goLogin(context),
+              ),
+              const SizedBox(
+                height: 20,
+              )
+            ],
           ),
         );
       }),
@@ -170,7 +162,8 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
         padding: const EdgeInsets.only(left: 16.0),
         decoration: BoxDecoration(
             image: const DecorationImage(
-                image: CachedNetworkImageProvider(ImageURL.url_280), fit: BoxFit.fill),
+                image: CachedNetworkImageProvider(ImageURL.url_280),
+                fit: BoxFit.fill),
             borderRadius: BorderRadius.circular(6.0)),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -204,7 +197,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   Widget historyWidget() {
     return Row(children: [
       Container(width: 10.0),
-      CachedNetworkImage(imageUrl:ImageURL.url_343, width: 16.0, height: 16.0),
+      CachedNetworkImage(imageUrl: ImageURL.url_343, width: 16.0, height: 16.0),
       Container(width: 5.0),
       const Text("History",
           style: TextStyle(
@@ -213,7 +206,8 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
               fontWeight: FontWeight.w600)),
       const Spacer(),
       GestureDetector(
-          child: CachedNetworkImage(imageUrl:ImageURL.url_289, width: 24.0, height: 24.0),
+          child: CachedNetworkImage(
+              imageUrl: ImageURL.url_289, width: 24.0, height: 24.0),
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return const HTClassWatchListPage(
@@ -278,8 +272,11 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
         )),
         margin: const EdgeInsets.only(right: 5.0),
         child: Stack(alignment: Alignment.center, children: [
-          CachedNetworkImage(imageUrl:ImageURL.url_268,
-              width: 24.0, height: 24.0, fit: BoxFit.fill),
+          CachedNetworkImage(
+              imageUrl: ImageURL.url_268,
+              width: 24.0,
+              height: 24.0,
+              fit: BoxFit.fill),
           Positioned(
               left: 5.0,
               top: 5.0,
@@ -300,7 +297,8 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
         margin: const EdgeInsets.only(top: 30, left: 10),
         color: Colors.transparent,
         child: Row(children: [
-          CachedNetworkImage(imageUrl:ImageURL.url_344, width: 16.0, height: 16.0),
+          CachedNetworkImage(
+              imageUrl: ImageURL.url_344, width: 16.0, height: 16.0),
           Container(width: 5.0),
           const Text("Watchlist",
               style: TextStyle(
@@ -308,7 +306,8 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
                   color: Colors.white,
                   fontWeight: FontWeight.w500)),
           const Spacer(),
-          CachedNetworkImage(imageUrl:ImageURL.url_289, width: 24.0, height: 24.0),
+          CachedNetworkImage(
+              imageUrl: ImageURL.url_289, width: 24.0, height: 24.0),
           Container(width: 10.0)
         ]),
       ),
@@ -330,7 +329,8 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
           color: Colors.transparent,
           margin: const EdgeInsets.only(left: 10),
           child: Row(children: [
-            CachedNetworkImage(imageUrl:ImageURL.url_345, width: 16.0, height: 16.0),
+            CachedNetworkImage(
+                imageUrl: ImageURL.url_345, width: 16.0, height: 16.0),
             Container(width: 5.0),
             const Text("Share",
                 style: TextStyle(
@@ -338,7 +338,8 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
                     color: Colors.white,
                     fontWeight: FontWeight.w500)),
             const Spacer(),
-            CachedNetworkImage(imageUrl:ImageURL.url_289, width: 24.0, height: 24.0),
+            CachedNetworkImage(
+                imageUrl: ImageURL.url_289, width: 24.0, height: 24.0),
             Container(width: 10.0)
           ]),
         ),
@@ -354,7 +355,8 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
           color: Colors.transparent,
           margin: const EdgeInsets.only(left: 10),
           child: Row(children: [
-            CachedNetworkImage(imageUrl:ImageURL.url_346, width: 16.0, height: 16.0),
+            CachedNetworkImage(
+                imageUrl: ImageURL.url_346, width: 16.0, height: 16.0),
             Container(width: 5.0),
             const Text("Feedback",
                 style: TextStyle(
@@ -362,7 +364,8 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
                     color: Colors.white,
                     fontWeight: FontWeight.w500)),
             const Spacer(),
-            CachedNetworkImage(imageUrl:ImageURL.url_289, width: 24.0, height: 24.0),
+            CachedNetworkImage(
+                imageUrl: ImageURL.url_289, width: 24.0, height: 24.0),
             Container(width: 10.0)
           ]),
         ),

@@ -11,17 +11,13 @@ mixin FamilyAccountProviderMixin on FamilyAccountProviderBase {
 
   Future<void> requestFamilyAccountApi() async {
     EasyLoading.show();
-
     var res = await HTNetUtils.htPost(
       apiUrl: Global.familyMemberListUrl,
       params: {"fid": "0", "uid": "0"},
     );
     EasyLoading.dismiss();
     var json = jsonDecode(res?.data);
-
     familyAccountBean = FamilyAccountBean.fromJson(json);
-
-    print(familyAccountBean?.status);
     var _dataList = <Data>[];
     print("---------" + res?.data);
     if (json['status'] == 200) {
