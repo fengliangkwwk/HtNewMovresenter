@@ -38,7 +38,12 @@
 				<string>tpapi20130214</string>
 			</array>
 		</dict>
-		<dict/>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.62371522668-b1kftf0r97ea6lc89svmjggpek2hfd31</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>

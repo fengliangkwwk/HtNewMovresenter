@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/bean/user_bean.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/provider/setting_provider_mixin.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/provider/settting_provider_base.dart';
@@ -22,14 +24,6 @@ class SettingProvider extends SettingProviderBase with SettingProviderMixin {
       await Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const PersonDataWidget();
       }));
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) {
-      //       return HTClassPersondataPage(title: "",userbean: userBean,);
-      //     },
-      //   ),
-      // );
     } else {
       ///2. 未登录 -> 去登录
       await Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -50,18 +44,36 @@ class SettingProvider extends SettingProviderBase with SettingProviderMixin {
       };
       await prefs.setString(HTSharedKeys.htPersonMesaage, res.toString());
       HTUserStore.userBean = UserBean.fromJson(res);
-      // if (state == true) {
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //       builder: (context) {
-      //         return const HTClassPersondataPage(title: "");
-      //       },
-      //     ),
-      //   );
-      // }
     }
   }
+
+  // ///谷歌登录方法
+  // void googleLoginAction(BuildContext context) async {
+  //   UserCredential? userCredential = await signInWithGoogle();
+  //   if (userCredential != null) {
+  //     print("User signed in: ${userCredential.user?.displayName}");
+  //     // 在这里处理登录成功后的操作
+  //   }
+  // }
+
+  // ///谷歌登录
+  // Future<UserCredential?> signInWithGoogle() async {
+  //   try {
+  //     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  //     if (googleUser == null) return null;
+
+  //     final GoogleSignInAuthentication googleAuth =
+  //         await googleUser.authentication;
+  //     final OAuthCredential googleCredential = GoogleAuthProvider.credential(
+  //       accessToken: googleAuth.accessToken,
+  //       idToken: googleAuth.idToken,
+  //     );
+  //     return await FirebaseAuth.instance.signInWithCredential(googleCredential);
+  //   } catch (e) {
+  //     print("Google sign in error: $e");
+  //     return null;
+  //   }
+  // }
 
   @override
   void addListener(VoidCallback listener) {

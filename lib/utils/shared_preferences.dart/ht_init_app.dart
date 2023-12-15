@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
@@ -11,6 +12,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> initApp() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
+
   await userData();
   // 强制竖屏
   SystemChrome.setPreferredOrientations([
