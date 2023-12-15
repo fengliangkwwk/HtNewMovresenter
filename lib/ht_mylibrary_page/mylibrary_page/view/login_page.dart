@@ -45,10 +45,22 @@ class _LoginPageState extends State<LoginPage> {
                 }
                 var infoMap = jsonDecode(p0.message);
 
+                print(infoMap);
                 if (infoMap['loginType'] == 16) {
                   ///退出页面
                   Navigator.of(context).pop();
                 }
+
+                if (infoMap['loginType'] == 1) {
+                  ///谷歌登录
+                  
+                }
+
+
+
+
+
+
               },
             );
           },

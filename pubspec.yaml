@@ -87,6 +87,10 @@ dependencies:
   #本地通知权限
   flutter_local_notifications: ^16.2.0
   image_picker: ^1.0.5
+  #谷歌登录
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.15.3
+  google_sign_in: ^6.2.1
 
     
 dev_dependencies:
