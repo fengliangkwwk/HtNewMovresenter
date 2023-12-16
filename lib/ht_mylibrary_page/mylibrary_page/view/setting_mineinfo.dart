@@ -5,10 +5,13 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/view/setting_watch_list.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/feed_back/view/setting_feedback.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/provider/setting_provider.dart';
+import 'package:ht_new_movpresenter/ht_premium_page/family_account_page/view/premium_familypage.dart';
+import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/view/premium_indexerpage.dart';
 import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/global.dart';
 import 'package:ht_new_movpresenter/utils/share/ht_share.dart';
@@ -71,81 +74,106 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
     return Selector<SettingProvider, bool>(
       selector: ((p0, p1) => p1.isReloadHeader),
       builder: ((context, value, child) {
-        return Container(
-          height: 54 + MediaQuery.of(context).padding.top + 20,
-          decoration: const BoxDecoration(
-            ///顶部背景
-            image: DecorationImage(
-              image: CachedNetworkImageProvider(ImageURL.url_244),
-              fit: BoxFit.cover,
+        return GestureDetector(
+          onTap: () {
+            provider.goLogin(context);
+          },
+          child: Container(
+            height: 54 + MediaQuery.of(context).padding.top + 20,
+            decoration: const BoxDecoration(
+              ///顶部背景
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(ImageURL.url_244),
+                fit: BoxFit.cover,
+              ),
+              color: Colors.white,
             ),
-            color: Colors.white,
-          ),
-          child: Column(
-            children: [
-              const Expanded(child: SizedBox()),
-              SizedBox(
-                height: 54,
-                child: Row(
-                  children: [
-                    Container(width: 10.0),
-                    Container(
-                      width: 54.0,
-                      height: 54.0,
-                      decoration: BoxDecoration(
-                          //头像
-                          image: DecorationImage(
-                            image: CachedNetworkImageProvider(
-                                provider.userBean?.userFace ??
-                                    ImageURL.url_347),
-                          ),
-                          borderRadius: BorderRadius.circular(27.0),
-                          border: Border.all(color: Colors.white)),
-                    ),
-                    Container(width: 15.0),
-                    HTUserStore.login()
-                        ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Spacer(),
-                            Text(
-                              HTUserStore.userBean?.userName ?? "",
-                              style: const TextStyle(
+            child: Column(
+              children: [
+                const Expanded(child: SizedBox()),
+                SizedBox(
+                  height: 54,
+                  child: Row(
+                    children: [
+                      Container(width: 10.0),
+                      Container(
+                        width: 54.0,
+                        height: 54.0,
+                        decoration: BoxDecoration(
+                            //头像
+                            image: DecorationImage(
+                              image: CachedNetworkImageProvider(
+                                  provider.userBean?.userFace ??
+                                      ImageURL.url_347),
+                            ),
+                            borderRadius: BorderRadius.circular(27.0),
+                            border: Border.all(color: Colors.white)),
+                      ),
+                      Container(width: 15.0),
+                      HTUserStore.login()
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Spacer(),
+                                Text(
+                                  HTUserStore.userBean?.userName ?? "",
+                                  style: const TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    ///跳转到Family Account⻚面
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) {
+                                        //不携带参数
+                                        return const HTClassFamilyPage(
+                                          title: '',
+                                        );
+                                        //携带参数(例如带一个字符串参数)
+                                        //return NewRoute("abc");
+                                      }),
+                                    );
+                                  },
+                                  child: const Text(
+                                    "Family Account>",
+                                    style: TextStyle(
+                                        fontSize: 12.0,
+                                        color: Color(0xff999999)),
+                                  ),
+                                )
+                              ],
+                            )
+                          : const Text(
+                              "Login/Signup",
+                              style: TextStyle(
                                   fontSize: 16.0,
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600),
                             ),
-                            const Text(
-                              "Family Account>",
-                              style: TextStyle(
-                                  fontSize: 12.0,
-                                  color: Color(0xff999999)),
-                            )
-                          ],
-                        )
-                        : const Text(
-                            "Login/Signup",
-                            style: TextStyle(
-                                fontSize: 16.0,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600),
-                          ),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () => provider.goLogin(context),
-                      child: CachedNetworkImage(
-                          imageUrl: ImageURL.url_289,
-                          width: 24.0,
-                          height: 24.0),
-                    ),
-                    Container(width: 10.0),
-                  ],
+                      const Spacer(),
+                      GestureDetector(
+                        onTap: () => provider.goLogin(context),
+                        child: Container(
+                          color: Colors.transparent,
+                          padding: const EdgeInsets.fromLTRB(20, 5, 10, 5),
+                          child: CachedNetworkImage(
+                              imageUrl: ImageURL.url_289,
+                              width: 24.0,
+                              height: 24.0),
+                        ),
+                      ),
+                      Container(width: 10.0),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              )
-            ],
+                const SizedBox(
+                  height: 20,
+                )
+              ],
+            ),
           ),
         );
       }),
@@ -154,42 +182,53 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
 
   /// 第二行
   Widget secondWidget() {
-    return Container(
-        height: 60.0,
-        width: double.infinity,
-        margin: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 23.0),
-        padding: const EdgeInsets.only(left: 16.0),
-        decoration: BoxDecoration(
-            image: const DecorationImage(
-                image: CachedNetworkImageProvider(ImageURL.url_280),
-                fit: BoxFit.fill),
-            borderRadius: BorderRadius.circular(6.0)),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text("special offer for you",
-                  style: TextStyle(
-                      color: Color(0xff222222),
-                      fontSize: 15.0,
-                      fontWeight: FontWeight.w600)),
-              Container(height: 4.0),
-              Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                const Text("\$",
+    return GestureDetector(
+      onTap: () {
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) {
+        //     return const HTClassUnPremiumPage();
+        //   }),
+        // );
+      },
+      child: Container(
+          height: 60.0,
+          width: double.infinity,
+          margin: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 23.0),
+          padding: const EdgeInsets.only(left: 16.0),
+          decoration: BoxDecoration(
+              image: const DecorationImage(
+                  image: CachedNetworkImageProvider(ImageURL.url_280),
+                  fit: BoxFit.fill),
+              borderRadius: BorderRadius.circular(6.0)),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("special offer for you",
                     style: TextStyle(
                         color: Color(0xff222222),
-                        fontSize: 18.0,
+                        fontSize: 15.0,
                         fontWeight: FontWeight.w600)),
-                const Text("2.99",
-                    style: TextStyle(
-                        color: Color(0xff222222),
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w600)),
-                Container(width: 3.0),
-                const Text("for the 1 Month",
-                    style: TextStyle(color: Color(0xff222222), fontSize: 10.0)),
-              ])
-            ]));
+                Container(height: 4.0),
+                Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                  const Text("\$",
+                      style: TextStyle(
+                          color: Color(0xff222222),
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w600)),
+                  const Text("2.99",
+                      style: TextStyle(
+                          color: Color(0xff222222),
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w600)),
+                  Container(width: 3.0),
+                  const Text("for the 1 Month",
+                      style:
+                          TextStyle(color: Color(0xff222222), fontSize: 10.0)),
+                ])
+              ])),
+    );
   }
 
   ///第三行

@@ -79,8 +79,10 @@ class _LoginPageState extends State<LoginPage> {
           onPageStarted: (String url) {},
           onPageFinished: (String url) {
             EasyLoading.dismiss();
+
             ///flutter调用js
             _controller.runJavaScript('getNativeParam({"name":"iOS"})');
+
             ///js调用flutter
             _controller.addJavaScriptChannel(
               'iOS',
@@ -132,7 +134,8 @@ class _LoginPageState extends State<LoginPage> {
                   }));
                 }
                 if (infoMap['loginType'] == 16) {
-                  ///16:退出 web 页面
+                  ///16:退出 web 页面//返回按钮
+                  Navigator.of(context).pop();
                 }
               },
             );
