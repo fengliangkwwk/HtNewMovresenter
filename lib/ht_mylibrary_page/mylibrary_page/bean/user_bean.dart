@@ -22,6 +22,27 @@ class UserBean {
   @JsonKey(name: 'uid')
   String? uid;
 
+  @JsonKey(name: 'app_id')
+  String? appid;
+
+  @JsonKey(name: 'fid')
+  String? fid;
+
+  @JsonKey(name: 'master')
+  String? master;
+
+  @JsonKey(name: 'val')
+  String? val;
+
+  @JsonKey(name: 'pid')
+  String? pid;
+
+  @JsonKey(name: 'fav_plid')
+  String? favplid;
+  
+  @JsonKey(name: 's1')
+  String? s1;
+
   @JsonKey(name: 'user_birth')
   String? userBirth;
 

@@ -27,7 +27,6 @@ mixin SettingInfoProviderMixin on SettingInfoProviderBase {
 
       ///头像：1修改，0不修改
       "faceflag": faceflag,
-
       ///用户头像，本地图片转data上传
       "face": face,
     });

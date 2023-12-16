@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:device_information/device_information.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 
 class KTClassUIUtils {
   static var defRes = "";
@@ -71,7 +72,7 @@ class KTClassUIUtils {
         htVarParam.putIfAbsent(
             "imsi", () => '51502'); //网络供应商国家编号+网络编号  默认值:51502
         htVarParam.putIfAbsent("installTime",
-            () => (DateTime.now().millisecondsSinceEpoch).toString()); //首次安装时间
+            () => SysTools().getSecondsTimeStamp()); //首次安装时间
         htVarParam.putIfAbsent("lang", () => "en"); //公参：设备当前语言 默认值:en
         htVarParam.putIfAbsent("model", () => modelID); //设备型号 默认值:iPhone10,3
         htVarParam.putIfAbsent("os_ver",
@@ -100,7 +101,7 @@ class KTClassUIUtils {
             "idfa", () => "276E0495-66F6-417B-92FA-66EF0DC69DD4");
         htVarParam.putIfAbsent("imsi", () => "51502");
         htVarParam.putIfAbsent("installTime",
-            () => (DateTime.now().millisecondsSinceEpoch).toString());
+            () => SysTools().getSecondsTimeStamp());
         htVarParam.putIfAbsent("lang", () => "en");
         htVarParam.putIfAbsent("control", () => "iPhone10,3");
         htVarParam.putIfAbsent("os_ver", () => "16.1");
@@ -128,7 +129,7 @@ class KTClassUIUtils {
           "idfa", () => "276E0495-66F6-417B-92FA-66EF0DC69DD4");
       htVarParam.putIfAbsent("imsi", () => "51502");
       htVarParam.putIfAbsent("installTime",
-          () => (DateTime.now().millisecondsSinceEpoch).toString());
+          () => SysTools().getSecondsTimeStamp());
       htVarParam.putIfAbsent("lang", () => "en");
       htVarParam.putIfAbsent("control", () => "iPhone10,3");
       htVarParam.putIfAbsent("os_ver", () => "16.1");

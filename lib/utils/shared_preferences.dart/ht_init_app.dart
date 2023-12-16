@@ -12,8 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> initApp() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
-
+  await Firebase.initializeApp();
   await userData();
   // 强制竖屏
   SystemChrome.setPreferredOrientations([
@@ -30,9 +29,10 @@ Future<void> userData() async {
   var list18 = prefs.getStringList(HTSharedKeys.htHomeHideKey);
   HTUserStore.list18 = list18 ?? [];
 
+  HTUserStore.userBean ??= UserBean();
   var userString = prefs.getString(HTSharedKeys.htPersonMesaage);
   if (userString != null) {
-    HTUserStore.userBean = UserBean.fromJson(jsonDecode(userString));
+    // HTUserStore.userBean = UserBean.fromJson(jsonDecode(userString));
   }
 
   ///是否第一次进入 app

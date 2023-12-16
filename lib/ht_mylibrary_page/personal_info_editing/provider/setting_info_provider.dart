@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/personal_info_editing/provider/setting_info_provider_base.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/personal_info_editing/provider/setting_info_provider_mixin.dart';
@@ -8,26 +6,6 @@ import 'package:image_picker/image_picker.dart';
 
 class SettingInfoProvider extends SettingInfoProviderBase
     with SettingInfoProviderMixin {
-  //编辑头像
-  //编辑姓名
-  //编辑性别
-  //编辑年龄
-  Future<void> commitPersonData({
-    String? name,
-    String? birth,
-    String? gender,
-    String? faceflag = "0",
-    String? face,
-  }) async {
-    await setPersonData(
-      name: name,
-      birth: birth,
-      gender: gender,
-      faceflag: faceflag,
-      face: face,
-    );
-  }
-
   ///点击头像
   void takePhotosAction(BuildContext context) {
     _showBottomMenu(context);
