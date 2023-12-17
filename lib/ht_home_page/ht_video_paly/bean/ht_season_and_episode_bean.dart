@@ -1,10 +1,9 @@
-import 'package:json_annotation/json_annotation.dart'; 
-      
-part 'ht_season_and_episode_bean.g.dart';
-    
-@JsonSerializable(explicitToJson: true)
-class HtSeasonAndEpisodeBean{
+import 'package:json_annotation/json_annotation.dart';
 
+part 'ht_season_and_episode_bean.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class HtSeasonAndEpisodeBean {
   @JsonKey(name: 'status')
   int? status;
 
@@ -25,16 +24,14 @@ class HtSeasonAndEpisodeBean{
 
   HtSeasonAndEpisodeBean();
 
-  static HtSeasonAndEpisodeBean fromJson(Map<String, dynamic> srcJson) => _$HtSeasonAndEpisodeBeanFromJson(srcJson);
+  static HtSeasonAndEpisodeBean fromJson(Map<String, dynamic> srcJson) =>
+      _$HtSeasonAndEpisodeBeanFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$HtSeasonAndEpisodeBeanToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Data{
-
+class Data {
   @JsonKey(name: 'logout')
   int? logout;
 
@@ -142,13 +139,10 @@ class Data{
   static Data fromJson(Map<String, dynamic> srcJson) => _$DataFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$DataToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Casts{
-
+class Casts {
   @JsonKey(name: 'star_name')
   String? starName;
 
@@ -160,50 +154,46 @@ class Casts{
 
   Casts();
 
-  static Casts fromJson(Map<String, dynamic> srcJson) => _$CastsFromJson(srcJson);
+  static Casts fromJson(Map<String, dynamic> srcJson) =>
+      _$CastsFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$CastsToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Ssn_list{
-
+class Ssn_list {
   @JsonKey(name: 'id')
   dynamic id;
 
   @JsonKey(name: 'title')
   String? title;
 
+  @JsonKey(includeFromJson: false,defaultValue: false)
+  bool? isCurrent;
+
   Ssn_list();
 
-  static Ssn_list fromJson(Map<String, dynamic> srcJson) => _$Ssn_listFromJson(srcJson);
+  static Ssn_list fromJson(Map<String, dynamic> srcJson) =>
+      _$Ssn_listFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$Ssn_listToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Data_2{
-
+class Data_2 {
   @JsonKey(name: 'data')
   List<Data>? data;
 
   Data_2();
 
-  static Data_2 fromJson(Map<String, dynamic> srcJson) => _$Data_2FromJson(srcJson);
+  static Data_2 fromJson(Map<String, dynamic> srcJson) =>
+      _$Data_2FromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$Data_2ToJson(this);
-
 }
 
-
-  
 @JsonSerializable(explicitToJson: true)
-class Data_3{
-
+class Data_3 {
   @JsonKey(name: 'info_type')
   String? infoType;
 
@@ -248,17 +238,14 @@ class Data_3{
 
   Data_3();
 
-  static Data_3 fromJson(Map<String, dynamic> srcJson) => _$Data_3FromJson(srcJson);
+  static Data_3 fromJson(Map<String, dynamic> srcJson) =>
+      _$Data_3FromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$Data_3ToJson(this);
-
 }
 
-
-  
 @JsonSerializable(explicitToJson: true)
-class Data_4{
-
+class Data_4 {
   @JsonKey(name: 'info_type')
   String? infoType;
 
@@ -303,11 +290,8 @@ class Data_4{
 
   Data_4();
 
-  static Data_4 fromJson(Map<String, dynamic> srcJson) => _$Data_4FromJson(srcJson);
+  static Data_4 fromJson(Map<String, dynamic> srcJson) =>
+      _$Data_4FromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$Data_4ToJson(this);
-
 }
-
-
-  

@@ -21,9 +21,9 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
         HTVideoDescPlayerProviderMixin {
   List<String> videoList = [];
   void _backFromPremiumPageToFullScreen() {
-
     player.enterFullScreen();
   }
+
   /// mType2:tt_mflx:电视剧   myfx:电影
   /// id:传的视频id
   Future<void> loadData(String mType2, String id) async {
@@ -47,6 +47,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
       'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
     ];
     initData();
+
     ///判断当前播放的视频是否处于收藏状态。
     isCollect();
   }
@@ -63,12 +64,18 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
 
   ///点击订阅广告跳转到订阅页面事件
   void jumpToPremiumPage(BuildContext context) {
-    isFullScreen = (MediaQuery.of(context).size.width > MediaQuery.of(context).size.height)?true:false;
+    isFullScreen =
+        (MediaQuery.of(context).size.width > MediaQuery.of(context).size.height)
+            ? true
+            : false;
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
         print(isFullScreen);
-        return HTClassUnPremiumPage(title: "Premium",isFromFullScreen: isFullScreen,backToFullSreen: _backFromPremiumPageToFullScreen);
+        return HTClassUnPremiumPage(
+            title: "Premium",
+            isFromFullScreen: isFullScreen,
+            backToFullSreen: _backFromPremiumPageToFullScreen);
       }),
     );
   }
@@ -84,7 +91,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   }
 
   void isCollect() async {
-    isCollected =  isSave(videoId());
+    isCollected = isSave(videoId());
     notifyListeners();
   }
 
@@ -104,7 +111,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
       "epsId": tv203Bean?.epsList?[0].id
     };
     var model = HistoryBean.fromJson(data);
-    bool isSaveState =  isSave(model.id);
+    bool isSaveState = isSave(model.id);
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     if (isSaveState) {
       ///1.已收藏
@@ -129,7 +136,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   }
 
   ///是否收藏
-  bool isSave(String? id)  {
+  bool isSave(String? id) {
     bool result = false;
     for (var element in HTUserStore.favoriteList) {
       if (element.id == id) {
@@ -183,7 +190,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
 
   ///控制器界面上的点击事件
   @override
-  Future<void> playerCallBack(int state,BuildContext context) async {
+  Future<void> playerCallBack(int state, BuildContext context) async {
     ///1 分享  2.投屏 3.收藏  4.vip 5.字幕 6.返回
     if (state == 1) {
       HTShare().share(mType2 ?? '', playLock(), '1', videoId(), title());
@@ -200,5 +207,16 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     if (state == 6) {
       Navigator.of(context).pop();
     }
+  }
+
+  ///更换播放集
+  void changePlayerSource(dynamic model) {
+    eid = model.id.toString();
+    loadData(mType2 ?? '', dataId ?? '');
+  }
+
+  ///更换视频类型
+  void changePlayerType(String mType2, String id) {
+    loadData(mType2, id);
   }
 }

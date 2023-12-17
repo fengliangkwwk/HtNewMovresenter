@@ -552,9 +552,10 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         itemBuilder: (context, index) {
           var model = dataList?[index];
           return GestureDetector(
-            // onTap: (() {
-            //   provider.loadData(model.mType2, model.id);
-            // }),
+            onTap: () {
+              // provider.loadData(model.mType2, model.id);
+              provider.changePlayerType(model.mType2 ?? '', model.id ?? '');
+            },
             child: Container(
                 width: 112.0,
                 margin: const EdgeInsets.only(right: 5.0),

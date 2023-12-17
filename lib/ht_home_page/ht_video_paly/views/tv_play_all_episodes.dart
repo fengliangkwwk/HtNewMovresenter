@@ -44,22 +44,32 @@ class AllEpisodesWidget extends StatelessWidget {
               itemCount:
                   context.read<HTVideoDescProvider>().seasonList()?.length,
               itemBuilder: ((context, index) {
-                Ssn_list model =
-                    context.read<HTVideoDescProvider>().seasonList()?[index];
+                var provider = context.read<HTVideoDescProvider>();
+                Ssn_list model = provider.seasonList()?[index];
+                if (model.id.toString() == provider.sid) {
+                  model.isCurrent = true;
+                } else {
+                  model.isCurrent = false;
+                }
                 return Container(
                   // width: double.infinity,
                   padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
                   margin: const EdgeInsets.only(right: 10),
                   decoration: BoxDecoration(
-                      color: const Color(0xff23252A),
+                      color: model.isCurrent == true
+                          ? const Color(0xFF003f47)
+                          : const Color(0xff23252A),
                       borderRadius: BorderRadius.circular(4.0)),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(model.title ?? "",
                             textAlign: TextAlign.center,
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 12.0),
+                            style: TextStyle(
+                                color: model.isCurrent == true
+                                    ? const Color(0xFF3CDEF4)
+                                    : Colors.white,
+                                fontSize: 12.0),
                             maxLines: 1),
                       ]),
                 );
@@ -74,30 +84,50 @@ class AllEpisodesWidget extends StatelessWidget {
               itemCount: context.read<HTVideoDescProvider>().setList()?.length,
               scrollDirection: Axis.vertical,
               itemBuilder: ((context, index) {
-                Eps_list model =
-                    context.read<HTVideoDescProvider>().setList()?[index];
-                return Container(
-                  padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-                  height: 70,
-                  margin: const EdgeInsets.only(top: 10),
-                  decoration: const BoxDecoration(
-                    color: Color(0xff23252A),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(model.epsNum.toString() ?? "",
+                var provider = context.read<HTVideoDescProvider>();
+                Eps_list model = provider.setList()?[index];
+                if (provider.eid == model.id.toString()) {
+                  model.isCurrent = true;
+                } else {
+                  model.isCurrent = false;
+                }
+                return GestureDetector(
+                  onTap: () {
+                    provider.changePlayerSource(model);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+                    height: 70,
+                    margin: const EdgeInsets.only(top: 10),
+                    decoration: const BoxDecoration(
+                      color: Color(0xff23252A),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(model.epsNum.toString() ?? "",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              color: model.isCurrent == true
+                                  ? const Color(0xFF3CDEF4)
+                                  : Colors.white,
+                              fontSize: 16.0,
+                            ),
+                            maxLines: 1),
+                        Container(height: 4.0),
+                        Text(
+                          model.title ?? "",
                           textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white, fontSize: 16.0),
-                          maxLines: 1),
-                      Container(height: 4.0),
-                      Text(
-                        model.title ?? "",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(color: Colors.white, fontSize: 14.0),
-                        maxLines: 1,
-                      ),
-                    ],
+                          style: TextStyle(
+                            color: model.isCurrent == true
+                                ? const Color(0xFF3CDEF4)
+                                : Colors.white,
+                            fontSize: 14.0,
+                          ),
+                          maxLines: 1,
+                        ),
+                      ],
+                    ),
                   ),
                 );
               }),
