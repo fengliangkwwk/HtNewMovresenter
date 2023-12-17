@@ -17,17 +17,24 @@ class SettingProvider extends SettingProviderBase with SettingProviderMixin {
 
   // 去登录
   void goLogin(BuildContext context) async {
+    bool? refresh;
     if (HTUserStore.login()) {
       ///1. 已登录
-      await Navigator.push(context, MaterialPageRoute(builder: (context) {
+     refresh = await Navigator.push(context, MaterialPageRoute(builder: (context) {
         return LoginPage(isLoginPage: false);
       }));
     } else {
       ///2. 未登录 -> 去登录
-      await Navigator.push(context, MaterialPageRoute(builder: (context) {
+    refresh =  await Navigator.push(context, MaterialPageRoute(builder: (context) {
         return LoginPage(isLoginPage: true);
       }));
     }
+
+    if (refresh == true) {
+      isReloadHeader = !isReloadHeader;
+      notifyListeners();
+    }
+
   }
 
   ///保存/更新用户信息

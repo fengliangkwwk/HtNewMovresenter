@@ -105,12 +105,12 @@ class _LoginPageState extends State<LoginPage> {
                   //10 web 端更新了用户信息,app 端需要更新本地的用户数据,并退出 web 页面,刷新 app
                   //6:save按钮   10：弹出窗的确认按钮
                   provider.saveUserInfo(infoMap["data"]);
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(true);
                 }
                 if (infoMap['loginType'] == 9) {
                   ///9:web 端执行了退出登录操作,app 端需要清空下用户数据,并退出 web 页面,刷新 app
                   provider.logOutClearUserInfo();
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(true);
                 }
                 if (infoMap['loginType'] == 12) {
                   // 12:web 页面放弃了修改用户信息,app 端需要退出 web 页面

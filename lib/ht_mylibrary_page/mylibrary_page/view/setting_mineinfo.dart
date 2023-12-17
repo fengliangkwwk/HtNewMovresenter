@@ -72,7 +72,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   ///第一行
   Widget headerWidget() {
     return Selector<SettingProvider, bool>(
-      selector: ((p0, p1) => p1.isReloadHeader),
+      selector: (p0, p1) => p1.isReloadHeader,
       builder: ((context, value, child) {
         return GestureDetector(
           onTap: () {
