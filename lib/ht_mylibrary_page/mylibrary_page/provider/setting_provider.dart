@@ -24,7 +24,7 @@ class SettingProvider extends SettingProviderBase with SettingProviderMixin {
           await Navigator.push(context, MaterialPageRoute(builder: (context) {
         return LoginPage(
           isLoginPage: false,
-          provider: this,
+          // provider: this,
         );
       }));
     } else {
@@ -33,7 +33,7 @@ class SettingProvider extends SettingProviderBase with SettingProviderMixin {
           await Navigator.push(context, MaterialPageRoute(builder: (context) {
         return LoginPage(
           isLoginPage: true,
-          provider: this,
+          // provider: this,
         );
       }));
     }

@@ -16,11 +16,11 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 // ignore: must_be_immutable
 class LoginPage extends StatefulWidget {
-  final SettingProvider provider;
+  // final SettingProvider provider;
   LoginPage({
     this.isLoginPage,
     Key? key,
-    required this.provider,
+    // required this.provider,
   }) : super(key: key);
   bool? isLoginPage;
   @override
@@ -30,14 +30,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late BuildContext myContext;
   WebViewController _controller = WebViewController();
-  late SettingProvider provider ;
+   SettingProvider provider =  SettingProvider();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   @override
   void initState() {
     super.initState();
-    provider = widget.provider;
+    // provider = widget.provider;
     webViewControllerInit();
   }
 

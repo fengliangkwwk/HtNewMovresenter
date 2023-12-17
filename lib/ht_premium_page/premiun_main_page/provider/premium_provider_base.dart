@@ -8,4 +8,7 @@ class PremiumProviderBase extends ChangeNotifier {
   int selectPerson = 0;
   ///家庭选中
   int selectFamaily = 0;
+
+  ///跳转工具包
+  bool  toToolPackage = false;
 }

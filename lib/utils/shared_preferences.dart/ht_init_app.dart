@@ -5,9 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/bean/user_bean.dart';
+import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/bean/tool_config_bean.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/bean/vip_info_bean.dart';
+import 'package:ht_new_movpresenter/utils/net_request/ht_api.dart';
+import 'package:ht_new_movpresenter/utils/net_request/ht_net_utils.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
+import 'package:ht_new_movpresenter/utils/tools/toast_tool.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> initApp() async {
@@ -65,5 +69,20 @@ Future<void> userData() async {
   var vipInfoString = prefs.getString(HTSharedKeys.htVipMesaage);
   if (vipInfoString != null) {
     HTUserStore.vipInfoBean = VipInfoBean.fromJson(jsonDecode(vipInfoString));
+  }
+  request84Api();
+}
+
+///84
+Future<void> request84Api() async {
+  var res = await HTNetUtils.htPost(
+    apiUrl: Global.advertisingConfigurationUrl,
+  );
+  var json = jsonDecode(res?.data);
+  if (json["status"] == '200') {
+    HTUserStore.toolConfigBean = ToolConfigBean.fromJson(json['data']);
+    print('解析84成功');
+  } else {
+    ToastUtil.showToast(msg: json["msg"]);
   }
 }

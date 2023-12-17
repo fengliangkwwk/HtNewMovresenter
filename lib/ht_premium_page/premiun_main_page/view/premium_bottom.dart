@@ -99,8 +99,8 @@ class _PremiumBottomWidgetState extends State<PremiumBottomWidget> {
             print('🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐$num');
             HTUserStore.popUps < 3
                 ? htMethodShowPayProptDialog(context)
-                : ToastUtil.showToast(msg: "已经超过三次了");
-            // provider.go2Pay();
+                : provider.go2Pay(context);
+            
           },
           child: Container(
             margin: const EdgeInsets.only(top: 20),

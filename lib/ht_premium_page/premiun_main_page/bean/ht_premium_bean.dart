@@ -93,7 +93,6 @@ class HTPremiumBean {
 
   ///是否走工具包
   bool isK12() {
-    return false;
     if (k12 == '1') {
       return true;
     }
