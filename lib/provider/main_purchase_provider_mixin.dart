@@ -117,6 +117,7 @@ mixin MainPurchaseProviderMixin on MainProviderBase {
       } else if (element.status == PurchaseStatus.restored) {
         print('object');
         EasyLoading.show();
+        await inAppPurchase.completePurchase(element);
         await PremiumProvider().requesCheckVipApi();
         EasyLoading.dismiss();
       } else if (element.status == PurchaseStatus.canceled) {
