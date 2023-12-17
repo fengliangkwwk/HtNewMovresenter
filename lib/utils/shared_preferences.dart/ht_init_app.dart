@@ -32,7 +32,7 @@ Future<void> userData() async {
   HTUserStore.userBean ??= UserBean();
   var userString = prefs.getString(HTSharedKeys.htPersonMesaage);
   if (userString != null) {
-    // HTUserStore.userBean = UserBean.fromJson(jsonDecode(userString));
+    HTUserStore.userBean = UserBean.fromJson(jsonDecode(userString));
   }
 
   ///是否第一次进入 app

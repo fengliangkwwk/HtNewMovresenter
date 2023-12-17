@@ -13,6 +13,8 @@ class PremiumProvider extends PremiumProviderBase
   Future<void> loadData() async {
     await requestPremiumApi();
     // await requesCheckVipApi();
+    mainProvider.purchaseRefresh = !mainProvider.purchaseRefresh;
+    mainProvider.notify();
     notifyListeners();
   }
 

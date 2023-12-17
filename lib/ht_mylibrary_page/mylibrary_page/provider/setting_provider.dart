@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/bean/user_bean.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/provider/setting_provider_mixin.dart';
@@ -81,8 +83,8 @@ class SettingProvider extends SettingProviderBase with SettingProviderMixin {
     if (userInfoMap["msync"] != null) {
       HTUserStore.userBean?.msync = userInfoMap["msync"];
     }
-    prefs.setString(
-        HTSharedKeys.htPersonMesaage, HTUserStore.userBean.toString());
+    prefs.setString(HTSharedKeys.htPersonMesaage,
+        jsonEncode(HTUserStore.userBean?.toJson()));
     userBean = HTUserStore.userBean;
     isReloadHeader = !isReloadHeader;
     notifyListeners();
@@ -92,8 +94,8 @@ class SettingProvider extends SettingProviderBase with SettingProviderMixin {
   void logOutClearUserInfo() async {
     UserBean nullUserBean = UserBean();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(
-        HTSharedKeys.htPersonMesaage, nullUserBean.toString());
+    prefs.remove(HTSharedKeys.htPersonMesaage);
+    // prefs.clear();
     userBean = nullUserBean;
     HTUserStore.userBean = nullUserBean;
     isReloadHeader = !isReloadHeader;
