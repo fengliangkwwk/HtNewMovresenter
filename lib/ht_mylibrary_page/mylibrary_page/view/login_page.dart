@@ -16,7 +16,12 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 // ignore: must_be_immutable
 class LoginPage extends StatefulWidget {
-  LoginPage({this.isLoginPage, Key? key}) : super(key: key);
+  final SettingProvider provider;
+  LoginPage({
+    this.isLoginPage,
+    Key? key,
+    required this.provider,
+  }) : super(key: key);
   bool? isLoginPage;
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -25,13 +30,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late BuildContext myContext;
   WebViewController _controller = WebViewController();
-  SettingProvider provider = SettingProvider();
+  late SettingProvider provider ;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   @override
   void initState() {
     super.initState();
+    provider = widget.provider;
     webViewControllerInit();
   }
 
@@ -86,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
             ///js调用flutter
             _controller.addJavaScriptChannel(
               'iOS',
-              onMessageReceived: (p0) {
+              onMessageReceived: (p0) async {
                 print("点击了${p0.message}");
                 if (p0.message.isEmpty) {
                   return;
@@ -98,18 +104,18 @@ class _LoginPageState extends State<LoginPage> {
                 }
                 if (infoMap['loginType'] == 5) {
                   // :web 端登录注册完毕,会将数据传给 app 端,app 端做后续的数据保存.
-                  provider.saveUserInfo(infoMap["data"]);
+                  await provider.saveUserInfo(infoMap["data"]);
                 }
                 if (infoMap['loginType'] == 6 || infoMap['loginType'] == 10) {
                   //6: web 端获取用户信息完毕,会将数据传给 app 端,app 端做后续的数据保存.并退出 web 页 面,刷新 app
                   //10 web 端更新了用户信息,app 端需要更新本地的用户数据,并退出 web 页面,刷新 app
                   //6:save按钮   10：弹出窗的确认按钮
-                  provider.saveUserInfo(infoMap["data"]);
+                  await provider.saveUserInfo(infoMap["data"]);
                   Navigator.of(context).pop(true);
                 }
                 if (infoMap['loginType'] == 9) {
                   ///9:web 端执行了退出登录操作,app 端需要清空下用户数据,并退出 web 页面,刷新 app
-                  provider.logOutClearUserInfo();
+                  await provider.logOutClearUserInfo();
                   Navigator.of(context).pop(true);
                 }
                 if (infoMap['loginType'] == 12) {
@@ -144,9 +150,9 @@ class _LoginPageState extends State<LoginPage> {
             EasyLoading.dismiss();
           },
           onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith('https://www.youtube.com/')) {
-              return NavigationDecision.prevent;
-            }
+            // if (request.url.startsWith('https://www.youtube.com/')) {
+            //   return NavigationDecision.prevent;
+            // }
             return NavigationDecision.navigate;
           },
         ),

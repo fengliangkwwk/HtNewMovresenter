@@ -4,6 +4,7 @@
 ///   @Desc   : 个人中心页面
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
@@ -32,7 +33,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   @override
   void initState() {
     super.initState();
-    provider.api1Net();
+    // provider.api1Net();
   }
 
   @override
@@ -71,9 +72,11 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
 
   ///第一行
   Widget headerWidget() {
-    return Selector<SettingProvider, bool>(
+    return Selector<SettingProvider,bool>(
       selector: (p0, p1) => p1.isReloadHeader,
       builder: ((context, value, child) {
+       
+        print('zzs:1');
         return GestureDetector(
           onTap: () {
             provider.goLogin(context);
@@ -103,7 +106,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
                             //头像
                             image: DecorationImage(
                               image: CachedNetworkImageProvider(
-                                  provider.userBean?.userFace ??
+                                  HTUserStore.userBean?.userFace ??
                                       ImageURL.url_347),
                             ),
                             borderRadius: BorderRadius.circular(27.0),

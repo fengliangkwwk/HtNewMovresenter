@@ -20,13 +20,21 @@ class SettingProvider extends SettingProviderBase with SettingProviderMixin {
     bool? refresh;
     if (HTUserStore.login()) {
       ///1. 已登录
-     refresh = await Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return LoginPage(isLoginPage: false);
+      refresh =
+          await Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return LoginPage(
+          isLoginPage: false,
+          provider: this,
+        );
       }));
     } else {
       ///2. 未登录 -> 去登录
-    refresh =  await Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return LoginPage(isLoginPage: true);
+      refresh =
+          await Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return LoginPage(
+          isLoginPage: true,
+          provider: this,
+        );
       }));
     }
 
@@ -34,11 +42,10 @@ class SettingProvider extends SettingProviderBase with SettingProviderMixin {
       isReloadHeader = !isReloadHeader;
       notifyListeners();
     }
-
   }
 
   ///保存/更新用户信息
-  void saveUserInfo(Map userInfoMap) async {
+  Future saveUserInfo(Map userInfoMap) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     HTUserStore.userBean ??= UserBean();
     if (userInfoMap["app_id"] != null) {
@@ -57,7 +64,7 @@ class SettingProvider extends SettingProviderBase with SettingProviderMixin {
       HTUserStore.userBean?.pid = userInfoMap["pid"];
     }
     if (userInfoMap["fav_plid"] != null) {
-      HTUserStore.userBean?.favplid = userInfoMap["fav_plid"];
+      HTUserStore.userBean?.favplid = userInfoMap["fav_plid"].toString();
     }
     if (userInfoMap["s1"] != null) {
       HTUserStore.userBean?.s1 = userInfoMap["s1"];
@@ -79,7 +86,7 @@ class SettingProvider extends SettingProviderBase with SettingProviderMixin {
       HTUserStore.userBean?.userGender = userInfoMap["user_gender"];
     }
     if (userInfoMap["uid"] != null) {
-      HTUserStore.userBean?.uid = userInfoMap["uid"];
+      HTUserStore.userBean?.uid = userInfoMap["uid"].toString();
     }
     if (userInfoMap["user_birth"] != null) {
       HTUserStore.userBean?.userBirth = userInfoMap["user_birth"];
@@ -90,46 +97,20 @@ class SettingProvider extends SettingProviderBase with SettingProviderMixin {
     if (userInfoMap["msync"] != null) {
       HTUserStore.userBean?.msync = userInfoMap["msync"];
     }
-    prefs.setString(HTSharedKeys.htPersonMesaage,
+   await prefs.setString(HTSharedKeys.htPersonMesaage,
         jsonEncode(HTUserStore.userBean?.toJson()));
-    userBean = HTUserStore.userBean;
-    isReloadHeader = !isReloadHeader;
-    notifyListeners();
+    // userBean = HTUserStore.userBean;
+    print('zzs2:' + (HTUserStore.userBean?.userName ?? ''));
   }
 
   ///退出登录清空下用户数据刷新状态
-  void logOutClearUserInfo() async {
+  Future logOutClearUserInfo() async {
     UserBean nullUserBean = UserBean();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove(HTSharedKeys.htPersonMesaage);
+    await prefs.remove(HTSharedKeys.htPersonMesaage);
     // prefs.clear();
     userBean = nullUserBean;
-    HTUserStore.userBean = nullUserBean;
-    isReloadHeader = !isReloadHeader;
-    notifyListeners();
-  }
-
-  @override
-  void addListener(VoidCallback listener) {
-    // TODO: implement addListener
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-  }
-
-  @override
-  // TODO: implement hasListeners
-  bool get hasListeners => throw UnimplementedError();
-
-  @override
-  void notifyListeners() {
-    // TODO: implement notifyListeners
-  }
-
-  @override
-  void removeListener(VoidCallback listener) {
-    // TODO: implement removeListener
+    HTUserStore.userBean = null;
+    print('zzs:' + (HTUserStore.userBean?.userName ?? ''));
   }
 }

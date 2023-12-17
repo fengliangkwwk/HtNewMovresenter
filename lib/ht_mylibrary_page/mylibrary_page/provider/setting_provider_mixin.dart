@@ -17,7 +17,7 @@ mixin SettingProviderMixin on SettingProviderBase {
       "p1": "",
     });
     Map<String, dynamic> jsonMap = jsonDecode(res?.data.toString() ?? '');
-    userBean = UserBean.fromJson(jsonMap);
+    HTUserStore.userBean = UserBean.fromJson(jsonMap['data']);
     isReloadHeader = !isReloadHeader;
     notifyListeners();
   }
