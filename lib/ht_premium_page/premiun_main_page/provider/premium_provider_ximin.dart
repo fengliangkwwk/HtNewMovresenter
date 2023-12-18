@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/bean/ht_premium_bean.dart';
-import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/bean/tool_config_bean.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/bean/vip_info_bean.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider_base.dart';
 import 'package:ht_new_movpresenter/provider/main_provider.dart';

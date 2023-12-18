@@ -5,12 +5,12 @@ import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:provider/provider.dart';
 
 class HTClassFeedbackPage extends StatefulWidget {
-  final String title;
+  final String? title;
   final String? vid;
   final String? sid;
   final String? eid;
   const HTClassFeedbackPage(
-      {Key? key, required this.title, this.vid, this.sid, this.eid})
+      {Key? key, this.title, this.vid, this.sid, this.eid})
       : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -48,11 +48,13 @@ class _HTClassFeedbackPageState extends State<HTClassFeedbackPage> {
             backgroundColor: Colors.black,
             appBar: AppBar(
                 backgroundColor: const Color(0xff1A1C21),
-                title: Text(widget.title,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w600)),
+                title: Text(
+                  widget.title ?? "Feedback",
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w600),
+                ),
                 centerTitle: true,
                 leadingWidth: 24.0,
                 leading: GestureDetector(
@@ -135,8 +137,8 @@ class _HTClassFeedbackPageState extends State<HTClassFeedbackPage> {
                   Container(height: 40.0),
                   GestureDetector(
                     onTap: (() {
-
-                      print("${widget.vid} ++++++++    ${widget.sid} ++++++++++     ${widget.eid}");
+                      print(
+                          "${widget.vid} ++++++++    ${widget.sid} ++++++++++     ${widget.eid}");
                       provider.submit(
                         content: provider.contentFieldController.value.text,
                         email: provider.emailFieldController.value.text,

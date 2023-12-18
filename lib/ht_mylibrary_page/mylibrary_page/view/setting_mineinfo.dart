@@ -4,9 +4,7 @@
 ///   @Desc   : 个人中心页面
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/view/setting_watch_list.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/feed_back/view/setting_feedback.dart';
@@ -47,35 +45,34 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
       child: Container(
         height: double.infinity,
         color: const Color(0xff111218),
-        child: scrollWidget(),
+        child: scrollWidget(context),
       ),
     );
   }
 
-  Widget scrollWidget() {
+  Widget scrollWidget(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          headerWidget(),
-          secondWidget(),
-          historyWidget(),
-          if (HTUserStore.historyList.isNotEmpty) historyList(),
-          watchListWidget(),
+          headerWidget(context),
+          secondWidget(context),
+          historyWidget(context),
+          if (HTUserStore.historyList.isNotEmpty) historyList(context),
+          watchListWidget(context),
           Container(height: 30),
-          shareWidget(),
+          shareWidget(context),
           Container(height: 30),
-          feedbackWidget(),
+          feedbackWidget(context),
         ],
       ),
     );
   }
 
   ///第一行
-  Widget headerWidget() {
-    return Selector<SettingProvider,bool>(
+  Widget headerWidget(BuildContext context) {
+    return Selector<SettingProvider, bool>(
       selector: (p0, p1) => p1.isReloadHeader,
       builder: ((context, value, child) {
-       
         print('zzs:1');
         return GestureDetector(
           onTap: () {
@@ -184,15 +181,15 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   }
 
   /// 第二行
-  Widget secondWidget() {
+  Widget secondWidget(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) {
-        //     return const HTClassUnPremiumPage();
-        //   }),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) {
+            return const HTClassUnPremiumPage();
+          }),
+        );
       },
       child: Container(
           height: 60.0,
@@ -235,7 +232,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   }
 
   ///第三行
-  Widget historyWidget() {
+  Widget historyWidget(BuildContext context) {
     return Row(children: [
       Container(width: 10.0),
       CachedNetworkImage(imageUrl: ImageURL.url_343, width: 16.0, height: 16.0),
@@ -262,7 +259,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   }
 
   ///historyListView列表
-  Widget historyList() {
+  Widget historyList(BuildContext context) {
     return Selector<MainPovider, bool>(
       selector: (p0, p1) => p1.historyRefresh,
       builder: (context, value, child) {
@@ -332,7 +329,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   }
 
   ///watchList
-  Widget watchListWidget() {
+  Widget watchListWidget(BuildContext context) {
     return GestureDetector(
       child: Container(
         margin: const EdgeInsets.only(top: 30, left: 10),
@@ -364,7 +361,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   }
 
   ///share
-  Widget shareWidget() {
+  Widget shareWidget(BuildContext context) {
     return GestureDetector(
         child: Container(
           color: Colors.transparent,
@@ -390,30 +387,45 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   }
 
   ///feedback
-  Widget feedbackWidget() {
+  Widget feedbackWidget(BuildContext context) {
     return GestureDetector(
-        child: Container(
-          color: Colors.transparent,
-          margin: const EdgeInsets.only(left: 10),
-          child: Row(children: [
-            CachedNetworkImage(
-                imageUrl: ImageURL.url_346, width: 16.0, height: 16.0),
-            Container(width: 5.0),
-            const Text("Feedback",
-                style: TextStyle(
-                    fontSize: 15.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500)),
-            const Spacer(),
-            CachedNetworkImage(
-                imageUrl: ImageURL.url_289, width: 24.0, height: 24.0),
-            Container(width: 10.0)
-          ]),
-        ),
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const HTClassFeedbackPage(title: "");
-          }));
-        });
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return const HTClassFeedbackPage(
+                title: 'Feedback',
+              );
+            },
+          ),
+        );
+        //       Navigator.push(
+        // context,
+        // MaterialPageRoute(builder: (context) {
+        // return const HTClassFeedbackPage(
+        //   title: 'Feedback',
+        // );
+        // }
+      },
+      child: Container(
+        color: Colors.white,
+        margin: const EdgeInsets.only(left: 10),
+        child: Row(children: [
+          CachedNetworkImage(
+              imageUrl: ImageURL.url_346, width: 16.0, height: 16.0),
+          Container(width: 5.0),
+          const Text("Feedback",
+              style: TextStyle(
+                  fontSize: 15.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500)),
+          const Spacer(),
+          CachedNetworkImage(
+              imageUrl: ImageURL.url_289, width: 24.0, height: 24.0),
+          Container(width: 10.0)
+        ]),
+      ),
+    );
   }
 }

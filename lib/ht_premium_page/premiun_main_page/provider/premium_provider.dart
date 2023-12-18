@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -9,13 +8,13 @@ import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/p
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider_ximin.dart';
 import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
+import 'package:ht_new_movpresenter/utils/tools/device_info_tool.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
-
 import 'package:url_launcher/url_launcher.dart';
 
 class PremiumProvider extends PremiumProviderBase
-    with PremiumProviderMixin, PremiumProviderDataMixin {
+    with PremiumProviderMixin, PremiumProviderDataMixin{
   ///数据请求
   Future<void> loadData() async {
     await requestPremiumApi();
@@ -106,6 +105,7 @@ class PremiumProvider extends PremiumProviderBase
 
   ///去订阅
   void go2Pay(BuildContext context) async {
+
     var dataList = productDataList();
     if (dataList.isEmpty) return;
 
@@ -116,11 +116,10 @@ class PremiumProvider extends PremiumProviderBase
       ///服务器订阅
 
       ///1.
-
       Map a = {
-        'uid': "0", //⽤⼾ID，同公参，未登录传0
-        'vip': "0", //本包的订阅状态，订阅传1，未订阅传0
-        'deviceNo': "7A4D3032-00C9-4253-98A6-2CD5818FDF4A", //本包设备号，同公参
+        'uid':HTUserStore.userBean?.uid??"0", //⽤⼾ID，同公参，未登录传0
+        'vip': mainProvider.subscriptionPurchaseState()?"1":"0", //本包的订阅状态，订阅传1，未订阅传0
+        'deviceNo':GetDeviceInfo.deviceNo(), //本包设备号，同公参
         'force': "1", //写死1
         'appType': "0", //本包类型：0.影视 1.动漫
         'appbundleid': "com.ding.movie", //本包的bundleid

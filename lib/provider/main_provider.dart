@@ -12,7 +12,6 @@ MainPovider mainProvider = MainPovider()..initInAppPurchase();
 class MainPovider extends MainProviderBase with MainPurchaseProviderMixin {
   ///浏览历史状态
   bool historyRefresh = false;
-
   void historyRefreshAction() {
     historyRefresh = !historyRefresh;
     notifyListeners();
@@ -57,4 +56,13 @@ class MainPovider extends MainProviderBase with MainPurchaseProviderMixin {
   void notify() {
     notifyListeners();
   }
+
+
+
+
+
+
+
+
+
 }

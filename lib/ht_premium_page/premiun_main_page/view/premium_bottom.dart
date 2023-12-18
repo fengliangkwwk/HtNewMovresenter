@@ -1,15 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:get/route_manager.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider.dart';
 import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_init_app.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
-import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
-import 'package:ht_new_movpresenter/utils/tools/toast_tool.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tuple/tuple.dart';
