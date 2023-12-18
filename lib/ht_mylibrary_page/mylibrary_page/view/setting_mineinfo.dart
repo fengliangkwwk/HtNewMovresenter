@@ -400,16 +400,9 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
             },
           ),
         );
-        //       Navigator.push(
-        // context,
-        // MaterialPageRoute(builder: (context) {
-        // return const HTClassFeedbackPage(
-        //   title: 'Feedback',
-        // );
-        // }
       },
       child: Container(
-        color: Colors.white,
+        color: Colors.transparent,
         margin: const EdgeInsets.only(left: 10),
         child: Row(children: [
           CachedNetworkImage(
