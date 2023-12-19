@@ -78,15 +78,16 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
 
   ///151
   Future<void> request151(String id) async {
-    if (eid != null) {
-      eid = tv203Bean?.epsList?[0].id.toString();
-    }
+    // if (eid != null) {
+    //   eid = tv203Bean?.epsList?[0].id.toString();
+    // }
+    eid = tv203Bean?.epsList?[0].id.toString();
     // 创建一个空的字典
     Map<String, dynamic> htVarparams = {};
 
     ///参数
     String cutterntTimeStamp = SysTools().getSecondsTimeStamp();
-    htVarparams['id'] = eid; //电视剧集 id
+    htVarparams['id'] = tv203Bean?.epsList?[0].id.toString(); //电视剧集 id
     htVarparams['sig2'] =
         'kevMvWzTjzlckLgckegcoeeRwdwlwEbejzjLvzvSod1UkEqVkEeOkWjS';
     htVarparams['unixtime1'] = cutterntTimeStamp;

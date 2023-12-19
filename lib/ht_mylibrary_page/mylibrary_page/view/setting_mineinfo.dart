@@ -12,16 +12,15 @@ import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/provider/se
 import 'package:ht_new_movpresenter/ht_premium_page/family_account_page/view/premium_familypage.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/view/premium_indexerpage.dart';
 import 'package:ht_new_movpresenter/provider/main_provider.dart';
-import 'package:ht_new_movpresenter/utils/net_request/global.dart';
 import 'package:ht_new_movpresenter/utils/share/ht_share.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:provider/provider.dart';
 
 class HTClassSettingInfoPage extends StatefulWidget {
-  const HTClassSettingInfoPage({Key? key, required this.title})
+  const HTClassSettingInfoPage({Key? key, this.title})
       : super(key: key);
-  final String title;
+  final String? title;
   @override
   State<HTClassSettingInfoPage> createState() => _HTClassSettingInfoPageState();
 }

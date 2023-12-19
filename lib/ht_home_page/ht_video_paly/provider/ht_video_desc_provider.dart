@@ -54,9 +54,21 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
 
   ///播放器赋值资源
   void initData() {
+    String? videoUrlStr;
+    if (MainPovider.isVip != -1) {
+      videoUrlStr = (videoDescBean?.data?.hd?.link) != null
+          ? videoDescBean?.data?.hd?.link
+          : videoDescBean?.data?.sd?.link;
+    } else {
+      videoUrlStr = (videoDescBean?.data?.sd?.link) != null
+          ? videoDescBean?.data?.sd?.link
+          : videoDescBean?.data?.hd?.link;
+    }
+
     player.setDataSource(
         // videoList[11],
-        videoDescBean?.data?.hd?.link ?? '',
+        videoUrlStr ?? "",
+        // videoDescBean?.data?.hd?.link ?? '',
         autoPlay: true,
         showCover: true);
     addHistoryAciton();

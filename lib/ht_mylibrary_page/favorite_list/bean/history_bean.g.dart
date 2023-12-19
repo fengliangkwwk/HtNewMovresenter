@@ -10,10 +10,10 @@ HistoryBean _$HistoryBeanFromJson(Map<String, dynamic> json) => HistoryBean()
   ..id = json['id'] as String?
   ..title = json['title'] as String?
   ..cover = json['cover'] as String?
-  ..rate = json['rate'] as String?
+  ..rate = json['rate']
   ..mType2 = json['mType2'] as String?
-  ..ssnId = json['ssnId'] as String?
-  ..epsId = json['epsId'] as String?;
+  ..ssnId = json['ssnId']
+  ..epsId = json['epsId'];
 
 Map<String, dynamic> _$HistoryBeanToJson(HistoryBean instance) =>
     <String, dynamic>{

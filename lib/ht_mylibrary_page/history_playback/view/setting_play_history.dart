@@ -31,8 +31,8 @@ class _HTClassPresHistoryPageState extends State<HTClassPresHistoryPage> {
     return Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
-            backgroundColor: Color(0xff1A1C21),
-            title: Text("Recently Played",
+            backgroundColor: const Color(0xff1A1C21),
+            title: const Text("Recently Played",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -46,15 +46,15 @@ class _HTClassPresHistoryPageState extends State<HTClassPresHistoryPage> {
           GridView.count(
               crossAxisCount: 3,
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               childAspectRatio: 0.575,
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
               mainAxisSpacing: 10.0,
               crossAxisSpacing: 9.5,
               children: [1, 2, 3, 4, 5, 6, 7, 8, 9]
                   .map((index) => Container(
                       width: 112.0,
-                      margin: EdgeInsets.only(right: 5.0),
+                      margin: const EdgeInsets.only(right: 5.0),
                       child: Column(children: [
                         Stack(children: [
                           Image.asset("image/pic_banner_test.png",
@@ -65,14 +65,14 @@ class _HTClassPresHistoryPageState extends State<HTClassPresHistoryPage> {
                               child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Text("8.",
+                                    const Text("8.",
                                         style: TextStyle(
                                             color: Color(0xffFF6D1C),
                                             fontSize: 20,
                                             fontWeight: FontWeight.w600)),
                                     Container(
-                                        padding: EdgeInsets.only(bottom: 2.0),
-                                        child: Text("0",
+                                        padding: const EdgeInsets.only(bottom: 2.0),
+                                        child: const Text("0",
                                             style: TextStyle(
                                                 color: Color(0xffFF6D1C),
                                                 fontSize: 12,
@@ -84,7 +84,7 @@ class _HTClassPresHistoryPageState extends State<HTClassPresHistoryPage> {
                               right: 0.0,
                               child: Container(
                                   height: 24.0,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       gradient: LinearGradient(
                                           begin: Alignment.topCenter,
                                           end: Alignment.bottomCenter,
@@ -92,7 +92,7 @@ class _HTClassPresHistoryPageState extends State<HTClassPresHistoryPage> {
                                         Colors.transparent,
                                         Colors.black
                                       ])),
-                                  child: Row(children: [
+                                  child: const Row(children: [
                                     Spacer(),
                                     Text("NEW",
                                         style: TextStyle(
@@ -106,7 +106,7 @@ class _HTClassPresHistoryPageState extends State<HTClassPresHistoryPage> {
                         Container(
                             color: Colors.yellow,
                             height: 2.0,
-                            child: LinearProgressIndicator(
+                            child: const LinearProgressIndicator(
                               value: 0.5,
                               minHeight: 2,
                               valueColor:
@@ -114,9 +114,9 @@ class _HTClassPresHistoryPageState extends State<HTClassPresHistoryPage> {
                               backgroundColor: Color(0xff4B505B),
                             )),
                         Container(
-                            margin: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0),
+                            margin: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0),
                             child: Row(children: [
-                              Expanded(
+                              const Expanded(
                                   child: Text("Minions:The Rise of Gru",
                                       maxLines: 2,
                                       style: TextStyle(

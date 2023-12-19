@@ -207,6 +207,7 @@ class _ProductThemePartWidgetState extends State<ProductThemePartWidget> {
       builder: (context, value, child) {
         return GestureDetector(
           onTap: () {
+            mainProvider.selectProductNo = HTUserStore.premiumBean?.productNo(model);
             provider.clickProductItemAction(index);
           },
           child: Container(

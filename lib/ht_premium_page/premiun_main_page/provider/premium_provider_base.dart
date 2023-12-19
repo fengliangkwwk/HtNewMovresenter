@@ -6,9 +6,10 @@ class PremiumProviderBase extends ChangeNotifier {
 
   ///个人选中
   int selectPerson = 0;
+
   ///家庭选中
   int selectFamaily = 0;
 
-  ///跳转工具包
-  bool  toToolPackage = false;
+  ///是否跳转工具包
+  bool toToolPackage = false;
 }

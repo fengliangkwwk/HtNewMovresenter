@@ -108,6 +108,30 @@ class HTPremiumBean {
     return result;
   }
 
+  ///获取当前点击的订阅产品编号（1:个人周 2:个人月 3:个人年 4:家庭周 5:家庭月 6:家庭年）
+  String? productNo(dynamic model) {
+    String str = model.runtimeType.toString().toLowerCase();
+    if (str == "week") {
+      return '1';
+    }
+    if (str == "month") {
+      return '2';
+    }
+    if (str == "year") {
+      return '3';
+    }
+    if (str == "fw") {
+      return '4';
+    }
+    if (str == "fm") {
+      return '5';
+    }
+    if (str == "fy") {
+      return '6';
+    }
+    return '0';
+  }
+
   ///家庭可订阅产品
   List familyDataList() {
     var result = [];

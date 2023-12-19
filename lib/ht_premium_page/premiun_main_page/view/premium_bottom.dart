@@ -365,12 +365,11 @@ class _PremiumBottomWidgetState extends State<PremiumBottomWidget> {
                           Navigator.pop(context1);
                         }),
                     Container(height: 16.0),
-                    Container(
-                        child: const Text("Later",
-                            style: TextStyle(
-                                color: Color(0xff999999),
-                                fontSize: 12.0,
-                                decoration: TextDecoration.underline))),
+                    const Text("Later",
+                        style: TextStyle(
+                            color: Color(0xff999999),
+                            fontSize: 12.0,
+                            decoration: TextDecoration.underline)),
                   ])));
         });
   }

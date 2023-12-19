@@ -174,13 +174,12 @@ class _LoginPageState extends State<LoginPage> {
       googleLoginMap["tp_name"] = userCredential.user?.displayName;
       googleLoginMap["tp_face"] = userCredential.user?.photoURL;
       googleLoginMap["email"] = userCredential.user?.email;
-
       ///将 map转成 json字符串
       String jsonMap = jsonEncode(googleLoginMap);
       // 在这里处理登录成功后的操作
       // 将值通过JavaScript注入方式传递给Web端
       // _controller.addJavaScriptChannel(name, onMessageReceived: onMessageReceived)
-      _controller.runJavaScript('getNativeParam({"name":$jsonMap,}');
+     await _controller.runJavaScript('getNativeParam({"name":$jsonMap,}');
     }
   }
 

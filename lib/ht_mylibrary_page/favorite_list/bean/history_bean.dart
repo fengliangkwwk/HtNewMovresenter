@@ -14,16 +14,16 @@ class HistoryBean {
   String? cover;
 
   @JsonKey(name: 'rate')
-  String? rate;
+  dynamic rate;
 
   @JsonKey(name: 'mType2')
   String? mType2;
 
   @JsonKey(name: 'ssnId')
-  String? ssnId;
+  dynamic ssnId;
 
   @JsonKey(name: 'epsId')
-  String? epsId;
+  dynamic epsId;
 
   ///选中状态
   @JsonKey(includeFromJson: false)

@@ -7,7 +7,6 @@ import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys
 import 'package:ht_new_movpresenter/utils/net_request/ui_utils.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart'
     show ModalProgressHUD;
-import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HTClassLauncherPage extends StatefulWidget {
