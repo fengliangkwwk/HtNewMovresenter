@@ -4,6 +4,7 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_search/providers/ht_searchre
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import '../../ht_video_paly/views/play_detailpage.dart';
 
 class HTClassSearchResultPage extends StatefulWidget {
   const HTClassSearchResultPage({
@@ -65,7 +66,6 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
             GestureDetector(
                 child: CachedNetworkImage(
                     imageUrl: ImageURL.url_291, width: 24, height: 24),
-
                 ///返回按钮
                 onTap: () {
                   Navigator.of(context).pop();
@@ -126,81 +126,101 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
               ),
               itemBuilder: (context, index) {
                 var model = dataList?[index];
-                return Column(
-                  children: [
-                    ///1.背景图
-                    Expanded(
-                        child: Stack(
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: CachedNetworkImage(
-                            imageUrl: model?.cover ?? '',
-                            fit: BoxFit.fill,
+                return GestureDetector(
+                  onTap:(){
+                    if(model?.dataType != '1'||model?.dataType != '3'){
+                      return;
+                    }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return HTClassVideoDetailPage(
+                            m_type_2: (model?.dataType == '1')
+                                ? "myfx"
+                                : "tt_mflx",
+                            id: model?.id ?? "",
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  child: Column(
+                    children: [
+                      ///1.背景图
+                      Expanded(
+                          child: Stack(
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            height: double.infinity,
+                            child: CachedNetworkImage(
+                              imageUrl: model?.cover ?? '',
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          Positioned(
+                              left: 5.0,
+                              top: 5.0,
+                              child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      model?.rate ?? '',
+                                      style: const TextStyle(
+                                        color: Color(0xffFF6D1C),
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ])),
+                          SizedBox(
+                            width: double.infinity,
+                            height: double.infinity,
+
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween
+                              ,children: [
+                              const SizedBox(),
+                              Container(
+                              height: 24.0,
+                              // padding: const EdgeInsets.symmetric(horizontal: 9.5 *2),
+                              width: double.infinity,
+                              decoration: const BoxDecoration(
+                                  gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [Colors.transparent, Colors.black])),
+                              child: const Row(
+                                children: [
+                                  Spacer(),
+                                  Text("NEW",
+                                      style: TextStyle(
+                                          color: Color(0xffFF6D1C), fontSize: 8.0)),
+                                  Text("|S07 E08",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 8.0))
+                                ],
+                              ),
+                            )
+                            ],),
+                          ),
+                        ],
+                      )),
+
+                      ///2.标题
+                      Container(
+                        child: Text(
+                          model?.title ?? '',
+                          maxLines: 2,
+                          style: const TextStyle(
+                            color: Color(0xff828386),
+                            fontSize: 12.0,
                           ),
                         ),
-                        Positioned(
-                            left: 5.0,
-                            top: 5.0,
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    model?.rate ?? '',
-                                    style: const TextStyle(
-                                      color: Color(0xffFF6D1C),
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ])),
-                        SizedBox(
-                          width: double.infinity,
-                          height: double.infinity,
-                
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween
-                            ,children: [
-                            const SizedBox(),
-                            Container(
-                            height: 24.0,
-                            // padding: const EdgeInsets.symmetric(horizontal: 9.5 *2),
-                            width: double.infinity,
-                            decoration: const BoxDecoration(
-                                gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [Colors.transparent, Colors.black])),
-                            child: const Row(
-                              children: [
-                                Spacer(),
-                                Text("NEW",
-                                    style: TextStyle(
-                                        color: Color(0xffFF6D1C), fontSize: 8.0)),
-                                Text("|S07 E08",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 8.0))
-                              ],
-                            ),
-                          )
-                          ],),
-                        ),
-                      ],
-                    )),
-                
-                    ///2.标题
-                    Container(
-                      child: Text(
-                        model?.title ?? '',
-                        maxLines: 2,
-                        style: const TextStyle(
-                          color: Color(0xff828386),
-                          fontSize: 12.0,
-                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
             
                 

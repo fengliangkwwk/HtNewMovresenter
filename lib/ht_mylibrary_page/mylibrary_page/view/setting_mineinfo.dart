@@ -186,7 +186,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) {
-            return const HTClassUnPremiumPage();
+            return const HTClassUnPremiumPage(title:"Premium",);
           }),
         );
       },

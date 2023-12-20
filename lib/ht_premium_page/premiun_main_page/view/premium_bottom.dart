@@ -362,6 +362,7 @@ class _PremiumBottomWidgetState extends State<PremiumBottomWidget> {
                               )),
                         ),
                         onTap: () {
+                          provider.go2Pay(ctx);
                           Navigator.pop(context1);
                         }),
                     Container(height: 16.0),
