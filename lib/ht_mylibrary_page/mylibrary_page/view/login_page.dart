@@ -12,6 +12,7 @@ import 'package:ht_new_movpresenter/ht_mylibrary_page/personal_info_editing/view
 import 'package:ht_new_movpresenter/utils/net_request/ht_api.dart';
 import 'package:ht_new_movpresenter/utils/net_request/ui_utils.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
+import 'package:ht_new_movpresenter/utils/tools/toast_tool.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 // ignore: must_be_immutable
@@ -30,7 +31,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late BuildContext myContext;
   WebViewController _controller = WebViewController();
-   SettingProvider provider =  SettingProvider();
+  SettingProvider provider = SettingProvider();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
@@ -147,6 +148,7 @@ class _LoginPageState extends State<LoginPage> {
             );
           },
           onWebResourceError: (WebResourceError error) {
+            print("WebView Error: ${error.description}");
             EasyLoading.dismiss();
           },
           onNavigationRequest: (NavigationRequest request) {
@@ -162,25 +164,54 @@ class _LoginPageState extends State<LoginPage> {
 
   ///谷歌登录方法
   void googleLoginAction(BuildContext context) async {
-    Map<String, dynamic> googleLoginMap = {};
-    UserCredential? userCredential = await signInWithGoogle();
-    if (userCredential != null) {
-      googleLoginMap["type"] = "2";
-      googleLoginMap["thridparty_g"] = "1";
-      googleLoginMap["loginType"] = "1";
-      googleLoginMap["tp_tpid"] = userCredential.user?.uid;
+    try {
+      await _googleSignIn.signIn();
+      // 在这里可以获取用户信息，例如： _googleSignIn.currentUser
+      Map<String, dynamic> googleLoginMap = {};
+      if (_googleSignIn.currentUser != null) {
+        ToastUtil.showToast(msg: '登录成功');
 
-      ///用户的唯一 id
-      googleLoginMap["tp_name"] = userCredential.user?.displayName;
-      googleLoginMap["tp_face"] = userCredential.user?.photoURL;
-      googleLoginMap["email"] = userCredential.user?.email;
-      ///将 map转成 json字符串
-      String jsonMap = jsonEncode(googleLoginMap);
-      // 在这里处理登录成功后的操作
-      // 将值通过JavaScript注入方式传递给Web端
-      // _controller.addJavaScriptChannel(name, onMessageReceived: onMessageReceived)
-     await _controller.runJavaScript('getNativeParam({"name":$jsonMap,}');
+        print('登录成功');
+        print("User Display Name: ${_googleSignIn.currentUser!.displayName}");
+        print("User Email: ${_googleSignIn.currentUser!.email}");
+        // 其他用户信息...
+        googleLoginMap["type"] = "2";
+        googleLoginMap["thridparty_g"] = "1";
+        googleLoginMap["loginType"] = "1";
+        googleLoginMap["tp_tpid"] = _googleSignIn.currentUser!.id;
+        ///用户的唯一 id
+        googleLoginMap["tp_name"] = _googleSignIn.currentUser!.displayName;
+        googleLoginMap["tp_face"] = _googleSignIn.currentUser!.photoUrl;
+        googleLoginMap["email"] = _googleSignIn.currentUser!.email;
+        ///将 map转成 json字符串
+        String jsonMap = jsonEncode(googleLoginMap);
+        // 在这里处理登录成功后的操作
+        // 将值通过JavaScript注入方式传递给Web端
+        // _controller.addJavaScriptChannel(name, onMessageReceived: onMessageReceived)
+        await _controller.runJavaScript('getNativeParam({"name":$jsonMap,}');
+      }
+    } catch (error) {
+      print(error);
     }
+    // Map<String, dynamic> googleLoginMap = {};
+    // UserCredential? userCredential = await signInWithGoogle();
+    // if (userCredential != null) {
+    //   googleLoginMap["type"] = "2";
+    //   googleLoginMap["thridparty_g"] = "1";
+    //   googleLoginMap["loginType"] = "1";
+    //   googleLoginMap["tp_tpid"] = userCredential.user?.uid;
+
+    //   ///用户的唯一 id
+    //   googleLoginMap["tp_name"] = userCredential.user?.displayName;
+    //   googleLoginMap["tp_face"] = userCredential.user?.photoURL;
+    //   googleLoginMap["email"] = userCredential.user?.email;
+    //   ///将 map转成 json字符串
+    //   String jsonMap = jsonEncode(googleLoginMap);
+    //   // 在这里处理登录成功后的操作
+    //   // 将值通过JavaScript注入方式传递给Web端
+    //   // _controller.addJavaScriptChannel(name, onMessageReceived: onMessageReceived)
+    //  await _controller.runJavaScript('getNativeParam({"name":$jsonMap,}');
+    // }
   }
 
   ///谷歌登录
