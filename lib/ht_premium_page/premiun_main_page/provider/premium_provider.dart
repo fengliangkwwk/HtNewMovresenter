@@ -136,6 +136,12 @@ class PremiumProvider extends PremiumProviderBase
       };
       var airplay = HTUserStore.toolConfigBean?.airplay;
       String jsonStringB = jsonEncode(a);
+
+      // Scheme方式跳转：
+      String schemeLink =
+          "${airplay?.scheme}://com.ding.tool?params=$jsonStringB";
+
+      ///deepLink跳转
       String shopLink = 'https://apps.apple.com/app/id${airplay?.appleid}';
       String deepLink = '$shopLink?params=$jsonStringB';
 
@@ -168,17 +174,25 @@ class PremiumProvider extends PremiumProviderBase
         print('🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐$dynamicLink');
       }
 
-      try {
-        // var s = await canLaunchUrl(dynamicLink);
-        if (await canLaunchUrl(dynamicLink)) {
-          ///标记一下,跳转了工具包,需要进行刷新
-          toToolPackage = true;
-          await launchUrl(dynamicLink);
+      Uri schemeUrl = Uri.parse('${airplay?.scheme}://');
+      bool isInstalled = await canLaunchUrl(schemeUrl);
+      if (isInstalled) {
+        ///scheme跳转
+        await canLaunchUrl(Uri.parse(schemeLink));
+      } else {
+        //深链接跳转
+        try {
+          // var s = await canLaunchUrl(dynamicLink);
+          if (await canLaunchUrl(dynamicLink)) {
+            ///标记一下,跳转了工具包,需要进行刷新
+            toToolPackage = true;
+            await launchUrl(dynamicLink);
+          }
+        } catch (e) {
+          print(e);
         }
-      } catch (e) {
-        print(e);
+        print('App is not installed.');
       }
-
       return;
     }
 

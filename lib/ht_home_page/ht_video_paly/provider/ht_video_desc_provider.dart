@@ -28,6 +28,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   /// mType2:tt_mflx:电视剧   myfx:电影
   /// id:传的视频id
   Future<void> loadData(String mType2, String id) async {
+    mtype2 = mType2;
     dataId = id;
     this.mType2 = mType2;
     await apiRequest(mType2, id);
@@ -52,11 +53,9 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     ///判断当前播放的视频是否处于收藏状态。
     isCollect();
   }
-
-  ///播放器赋值资源
-  void initData() {
-    String? videoUrlStr;
-    if (MainPovider.isVip != -1) {
+  String videoUrl(){
+ // ignore: unrelated_type_equality_checks
+ if (MainPovider.isVip != -1) {
       videoUrlStr = (videoDescBean?.data?.hd?.link) != null
           ? videoDescBean?.data?.hd?.link
           : videoDescBean?.data?.sd?.link;
@@ -65,11 +64,13 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
           ? videoDescBean?.data?.sd?.link
           : videoDescBean?.data?.hd?.link;
     }
+    return videoUrlStr??'';
+  }
 
+  ///播放器赋值资源
+  void initData() {   
     player.setDataSource(
-        // videoList[11],
         videoUrlStr ?? "",
-        // videoDescBean?.data?.hd?.link ?? '',
         autoPlay: true,
         showCover: true);
     addHistoryAciton();

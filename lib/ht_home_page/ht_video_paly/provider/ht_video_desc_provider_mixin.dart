@@ -11,12 +11,6 @@ import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 
 mixin HTVideoProviderMixin on HTVideoDescProviderBase {
   ///151
-  HtVideoDescBean? videoDescBean;
-
-  HtSeasonAndEpisodeBean? tv202Bean;
-
-  HtSetListBean? tv203Bean;
-
   String? mType2;
   String? dataId;
 
@@ -31,6 +25,7 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
 
   Future<void> apiRequest(String m_type_2, String id) async {
     mType2 = m_type_2;
+    vid = id;
     EasyLoading.show(status: 'loading...');
     if (m_type_2 == 'tt_mflx') {
       ///1.电视剧
@@ -103,6 +98,7 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
   ///电影
   ///144
   Future<void> request144(String id) async {
+    vid = id;
     String cutterntTimeStamp = SysTools().getSecondsTimeStamp();
     var res =
         await HTNetUtils.htPost(apiUrl: Global.movieLinksAndMoviesUrl, params: {

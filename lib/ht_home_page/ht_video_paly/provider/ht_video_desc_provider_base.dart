@@ -1,7 +1,16 @@
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_and_episode_bean.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_set_list_bean.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_video_desc_bean.dart';
 
 class HTVideoDescProviderBase extends ChangeNotifier {
+  HtVideoDescBean? videoDescBean;
+
+  HtSeasonAndEpisodeBean? tv202Bean;
+
+  HtSetListBean? tv203Bean;
+
   ///more info 是否展开
   var htVarInfoShown = false;
 
@@ -11,10 +20,11 @@ class HTVideoDescProviderBase extends ChangeNotifier {
   ///是否收藏
   bool isCollected = false;
 
+  String? mtype2; //判断是电影还是电视剧 mType2:tt_mflx:电视剧   myfx:电影
   String? vid; //电影或电视剧ID（没有传0）
   String? sid; //电视剧季ID（没有传0）
   String? eid; //电视剧集ID（没有传0）
-
+  String? videoUrlStr; //播放链接
 
   ///视频播放器
   FijkPlayer player = FijkPlayer();

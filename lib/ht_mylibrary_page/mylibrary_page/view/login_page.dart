@@ -149,7 +149,9 @@ class _LoginPageState extends State<LoginPage> {
             );
           },
           onWebResourceError: (WebResourceError error) {
-            print("WebView Error: ${error.description}");
+            if (kDebugMode) {
+              print("WebView Error: ${error.description}");
+            }
             EasyLoading.dismiss();
           },
           onNavigationRequest: (NavigationRequest request) {
@@ -187,14 +189,16 @@ class _LoginPageState extends State<LoginPage> {
         googleLoginMap["tp_face"] = _googleSignIn.currentUser!.photoUrl;
         googleLoginMap["email"] = _googleSignIn.currentUser!.email;
 
-
         print(googleLoginMap);
+
         ///将 map转成 json字符串
         String jsonMap = jsonEncode(googleLoginMap);
         // 在这里处理登录成功后的操作
         // 将值通过JavaScript注入方式传递给Web端
         // _controller.addJavaScriptChannel(name, onMessageReceived: onMessageReceived)
-        await _controller.runJavaScript('getNativeParam({"name":$jsonMap,}');
+        await _controller.runJavaScript("getNativeParam('$jsonMap');");
+
+        // await _controller.runJavaScript('getNativeParam({"name":$jsonMap,}');
       }
     } catch (error) {
       Map<String, dynamic> googleLoginErrorMap = {};
@@ -203,8 +207,9 @@ class _LoginPageState extends State<LoginPage> {
       googleLoginErrorMap["msgDetails"] = error.hashCode.toString() + '-$error';
       //转字符串
       String erorMapString = jsonEncode(googleLoginErrorMap);
-      await _controller.runJavaScript('getNativeParam({"name":$erorMapString,}');
-
+      // await _controller
+      // .runJavaScript('getNativeParam({"name":$erorMapString,}');
+      await _controller.runJavaScript("getNativeParam('$erorMapString');");
       print(error);
     }
     // Map<String, dynamic> googleLoginMap = {};
@@ -254,7 +259,7 @@ class _LoginPageState extends State<LoginPage> {
       googleLoginErrorMap["msg"] = 'Failed';
       googleLoginErrorMap["msgDetails"] = error.hashCode.toString() + '-$error';
       //转字符串
-      String erorMapString = jsonEncode(googleLoginErrorMap);
+      // String erorMapString = jsonEncode(googleLoginErrorMap);
 
       print('登录失败：${error.hashCode}');
       print("Google sign in error: $error");
