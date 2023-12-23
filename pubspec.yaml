@@ -91,8 +91,13 @@ dependencies:
   firebase_core: ^2.24.2
   firebase_auth: ^4.15.3
   google_sign_in: ^6.1.5
+
+  # 加载深链接
   firebase_dynamic_links: ^5.4.8
   url_launcher: ^6.2.2
+  # 判断是否安装某工具包
+  packages_info: ^0.0.1-dev.1
+
     
 dev_dependencies:
   flutter_test:

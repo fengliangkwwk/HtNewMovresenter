@@ -4,6 +4,7 @@
 ///   @Desc   : 登录界面/个人中心页面
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -170,19 +171,24 @@ class _LoginPageState extends State<LoginPage> {
       Map<String, dynamic> googleLoginMap = {};
       if (_googleSignIn.currentUser != null) {
         ToastUtil.showToast(msg: '登录成功');
-
-        print('登录成功');
-        print("User Display Name: ${_googleSignIn.currentUser!.displayName}");
-        print("User Email: ${_googleSignIn.currentUser!.email}");
+        if (kDebugMode) {
+          print('登录成功');
+          print("User Display Name: ${_googleSignIn.currentUser!.displayName}");
+          print("User Email: ${_googleSignIn.currentUser!.email}");
+        }
         // 其他用户信息...
         googleLoginMap["type"] = "2";
         googleLoginMap["thridparty_g"] = "1";
         googleLoginMap["loginType"] = "1";
         googleLoginMap["tp_tpid"] = _googleSignIn.currentUser!.id;
+
         ///用户的唯一 id
         googleLoginMap["tp_name"] = _googleSignIn.currentUser!.displayName;
         googleLoginMap["tp_face"] = _googleSignIn.currentUser!.photoUrl;
         googleLoginMap["email"] = _googleSignIn.currentUser!.email;
+
+
+        print(googleLoginMap);
         ///将 map转成 json字符串
         String jsonMap = jsonEncode(googleLoginMap);
         // 在这里处理登录成功后的操作
@@ -191,6 +197,14 @@ class _LoginPageState extends State<LoginPage> {
         await _controller.runJavaScript('getNativeParam({"name":$jsonMap,}');
       }
     } catch (error) {
+      Map<String, dynamic> googleLoginErrorMap = {};
+      googleLoginErrorMap["loginType"] = '7';
+      googleLoginErrorMap["msg"] = 'Failed';
+      googleLoginErrorMap["msgDetails"] = error.hashCode.toString() + '-$error';
+      //转字符串
+      String erorMapString = jsonEncode(googleLoginErrorMap);
+      await _controller.runJavaScript('getNativeParam({"name":$erorMapString,}');
+
       print(error);
     }
     // Map<String, dynamic> googleLoginMap = {};

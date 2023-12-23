@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_screen_projection_provider_mixin.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_data_prvider_mixin.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_player_provider_mixin.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider_base.dart';
@@ -18,7 +18,8 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     with
         HTVideoProviderMixin,
         HTVideoDescDataProviderMixin,
-        HTVideoDescPlayerProviderMixin {
+        HTVideoDescPlayerProviderMixin ,
+        HTScreenProjectionProviderMixin{
   List<String> videoList = [];
   void _backFromPremiumPageToFullScreen() {
     player.enterFullScreen();
@@ -207,7 +208,10 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     if (state == 1) {
       HTShare().share(mType2 ?? '', playLock(), '1', videoId(), title());
     }
-    if (state == 2) {}
+    if (state == 2) {
+      ///投屏
+      screenProjectionAction();
+    }
     if (state == 3) {
       saveAction();
     }

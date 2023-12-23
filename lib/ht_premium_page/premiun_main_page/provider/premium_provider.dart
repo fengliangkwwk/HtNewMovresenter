@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -125,7 +126,7 @@ class PremiumProvider extends PremiumProviderBase
         'appType': "0", //本包类型：0.影视 1.动漫
         'appbundleid': "com.ding.movie", //本包的bundleid
         'appid': "93", //本包的appid
-        'appleid': "6464025805",//"6463694667", //本包的appleId
+        'appleid': "6464025805", //"6463694667", //本包的appleId
         'applink': "https://waibao.page.link", //本包的deeplink域名，值为（取⾃接⼝84/
         'appname': "APP名⼉", //本包app名
         'type': "1", //深链类型，1.订阅，2.下架导量，3.投屏
@@ -160,12 +161,12 @@ class PremiumProvider extends PremiumProviderBase
 
       // Clipboard.setData(ClipboardData(text: dynamicLink.toString()));
 
-      print('🍊🍊🍊🍊🍊🍊🍊🍊🍊🍊🍊🍊🍊$dynamicLink');
-
-      print('🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌${dynamicLink.toString()}');
-
-      print('🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎${dynamicLink.query}');
-      print('🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐$dynamicLink');
+      if (kDebugMode) {
+        print('🍊🍊🍊🍊🍊🍊🍊🍊🍊🍊🍊🍊🍊$dynamicLink');
+        print('🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌${dynamicLink.toString()}');
+        print('🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎${dynamicLink.query}');
+        print('🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐$dynamicLink');
+      }
 
       try {
         // var s = await canLaunchUrl(dynamicLink);
@@ -183,7 +184,6 @@ class PremiumProvider extends PremiumProviderBase
 
     ///本地订阅
     var purchaseParam = PurchaseParam(productDetails: model);
-
     EasyLoading.show();
     mainProvider.inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
   }

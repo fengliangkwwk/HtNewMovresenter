@@ -26,9 +26,9 @@ class HTClassLauncherPage extends StatefulWidget {
 }
 
 class _HTClassLauncherPageState extends State<HTClassLauncherPage> {
-  var _htVarSearchController = TextEditingController();
+  final _htVarSearchController = TextEditingController();
   var _htVarShowIndicator = false; //加载指示器是否显示
-  var _htVarInviteCodeControl = InviteCodeController();
+  final _htVarInviteCodeControl = InviteCodeController();
   @override
   void initState() {
     super.initState();

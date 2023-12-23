@@ -3,7 +3,9 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 
 FijkPanelWidgetBuilder fijkPanel2Builder1({
@@ -86,9 +88,9 @@ class __FijkPanel2State extends State<_FijkPanel2> {
   double? _brightness;
 
   double _seekPos = -1.0;
-  Duration _duration = Duration();
-  Duration _currentPos = Duration();
-  Duration _bufferPos = Duration();
+  Duration _duration = const Duration();
+  Duration _currentPos = const Duration();
+  Duration _bufferPos = const Duration();
 
   StreamSubscription? _currentPosSubs;
   StreamSubscription? _bufferPosSubs;
@@ -457,17 +459,20 @@ class __FijkPanel2State extends State<_FijkPanel2> {
                       ),
                       const SizedBox(width: 10.0),
                     ],
-                    GestureDetector(
-                      ///tv
-                      onTap: () {
-                        if (widget.callBack != null) {
-                          widget.callBack!(2, context);
-                        }
-                      },
-                      child: CachedNetworkImage(
-                        imageUrl: ImageURL.url_329,
-                        width: 24.0,
-                        height: 24.0,
+                    Visibility(
+                      visible: HTUserStore.toolConfigBean?.airplay == null?false:true,
+                      child: GestureDetector(
+                        ///tv
+                        onTap: () {
+                          if (widget.callBack != null) {
+                            widget.callBack!(2, context);
+                          }
+                        },
+                        child: CachedNetworkImage(
+                          imageUrl: ImageURL.url_329,
+                          width: 24.0,
+                          height: 24.0,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 10.0),
