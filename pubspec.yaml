@@ -97,6 +97,7 @@ dependencies:
   url_launcher: ^6.2.2
   # 判断是否安装某工具包
   packages_info: ^0.0.1-dev.1
+  firebase_messaging: ^14.7.9
 
     
 dev_dependencies:
