@@ -1,5 +1,6 @@
 //／启动广告页
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:ht_new_movpresenter/main.dart';
@@ -19,9 +20,8 @@ class _HTClassPremiumLauncherPageState
     extends State<HTClassPremiumLauncherPage> {
   @override
   void initState() {
-    Permission.notification.request();
+    // Permission.notification.request();
     super.initState();
-    // _requestNotificationPermission();
   }
 
   @override
@@ -33,9 +33,6 @@ class _HTClassPremiumLauncherPageState
             image: DecorationImage(
                 image: CachedNetworkImageProvider(ImageURL.url_86),
                 fit: BoxFit.fill)
-            // image:Image(image: CachedNetworkImageProvider(ImageURL.url_86)),
-            // Image(image: CachedNetworkImage(imageUrl: ImageURL.url_86), fit: BoxFit.fill)),
-            // image: NetworkImage(ImageURL.url_86), fit: BoxFit.fill)
             ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -104,14 +101,7 @@ class _HTClassPremiumLauncherPageState
                             fontSize: 16.0,
                             fontWeight: FontWeight.w600))),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const HTClassBtmNavPage();
-                      },
-                    ),
-                  );
+                  _requestNotificationPermission();
                 }),
             Container(height: 18.0),
             Container(
@@ -127,14 +117,32 @@ class _HTClassPremiumLauncherPageState
   }
 
   void _requestNotificationPermission() async {
-    // 请求通知权限
-    var status = await Permission.notification.request();
+    // //这会触发一个系统级别的权限请求对话框。
+    // FirebaseMessaging messaging = FirebaseMessaging.instance;
+    // NotificationSettings settings = await messaging.requestPermission(
+    //   alert: true,
+    //   badge: true,
+    //   sound: true,
+    // );
+    // print('User granted permission: ${settings.authorizationStatus}');
 
-    // 检查是否授予了通知权限
-    if (status == PermissionStatus.granted) {
-      print('Notification permission granted');
-    } else {
-      print('Notification permission not granted');
-    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return const HTClassBtmNavPage();
+        },
+      ),
+    );
+
+    // // 请求通知权限
+    // var status = await Permission.notification.request();
+
+    // // 检查是否授予了通知权限
+    // if (status == PermissionStatus.granted) {
+    //   print('Notification permission granted');
+    // } else {
+    //   print('Notification permission not granted');
+    // }
   }
 }

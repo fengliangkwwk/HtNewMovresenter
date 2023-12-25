@@ -1,4 +1,5 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_ad_lunch_page/views/home_launcherpage.dart';
@@ -28,6 +29,14 @@ class HTClassApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    //   print('Got a message whilst in the foreground!');
+    //   print('Message data: ${message.data}');
+
+    //   if (message.notification != null) {
+    //     print('Message also contained a notification: ${message.notification}');
+    //   }
+    // });
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => mainProvider)],
       child: MaterialApp(
@@ -41,16 +50,10 @@ class HTClassApp extends StatelessWidget {
               context, EasyLoading.init()(context, child));
         },
         theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
           primarySwatch: Colors.blue,
+          // 设置全局水波纹颜色为透明(去掉底部导航栏的水波纹效果)
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
         ),
         home: HTUserStore.isFirstInto
             ? const HTClassLauncherPage(title: "")
