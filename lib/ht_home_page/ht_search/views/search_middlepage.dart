@@ -144,9 +144,6 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
               Expanded(
                 child: TextField(
                   onEditingComplete: (() {
-                    if (_htVarSearchValue.isEmpty) {
-                      return;
-                    }
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return HTClassSearchResultPage(
@@ -154,7 +151,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                     }));
                   }),
                   controller: midSearchProvider.htVarFieldController,
-                  // autofocus: true,
+                  autofocus: true,
                   focusNode: _htVarFieldFocusNode,
                   style: const TextStyle(
                     color: Colors.white,

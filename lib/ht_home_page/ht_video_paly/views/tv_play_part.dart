@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_set_list_bean.dart';
@@ -7,11 +8,36 @@ import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:provider/provider.dart';
 // import 'package:quds_popup_menu/quds_popup_menu.dart';
 
+// ignore: must_be_immutable
 class TVPlayPartWidget extends StatelessWidget {
-  const TVPlayPartWidget({
+  TVPlayPartWidget({
+    this.selectedValue,
     Key? key,
   }) : super(key: key);
-
+  final List<String> items = [
+    'Item1',
+    'Item2',
+    'Item3',
+    'Item4',
+    'Item1',
+    'Item2',
+    'Item3',
+    'Item4',
+    'Item1',
+    'Item2',
+    'Item3',
+    'Item4',
+    'Item1',
+    'Item2',
+    'Item3',
+    'Item4',
+    'Item1',
+    'Item2',
+    'Item3',
+    'Item4',
+  ];
+  String? selectedValue;
+  @override
   @override
   Widget build(BuildContext context) {
     return tvPlayPartWidget(context);
@@ -24,22 +50,75 @@ class TVPlayPartWidget extends StatelessWidget {
           children: [
             ///Season 那一行
             Container(
-                margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
-                width: 95.0,
-                height: 28.0,
-                decoration: BoxDecoration(
-                    color: const Color(0xff23252A),
-                    borderRadius: BorderRadius.circular(5.0)),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  const Text(
-                    "Season 1",
-                    style: TextStyle(color: Colors.white, fontSize: 14.0),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton2<String>(
+                  // isExpanded: true,
+                  hint: const Text(
+                    'Select Item',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.amber,
+
+                      // color: Theme.of(context).hintColor,
+                    ),
                   ),
-                  Container(width: 6.0),
-                  CachedNetworkImage(
-                      imageUrl: ImageURL.url_114, width: 10.0, height: 8.0)
-                ])),
+
+                  style: const TextStyle(
+                    // 设置下拉列表中选中项的文本样式
+                    color: Colors.white, // 设置文本颜色
+                  ),
+
+                  items: items
+                      .map(
+                        (String item) => DropdownMenuItem<String>(
+                          value: item,
+                          child: Text(
+                            item,
+                            style: const TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  value: selectedValue,
+                  onChanged: (String? value) {},
+
+                  dropdownStyleData: DropdownStyleData(
+                    maxHeight: 144,
+                    width: 95,
+                    padding: const EdgeInsets.symmetric(vertical: 6),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: const Color(0xff23252A),
+                    ),
+                    offset: const Offset(0, -4),
+                  ),
+                  menuItemStyleData: const MenuItemStyleData(
+                    height: 40,
+                  ),
+                ),
+              ),
+
+              // margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
+              // width: 95.0,
+              // height: 28.0,
+              // decoration: BoxDecoration(
+              //     color: const Color(0xff23252A),
+              //     borderRadius: BorderRadius.circular(5.0)),
+              // child: Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     const Text(
+              //       "Season 1",
+              //       style: TextStyle(color: Colors.white, fontSize: 14.0),
+              //     ),
+              //     Container(width: 6.0),
+              //     CachedNetworkImage(
+              //         imageUrl: ImageURL.url_114, width: 10.0, height: 8.0)
+              //   ],
+              // ),
+            ),
             const Spacer(),
             GestureDetector(
               onTap: (() {
@@ -67,9 +146,11 @@ class TVPlayPartWidget extends StatelessWidget {
           color: const Color(0xff3F3F5C),
         ),
 
-        ///横线下面的列表
+        ///横线下面的集列表
         Visibility(
-          visible: context.read<HTVideoDescProvider>().setList()!.isEmpty?false:true,
+          visible: context.read<HTVideoDescProvider>().setList()!.isEmpty
+              ? false
+              : true,
           child: Container(
             margin: const EdgeInsets.only(top: 5, left: 10),
             height: 66.0,
@@ -97,8 +178,8 @@ class TVPlayPartWidget extends StatelessWidget {
                       Container(height: 4.0),
                       Text(
                         model.title ?? "",
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 12.0),
+                        style: const TextStyle(
+                            color: Colors.white, fontSize: 12.0),
                         maxLines: 2,
                       ),
                     ],

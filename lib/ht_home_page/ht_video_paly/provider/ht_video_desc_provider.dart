@@ -18,8 +18,8 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     with
         HTVideoProviderMixin,
         HTVideoDescDataProviderMixin,
-        HTVideoDescPlayerProviderMixin ,
-        HTScreenProjectionProviderMixin{
+        HTVideoDescPlayerProviderMixin,
+        HTScreenProjectionProviderMixin {
   List<String> videoList = [];
   void _backFromPremiumPageToFullScreen() {
     player.enterFullScreen();
@@ -53,9 +53,10 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     ///判断当前播放的视频是否处于收藏状态。
     isCollect();
   }
-  String videoUrl(){
- // ignore: unrelated_type_equality_checks
- if (MainPovider.isVip != -1) {
+
+  String videoUrl() {
+    // ignore: unrelated_type_equality_checks
+    if (MainPovider.isVip != -1) {
       videoUrlStr = (videoDescBean?.data?.hd?.link) != null
           ? videoDescBean?.data?.hd?.link
           : videoDescBean?.data?.sd?.link;
@@ -64,15 +65,13 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
           ? videoDescBean?.data?.sd?.link
           : videoDescBean?.data?.hd?.link;
     }
-    return videoUrlStr??'';
+    return videoUrlStr ?? '';
   }
-
   ///播放器赋值资源
-  void initData() {   
-    player.setDataSource(
-        videoUrlStr ?? "",
-        autoPlay: true,
-        showCover: true);
+  void initData() {
+        // 停止播放并释放资源
+    player.reset();
+    player.setDataSource(videoUrl(), autoPlay: true, showCover: true);
     addHistoryAciton();
   }
 

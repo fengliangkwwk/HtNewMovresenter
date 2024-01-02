@@ -18,25 +18,39 @@ void main() async {
     DevicePreview(
       // enabled: !kReleaseMode,
       enabled: false,
-      builder: (context) => const HTClassApp(), // Wrap your app
+      builder: (context) => HTClassApp(), // Wrap your app
     ),
   );
 }
 
 class HTClassApp extends StatelessWidget {
-  const HTClassApp({Key? key}) : super(key: key);
+  ///推送
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
+  HTClassApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    //   print('Got a message whilst in the foreground!');
-    //   print('Message data: ${message.data}');
+    _firebaseMessaging.getToken().then((token) {
+      print("Firebase Token: $token");
+    });
 
-    //   if (message.notification != null) {
-    //     print('Message also contained a notification: ${message.notification}');
-    //   }
-    // });
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print("onMessage: $message");
+      // 处理在前台收到的消息
+    });
+
+    FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
+      print("onBackgroundMessage: $message");
+      // 处理应用程序在后台时收到的消息
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print("onMessageOpenedApp: $message");
+      // 处理应用程序从后台状态启动时收到的消息
+    });
+
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => mainProvider)],
       child: MaterialApp(
@@ -50,10 +64,16 @@ class HTClassApp extends StatelessWidget {
               context, EasyLoading.init()(context, child));
         },
         theme: ThemeData(
+          // This is the theme of your application.
+          //
+          // Try running your application with "flutter run". You'll see the
+          // application has a blue toolbar. Then, without quitting the app, try
+          // changing the primarySwatch below to Colors.green and then invoke
+          // "hot reload" (press "r" in the console where you ran "flutter run",
+          // or simply save your changes to "hot reload" in a Flutter IDE).
+          // Notice that the counter didn't reset back to zero; the application
+          // is not restarted.
           primarySwatch: Colors.blue,
-          // 设置全局水波纹颜色为透明(去掉底部导航栏的水波纹效果)
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
         ),
         home: HTUserStore.isFirstInto
             ? const HTClassLauncherPage(title: "")

@@ -102,14 +102,12 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
 
                             ///分享那一行
                             sharePartWidget(),
-
                             ///如果是电视剧播放页的话会有这部分
                             (widget.m_type_2 == 'tt_mflx')
-                                ? const TVPlayPartWidget()
+                                ? TVPlayPartWidget()
                                 : Container(
                                     height: 0,
                                   ),
-
                             ///专题列表那部分
                             ...creatspecialSubjectListWidget(),
                           ],
