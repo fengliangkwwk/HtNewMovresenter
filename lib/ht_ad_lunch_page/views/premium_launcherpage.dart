@@ -1,5 +1,6 @@
 //／启动广告页
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:ht_new_movpresenter/main.dart';
@@ -19,7 +20,6 @@ class _HTClassPremiumLauncherPageState
     extends State<HTClassPremiumLauncherPage> {
   @override
   void initState() {
-    Permission.notification.request();
     super.initState();
     // _requestNotificationPermission();
   }
@@ -108,6 +108,7 @@ class _HTClassPremiumLauncherPageState
                     context,
                     MaterialPageRoute(
                       builder: (context) {
+                        Permission.notification.request();
                         return const HTClassBtmNavPage();
                       },
                     ),
@@ -126,15 +127,19 @@ class _HTClassPremiumLauncherPageState
     );
   }
 
+  // ignore: unused_element
   void _requestNotificationPermission() async {
     // 请求通知权限
     var status = await Permission.notification.request();
-
     // 检查是否授予了通知权限
     if (status == PermissionStatus.granted) {
-      print('Notification permission granted');
+      if (kDebugMode) {
+        print('Notification permission granted');
+      }
     } else {
-      print('Notification permission not granted');
+      if (kDebugMode) {
+        print('Notification permission not granted');
+      }
     }
   }
 }

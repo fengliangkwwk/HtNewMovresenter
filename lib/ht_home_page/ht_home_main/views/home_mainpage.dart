@@ -215,14 +215,14 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
           )),
           Container(width: 6.0),
           GestureDetector(
-            onTap: () =>  Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const HTClassWatchListPage(title: "");
-                          },
-                        ),
-                      ),
+              onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const HTClassWatchListPage(title: "");
+                      },
+                    ),
+                  ),
               child: CachedNetworkImage(
                   imageUrl: ImageURL.url_282, width: 24, height: 24)),
           Container(width: 10.0),
@@ -563,10 +563,15 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                               width: 112.0,
                               margin: const EdgeInsets.only(right: 5.0),
                               child: Stack(children: [
-                                CachedNetworkImage(
-                                    imageUrl: (item.cover ?? ''),
-                                    height: 160.0,
-                                    fit: BoxFit.cover),
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(5.0),
+                                  ),
+                                  child: CachedNetworkImage(
+                                      imageUrl: (item.cover ?? ''),
+                                      height: 160.0,
+                                      fit: BoxFit.cover),
+                                ),
                                 Positioned(
                                   left: 5.0,
                                   top: 5.0,
@@ -640,10 +645,15 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                               width: 112.0,
                               margin: const EdgeInsets.only(right: 5.0),
                               child: Stack(children: [
-                                CachedNetworkImage(
-                                    imageUrl: (item.cover ?? ''),
-                                    height: 160.0,
-                                    fit: BoxFit.cover),
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(5.0),
+                                  ),
+                                  child: CachedNetworkImage(
+                                      imageUrl: (item.cover ?? ''),
+                                      height: 160.0,
+                                      fit: BoxFit.cover),
+                                ),
                                 Positioned(
                                   left: 5.0,
                                   top: 5.0,
@@ -726,7 +736,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
               crossAxisCount: 3,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              childAspectRatio: 112 / 160,
+              childAspectRatio: 112 / 180,
               padding:
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
               mainAxisSpacing: 10.0,
@@ -737,11 +747,16 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                         children: [
                           Expanded(
                             child: Stack(children: [
-                              CachedNetworkImage(
-                                width: double.infinity,
-                                height: double.infinity,
-                                imageUrl: m20.cover ?? '',
-                                fit: BoxFit.cover,
+                              ClipRRect(
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(5.0),
+                                ),
+                                child: CachedNetworkImage(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  imageUrl: m20.cover ?? '',
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                               Positioned(
                                   left: 5.0,
@@ -822,11 +837,16 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                           children: [
                             Expanded(
                               child: Stack(children: [
-                                CachedNetworkImage(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  imageUrl: (tt20.cover ?? ''),
-                                  fit: BoxFit.cover,
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(5.0),
+                                  ),
+                                  child: CachedNetworkImage(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    imageUrl: (tt20.cover ?? ''),
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                                 Positioned(
                                     left: 5.0,
@@ -952,11 +972,16 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                 width: double.infinity,
                 height: 246.0 + 48,
                 child: Stack(children: [
-                  CachedNetworkImage(
-                    imageUrl: itemData.cover ?? '',
-                    height: 246.0,
-                    width: double.infinity,
-                    fit: BoxFit.fill,
+                  ClipRRect(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(5.0),
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: itemData.cover ?? '',
+                      height: 246.0,
+                      width: double.infinity,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                   Positioned(
                       left: 5.0,

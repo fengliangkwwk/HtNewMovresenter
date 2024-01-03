@@ -40,14 +40,14 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
         selector: (p0, p1) => p1.loading,
         builder: (context, value, child) {
           return Scaffold(
-          backgroundColor: const Color(0xff36373C),
-          body: Column(
-            children:[
-              hTTopSearchWidget(),
-              listWidget(),
-            ],
-          ),
-        );
+            backgroundColor: const Color(0xff36373C),
+            body: Column(
+              children: [
+                hTTopSearchWidget(),
+                listWidget(),
+              ],
+            ),
+          );
         },
       ),
     );
@@ -90,10 +90,9 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
               onTap: () {
                 //HTClassSearchMidPage
 
-                Navigator.push(context,
-                  MaterialPageRoute(builder: (context) {
-                    return const HTClassSearchMidPage(title: "");
-                  }));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const HTClassSearchMidPage(title: "");
+                }));
               },
               child: Padding(
                 padding: const EdgeInsets.only(right: 10),
@@ -131,10 +130,18 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
                 child: GridView.builder(
                   itemCount: value.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,///
-                    childAspectRatio: 112 / 160,///
-                    mainAxisSpacing: 10,///
-                    crossAxisSpacing: 9.5,///
+                    crossAxisCount: 3,
+
+                    ///
+                    childAspectRatio: 112 / 160,
+
+                    ///
+                    mainAxisSpacing: 10,
+
+                    ///
+                    crossAxisSpacing: 9.5,
+
+                    ///
                   ),
                   itemBuilder: (context, index) {
                     return itemWidget(value[index]);
@@ -161,9 +168,14 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
                   SizedBox(
                     width: double.infinity,
                     height: double.infinity,
-                    child: CachedNetworkImage(
-                      imageUrl: itemData.cover ?? '',
-                      fit: BoxFit.fill,
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(5.0),
+                      ),
+                      child: CachedNetworkImage(
+                        imageUrl: itemData.cover ?? '',
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
 

@@ -18,38 +18,37 @@ void main() async {
     DevicePreview(
       // enabled: !kReleaseMode,
       enabled: false,
-      builder: (context) => HTClassApp(), // Wrap your app
+      builder: (context) => const HTClassApp(), // Wrap your app
     ),
   );
 }
 
 class HTClassApp extends StatelessWidget {
   ///推送
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
-  HTClassApp({Key? key}) : super(key: key);
-
+  const HTClassApp({Key? key}) : super(key: key);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    _firebaseMessaging.getToken().then((token) {
-      print("Firebase Token: $token");
-    });
+    // _firebaseMessaging.getToken().then((token) {
+    //   print("Firebase Token: $token");
+    // });
 
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print("onMessage: $message");
-      // 处理在前台收到的消息
-    });
+    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    //   print("onMessage: $message");
+    //   // 处理在前台收到的消息
+    // });
 
-    FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
-      print("onBackgroundMessage: $message");
-      // 处理应用程序在后台时收到的消息
-    });
+    // FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
+    //   print("onBackgroundMessage: $message");
+    //   // 处理应用程序在后台时收到的消息
+    // });
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print("onMessageOpenedApp: $message");
-      // 处理应用程序从后台状态启动时收到的消息
-    });
+    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    //   print("onMessageOpenedApp: $message");
+    //   // 处理应用程序从后台状态启动时收到的消息
+    // });
 
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => mainProvider)],
