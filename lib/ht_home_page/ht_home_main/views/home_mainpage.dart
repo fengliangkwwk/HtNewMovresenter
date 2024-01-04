@@ -579,7 +579,8 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Text(
-                                        item.rate ?? '',
+                                        item.getRate(),
+                                        //  double.parse(item.rate!).toStringAsFixed(1),
                                         style: const TextStyle(
                                             color: Color(0xffFF6D1C),
                                             fontSize: 20,
@@ -661,7 +662,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Text(
-                                        item.rate ?? '',
+                                        item.getRate(),
                                         style: const TextStyle(
                                             color: Color(0xffFF6D1C),
                                             fontSize: 20,
@@ -765,7 +766,9 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                                       crossAxisAlignment:
                                           CrossAxisAlignment.end,
                                       children: [
-                                        Text(m20.rate ?? '',
+                                        Text(m20.getRate(),
+                                            // double.parse(m20.rate ?? '')
+                                            //     .toStringAsFixed(1),
                                             style: const TextStyle(
                                                 color: Color(0xffFF6D1C),
                                                 fontSize: 20,
@@ -855,7 +858,9 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,
                                         children: [
-                                          Text(tt20.rate ?? '',
+                                          Text(tt20.getRate(),
+                                              // double.parse(tt20.rate ?? '')
+                                              //     .toStringAsFixed(1),
                                               style: const TextStyle(
                                                   color: Color(0xffFF6D1C),
                                                   fontSize: 20,
@@ -867,41 +872,45 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                                   visible:
                                       tt20.new_flag == "NEW" ? true : false,
                                   child: Positioned(
-                                      bottom: 0.0,
-                                      left: 0,
-                                      right: 0,
-                                      child: Container(
-                                          padding: const EdgeInsets.only(
-                                              right: 5, left: 5),
-                                          height: 24.0,
-                                          decoration: const BoxDecoration(
-                                            gradient: LinearGradient(
-                                              begin: Alignment.topCenter,
-                                              end: Alignment.bottomCenter,
-                                              colors: [
-                                                Colors.transparent,
-                                                Colors.black
-                                              ],
-                                            ),
-                                          ),
-                                          child: Row(children: [
-                                            Spacer(),
-                                            Text(tt20.new_flag ?? 'NEW',
-                                                style: const TextStyle(
-                                                    color: Color(0xffFF6D1C),
-                                                    fontSize: 8.0)),
-                                            Text("| ${tt20.ss_eps}",
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 8.0))
-                                          ]))),
+                                    bottom: 0.0,
+                                    left: 0,
+                                    right: 0,
+                                    child: Container(
+                                      padding: const EdgeInsets.only(
+                                          right: 5, left: 5),
+                                      height: 24.0,
+                                      decoration: const BoxDecoration(
+                                        gradient: LinearGradient(
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                          colors: [
+                                            Colors.transparent,
+                                            Colors.black
+                                          ],
+                                        ),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          const Spacer(),
+                                          Text(tt20.new_flag ?? 'NEW',
+                                              style: const TextStyle(
+                                                  color: Color(0xffFF6D1C),
+                                                  fontSize: 8.0)),
+                                          Text("| ${tt20.ss_eps}",
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 8.0))
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ]),
                             ),
                             Container(
                               height: 35,
                               width: double.infinity,
-                              padding: EdgeInsets.all(2),
+                              padding: const EdgeInsets.all(2),
                               child: Center(
                                 child: Text(
                                   tt20.title ?? '',
@@ -989,7 +998,8 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                       child: Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text(itemData.rate ?? '',
+                            Text(itemData.getRate(),
+                                // itemData.rate ?? '',
                                 style: const TextStyle(
                                     color: Color(0xffFF6D1C),
                                     fontSize: 20,
@@ -1033,7 +1043,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                               ),
                             ),
                             child: Row(children: [
-                              Spacer(),
+                              const Spacer(),
                               Text(itemData.new_flag ?? '',
                                   style: const TextStyle(
                                       color: Color(0xffFF6D1C), fontSize: 8.0)),

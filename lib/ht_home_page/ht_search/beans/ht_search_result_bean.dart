@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:json_annotation/json_annotation.dart'; 
       
 part 'ht_search_result_bean.g.dart';
@@ -64,6 +66,18 @@ class Movie_tv_list{
 
   @JsonKey(name: 'rate')
   String? rate;
+
+   String getRate() {
+    if (rate == null || rate?.isEmpty == true) {
+      return '';
+    } else {
+      try {
+        return double.parse(rate!).toStringAsFixed(1);
+      } catch (e) {
+        return '';
+      }
+    }
+  }
 
   @JsonKey(name: 'data_type')
   String? dataType;
@@ -145,6 +159,18 @@ class Mtt_list{
 
   @JsonKey(name: 'rate')
   String? rate;
+
+   String getRate() {
+    if (rate == null || rate?.isEmpty == true) {
+      return '';
+    } else {
+      try {
+        return double.parse(rate!).toStringAsFixed(1);
+      } catch (e) {
+        return '';
+      }
+    }
+  }
 
   @JsonKey(name: 'data_type')
   String? dataType;

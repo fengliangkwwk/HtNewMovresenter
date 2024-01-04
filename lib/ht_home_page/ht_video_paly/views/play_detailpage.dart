@@ -5,6 +5,7 @@ import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_and_episode_bean.dart'
     as desc;
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_and_episode_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_video_desc_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/custom_player_view.dart';
@@ -268,7 +269,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
         child: Row(children: [
           ///星级评分
           RatingBar(
-            initialRating: double.parse(provider.rate()) / 2,
+            initialRating: provider.rate(),
             direction: Axis.horizontal,
             allowHalfRating: false,
             ignoreGestures: true,
@@ -284,7 +285,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
           ),
           Container(width: 8.0),
           Text(
-            provider.rate(),
+            provider.rate().toString(),
             style: const TextStyle(
               fontSize: 14.0,
               color: Colors.white,

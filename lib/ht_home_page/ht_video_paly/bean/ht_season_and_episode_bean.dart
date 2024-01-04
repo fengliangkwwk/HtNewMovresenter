@@ -44,6 +44,18 @@ class Data {
   @JsonKey(name: 'rate')
   String? rate;
 
+   String getRate() {
+    if (rate == null || rate?.isEmpty == true) {
+      return '';
+    } else {
+      try {
+        return double.parse(rate!).toStringAsFixed(1);
+      } catch (e) {
+        return '';
+      }
+    }
+  }
+
   @JsonKey(name: 'pub_date')
   String? pubDate;
 

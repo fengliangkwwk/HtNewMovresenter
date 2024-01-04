@@ -1,15 +1,28 @@
-import 'package:json_annotation/json_annotation.dart'; 
-      
-part 'homedropping_water_bean.g.dart';
-    
-@JsonSerializable(explicitToJson: true)
-class HomedroppingWaterBean{
+// ignore_for_file: non_constant_identifier_names
 
+import 'package:json_annotation/json_annotation.dart';
+
+part 'homedropping_water_bean.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class HomedroppingWaterBean {
   @JsonKey(name: 'id')
   String? id;
 
   @JsonKey(name: 'rate')
   String? rate;
+
+  String getRate() {
+    if (rate == null || rate?.isEmpty == true) {
+      return '';
+    } else {
+      try {
+        return double.parse(rate!).toStringAsFixed(1);
+      } catch (e) {
+        return '';
+      }
+    }
+  }
 
   @JsonKey(name: 'title')
   String? title;
@@ -52,10 +65,8 @@ class HomedroppingWaterBean{
 
   HomedroppingWaterBean();
 
-  static HomedroppingWaterBean fromJson(Map<String, dynamic> srcJson) => _$HomedroppingWaterBeanFromJson(srcJson);
+  static HomedroppingWaterBean fromJson(Map<String, dynamic> srcJson) =>
+      _$HomedroppingWaterBeanFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$HomedroppingWaterBeanToJson(this);
-
 }
-
-  

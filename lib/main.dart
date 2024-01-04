@@ -72,6 +72,9 @@ class HTClassApp extends StatelessWidget {
           // or simply save your changes to "hot reload" in a Flutter IDE).
           // Notice that the counter didn't reset back to zero; the application
           // is not restarted.
+          splashFactory:
+              NoSplash.splashFactory, // Disable splash effect globally
+
           primarySwatch: Colors.blue,
         ),
         home: HTUserStore.isFirstInto
@@ -107,7 +110,7 @@ class _HTClassBtmNavPageState extends State<HTClassBtmNavPage> {
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
         currentIndex: _htVarCurrentIndex,
-        unselectedItemColor: Color(0xff666666),
+        unselectedItemColor: const Color(0xff666666),
         selectedItemColor: Colors.white,
         onTap: (index) {
           setState(() {

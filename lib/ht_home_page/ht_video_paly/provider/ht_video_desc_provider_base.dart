@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_and_episode_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_set_list_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_video_desc_bean.dart';
+// import 'package:flutter_aliplayer/flutter_aliplayer.dart';
 
 class HTVideoDescProviderBase extends ChangeNotifier {
   HtVideoDescBean? videoDescBean;
@@ -28,6 +29,8 @@ class HTVideoDescProviderBase extends ChangeNotifier {
 
   ///视频播放器
   FijkPlayer player = FijkPlayer();
+
+
   void playerOption() {
     /*
      1. mediacodec-hevc: 设置使用HEVC（High Efficiency Video Coding）硬件解码器。HEVC是一种视频编码标准，允许更高的视频质量和更低的比特率。

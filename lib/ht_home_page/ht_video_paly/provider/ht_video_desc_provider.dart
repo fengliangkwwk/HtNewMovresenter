@@ -71,7 +71,13 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   void initData() {
         // 停止播放并释放资源
     player.reset();
-    player.setDataSource(videoUrl(), autoPlay: true, showCover: true);
+    player.setDataSource(videoUrl(), autoPlay: false, showCover: true);
+
+
+  //   player.setSubtitle(
+  //   'https://example.com/your-subtitle.srt',
+  //   type: FijkSubtitleType.SRT,
+  // );
     addHistoryAciton();
   }
 

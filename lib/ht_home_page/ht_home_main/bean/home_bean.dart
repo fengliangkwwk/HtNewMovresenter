@@ -92,14 +92,14 @@ class DataList {
   @JsonKey(name: 'info_type_2')
   String? info_type_2;
 
-  @JsonKey(includeToJson: true,defaultValue: 0)
+  @JsonKey(includeToJson: true, defaultValue: 0)
   int? page;
 
-  @JsonKey(includeToJson: true,defaultValue: 20)
-  int? pageSize ;
+  @JsonKey(includeToJson: true, defaultValue: 20)
+  int? pageSize;
 
-  @JsonKey(includeToJson: true,defaultValue: 9)
-  int? filterNo ;
+  @JsonKey(includeToJson: true, defaultValue: 9)
+  int? filterNo;
 
   DataList();
 
@@ -256,6 +256,18 @@ class M20 {
   @JsonKey(name: 'rate')
   String? rate;
 
+ String getRate() {
+    if (rate == null || rate?.isEmpty == true) {
+      return '';
+    } else {
+      try {
+        return double.parse(rate!).toStringAsFixed(1);
+      } catch (e) {
+        return '';
+      }
+    }
+  }
+  
   @JsonKey(name: 'stars')
   String? stars;
 
@@ -309,6 +321,18 @@ class TT20 {
 
   @JsonKey(name: 'rate')
   String? rate;
+
+  String getRate() {
+    if (rate == null || rate?.isEmpty == true) {
+      return '';
+    } else {
+      try {
+        return double.parse(rate!).toStringAsFixed(1);
+      } catch (e) {
+        return '';
+      }
+    }
+  }
 
   @JsonKey(name: 'pub_date')
   String? pub_date;

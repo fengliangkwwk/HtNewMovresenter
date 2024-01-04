@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -106,7 +108,7 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
       'sig2': 'kevMvWzTjzlckLgckegcoeeRwdwlwEbejzjLvzvSod1UkEqVkEeOkWjS',
       'unixtime1': cutterntTimeStamp,
       'unixtime': cutterntTimeStamp,
-      'api_ver': '6'
+      // 'api_ver': '6'
     });
     Map<String, dynamic> jsonMap = jsonDecode(res?.data.toString() ?? '');
     videoDescBean = HtVideoDescBean.fromJson(jsonMap);

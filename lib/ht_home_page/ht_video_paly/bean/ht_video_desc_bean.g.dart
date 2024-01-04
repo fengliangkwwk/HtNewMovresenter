@@ -85,7 +85,7 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data()
   ..lock = json['lock'] as String?
   ..r18 = json['r18'] as String?
   ..like = json['like'] as String?
-  ..unlike = json['unlike'] as String?
+  ..unlike = json['unlike']
   ..tbapi = json['tbapi'] as String?
   ..apiUrl = json['api_url'] as String?
   ..crwdsrc = json['crwdsrc'] == null

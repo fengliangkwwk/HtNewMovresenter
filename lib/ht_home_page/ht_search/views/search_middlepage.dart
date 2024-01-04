@@ -50,11 +50,13 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
 
     super.initState();
   }
+
   @override
   void dispose() {
     super.dispose();
-   FocusScope.of(context).unfocus();
+    FocusScope.of(context).unfocus();
   }
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -114,7 +116,8 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
 
   ///搜索框那一行
   Widget searchBoxWidget() {
-    return Container(
+    return SizedBox(
+        // color: Colors.amber,
         height: 56.0,
         child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Container(width: 10.0),
@@ -131,18 +134,20 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
               child: Container(
             height: 36.0,
             decoration: BoxDecoration(
-                color: Color(0xff36373C),
+                // color: Colors.red,
+                color: const Color(0xff36373C),
                 borderRadius: BorderRadius.circular(10.0)),
             child:
                 Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
               Container(width: 11.3),
               CachedNetworkImage(
                   imageUrl: ImageURL.url_283, width: 24, height: 24),
-
               ///搜索图标
               Container(width: 8),
               Expanded(
+                
                 child: TextField(
+                  // textAlignVertical: TextAlignVertical.center,
                   onEditingComplete: (() {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
@@ -157,6 +162,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                     color: Colors.white,
                   ),
                   decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.only(bottom: 10),
                     hintText: "Search for Movies,TV",
                     border: InputBorder.none,
                     hintStyle: TextStyle(
@@ -180,14 +186,21 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
               ),
 
               ///删除图标
-              GestureDetector(
-                onTap: () {
-                  midSearchProvider.deleteInput(context, _htVarFieldFocusNode);
-                },
-                child: CachedNetworkImage(
-                  imageUrl: ImageURL.url_79,
-                  width: 16,
-                  height: 16,
+              Visibility(
+                visible: _htVarSearchValue.isNotEmpty?true:false,
+                child: GestureDetector(
+                  onTap: () {
+                    midSearchProvider.deleteInput(context, _htVarFieldFocusNode);
+                    setState(() {
+                        _htVarSearchValue =
+                            midSearchProvider.htVarFieldController.value.text;
+                      });
+                  },
+                  child: CachedNetworkImage(
+                    imageUrl: ImageURL.url_79,
+                    width: 16,
+                    height: 16,
+                  ),
                 ),
               ),
               Container(width: 10.0),
@@ -212,13 +225,14 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                     fontWeight: FontWeight.w600)),
           ]),
           Container(height: 10.0),
-          Container(
+          SizedBox(
               height: 36.0,
               child: TabBar(
+                  indicatorPadding: EdgeInsets.zero, // 确保内边距是正确的
                   controller: _htVarTabController,
                   isScrollable: true,
                   indicatorSize: TabBarIndicatorSize.label,
-                  indicatorColor: Color(0xff3CDEF4),
+                  indicatorColor: const Color(0xff3CDEF4),
                   tabs: const <Widget>[
                     Tab(text: 'All'),
                     Tab(text: 'Movie'),

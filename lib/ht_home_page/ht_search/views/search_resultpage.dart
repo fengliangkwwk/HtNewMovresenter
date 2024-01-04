@@ -7,12 +7,11 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../ht_video_paly/views/play_detailpage.dart';
 
 class HTClassSearchResultPage extends StatefulWidget {
-  const HTClassSearchResultPage({
-    Key? key,
-    this.keyWord,
-  }) : super(key: key);
-
   final String? keyWord;
+  const HTClassSearchResultPage({
+    this.keyWord,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<HTClassSearchResultPage> createState() =>
@@ -66,6 +65,7 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
             GestureDetector(
                 child: CachedNetworkImage(
                     imageUrl: ImageURL.url_291, width: 24, height: 24),
+
                 ///返回按钮
                 onTap: () {
                   Navigator.of(context).pop();
@@ -75,7 +75,7 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                 child: Container(
               height: 36.0,
               decoration: BoxDecoration(
-                  color: Color(0xff36373C),
+                  color: const Color(0xff36373C),
                   borderRadius: BorderRadius.circular(10.0)),
               child:
                   Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
@@ -89,11 +89,12 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                     child: TextField(
                         controller: TextEditingController(),
                         focusNode: _htVarFieldFocusNode,
-                        decoration: const InputDecoration(
-                            hintText: "Search for Movies,TV",
+                        decoration: InputDecoration(
+                            hintText: widget.keyWord,
                             border: InputBorder.none,
-                            hintStyle: TextStyle(
+                            hintStyle: const TextStyle(
                                 color: Color(0xffAEAFB1), fontSize: 15.0)))),
+
                 CachedNetworkImage(
                     imageUrl: ImageURL.url_79, width: 16, height: 16),
                 Container(width: 10.0),
@@ -127,18 +128,17 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
               itemBuilder: (context, index) {
                 var model = dataList?[index];
                 return GestureDetector(
-                  onTap:(){
-                    if(model?.dataType != '1'||model?.dataType != '3'){
-                      return;
-                    }
+                  onTap: () {
+                    // if (model?.dataType != '1' || model?.dataType != '3') {
+                    //   return;
+                    // }
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
                           return HTClassVideoDetailPage(
-                            m_type_2: (model?.dataType == '1')
-                                ? "myfx"
-                                : "tt_mflx",
+                            m_type_2:
+                                (model?.dataType == '1') ? "myfx" : "tt_mflx",
                             id: model?.id ?? "",
                           );
                         },
@@ -151,7 +151,7 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                       Expanded(
                           child: Stack(
                         children: [
-                          Container(
+                          SizedBox(
                             width: double.infinity,
                             height: double.infinity,
                             child: CachedNetworkImage(
@@ -166,7 +166,7 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Text(
-                                      model?.rate ?? '',
+                                      model!.getRate(),
                                       style: const TextStyle(
                                         color: Color(0xffFF6D1C),
                                         fontSize: 20,
@@ -174,56 +174,60 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                                       ),
                                     ),
                                   ])),
-                          SizedBox(
-                            width: double.infinity,
-                            height: double.infinity,
-
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween
-                              ,children: [
-                              const SizedBox(),
-                              Container(
-                              height: 24.0,
-                              // padding: const EdgeInsets.symmetric(horizontal: 9.5 *2),
+                          Visibility(
+                            visible: model.newFlag == "NEW" ? true : false,
+                            child: SizedBox(
                               width: double.infinity,
-                              decoration: const BoxDecoration(
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [Colors.transparent, Colors.black])),
-                              child: const Row(
+                              height: double.infinity,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Spacer(),
-                                  Text("NEW",
-                                      style: TextStyle(
-                                          color: Color(0xffFF6D1C), fontSize: 8.0)),
-                                  Text("|S07 E08",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 8.0))
+                                  const SizedBox(),
+                                  Container(
+                                    height: 24.0,
+                                    // padding: const EdgeInsets.symmetric(horizontal: 9.5 *2),
+                                    width: double.infinity,
+                                    decoration: const BoxDecoration(
+                                        gradient: LinearGradient(
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                            colors: [
+                                          Colors.transparent,
+                                          Colors.black
+                                        ])),
+                                    child: Row(
+                                     children: [
+                                          const Spacer(),
+                                          Text(model.newFlag ?? 'NEW',
+                                              style: const TextStyle(
+                                                  color: Color(0xffFF6D1C),
+                                                  fontSize: 8.0)),
+                                          Text("| ${model.ssEps}",
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 8.0))
+                                        ],
+                                    ),
+                                  )
                                 ],
                               ),
-                            )
-                            ],),
+                            ),
                           ),
                         ],
                       )),
 
                       ///2.标题
-                      Container(
-                        child: Text(
-                          model?.title ?? '',
-                          maxLines: 2,
-                          style: const TextStyle(
-                            color: Color(0xff828386),
-                            fontSize: 12.0,
-                          ),
+                      Text(
+                        model.title ?? '',
+                        maxLines: 2,
+                        style: const TextStyle(
+                          color: Color(0xff828386),
+                          fontSize: 12.0,
                         ),
                       ),
                     ],
                   ),
                 );
-            
-                
               },
             ),
           ),

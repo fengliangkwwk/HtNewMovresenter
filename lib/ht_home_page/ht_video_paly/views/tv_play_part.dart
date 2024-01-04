@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_and_episode_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_set_list_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
@@ -44,29 +45,35 @@ class TVPlayPartWidget extends StatelessWidget {
   }
 
   Widget tvPlayPartWidget(BuildContext context) {
+    List<Ssn_list>? ssnList =
+        (context.read<HTVideoDescProvider>().seasonList())?.cast<Ssn_list>();
+
+    print(
+        '🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎${ssnList?.length}');
     return Column(
       children: [
-        Row(
-          children: [
-            ///Season 那一行
-            Container(
-              child: DropdownButtonHideUnderline(
+        Container(
+          margin: const EdgeInsets.only(top: 20, bottom: 5),
+          child: Row(
+            children: [
+              ///Season 那一行
+              DropdownButtonHideUnderline(
                 child: DropdownButton2<String>(
+                  // child: DropdownButton2<Ssn_list>(
+
                   // isExpanded: true,
-                  hint: const Text(
-                    'Select Item',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.amber,
-
-                      // color: Theme.of(context).hintColor,
-                    ),
-                  ),
-
-                  style: const TextStyle(
-                    // 设置下拉列表中选中项的文本样式
-                    color: Colors.white, // 设置文本颜色
-                  ),
+                  // items: ssnList?.map(
+                  //       (Ssn_list item) => DropdownMenuItem<Ssn_list>(
+                  //         value: item,
+                  //         child: Text(
+                  //           item.title??'',
+                  //           style: const TextStyle(
+                  //             fontSize: 14,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     )
+                  //     .toList(),
 
                   items: items
                       .map(
@@ -84,9 +91,28 @@ class TVPlayPartWidget extends StatelessWidget {
                   value: selectedValue,
                   onChanged: (String? value) {},
 
+                  hint: const Text(
+                    'Select Item',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+
+                  style: const TextStyle(
+                    // 设置下拉列表中选中项的文本样式
+                    color: Colors.white, //设置文本颜色
+                  ),
+                  buttonStyleData: const ButtonStyleData(
+                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      color: Color(0xff23252A),
+                    ),
+                  ),
                   dropdownStyleData: DropdownStyleData(
                     maxHeight: 144,
-                    width: 95,
+                    width: 115,
                     padding: const EdgeInsets.symmetric(vertical: 6),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
@@ -99,44 +125,26 @@ class TVPlayPartWidget extends StatelessWidget {
                   ),
                 ),
               ),
-
-              // margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
-              // width: 95.0,
-              // height: 28.0,
-              // decoration: BoxDecoration(
-              //     color: const Color(0xff23252A),
-              //     borderRadius: BorderRadius.circular(5.0)),
-              // child: Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     const Text(
-              //       "Season 1",
-              //       style: TextStyle(color: Colors.white, fontSize: 14.0),
-              //     ),
-              //     Container(width: 6.0),
-              //     CachedNetworkImage(
-              //         imageUrl: ImageURL.url_114, width: 10.0, height: 8.0)
-              //   ],
-              // ),
-            ),
-            const Spacer(),
-            GestureDetector(
-              onTap: (() {
-                if (kDebugMode) {
-                  print('你好👋你好👋你好👋你好👋你好👋你好👋');
-                }
-                // allEpisodesEvent(true);
-                context.read<HTVideoDescProvider>().allEpisodesEvent();
-              }),
-              child: Row(children: [
-                const Text("All Episodes",
-                    style: TextStyle(color: Color(0xff999999), fontSize: 14.0)),
-                Container(width: 4.0),
-                CachedNetworkImage(
-                    imageUrl: ImageURL.url_288, width: 16.0, height: 16.0),
-              ]),
-            ),
-          ],
+              const Spacer(),
+              GestureDetector(
+                onTap: (() {
+                  if (kDebugMode) {
+                    print('你好👋你好👋你好👋你好👋你好👋你好👋');
+                  }
+                  // allEpisodesEvent(true);
+                  context.read<HTVideoDescProvider>().allEpisodesEvent();
+                }),
+                child: Row(children: [
+                  const Text("All Episodes",
+                      style:
+                          TextStyle(color: Color(0xff999999), fontSize: 14.0)),
+                  Container(width: 4.0),
+                  CachedNetworkImage(
+                      imageUrl: ImageURL.url_288, width: 16.0, height: 16.0),
+                ]),
+              ),
+            ],
+          ),
         ),
         ////中间的横线
         Container(

@@ -10,9 +10,7 @@ import 'package:dio/dio.dart' as Dio;
 
 class HTMidSearchProvider extends HTMidSearchProviderBase
     with HTMidSearchProviderMiXin {
-/**
- * type  5.All; 1.Movies; 2.TV Shows; 3.Animated Series; 4.Animation Movies
- */
+/// type  5.All; 1.Movies; 2.TV Shows; 3.Animated Series; 4.Animation Movies
   var type = '5';
   Future<void> loadData() async {
     //1.请求数据,并且刷新

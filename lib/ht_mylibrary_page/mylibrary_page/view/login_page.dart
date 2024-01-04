@@ -46,6 +46,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff191B21),
       body: SafeArea(
         child: WebViewWidget(
           controller: _controller,

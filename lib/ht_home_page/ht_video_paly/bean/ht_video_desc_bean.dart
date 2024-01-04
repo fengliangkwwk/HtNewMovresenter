@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'ht_video_desc_bean.g.dart';
@@ -40,6 +42,18 @@ class Data {
 
   @JsonKey(name: 'rate')
   String? rate;
+
+   String getRate() {
+    if (rate == null || rate?.isEmpty == true) {
+      return '';
+    } else {
+      try {
+        return double.parse(rate!).toStringAsFixed(1);
+      } catch (e) {
+        return '';
+      }
+    }
+  }
 
   @JsonKey(name: 'pub_date')
   String? pubDate;
@@ -162,7 +176,7 @@ class Data {
   String? like;
 
   @JsonKey(name: 'unlike')
-  String? unlike;
+  dynamic unlike;
 
   @JsonKey(name: 'tbapi')
   String? tbapi;

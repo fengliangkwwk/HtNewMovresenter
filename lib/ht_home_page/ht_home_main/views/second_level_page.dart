@@ -184,7 +184,8 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
                     left: 5,
                     top: 5,
                     child: Text(
-                      itemData.rate ?? '',
+                      itemData.getRate(),
+                      // itemData.rate ?? '',
                       style: const TextStyle(
                         color: Color(0xFFFF6D1C),
                         fontSize: 20,
