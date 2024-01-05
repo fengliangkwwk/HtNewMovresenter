@@ -63,14 +63,11 @@ dependencies:
 
   #下拉刷新
   easy_refresh: ^3.3.2+4
-
   tuple: ^2.0.2
   #设备预览
   device_preview: ^1.1.0
-
   #loading
   flutter_easyloading: ^3.0.5
-
   #上拉刷新下拉加载
   pull_to_refresh: ^2.0.0
   #苹果原生分享
@@ -90,7 +87,6 @@ dependencies:
   firebase_core: ^2.24.2
   firebase_auth: ^4.15.3
   google_sign_in: ^6.1.5
-
   # 加载深链接
   firebase_dynamic_links: ^5.4.8
   url_launcher: ^6.2.2
@@ -102,6 +98,8 @@ dependencies:
   dropdown_button2: ^2.3.9
   #阿里播放器
   # flutter_aliplayer: ^6.7.0
+  #轮播图
+  card_swiper: ^3.0.1
 
 dev_dependencies:
   flutter_test:

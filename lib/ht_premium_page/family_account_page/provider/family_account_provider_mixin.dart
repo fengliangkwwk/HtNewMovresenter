@@ -4,16 +4,15 @@ import 'package:ht_new_movpresenter/ht_premium_page/family_account_page/bean/fam
 import 'package:ht_new_movpresenter/ht_premium_page/family_account_page/provider/family_account_provider_base.dart';
 import 'package:ht_new_movpresenter/utils/net_request/ht_api.dart';
 import 'package:ht_new_movpresenter/utils/net_request/ht_net_utils.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:ht_new_movpresenter/utils/tools/toast_tool.dart';
 
 mixin FamilyAccountProviderMixin on FamilyAccountProviderBase {
-  FamilyAccountBean? familyAccountBean;
-
   Future<void> requestFamilyAccountApi() async {
     EasyLoading.show();
     var res = await HTNetUtils.htPost(
       apiUrl: Global.familyMemberListUrl,
-      params: {"fid": "0", "uid": "0"},
+      params: {"fid": HTUserStore.vipInfoBean?.family?.fid, "uid":HTUserStore.userBean?.uid},
     );
     EasyLoading.dismiss();
     var json = jsonDecode(res?.data);
@@ -52,20 +51,34 @@ mixin FamilyAccountProviderMixin on FamilyAccountProviderBase {
 //   print('Name: $name');
 //   print('Age: $age');
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
+
+///解散家庭接口
+  Future<bool> dissolveFamily() async {
+    EasyLoading.show();
+    var res = await HTNetUtils.htPost(
+      apiUrl: Global.dissolveFamilyUrl,
+      params: {"fid": HTUserStore.vipInfoBean?.family?.fid, "uid":HTUserStore.userBean?.uid},
+    );
+    EasyLoading.dismiss();
+    var json = jsonDecode(res?.data);
+    familyAccountBean = FamilyAccountBean.fromJson(json);
+    var _dataList = <Data>[];
+    print("---------" + res?.data);
+    if (json['status'] == 200) {
+      for (Map<String, dynamic> element in json?['data'] ?? []) {
+        _dataList.add(Data.fromJson(element));
+      }
+      familyAccountBean?.data = _dataList;
+    } else {
+      ToastUtil.showToast(msg: familyAccountBean?.msg ?? "");
+    }
+
+    return false;
+  }
+
+
+
+
+
 }

@@ -74,7 +74,6 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
                 children: [
                   ///播放器
                   videoPlayerViewWidget(),
-
                   ///带背景图的第一行
                   firstPartWidget(),
 

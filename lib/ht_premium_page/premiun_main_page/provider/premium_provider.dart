@@ -176,7 +176,7 @@ class PremiumProvider extends PremiumProviderBase
 
       Uri schemeUrl = Uri.parse('${airplay?.scheme}://');
       bool isInstalled = await canLaunchUrl(schemeUrl);
-      if (isInstalled) {
+      if (!isInstalled) {
         ///scheme跳转
         await canLaunchUrl(Uri.parse(schemeLink));
       } else {

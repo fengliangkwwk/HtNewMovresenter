@@ -37,7 +37,6 @@ class HTHomeProvider extends HTHomeProviderBase with HTHomeProviderMixin {
   void onTapMoreAction(DataList data) async {
     selectData = data;
     notifyListeners();
-
     ///1.请求更多接口
     await moreNet(data: data);
   }

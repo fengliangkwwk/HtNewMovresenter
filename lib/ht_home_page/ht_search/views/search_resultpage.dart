@@ -154,9 +154,12 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                           SizedBox(
                             width: double.infinity,
                             height: double.infinity,
-                            child: CachedNetworkImage(
-                              imageUrl: model?.cover ?? '',
-                              fit: BoxFit.fill,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(5.0),
+                              child: CachedNetworkImage(
+                                imageUrl: model?.cover ?? '',
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
                           Positioned(

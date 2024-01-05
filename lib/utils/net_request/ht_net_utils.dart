@@ -19,14 +19,14 @@ class HTNetUtils {
     var dio = Dio();
 
     //设置代理
-    dio.httpClientAdapter = IOHttpClientAdapter()
-      // ignore: deprecated_member_use
-      ..onHttpClientCreate = (client) {
-        client.findProxy = (uri) {
-          return 'PROXY 192.168.0.112:8888';
-        };
-        return client;
-      };
+    // dio.httpClientAdapter = IOHttpClientAdapter()
+    //   // ignore: deprecated_member_use
+    //   ..onHttpClientCreate = (client) {
+    //     client.findProxy = (uri) {
+    //       return 'PROXY 192.168.0.112:8888';
+    //     };
+    //     return client;
+    //   };
 
     var res = await dio.post(
       apiUrl,

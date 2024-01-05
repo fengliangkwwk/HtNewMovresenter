@@ -5,6 +5,7 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/view/setting_watch_list.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/feed_back/view/setting_feedback.dart';
@@ -18,8 +19,7 @@ import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.
 import 'package:provider/provider.dart';
 
 class HTClassSettingInfoPage extends StatefulWidget {
-  const HTClassSettingInfoPage({Key? key, this.title})
-      : super(key: key);
+  const HTClassSettingInfoPage({Key? key, this.title}) : super(key: key);
   final String? title;
   @override
   State<HTClassSettingInfoPage> createState() => _HTClassSettingInfoPageState();
@@ -186,7 +186,9 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) {
-            return const HTClassUnPremiumPage(title:"Premium",);
+            return const HTClassUnPremiumPage(
+              title: "Premium",
+            );
           }),
         );
       },
@@ -232,30 +234,30 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
 
   ///第三行
   Widget historyWidget(BuildContext context) {
-    return GestureDetector(
+    return Row(children: [
+      Container(width: 10.0),
+      CachedNetworkImage(imageUrl: ImageURL.url_343, width: 16.0, height: 16.0),
+      Container(width: 5.0),
+      const Text("History",
+          style: TextStyle(
+              fontSize: 15.0,
+              color: Colors.white,
+              fontWeight: FontWeight.w600)),
+      const Spacer(),
+      GestureDetector(
         onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const HTClassWatchListPage(
-                title: "Recently Played",
-                state: 1,
-              );
-            }));
-          },
-      child: Row(children: [
-        Container(width: 10.0),
-        CachedNetworkImage(imageUrl: ImageURL.url_343, width: 16.0, height: 16.0),
-        Container(width: 5.0),
-        const Text("History",
-            style: TextStyle(
-                fontSize: 15.0,
-                color: Colors.white,
-                fontWeight: FontWeight.w600)),
-        const Spacer(),
-        CachedNetworkImage(
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return const HTClassWatchListPage(
+              title: "Recently Played",
+              state: 1,
+            );
+          }));
+        },
+        child: CachedNetworkImage(
             imageUrl: ImageURL.url_289, width: 24.0, height: 24.0),
-        Container(width: 10.0)
-      ]),
-    );
+      ),
+      Container(width: 10.0)
+    ]);
   }
 
   ///historyListView列表
@@ -282,20 +284,35 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
 
   Widget historyListItem(int index) {
     var model = HTUserStore.historyList[index];
-    return Column(
-      children: [
-        topPart(model),
-        Container(
-          margin: const EdgeInsets.only(top: 5),
-          height: 20,
-          child: Text(
-            model.title ?? '',
-            maxLines: 2,
-            textAlign: TextAlign.center,
-            style: const TextStyle(color: Color(0xff828386), fontSize: 8.0),
+    return GestureDetector(
+        onTap: () {
+               Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return HTClassVideoDetailPage(
+                    m_type_2:model.mType2??"",
+                    id: model.id??"",
+                  );
+                },
+              ),
+            );
+          },
+      child: Column(
+        children: [
+          topPart(model),
+          Container(
+            margin: const EdgeInsets.only(top: 5),
+            height: 20,
+            child: Text(
+              model.title ?? '',
+              maxLines: 2,
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Color(0xff828386), fontSize: 8.0),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

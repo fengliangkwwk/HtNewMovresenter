@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter_share/flutter_share.dart';
 import 'package:ht_new_movpresenter/utils/share/ht_other_request.dart';
 

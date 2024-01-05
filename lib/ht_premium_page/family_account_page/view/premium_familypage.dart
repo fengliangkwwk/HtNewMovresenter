@@ -43,42 +43,45 @@ class _HTClassFamilyPageState extends State<HTClassFamilyPage> {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
         appBar: AppBar(
-            backgroundColor: const Color(0xff1A1C21),
-            title: const Text("Family Account",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w600)),
-            centerTitle: true,
-            leadingWidth: 24.0,
-            leading: InkWell(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: CachedNetworkImage(
-                imageUrl: ImageURL.url_291,
-                width: 24.0,
-                height: 24.0,
-                fit: BoxFit.contain,
-              ),
+          backgroundColor: const Color(0xff1A1C21),
+          title: const Text("Family Account",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w600)),
+          centerTitle: true,
+          leadingWidth: 24.0,
+          leading: InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: CachedNetworkImage(
+              imageUrl: ImageURL.url_291,
+              width: 24.0,
+              height: 24.0,
+              fit: BoxFit.contain,
             ),
+          ),
 
-            ///右上边的离开按钮
-            actions: [
-              GestureDetector(
-                child: Container(
-                  margin: const EdgeInsets.only(right: 15.0, top: 3.0),
-                  child: Image.asset(
-                    "assets/images/httabbar_images/icon_family_quit@3x.png",
-                    width: 24.0,
-                    height: 24.0,
-                  ),
-                ),
-                onTap: () {
-                  htMethodShowDelConfirmDialog(context);
-                },
-              )
-            ]),
+          ///右上角解散家庭按钮(是主账号或者主账号订阅到期才会显示)
+          actions: [
+            provider.familyAccountBean?.data?.isEmpty != true
+                ? GestureDetector(
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 15.0, top: 3.0),
+                      child: Image.asset(
+                        "assets/images/httabbar_images/icon_family_quit@3x.png",
+                        width: 24.0,
+                        height: 24.0,
+                      ),
+                    ),
+                    onTap: () {
+                      htMethodShowDelConfirmDialog(context);
+                    },
+                  )
+                : Container(),
+          ],
+        ),
         body: provider.familyAccountBean?.data?.isEmpty == false
             ? familyListWidget()
             : noFamilyMemberWiget(),
@@ -113,7 +116,7 @@ class _HTClassFamilyPageState extends State<HTClassFamilyPage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Row(children: [
-                                      const Text("Aurora" + "(Me)",
+                                      const Text("Aurora(Me)",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w600,
@@ -225,7 +228,11 @@ class _HTClassFamilyPageState extends State<HTClassFamilyPage> {
                           "Are you sure you want delete this \nfamily account?",
                           style:
                               TextStyle(color: Colors.white, fontSize: 16.0))),
-                  Container(
+                  GestureDetector(
+                    onTap: () {
+                      
+                    },
+                    child: Container(
                       alignment: Alignment.center,
                       margin: const EdgeInsets.fromLTRB(20.0, 24.0, 20.0, 18.0),
                       height: 44.0,
@@ -237,17 +244,24 @@ class _HTClassFamilyPageState extends State<HTClassFamilyPage> {
                               end: Alignment.centerRight,
                               stops: [0.0, 1.0],
                               colors: [Color(0xfff27f7f), Color(0xffd93b3a)])),
-                      child: const Text("Delete",
-                          style: TextStyle(
-                              fontSize: 16.0,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600))),
-                  const Text("Cancel",
-                      style: TextStyle(
-                          color: Color(0xff999999),
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w600,
-                          decoration: TextDecoration.underline)),
+                      child: const Text(
+                        "Delete",
+                        style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context1),
+                    child: const Text("Cancel",
+                        style: TextStyle(
+                            color: Color(0xff999999),
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w600,
+                            decoration: TextDecoration.underline)),
+                  ),
                 ],
               ),
             ),

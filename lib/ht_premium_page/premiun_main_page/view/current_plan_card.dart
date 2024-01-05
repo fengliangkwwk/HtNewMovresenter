@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/ht_premium_page/add_member_page/premium_family_addpage.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/family_account_page/view/premium_familypage.dart';
 import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
@@ -36,7 +37,7 @@ class _CurrentPlanCardWidgetState extends State<CurrentPlanCardWidget> {
     return Selector<MainPovider, bool>(
       selector: (p0, p1) => p1.purchaseRefresh,
       builder: (context, value, child) {
-        if (MainPovider.isVip() == 1) {
+        if (MainPovider.isVip() != 1) {
           return currentPlanFamilyMainWidget();
         }
 
@@ -174,8 +175,8 @@ class _CurrentPlanCardWidgetState extends State<CurrentPlanCardWidget> {
                             return const HTClassFamilyPage(
                               title: '',
                             );
-                            //携带参数(例如带一个字符串参数)
-                            //return NewRoute("abc");
+                            
+                            // return const HTClassFamilyAddPage(title: '',);
                           }),
                         );
                       },
