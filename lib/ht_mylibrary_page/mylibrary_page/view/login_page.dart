@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
     Uri url;
     if (widget.isLoginPage == true) {
       var params = <String, dynamic>{
-        "force": HTUserStore.premiumBean?.k13 ?? "0"
+        "force": widget.isLoginPage == true?'0':(HTUserStore.premiumBean?.k13 == '1'?'1':'2'),
       };
       await KTClassUIUtils.htMethodPutRequestCommonParams(params);
       url = Uri.parse(Global.unLoginWebUrl + '?param=' + jsonEncode(params));

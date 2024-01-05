@@ -193,6 +193,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                     enableInteractiveSelection: false,
                     readOnly: true,
                     decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.only(bottom: 15),
                         hintText: "Search for Movies,TV",
                         border: InputBorder.none,
                         hintStyle: TextStyle(

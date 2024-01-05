@@ -43,6 +43,11 @@ Future<void> userData() async {
   bool? isFirstInto = prefs.getBool(HTSharedKeys.isFirstInto);
   HTUserStore.isFirstInto = isFirstInto ?? true;
 
+  ///是否点击了通知授权框
+  bool? isClickMessageRequest =
+      prefs.getBool(HTSharedKeys.isClickMessageRequest);
+  HTUserStore.isClickMessageRequest = isClickMessageRequest ?? false;
+
   ///订阅页面点击支付之后的弹窗是否超过三次
   int? popUps = prefs.getInt(HTSharedKeys.popUps);
   HTUserStore.popUps = popUps ?? 0;

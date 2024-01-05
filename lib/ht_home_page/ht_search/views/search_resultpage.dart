@@ -90,6 +90,7 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                         controller: TextEditingController(),
                         focusNode: _htVarFieldFocusNode,
                         decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.only(bottom: 12),
                             hintText: widget.keyWord,
                             border: InputBorder.none,
                             hintStyle: const TextStyle(
@@ -171,9 +172,12 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                               children: [
                                 Text(
                                   // 查找点的位置
-                                  (model!.getRate().substring(
-                                      0, model.getRate().indexOf('.') + 1)).isEmpty?'0.':model.getRate().substring(
-                                      0, model.getRate().indexOf('.') + 1),
+                                  (model!.getRate().substring(0,
+                                              model.getRate().indexOf('.') + 1))
+                                          .isEmpty
+                                      ? '0.'
+                                      : model.getRate().substring(
+                                          0, model.getRate().indexOf('.') + 1),
                                   style: const TextStyle(
                                       color: Color(0xffFF6D1C),
                                       fontSize: 18,

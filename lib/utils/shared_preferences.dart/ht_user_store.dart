@@ -16,7 +16,7 @@ class HTUserStore {
 
   ///工具配置信息
   static ToolConfigBean? toolConfigBean;
-  
+
   static List<String> list18 = [];
 
   static bool login() {
@@ -26,12 +26,18 @@ class HTUserStore {
     return false;
   }
 
-//是否是首次进入 app
+  ///是否是首次进入 app
   static bool isFirstInto = true;
-//订阅页面点击支付之后的弹窗次数记录
+
+  ///是否点击了通知授权框
+  static bool isClickMessageRequest = false;
+
+  ///订阅页面点击支付之后的弹窗次数记录
   static int popUps = 0;
-//收藏列表
+
+  ///收藏列表
   static List<HistoryBean> favoriteList = [];
+
   ///浏览数据
   static List<HistoryBean> historyList = [];
 }

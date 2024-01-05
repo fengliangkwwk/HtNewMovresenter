@@ -1,11 +1,14 @@
 //／启动广告页
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:ht_new_movpresenter/main.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HTClassPremiumLauncherPage extends StatefulWidget {
   const HTClassPremiumLauncherPage({Key? key, required this.title})
@@ -21,7 +24,6 @@ class _HTClassPremiumLauncherPageState
   @override
   void initState() {
     super.initState();
-    // _requestNotificationPermission();
   }
 
   @override
@@ -32,11 +34,7 @@ class _HTClassPremiumLauncherPageState
         decoration: const BoxDecoration(
             image: DecorationImage(
                 image: CachedNetworkImageProvider(ImageURL.url_86),
-                fit: BoxFit.fill)
-            // image:Image(image: CachedNetworkImageProvider(ImageURL.url_86)),
-            // Image(image: CachedNetworkImage(imageUrl: ImageURL.url_86), fit: BoxFit.fill)),
-            // image: NetworkImage(ImageURL.url_86), fit: BoxFit.fill)
-            ),
+                fit: BoxFit.fill)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -104,15 +102,16 @@ class _HTClassPremiumLauncherPageState
                             fontSize: 16.0,
                             fontWeight: FontWeight.w600))),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        Permission.notification.request();
-                        return const HTClassBtmNavPage();
-                      },
-                    ),
-                  );
+                  _requestNotificationPermission();
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) {
+                  //       Permission.notification.request();
+                  //       return const HTClassBtmNavPage();
+                  //     },
+                  //   ),
+                  // );
                 }),
             Container(height: 18.0),
             Container(
@@ -129,17 +128,51 @@ class _HTClassPremiumLauncherPageState
 
   // ignore: unused_element
   void _requestNotificationPermission() async {
-    // 请求通知权限
-    var status = await Permission.notification.request();
-    // 检查是否授予了通知权限
-    if (status == PermissionStatus.granted) {
+    // 请求推送通知权限
+    NotificationSettings settings =
+        await FirebaseMessaging.instance.requestPermission();
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      // 用户已授予推送通知权限
       if (kDebugMode) {
-        print('Notification permission granted');
+        print("Notification permission granted");
       }
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setBool(HTSharedKeys.isClickMessageRequest, true);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            Permission.notification.request();
+            return const HTClassBtmNavPage();
+          },
+        ),
+      );
     } else {
+      // 用户拒绝了推送通知权限
       if (kDebugMode) {
-        print('Notification permission not granted');
+        print("Notification permission denied");
       }
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            Permission.notification.request();
+            return const HTClassBtmNavPage();
+          },
+        ),
+      );
     }
+    // // 请求通知权限
+    // var status = await Permission.notification.request();
+    // // 检查是否授予了通知权限
+    // if (status == PermissionStatus.granted) {
+    //   if (kDebugMode) {
+    //     print('Notification permission granted');
+    //   }
+    // } else {
+    //   if (kDebugMode) {
+    //     print('Notification permission not granted');
+    //   }
+    // }
   }
 }

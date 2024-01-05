@@ -124,7 +124,6 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
           GestureDetector(
               child: CachedNetworkImage(
                   imageUrl: ImageURL.url_291, width: 24, height: 24),
-
               ///返回按钮
               onTap: () {
                 Navigator.pop(context);
@@ -145,7 +144,6 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
               ///搜索图标
               Container(width: 8),
               Expanded(
-                
                 child: TextField(
                   // textAlignVertical: TextAlignVertical.center,
                   onEditingComplete: (() {
@@ -162,7 +160,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                     color: Colors.white,
                   ),
                   decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.only(bottom: 10),
+                    contentPadding: EdgeInsets.only(bottom: 12),
                     hintText: "Search for Movies,TV",
                     border: InputBorder.none,
                     hintStyle: TextStyle(
