@@ -163,27 +163,40 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                             ),
                           ),
                           Positioned(
-                              left: 5.0,
-                              top: 5.0,
-                              child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      model!.getRate(),
-                                      style: const TextStyle(
-                                        color: Color(0xffFF6D1C),
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ])),
+                            left: 5.0,
+                            top: 5.0,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                Text(
+                                  // 查找点的位置
+                                  (model!.getRate().substring(
+                                      0, model.getRate().indexOf('.') + 1)).isEmpty?'0.':model.getRate().substring(
+                                      0, model.getRate().indexOf('.') + 1),
+                                  style: const TextStyle(
+                                      color: Color(0xffFF6D1C),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                const Text(
+                                  '0',
+                                  style: TextStyle(
+                                      color: Color(0xffFF6D1C),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                          ),
                           Visibility(
                             visible: model.newFlag == "NEW" ? true : false,
                             child: SizedBox(
                               width: double.infinity,
                               height: double.infinity,
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   const SizedBox(),
                                   Container(
@@ -199,17 +212,17 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                                           Colors.black
                                         ])),
                                     child: Row(
-                                     children: [
-                                          const Spacer(),
-                                          Text(model.newFlag ?? 'NEW',
-                                              style: const TextStyle(
-                                                  color: Color(0xffFF6D1C),
-                                                  fontSize: 8.0)),
-                                          Text("| ${model.ssEps}",
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 8.0))
-                                        ],
+                                      children: [
+                                        const Spacer(),
+                                        Text(model.newFlag ?? 'NEW',
+                                            style: const TextStyle(
+                                                color: Color(0xffFF6D1C),
+                                                fontSize: 8.0)),
+                                        Text("| ${model.ssEps}",
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 8.0))
+                                      ],
                                     ),
                                   )
                                 ],

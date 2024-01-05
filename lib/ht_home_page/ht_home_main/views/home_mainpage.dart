@@ -578,14 +578,24 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                                   left: 5.0,
                                   top: 5.0,
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.baseline,
+                                    textBaseline: TextBaseline.alphabetic,
                                     children: [
                                       Text(
-                                        item.getRate(),
-                                        //  double.parse(item.rate!).toStringAsFixed(1),
+                                        // 查找点的位置
+                                        item.getRate().substring(
+                                            0, item.getRate().indexOf('.') + 1),
                                         style: const TextStyle(
                                             color: Color(0xffFF6D1C),
-                                            fontSize: 20,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      const Text(
+                                        '0',
+                                        style: TextStyle(
+                                            color: Color(0xffFF6D1C),
+                                            fontSize: 12,
                                             fontWeight: FontWeight.w600),
                                       ),
                                     ],
@@ -661,13 +671,24 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                                   left: 5.0,
                                   top: 5.0,
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.baseline,
+                                    textBaseline: TextBaseline.alphabetic,
                                     children: [
                                       Text(
-                                        item.getRate(),
+                                        // 查找点的位置
+                                        item.getRate().substring(
+                                            0, item.getRate().indexOf('.') + 1),
                                         style: const TextStyle(
                                             color: Color(0xffFF6D1C),
-                                            fontSize: 20,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      const Text(
+                                        '0',
+                                        style: TextStyle(
+                                            color: Color(0xffFF6D1C),
+                                            fontSize: 12,
                                             fontWeight: FontWeight.w600),
                                       ),
                                     ],
@@ -762,20 +783,32 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                                 ),
                               ),
                               Positioned(
-                                  left: 5.0,
-                                  top: 5.0,
-                                  child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        Text(m20.getRate(),
-                                            // double.parse(m20.rate ?? '')
-                                            //     .toStringAsFixed(1),
-                                            style: const TextStyle(
-                                                color: Color(0xffFF6D1C),
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w600)),
-                                      ])),
+                                left: 5.0,
+                                top: 5.0,
+                                child: Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.baseline,
+                                  textBaseline: TextBaseline.alphabetic,
+                                  children: [
+                                    Text(
+                                      // 查找点的位置
+                                      m20.getRate().substring(
+                                          0, m20.getRate().indexOf('.') + 1),
+                                      style: const TextStyle(
+                                          color: Color(0xffFF6D1C),
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    const Text(
+                                      '0',
+                                      style: TextStyle(
+                                          color: Color(0xffFF6D1C),
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ],
+                                ),
+                              ),
 
                               ///右上角
                               Visibility(
@@ -830,7 +863,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
               crossAxisCount: 3,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              childAspectRatio: 112 / 160,
+              childAspectRatio: 112 / 180,
               padding:
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
               mainAxisSpacing: 10.0,
@@ -854,20 +887,32 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                                   ),
                                 ),
                                 Positioned(
-                                    left: 5.0,
-                                    top: 5.0,
-                                    child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: [
-                                          Text(tt20.getRate(),
-                                              // double.parse(tt20.rate ?? '')
-                                              //     .toStringAsFixed(1),
-                                              style: const TextStyle(
-                                                  color: Color(0xffFF6D1C),
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w600)),
-                                        ])),
+                                  left: 5.0,
+                                  top: 5.0,
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.baseline,
+                                    textBaseline: TextBaseline.alphabetic,
+                                    children: [
+                                      Text(
+                                        // 查找点的位置
+                                        tt20.getRate().substring(
+                                            0, tt20.getRate().indexOf('.') + 1),
+                                        style: const TextStyle(
+                                            color: Color(0xffFF6D1C),
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      const Text(
+                                        '0',
+                                        style: TextStyle(
+                                            color: Color(0xffFF6D1C),
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ],
+                                  ),
+                                ),
 
                                 ///右下角
                                 Visibility(
@@ -995,18 +1040,31 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                     ),
                   ),
                   Positioned(
-                      left: 5.0,
-                      top: 5.0,
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(itemData.getRate(),
-                                // itemData.rate ?? '',
-                                style: const TextStyle(
-                                    color: Color(0xffFF6D1C),
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600)),
-                          ])),
+                    left: 5.0,
+                    top: 5.0,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          // 查找点的位置
+                          itemData.getRate().substring(
+                              0, itemData.getRate().indexOf('.') + 1),
+                          style: const TextStyle(
+                              color: Color(0xffFF6D1C),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        const Text(
+                          '0',
+                          style: TextStyle(
+                              color: Color(0xffFF6D1C),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
+                  ),
 
                   ///右上角
                   Visibility(
