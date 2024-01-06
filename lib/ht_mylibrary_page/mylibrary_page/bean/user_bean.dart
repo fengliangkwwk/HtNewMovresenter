@@ -51,6 +51,14 @@ class UserBean {
 
   @JsonKey(name: 'msync')
   int? msync;
+  
+  ///当前登录账号是否是主账号
+  bool isPrimaryAccount() {
+    if (master == '1') {
+      return true;
+    }
+    return false;
+  }
 
   UserBean();
 

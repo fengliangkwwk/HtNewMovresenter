@@ -59,50 +59,58 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
     return SafeArea(
       bottom: false,
       child: SizedBox(
-          height: 56.0,
-          child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+        height: 56.0,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
             Container(width: 10.0),
             GestureDetector(
                 child: CachedNetworkImage(
                     imageUrl: ImageURL.url_291, width: 24, height: 24),
-
                 ///返回按钮
                 onTap: () {
                   Navigator.of(context).pop();
                 }),
             Container(width: 6.0),
             Expanded(
-                child: Container(
-              height: 36.0,
-              decoration: BoxDecoration(
-                  color: const Color(0xff36373C),
-                  borderRadius: BorderRadius.circular(10.0)),
-              child:
-                  Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                Container(width: 11.3),
-                CachedNetworkImage(
-                    imageUrl: ImageURL.url_283, width: 24, height: 24),
+              child: Container(
+                height: 36.0,
+                decoration: BoxDecoration(
+                    color: const Color(0xff36373C),
+                    borderRadius: BorderRadius.circular(10.0)),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(width: 11.3),
+                    CachedNetworkImage(
+                        imageUrl: ImageURL.url_283, width: 24, height: 24),
 
-                ///搜索图标
-                Container(width: 8),
-                Expanded(
-                    child: TextField(
+                    ///搜索图标
+                    Container(width: 8),
+                    Expanded(
+                      child: TextField(
                         controller: TextEditingController(),
                         focusNode: _htVarFieldFocusNode,
                         decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.only(bottom: 12),
-                            hintText: widget.keyWord,
-                            border: InputBorder.none,
-                            hintStyle: const TextStyle(
-                                color: Color(0xffAEAFB1), fontSize: 15.0)))),
-
-                CachedNetworkImage(
-                    imageUrl: ImageURL.url_79, width: 16, height: 16),
-                Container(width: 10.0),
-              ]),
-            )),
+                          contentPadding: const EdgeInsets.only(bottom: 12),
+                          hintText: widget.keyWord,
+                          border: InputBorder.none,
+                          hintStyle: const TextStyle(
+                              color: Color(0xffAEAFB1), fontSize: 15.0),
+                        ),
+                      ),
+                    ),
+                    CachedNetworkImage(
+                        imageUrl: ImageURL.url_79, width: 16, height: 16),
+                    Container(width: 10.0),
+                  ],
+                ),
+              ),
+            ),
             Container(width: 10.0),
-          ])),
+          ],
+        ),
+      ),
     );
   }
 

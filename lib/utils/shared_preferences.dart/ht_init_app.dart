@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
@@ -86,7 +87,9 @@ Future<void> request84Api() async {
   var json = jsonDecode(res?.data);
   if (json["status"] == '200') {
     HTUserStore.toolConfigBean = ToolConfigBean.fromJson(json['data']);
-    print('解析84成功');
+    if (kDebugMode) {
+      print('解析84成功');
+    }
   } else {
     ToastUtil.showToast(msg: json["msg"]);
   }

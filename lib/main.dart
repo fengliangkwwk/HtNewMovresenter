@@ -36,11 +36,14 @@ class HTClassApp extends StatelessWidget {
         print("Firebase Token: $token");
       }
     });
+
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       if (kDebugMode) {
         print("onMessage: $message");
       }
       // 处理在前台收到的消息
+    }).onError((err) {
+      // Error getting token.
     });
 
     FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
@@ -55,6 +58,8 @@ class HTClassApp extends StatelessWidget {
         print("onMessageOpenedApp: $message");
       }
       // 处理应用程序从后台状态启动时收到的消息
+    }).onError((err) {
+      // Error getting token.
     });
 
 print(HTUserStore.isClickMessageRequest);

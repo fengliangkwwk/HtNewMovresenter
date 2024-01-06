@@ -12,7 +12,10 @@ mixin FamilyAccountProviderMixin on FamilyAccountProviderBase {
     EasyLoading.show();
     var res = await HTNetUtils.htPost(
       apiUrl: Global.familyMemberListUrl,
-      params: {"fid": HTUserStore.vipInfoBean?.family?.fid, "uid":HTUserStore.userBean?.uid},
+      params: {
+        "fid": HTUserStore.vipInfoBean?.family?.fid,
+        "uid": HTUserStore.userBean?.uid
+      },
     );
     EasyLoading.dismiss();
     var json = jsonDecode(res?.data);
@@ -27,8 +30,8 @@ mixin FamilyAccountProviderMixin on FamilyAccountProviderBase {
     } else {
       ToastUtil.showToast(msg: familyAccountBean?.msg ?? "");
     }
-  
-
+    loading = !loading;
+    notifyListeners();
 // // 读取本地JSON文件并解析
 // Future<String> _loadLocalJSON() async {
 //   return await rootBundle.loadString('assets/data.json');
@@ -53,32 +56,49 @@ mixin FamilyAccountProviderMixin on FamilyAccountProviderBase {
 // }
   }
 
-///解散家庭接口
+  ///解散家庭接口
   Future<bool> dissolveFamily() async {
+    var hostMail = '';
     EasyLoading.show();
+    for (var element in familyAccountBean?.data ?? List.empty()) {
+      if (element.master == 1) {
+        hostMail = element?.mail;
+      }
+    }
     var res = await HTNetUtils.htPost(
       apiUrl: Global.dissolveFamilyUrl,
-      params: {"fid": HTUserStore.vipInfoBean?.family?.fid, "uid":HTUserStore.userBean?.uid},
+      params: {"fid": HTUserStore.vipInfoBean?.family?.fid, "mail": hostMail},
     );
     EasyLoading.dismiss();
     var json = jsonDecode(res?.data);
-    familyAccountBean = FamilyAccountBean.fromJson(json);
-    var _dataList = <Data>[];
-    print("---------" + res?.data);
+    // familyAccountBean = FamilyAccountBean.fromJson(json);
+    // var _dataList = <Data>[];
+    // print("---------" + res?.data);
+    ToastUtil.showToast(msg: json['msg']);
     if (json['status'] == 200) {
-      for (Map<String, dynamic> element in json?['data'] ?? []) {
-        _dataList.add(Data.fromJson(element));
-      }
-      familyAccountBean?.data = _dataList;
+      return true;
     } else {
-      ToastUtil.showToast(msg: familyAccountBean?.msg ?? "");
+      return false;
     }
-
-    return false;
   }
 
-
-
-
-
+  ///删除退出家庭成员deleteExitFamilyMemberUrl
+  Future<bool> deleteFamilyMember(String hostMail) async {
+    EasyLoading.show();
+    var res = await HTNetUtils.htPost(
+      apiUrl: Global.dissolveFamilyUrl,
+      params: {"fid": HTUserStore.vipInfoBean?.family?.fid, "mail": hostMail},
+    );
+    EasyLoading.dismiss();
+    var json = jsonDecode(res?.data);
+    // familyAccountBean = FamilyAccountBean.fromJson(json);
+    // var _dataList = <Data>[];
+    // print("---------" + res?.data);
+    ToastUtil.showToast(msg: json['msg']);
+    if (json['status'] == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
