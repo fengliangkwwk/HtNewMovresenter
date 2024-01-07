@@ -38,20 +38,28 @@ class HTClassVideoDetailPage extends StatefulWidget {
   State<HTClassVideoDetailPage> createState() => _HTClassVideoDetailPageState();
 }
 
-class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage> {
+class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage>with WidgetsBindingObserver {
   bool isSaved = false;
   final HTVideoDescProvider provider = HTVideoDescProvider();
 
   @override
   void initState() {
     provider.loadData(widget.m_type_2, widget.id);
+        WidgetsBinding.instance.addObserver(this);
+
     // provider.playerOption();
     super.initState();
+    
   }
+  @override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  provider.didChangeAppLifecycleState(state,context);
+}
 
   @override
   void dispose() {
     super.dispose();
+    provider.addHistoryAciton();
     provider.dismissEasyLoading();
     provider.player.release();
   }

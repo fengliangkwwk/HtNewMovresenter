@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -53,8 +54,6 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
       'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
     ];
 
-
-
     initData(id: id);
 
     ///判断当前播放的视频是否处于收藏状态。
@@ -74,29 +73,31 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     }
     return videoUrlStr ?? '';
   }
+
   ///播放器赋值资源
-  void initData({String? id}) async{
+  void initData({String? id}) async {
+    ///判断是否有播放记录
+    var saveData = await isSaveHistory(id);
 
-      ///判断是否有播放记录
-  var saveData = await isSaveHistory(id);
-
-
-      // 停止播放并释放资源
+    // 停止播放并释放资源
     await player.reset();
     if (kDebugMode) {
       print(videoUrl());
     }
-   await player.setDataSource(videoUrl(), autoPlay: true, showCover: true);
-    if (saveData.item1) {
+    player.setDataSource(videoUrl(), autoPlay: true, showCover: true);
+
+    //   player.setSubtitle(
+    //   'https://example.com/your-subtitle.srt',
+    //   type: FijkSubtitleType.SRT,
+    // );
+    player.addListener(() {
+      if (player.value.state == FijkState.started) {
+        if (saveData.item1) {
+          print('当前进度:${saveData.item2?.seek}');
           player.seekTo(saveData.item2?.seek ?? 0);
-    }
-  //   player.setSubtitle(
-  //   'https://example.com/your-subtitle.srt',
-  //   type: FijkSubtitleType.SRT,
-  // );
-    addHistoryAciton();
-    player.addListener(() { 
-      addHistoryAciton();
+        }
+      }
+      // addHistoryAciton();
     });
   }
 
@@ -185,7 +186,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   }
 
   ///是否浏览
-  Future<Tuple2<bool,HistoryBean?>> isSaveHistory(String? id) async {
+  Future<Tuple2<bool, HistoryBean?>> isSaveHistory(String? id) async {
     bool result = false;
     HistoryBean? model;
     for (var element in HTUserStore.historyList) {
@@ -205,8 +206,8 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
       "rate": videoDescBean?.data?.rate,
       "mType2": mType2,
       "ssnId": sid ?? tv202Bean?.data?.ssnList?[0].id,
-      "epsId":  eid ?? tv203Bean?.epsList?[0].id,
-      'seek':player.currentPos.inMilliseconds
+      "epsId": eid ?? tv203Bean?.epsList?[0].id,
+      'seek': player.currentPos.inMilliseconds
     };
     var model = HistoryBean.fromJson(data);
     bool isSaveState = (await isSaveHistory(model.id)).item1;
@@ -256,20 +257,32 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   ///更换播放集
   void changePlayerSource(dynamic model) {
     eid = model.id.toString();
+    addHistoryAciton();
     loadData(mType2 ?? '', dataId ?? '');
   }
 
   ///更换视频类型
   void changePlayerType(String mType2, String id) {
+    addHistoryAciton();
     loadData(mType2, id);
   }
 
   ///更换季
-  void changeSesion(Ssn_list? value) async{
+  void changeSesion(Ssn_list? value) async {
     EasyLoading.show(status: 'loading...');
     selectSsnModelData = value;
     await request203();
     EasyLoading.dismiss();
     notify();
+  }
+
+
+  void didChangeAppLifecycleState(
+      AppLifecycleState state, BuildContext context) async {
+    if (state == AppLifecycleState.resumed) {
+      
+    } else if (state == AppLifecycleState.paused) {
+      addHistoryAciton();
+    }
   }
 }
