@@ -90,7 +90,6 @@ mixin HTVideoDescDataProviderMixin on HTVideoProviderMixin {
 
   ///获取电视剧季列表
   List? seasonList() {
-    print(tv202Bean?.data?.ssnList);
     if (isTV()) {
       return tv202Bean?.data?.ssnList ?? [];
     }

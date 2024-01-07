@@ -27,6 +27,9 @@ class HTVideoDescProviderBase extends ChangeNotifier {
   String? eid; //电视剧集ID（没有传0）
   String? videoUrlStr; //播放链接
 
+  ///选中的季
+  Ssn_list? selectSsnModelData;
+
   ///视频播放器
   FijkPlayer player = FijkPlayer();
 

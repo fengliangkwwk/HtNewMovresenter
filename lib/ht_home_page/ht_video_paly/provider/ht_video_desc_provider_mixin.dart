@@ -63,10 +63,10 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
 
   ///203
   Future<void> request203() async {
-    sid = (tv202Bean?.data?.ssnList?[0].id)?.toString();
+    sid = (selectSsnModelData?.id ??tv202Bean?.data?.ssnList?[0].id)?.toString();
     var res =
         await HTNetUtils.htPost(apiUrl: Global.switchingSeasonsUrl, params: {
-      'id': tv202Bean?.data?.ssnList?[0].id, //季id
+      'id': sid, //季id
     });
 
     Map<String, dynamic> jsonMap = jsonDecode(res?.data.toString() ?? '');
@@ -78,13 +78,13 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
     // if (eid != null) {
     //   eid = tv203Bean?.epsList?[0].id.toString();
     // }
-    eid = tv203Bean?.epsList?[0].id.toString();
+    eid =   eid ?? tv203Bean?.epsList?[0].id.toString();
     // 创建一个空的字典
     Map<String, dynamic> htVarparams = {};
 
     ///参数
     String cutterntTimeStamp = SysTools().getSecondsTimeStamp();
-    htVarparams['id'] = tv203Bean?.epsList?[0].id.toString(); //电视剧集 id
+    htVarparams['id'] = eid; //电视剧集 id
     htVarparams['sig2'] =
         'kevMvWzTjzlckLgckegcoeeRwdwlwEbejzjLvzvSod1UkEqVkEeOkWjS';
     htVarparams['unixtime1'] = cutterntTimeStamp;

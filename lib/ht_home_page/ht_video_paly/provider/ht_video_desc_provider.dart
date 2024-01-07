@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_and_episode_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_screen_projection_provider_mixin.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_data_prvider_mixin.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/provider/ht_video_desc_player_provider_mixin.dart';
@@ -238,5 +240,14 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   ///更换视频类型
   void changePlayerType(String mType2, String id) {
     loadData(mType2, id);
+  }
+
+  ///更换季
+  void changeSesion(Ssn_list? value) async{
+    EasyLoading.show(status: 'loading...');
+    selectSsnModelData = value;
+    await request203();
+    EasyLoading.dismiss();
+    notify();
   }
 }

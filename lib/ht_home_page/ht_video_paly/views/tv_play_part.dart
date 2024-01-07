@@ -12,7 +12,6 @@ import 'package:provider/provider.dart';
 // ignore: must_be_immutable
 class TVPlayPartWidget extends StatelessWidget {
   TVPlayPartWidget({
-    this.selectedValue,
     Key? key,
   }) : super(key: key);
   final List<String> items = [
@@ -37,16 +36,15 @@ class TVPlayPartWidget extends StatelessWidget {
     'Item3',
     'Item4',
   ];
-  String? selectedValue;
-  @override
   @override
   Widget build(BuildContext context) {
     return tvPlayPartWidget(context);
   }
 
   Widget tvPlayPartWidget(BuildContext context) {
-    List<Ssn_list>? ssnList =
-        (context.read<HTVideoDescProvider>().seasonList())?.cast<Ssn_list>();
+    List<Ssn_list?>? ssnList =
+        (context.read<HTVideoDescProvider>().seasonList())?.cast<Ssn_list?>();
+    HTVideoDescProvider provider = context.read<HTVideoDescProvider>();
 
     print(
         '🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎${ssnList?.length}');
@@ -57,73 +55,59 @@ class TVPlayPartWidget extends StatelessWidget {
           child: Row(
             children: [
               ///Season 那一行
-              DropdownButtonHideUnderline(
-                child: DropdownButton2<String>(
-                  // child: DropdownButton2<Ssn_list>(
-
-                  // isExpanded: true,
-                  // items: ssnList?.map(
-                  //       (Ssn_list item) => DropdownMenuItem<Ssn_list>(
-                  //         value: item,
-                  //         child: Text(
-                  //           item.title??'',
-                  //           style: const TextStyle(
-                  //             fontSize: 14,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     )
-                  //     .toList(),
-
-                  items: items
-                      .map(
-                        (String item) => DropdownMenuItem<String>(
-                          value: item,
-                          child: Text(
-                            item,
-                            style: const TextStyle(
-                              fontSize: 14,
+              Selector<HTVideoDescProvider, Ssn_list?>(
+                selector: (p0, p1) => p1.selectSsnModelData,
+                builder: (context, value, child) {
+                  return DropdownButtonHideUnderline(
+                    child: DropdownButton2<Ssn_list?>(
+                      items: (ssnList ?? <Ssn_list?>[])
+                          .map(
+                            (Ssn_list? item) => DropdownMenuItem<Ssn_list?>(
+                              value: item,
+                              child: Text(
+                                item?.title ?? '',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
                             ),
-                          ),
+                          )
+                          .toList(),
+                      onChanged: provider.changeSesion,
+                      hint:  Text(
+                        value?.title ?? 'Select Item',
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
                         ),
-                      )
-                      .toList(),
-                  value: selectedValue,
-                  onChanged: (String? value) {},
-
-                  hint: const Text(
-                    'Select Item',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
+                      ),
+                      style: const TextStyle(
+                        // 设置下拉列表中选中项的文本样式
+                        color: Colors.white, //设置文本颜色
+                      ),
+                      buttonStyleData: const ButtonStyleData(
+                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          color: Color(0xff23252A),
+                        ),
+                      ),
+                      dropdownStyleData: DropdownStyleData(
+                        maxHeight: 144,
+                        width: 115,
+                        padding: const EdgeInsets.symmetric(vertical: 6),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          color: const Color(0xff23252A),
+                        ),
+                        offset: const Offset(0, -4),
+                      ),
+                      menuItemStyleData: const MenuItemStyleData(
+                        height: 40,
+                      ),
                     ),
-                  ),
-
-                  style: const TextStyle(
-                    // 设置下拉列表中选中项的文本样式
-                    color: Colors.white, //设置文本颜色
-                  ),
-                  buttonStyleData: const ButtonStyleData(
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                      color: Color(0xff23252A),
-                    ),
-                  ),
-                  dropdownStyleData: DropdownStyleData(
-                    maxHeight: 144,
-                    width: 115,
-                    padding: const EdgeInsets.symmetric(vertical: 6),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: const Color(0xff23252A),
-                    ),
-                    offset: const Offset(0, -4),
-                  ),
-                  menuItemStyleData: const MenuItemStyleData(
-                    height: 40,
-                  ),
-                ),
+                  );
+                },
               ),
               const Spacer(),
               GestureDetector(
@@ -155,47 +139,55 @@ class TVPlayPartWidget extends StatelessWidget {
         ),
 
         ///横线下面的集列表
-        Visibility(
-          visible: context.read<HTVideoDescProvider>().setList()!.isEmpty
-              ? false
-              : true,
-          child: Container(
-            margin: const EdgeInsets.only(top: 5, left: 10),
-            height: 66.0,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: context.read<HTVideoDescProvider>().setList()?.length,
-              itemBuilder: ((context, index) {
-                Eps_list model =
-                    context.read<HTVideoDescProvider>().setList()?[index];
-                return Container(
-                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                  margin: const EdgeInsets.only(right: 10.0),
-                  width: 140.0,
-                  height: 66.0,
-                  decoration: BoxDecoration(
-                    color: const Color(0xff23252A),
-                    borderRadius: BorderRadius.circular(4.0),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(model.epsNum.toString(),
-                          style: const TextStyle(
-                              color: Color(0xff999999), fontSize: 10.0)),
-                      Container(height: 4.0),
-                      Text(
-                        model.title ?? "",
-                        style: const TextStyle(
-                            color: Colors.white, fontSize: 12.0),
-                        maxLines: 2,
+        Selector<HTVideoDescProvider, HtSetListBean?>(
+          selector: (p0, p1) => p1.tv203Bean,
+          builder: (context, value, child) {
+            var dataList = provider.setList() ?? [];
+            return Visibility(
+              visible: dataList.isEmpty ? false : true,
+              child: Container(
+                margin: const EdgeInsets.only(top: 5, left: 10),
+                height: 66.0,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: dataList.length,
+                  itemBuilder: ((context, index) {
+                    Eps_list model = dataList[index];
+                    return GestureDetector(
+                      onTap: () {
+                        provider.changePlayerSource(model);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                        margin: const EdgeInsets.only(right: 10.0),
+                        width: 140.0,
+                        height: 66.0,
+                        decoration: BoxDecoration(
+                          color: const Color(0xff23252A),
+                          borderRadius: BorderRadius.circular(4.0),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(model.epsNum.toString(),
+                                style: const TextStyle(
+                                    color: Color(0xff999999), fontSize: 10.0)),
+                            Container(height: 4.0),
+                            Text(
+                              model.title ?? "",
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 12.0),
+                              maxLines: 2,
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
-                );
-              }),
-            ),
-          ),
+                    );
+                  }),
+                ),
+              ),
+            );
+          },
         ),
       ],
     );
