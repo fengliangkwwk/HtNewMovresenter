@@ -78,13 +78,13 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
     // if (eid != null) {
     //   eid = tv203Bean?.epsList?[0].id.toString();
     // }
-    eid = tv203Bean?.epsList?[0].id.toString();
+    eid =   eid ?? tv203Bean?.epsList?[0].id.toString();
     // 创建一个空的字典
     Map<String, dynamic> htVarparams = {};
 
     ///参数
     String cutterntTimeStamp = SysTools().getSecondsTimeStamp();
-    htVarparams['id'] = tv203Bean?.epsList?[0].id.toString(); //电视剧集 id
+    htVarparams['id'] = eid; //电视剧集 id
     htVarparams['sig2'] =
         'kevMvWzTjzlckLgckegcoeeRwdwlwEbejzjLvzvSod1UkEqVkEeOkWjS';
     htVarparams['unixtime1'] = cutterntTimeStamp;

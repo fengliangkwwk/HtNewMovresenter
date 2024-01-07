@@ -42,8 +42,8 @@ class TVPlayPartWidget extends StatelessWidget {
   }
 
   Widget tvPlayPartWidget(BuildContext context) {
-    List<Ssn_list>? ssnList =
-        (context.read<HTVideoDescProvider>().seasonList())?.cast<Ssn_list>();
+    List<Ssn_list?>? ssnList =
+        (context.read<HTVideoDescProvider>().seasonList())?.cast<Ssn_list?>();
     HTVideoDescProvider provider = context.read<HTVideoDescProvider>();
 
     print(
@@ -59,13 +59,13 @@ class TVPlayPartWidget extends StatelessWidget {
                 selector: (p0, p1) => p1.selectSsnModelData,
                 builder: (context, value, child) {
                   return DropdownButtonHideUnderline(
-                    child: DropdownButton2<Ssn_list>(
-                      items: (ssnList ?? [])
+                    child: DropdownButton2<Ssn_list?>(
+                      items: (ssnList ?? <Ssn_list?>[])
                           .map(
-                            (Ssn_list item) => DropdownMenuItem<Ssn_list>(
+                            (Ssn_list? item) => DropdownMenuItem<Ssn_list?>(
                               value: item,
                               child: Text(
-                                item.title ?? '',
+                                item?.title ?? '',
                                 style: const TextStyle(
                                   fontSize: 14,
                                 ),
@@ -73,11 +73,10 @@ class TVPlayPartWidget extends StatelessWidget {
                             ),
                           )
                           .toList(),
-                      value: value,
                       onChanged: provider.changeSesion,
-                      hint: const Text(
-                        'Select Item',
-                        style: TextStyle(
+                      hint:  Text(
+                        value?.title ?? 'Select Item',
+                        style: const TextStyle(
                           fontSize: 14,
                           color: Colors.white,
                         ),
@@ -154,29 +153,34 @@ class TVPlayPartWidget extends StatelessWidget {
                   itemCount: dataList.length,
                   itemBuilder: ((context, index) {
                     Eps_list model = dataList[index];
-                    return Container(
-                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                      margin: const EdgeInsets.only(right: 10.0),
-                      width: 140.0,
-                      height: 66.0,
-                      decoration: BoxDecoration(
-                        color: const Color(0xff23252A),
-                        borderRadius: BorderRadius.circular(4.0),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(model.epsNum.toString(),
+                    return GestureDetector(
+                      onTap: () {
+                        provider.changePlayerSource(model);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                        margin: const EdgeInsets.only(right: 10.0),
+                        width: 140.0,
+                        height: 66.0,
+                        decoration: BoxDecoration(
+                          color: const Color(0xff23252A),
+                          borderRadius: BorderRadius.circular(4.0),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(model.epsNum.toString(),
+                                style: const TextStyle(
+                                    color: Color(0xff999999), fontSize: 10.0)),
+                            Container(height: 4.0),
+                            Text(
+                              model.title ?? "",
                               style: const TextStyle(
-                                  color: Color(0xff999999), fontSize: 10.0)),
-                          Container(height: 4.0),
-                          Text(
-                            model.title ?? "",
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 12.0),
-                            maxLines: 2,
-                          ),
-                        ],
+                                  color: Colors.white, fontSize: 12.0),
+                              maxLines: 2,
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   }),
