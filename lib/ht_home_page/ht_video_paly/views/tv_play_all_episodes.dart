@@ -80,57 +80,62 @@ class AllEpisodesWidget extends StatelessWidget {
           child: MediaQuery.removePadding(
             context: context,
             removeTop: true,
-            child: ListView.builder(
-              itemCount: context.read<HTVideoDescProvider>().setList()?.length,
-              scrollDirection: Axis.vertical,
-              itemBuilder: ((context, index) {
-                var provider = context.read<HTVideoDescProvider>();
-                Eps_list model = provider.setList()?[index];
-                if (provider.eid == model.id.toString()) {
-                  model.isCurrent = true;
-                } else {
-                  model.isCurrent = false;
-                }
-                return GestureDetector(
-                  onTap: () {
-                    provider.changePlayerSource(model);
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-                    height: 70,
-                    margin: const EdgeInsets.only(top: 10),
-                    decoration: const BoxDecoration(
-                      color: Color(0xff23252A),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(model.epsNum.toString() ?? "",
+            child: Selector<HTVideoDescProvider,Ssn_list?>(
+              selector: (p0, p1) => p1.selectSsnModelData,
+              builder: (context, value, child) {
+                return ListView.builder(
+                itemCount: context.read<HTVideoDescProvider>().setList()?.length,
+                scrollDirection: Axis.vertical,
+                itemBuilder: ((context, index) {
+                  var provider = context.read<HTVideoDescProvider>();
+                  Eps_list model = provider.setList()?[index];
+                  if (provider.eid == model.id.toString()) {
+                    model.isCurrent = true;
+                  } else {
+                    model.isCurrent = false;
+                  }
+                  return GestureDetector(
+                    onTap: () {
+                      provider.changePlayerSource(model);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+                      height: 70,
+                      margin: const EdgeInsets.only(top: 10),
+                      decoration: const BoxDecoration(
+                        color: Color(0xff23252A),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(model.epsNum.toString(),
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                color: model.isCurrent == true
+                                    ? const Color(0xFF3CDEF4)
+                                    : Colors.white,
+                                fontSize: 16.0,
+                              ),
+                              maxLines: 1),
+                          Container(height: 4.0),
+                          Text(
+                            model.title ?? "",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               color: model.isCurrent == true
                                   ? const Color(0xFF3CDEF4)
                                   : Colors.white,
-                              fontSize: 16.0,
+                              fontSize: 14.0,
                             ),
-                            maxLines: 1),
-                        Container(height: 4.0),
-                        Text(
-                          model.title ?? "",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            color: model.isCurrent == true
-                                ? const Color(0xFF3CDEF4)
-                                : Colors.white,
-                            fontSize: 14.0,
+                            maxLines: 1,
                           ),
-                          maxLines: 1,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              }),
+                  );
+                }),
+              );
+              },
             ),
           ),
         ),
