@@ -16,6 +16,7 @@ import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:ht_new_movpresenter/utils/tools/toast_tool.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tuple/tuple.dart';
 
 class HTVideoDescProvider extends HTVideoDescProviderBase
     with
@@ -51,7 +52,10 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
       'https://sample-videos.com/video123/3gp/144/big_buck_bunny_144p_10mb.3gp',
       'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
     ];
-    initData();
+
+
+
+    initData(id: id);
 
     ///判断当前播放的视频是否处于收藏状态。
     isCollect();
@@ -71,18 +75,29 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     return videoUrlStr ?? '';
   }
   ///播放器赋值资源
-  void initData() async{
-        // 停止播放并释放资源
+  void initData({String? id}) async{
+
+      ///判断是否有播放记录
+  var saveData = await isSaveHistory(id);
+
+
+      // 停止播放并释放资源
     await player.reset();
     if (kDebugMode) {
       print(videoUrl());
     }
-    player.setDataSource(videoUrl(), autoPlay: true, showCover: true);
+   await player.setDataSource(videoUrl(), autoPlay: true, showCover: true);
+    if (saveData.item1) {
+          player.seekTo(saveData.item2?.seek ?? 0);
+    }
   //   player.setSubtitle(
   //   'https://example.com/your-subtitle.srt',
   //   type: FijkSubtitleType.SRT,
   // );
     addHistoryAciton();
+    player.addListener(() { 
+      addHistoryAciton();
+    });
   }
 
   ///点击订阅广告跳转到订阅页面事件
@@ -170,14 +185,16 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   }
 
   ///是否浏览
-  Future<bool> isSaveHistory(String? id) async {
+  Future<Tuple2<bool,HistoryBean?>> isSaveHistory(String? id) async {
     bool result = false;
+    HistoryBean? model;
     for (var element in HTUserStore.historyList) {
       if (element.id == id) {
         result = true;
+        model = element;
       }
     }
-    return result;
+    return Tuple2(result, model);
   }
 
   void addHistoryAciton() async {
@@ -187,11 +204,12 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
       "cover": videoDescBean?.data?.cover,
       "rate": videoDescBean?.data?.rate,
       "mType2": mType2,
-      "ssnId": tv202Bean?.data?.ssnList?[0].id,
-      "epsId": tv203Bean?.epsList?[0].id
+      "ssnId": sid ?? tv202Bean?.data?.ssnList?[0].id,
+      "epsId":  eid ?? tv203Bean?.epsList?[0].id,
+      'seek':player.currentPos.inMilliseconds
     };
     var model = HistoryBean.fromJson(data);
-    bool isSaveState = await isSaveHistory(model.id);
+    bool isSaveState = (await isSaveHistory(model.id)).item1;
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     if (isSaveState) {
       ///已浏览

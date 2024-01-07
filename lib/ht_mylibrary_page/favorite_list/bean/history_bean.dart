@@ -24,6 +24,10 @@ class HistoryBean {
 
   @JsonKey(name: 'epsId')
   dynamic epsId;
+  
+  @JsonKey(name: 'seek')
+  int? seek;
+
 
   ///选中状态
   @JsonKey(includeFromJson: false)

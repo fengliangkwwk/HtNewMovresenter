@@ -13,7 +13,8 @@ HistoryBean _$HistoryBeanFromJson(Map<String, dynamic> json) => HistoryBean()
   ..rate = json['rate']
   ..mType2 = json['mType2'] as String?
   ..ssnId = json['ssnId']
-  ..epsId = json['epsId'];
+  ..epsId = json['epsId']
+  ..seek = json['seek'] as int?;
 
 Map<String, dynamic> _$HistoryBeanToJson(HistoryBean instance) =>
     <String, dynamic>{
@@ -24,4 +25,5 @@ Map<String, dynamic> _$HistoryBeanToJson(HistoryBean instance) =>
       'mType2': instance.mType2,
       'ssnId': instance.ssnId,
       'epsId': instance.epsId,
+      'seek': instance.seek,
     };
