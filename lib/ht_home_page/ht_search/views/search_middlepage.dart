@@ -54,7 +54,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
   @override
   void dispose() {
     super.dispose();
-    FocusScope.of(context).unfocus();
+    // FocusScope.of(context).unfocus();
   }
 
   @override
