@@ -17,7 +17,6 @@ import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tuple/tuple.dart';
-import 'package:card_swiper/card_swiper.dart';
 
 class HTClassHomeMainPage extends StatefulWidget {
   const HTClassHomeMainPage({Key? key, required this.title}) : super(key: key);
@@ -246,25 +245,68 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                   onTap: () {
                     homeProvider.onTapMoreAction(data);
                   },
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 10.0, right: 5.0),
-                    height: 35.0,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.0),
-                        color: const Color(0xff23252A)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("More",
-                            style: TextStyle(
-                                color: Color(0xffBCBDBE), fontSize: 15.0)),
-                        Container(width: 5.0),
-                        CachedNetworkImage(
-                            imageUrl: ImageURL.url_286, width: 18, height: 18),
-                      ],
-                    ),
+                  child: Selector<HTHomeProvider, DataList?>(
+                    selector: (p0, p1) => p1.selectData,
+                    builder: (context, value, child) {
+                      return Container(
+                        margin: const EdgeInsets.only(left: 10.0, right: 5.0),
+                        height: 35.0,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5.0),
+                            color: const Color(0xff23252A)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                             Text(value == null ?  "More" : 'loading',
+                                style: const TextStyle(
+                                    color: Color(0xffBCBDBE), fontSize: 15.0)),
+                            Container(width: 5.0),
+
+                            value == null ? 
+                            CachedNetworkImage(
+                                imageUrl: ImageURL.url_286,
+                                width: 18,
+                                height: 18) : RotationTransition(
+                              turns: Tween<double>(
+                                begin: 1,
+                                end: 300,
+                              ).animate(_animationController),
+                              child: CachedNetworkImage(
+                                  imageUrl: ImageURL.url_287,
+                                  width: 18,
+                                  height: 18),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 )),
+            // Flexible(
+            //     flex: 1,
+            //     child: GestureDetector(
+            //       onTap: () {
+            //         homeProvider.onTapMoreAction(data);
+            //       },
+            //       child: Container(
+            //         margin: const EdgeInsets.only(left: 10.0, right: 5.0),
+            //         height: 35.0,
+            //         decoration: BoxDecoration(
+            //             borderRadius: BorderRadius.circular(5.0),
+            //             color: const Color(0xff23252A)),
+            //         child: Row(
+            //           mainAxisAlignment: MainAxisAlignment.center,
+            //           children: [
+            //             const Text("More",
+            //                 style: TextStyle(
+            //                     color: Color(0xffBCBDBE), fontSize: 15.0)),
+            //             Container(width: 5.0),
+            //             CachedNetworkImage(
+            //                 imageUrl: ImageURL.url_286, width: 18, height: 18),
+            //           ],
+            //         ),
+            //       ),
+            //     )),
             Flexible(
               flex: 1,
               child: GestureDetector(
@@ -305,47 +347,47 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
           const SizedBox(height: 10),
 
           ///2. loading
-          Selector<HTHomeProvider, DataList?>(
-            selector: (p0, p1) => p1.selectData,
-            builder: (context, value, child) {
-              return Visibility(
-                visible: data == value,
-                child: child!,
-              );
-            },
-            child: Row(children: [
-              Flexible(
-                  flex: 1,
-                  child: Container(
-                      margin: const EdgeInsets.only(left: 10.0, right: 5.0),
-                      height: 35.0,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.0),
-                          color: const Color(0xff23252A)),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text("loading",
-                                style: TextStyle(
-                                    color: Color(0xffBCBDBE), fontSize: 15.0)),
-                            Container(width: 5.0),
-                            RotationTransition(
-                              turns: Tween<double>(
-                                begin: 1,
-                                end: 300,
-                              ).animate(_animationController),
-                              child: CachedNetworkImage(
-                                  imageUrl: ImageURL.url_287,
-                                  width: 18,
-                                  height: 18),
-                            ),
-                          ]))),
-              Flexible(
-                flex: 1,
-                child: Container(),
-              ),
-            ]),
-          ),
+          // Selector<HTHomeProvider, DataList?>(
+          //   selector: (p0, p1) => p1.selectData,
+          //   builder: (context, value, child) {
+          //     return Visibility(
+          //       visible: data == value,
+          //       child: child!,
+          //     );
+          //   },
+          //   child: Row(children: [
+          //     Flexible(
+          //         flex: 1,
+          //         child: Container(
+          //             margin: const EdgeInsets.only(left: 10.0, right: 5.0),
+          //             height: 35.0,
+          //             decoration: BoxDecoration(
+          //                 borderRadius: BorderRadius.circular(5.0),
+          //                 color: const Color(0xff23252A)),
+          //             child: Row(
+          //                 mainAxisAlignment: MainAxisAlignment.center,
+          //                 children: [
+          //                   const Text("loading",
+          //                       style: TextStyle(
+          //                           color: Color(0xffBCBDBE), fontSize: 15.0)),
+          //                   Container(width: 5.0),
+          //                   RotationTransition(
+          //                     turns: Tween<double>(
+          //                       begin: 1,
+          //                       end: 300,
+          //                     ).animate(_animationController),
+          //                     child: CachedNetworkImage(
+          //                         imageUrl: ImageURL.url_287,
+          //                         width: 18,
+          //                         height: 18),
+          //                   ),
+          //                 ]))),
+          //     Flexible(
+          //       flex: 1,
+          //       child: Container(),
+          //     ),
+          //   ]),
+          // ),
         ],
       ),
     );
