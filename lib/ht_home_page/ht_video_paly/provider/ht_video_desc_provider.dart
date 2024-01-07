@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/bean/ht_season_and_episode_bean.dart';
@@ -70,9 +71,12 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     return videoUrlStr ?? '';
   }
   ///播放器赋值资源
-  void initData() {
+  void initData() async{
         // 停止播放并释放资源
-    // player.reset();
+    await player.reset();
+    if (kDebugMode) {
+      print(videoUrl());
+    }
     player.setDataSource(videoUrl(), autoPlay: true, showCover: true);
   //   player.setSubtitle(
   //   'https://example.com/your-subtitle.srt',

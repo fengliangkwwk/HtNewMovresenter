@@ -95,6 +95,7 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
     // 解析JSON数据为User对象
     Map<String, dynamic> jsonMap = jsonDecode(result?.data?.toString() ?? '');
     videoDescBean = HtVideoDescBean.fromJson(jsonMap);
+    
   }
 
   ///电影
