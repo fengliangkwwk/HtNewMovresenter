@@ -231,6 +231,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                   isScrollable: true,
                   indicatorSize: TabBarIndicatorSize.label,
                   indicatorColor: const Color(0xff3CDEF4),
+                  tabAlignment: TabAlignment.start,
                   tabs: const <Widget>[
                     Tab(text: 'All'),
                     Tab(text: 'Movie'),
