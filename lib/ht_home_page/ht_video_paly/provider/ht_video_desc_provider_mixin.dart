@@ -63,10 +63,10 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
 
   ///203
   Future<void> request203() async {
-    sid = (tv202Bean?.data?.ssnList?[0].id)?.toString();
+    sid = (selectSsnModelData?.id ??tv202Bean?.data?.ssnList?[0].id)?.toString();
     var res =
         await HTNetUtils.htPost(apiUrl: Global.switchingSeasonsUrl, params: {
-      'id': tv202Bean?.data?.ssnList?[0].id, //季id
+      'id': sid, //季id
     });
 
     Map<String, dynamic> jsonMap = jsonDecode(res?.data.toString() ?? '');
