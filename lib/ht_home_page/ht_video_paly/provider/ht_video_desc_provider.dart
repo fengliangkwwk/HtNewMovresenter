@@ -36,6 +36,13 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     mtype2 = mType2;
     dataId = id;
     this.mType2 = mType2;
+    var saveData = await isSaveHistory(id);
+
+    if (saveData.item1 == true) {
+      selectSsnModelData = Ssn_list()..id = saveData.item2?.ssnId;
+      eid = saveData.item2?.epsId;
+    }
+
     await apiRequest(mType2, id);
     videoList = [
       'rtsp://zephyr.rtsp.stream/pattern?streamKey=1fd73653a094b877b9bd78468c91adbf',
@@ -198,7 +205,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     return Tuple2(result, model);
   }
 
-  void addHistoryAciton() async {
+  Future<void> addHistoryAciton() async {
     var data = {
       "id": dataId,
       "title": videoDescBean?.data?.title,
@@ -255,15 +262,15 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   }
 
   ///更换播放集
-  void changePlayerSource(dynamic model) {
+  void changePlayerSource(dynamic model) async{
     eid = model.id.toString();
-    addHistoryAciton();
+    await addHistoryAciton();
     loadData(mType2 ?? '', dataId ?? '');
   }
 
   ///更换视频类型
-  void changePlayerType(String mType2, String id) {
-    addHistoryAciton();
+  void changePlayerType(String mType2, String id) async{
+   await addHistoryAciton();
     loadData(mType2, id);
   }
 
@@ -276,11 +283,9 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     notify();
   }
 
-
   void didChangeAppLifecycleState(
       AppLifecycleState state, BuildContext context) async {
     if (state == AppLifecycleState.resumed) {
-      
     } else if (state == AppLifecycleState.paused) {
       addHistoryAciton();
     }

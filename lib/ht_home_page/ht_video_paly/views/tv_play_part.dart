@@ -74,8 +74,8 @@ class TVPlayPartWidget extends StatelessWidget {
                           )
                           .toList(),
                       onChanged: provider.changeSesion,
-                      hint:  Text(
-                        value?.title ?? 'Select Item',
+                      hint: Text(
+                        provider.ssnTitle(value?.id.toString() ?? ''),
                         style: const TextStyle(
                           fontSize: 14,
                           color: Colors.white,
@@ -169,14 +169,23 @@ class TVPlayPartWidget extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(model.epsNum.toString(),
-                                style: const TextStyle(
-                                    color: Color(0xff999999), fontSize: 10.0)),
+                            Text(
+                              model.epsNum.toString(),
+                              style: TextStyle(
+                                color: provider.eid == model.id.toString()
+                                    ? const Color(0xff3cdef4)
+                                    : const Color(0xff999999),
+                                fontSize: 10.0,
+                              ),
+                            ),
                             Container(height: 4.0),
                             Text(
                               model.title ?? "",
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 12.0),
+                              style: TextStyle(
+                                  color: provider.eid == model.id.toString()
+                                      ? const Color(0xff3cdef4)
+                                      : const Color(0xff999999),
+                                  fontSize: 12.0),
                               maxLines: 2,
                             ),
                           ],
