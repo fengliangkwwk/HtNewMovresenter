@@ -63,24 +63,33 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
           builder: (context, value, child) {
             return Scaffold(
               backgroundColor: Colors.black,
-              body: SmartRefresher(
-                controller: homeProvider.refreshController,
-                enablePullDown: true,
-                enablePullUp: true,
-                onLoading: () {
-                  homeProvider.onLoad();
-                },
-                onRefresh: () {
-                  homeProvider.onRefresh();
-                },
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      HTTopSearchWidget(),
-                      ...mainListWidget(),
-                    ],
-                  ),
+              body: Container(
+                height: double.infinity,
+                child: Column(
+                  children: [
+                    HTTopSearchWidget(),
+                    Expanded(
+                      child: SmartRefresher(
+                        controller: homeProvider.refreshController,
+                        enablePullDown: true,
+                        enablePullUp: true,
+                        onLoading: () {
+                          homeProvider.onLoad();
+                        },
+                        onRefresh: () {
+                          homeProvider.onRefresh();
+                        },
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              ...mainListWidget(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             );
@@ -257,25 +266,25 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                             Text(value == null ?  "More" : 'loading',
+                            Text(value == null ? "More" : 'loading',
                                 style: const TextStyle(
                                     color: Color(0xffBCBDBE), fontSize: 15.0)),
                             Container(width: 5.0),
-
-                            value == null ? 
-                            CachedNetworkImage(
-                                imageUrl: ImageURL.url_286,
-                                width: 18,
-                                height: 18) : RotationTransition(
-                              turns: Tween<double>(
-                                begin: 1,
-                                end: 300,
-                              ).animate(_animationController),
-                              child: CachedNetworkImage(
-                                  imageUrl: ImageURL.url_287,
-                                  width: 18,
-                                  height: 18),
-                            ),
+                            value == null
+                                ? CachedNetworkImage(
+                                    imageUrl: ImageURL.url_286,
+                                    width: 18,
+                                    height: 18)
+                                : RotationTransition(
+                                    turns: Tween<double>(
+                                      begin: 1,
+                                      end: 300,
+                                    ).animate(_animationController),
+                                    child: CachedNetworkImage(
+                                        imageUrl: ImageURL.url_287,
+                                        width: 18,
+                                        height: 18),
+                                  ),
                           ],
                         ),
                       );
