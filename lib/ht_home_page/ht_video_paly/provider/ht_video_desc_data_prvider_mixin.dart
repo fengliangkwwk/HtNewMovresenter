@@ -103,4 +103,14 @@ mixin HTVideoDescDataProviderMixin on HTVideoProviderMixin {
     }
     return null;
   }
+
+  ///获取当前季名称
+String ssnTitle(String id) {
+  for (var element in seasonList() ?? []) {
+    if (element.id.toString() == id) {
+      return element.title.toString();
+    }
+  }
+  return 'Select Item';
+}
 }

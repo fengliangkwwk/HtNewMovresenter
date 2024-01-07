@@ -75,7 +75,7 @@ class TVPlayPartWidget extends StatelessWidget {
                           .toList(),
                       onChanged: provider.changeSesion,
                       hint:  Text(
-                        value?.title ?? 'Select Item',
+                        provider.ssnTitle(value?.id.toString() ?? ''),
                         style: const TextStyle(
                           fontSize: 14,
                           color: Colors.white,
