@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/beans/ht_mid_search_bean.dart';
+import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'home_bean.g.dart';
@@ -256,18 +257,21 @@ class M20 {
   @JsonKey(name: 'rate')
   String? rate;
 
- String getRate() {
+  String getRate() {
     if (rate == null || rate?.isEmpty == true) {
       return '';
     } else {
       try {
+        if (SysTools.hasOneDecimalPlace(rate ?? '')) {
+          return rate ?? '';
+        }
         return double.parse(rate!).toStringAsFixed(1);
       } catch (e) {
         return '';
       }
     }
   }
-  
+
   @JsonKey(name: 'stars')
   String? stars;
 
@@ -327,6 +331,9 @@ class TT20 {
       return '';
     } else {
       try {
+        if (SysTools.hasOneDecimalPlace(rate ?? '')) {
+          return rate ?? '';
+        }
         return double.parse(rate!).toStringAsFixed(1);
       } catch (e) {
         return '';

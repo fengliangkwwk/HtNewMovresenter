@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'homedropping_water_bean.g.dart';
@@ -17,6 +18,9 @@ class HomedroppingWaterBean {
       return '';
     } else {
       try {
+        if (SysTools.hasOneDecimalPlace(rate ?? '')) {
+          return rate ?? '';
+        }
         return double.parse(rate!).toStringAsFixed(1);
       } catch (e) {
         return '';
