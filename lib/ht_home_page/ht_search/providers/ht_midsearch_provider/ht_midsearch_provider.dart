@@ -1,16 +1,17 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/providers/ht_midsearch_provider/ht_midsearch_provider_base.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/providers/ht_midsearch_provider/ht_midsearch_provider_mixin.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
-import 'package:ht_new_movpresenter/utils/net_request/ui_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dio/dio.dart' as Dio;
+import 'package:dio/dio.dart' as mid_search_dio;
 
 class HTMidSearchProvider extends HTMidSearchProviderBase
     with HTMidSearchProviderMiXin {
-/// type  5.All; 1.Movies; 2.TV Shows; 3.Animated Series; 4.Animation Movies
+  /// type  5.All; 1.Movies; 2.TV Shows; 3.Animated Series; 4.Animation Movies
   var type = '5';
   Future<void> loadData() async {
     //1.请求数据,并且刷新
@@ -58,7 +59,8 @@ class HTMidSearchProvider extends HTMidSearchProviderBase
 
   void onChanged(String value) async {
     if (value.isEmpty) return;
-    var dio = Dio.Dio();
+    EasyLoading.show();
+    var dio = mid_search_dio.Dio();
     var res = await dio.get(
         'https://suggestqueries.google.com/complete/search?client=youtube&q=$value');
 
@@ -68,8 +70,10 @@ class HTMidSearchProvider extends HTMidSearchProviderBase
     var json = jsonDecode(data);
 
     searchResult = json;
-
+    EasyLoading.dismiss();
     notifyListeners();
-    print('联想数据: $searchResult');
+    if (kDebugMode) {
+      print('联想数据: $searchResult');
+    }
   }
 }

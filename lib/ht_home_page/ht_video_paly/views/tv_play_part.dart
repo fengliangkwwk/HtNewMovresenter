@@ -46,8 +46,10 @@ class TVPlayPartWidget extends StatelessWidget {
         (context.read<HTVideoDescProvider>().seasonList())?.cast<Ssn_list?>();
     HTVideoDescProvider provider = context.read<HTVideoDescProvider>();
 
-    print(
-        '🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎${ssnList?.length}');
+    if (kDebugMode) {
+      print(
+          '🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎${ssnList?.length}');
+    }
     return Column(
       children: [
         Container(

@@ -8,7 +8,15 @@ class HTSearchResultProviderBase extends ChangeNotifier {
   var vType = 0;
 
   bool loading = false;
-
-
   RefreshController refreshController = RefreshController();
+  final htVarFieldController = TextEditingController();
+
+
+
+  ///搜索数据
+  List<String> searchDataList = [];
+   ///搜素结果数据
+  List? searchResult;
+
+  
 }

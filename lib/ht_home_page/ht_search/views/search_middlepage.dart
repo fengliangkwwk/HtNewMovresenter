@@ -1,6 +1,4 @@
-/**
- * 搜索中间页
- */
+//  * 搜索中间页
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/beans/ht_mid_search_bean.dart';
@@ -51,67 +49,79 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
     super.initState();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    // FocusScope.of(context).unfocus();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   FocusScope.of(context).unfocus();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (context) => midSearchProvider,
-          )
-        ],
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => midSearchProvider,
+        )
+      ],
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
         child: Scaffold(
-            backgroundColor: Colors.black,
-            body: SafeArea(
-              child: Column(
-                children: [
-                  ///搜索框那一行
-                  searchBoxWidget(),
+          backgroundColor: Colors.black,
+          body: SafeArea(
+            child: Column(
+              children: [
+                ///搜索框那一行
+                searchBoxWidget(),
 
-                  ///搜索历史
-                  historyWidget(),
+                ///搜索历史
+                historyWidget(),
 
-                  ///导航栏那一行
-                  navigationWidget(),
+                ///导航栏那一行
+                navigationWidget(),
 
-                  Expanded(
-                    child: SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Offstage(
+                          offstage: _htVarSearchValue.isNotEmpty,
+                          child: Column(
                             children: [
-                              Offstage(
-                                  offstage: _htVarSearchValue.isNotEmpty,
-                                  child: Column(children: [
-                                    ///2.刷新数据
-                                    Consumer<HTMidSearchProvider>(
-                                      builder: (context, value, child) {
-                                        return GridView.count(
-                                            crossAxisCount: 3,
-                                            shrinkWrap: true,
-                                            physics:
-                                                const NeverScrollableScrollPhysics(),
-                                            childAspectRatio: 112 / 160,
-                                            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
-                                            mainAxisSpacing: 10.0,
-                                            crossAxisSpacing: 9.5,
-                                            children: [...itemWidget()]);
-                                      },
-                                    )
-                                  ])),
+                              ///2.刷新数据
+                              Consumer<HTMidSearchProvider>(
+                                builder: (context, value, child) {
+                                  return GridView.count(
+                                    crossAxisCount: 3,
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    childAspectRatio: 112 / 160,
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 0.0),
+                                    mainAxisSpacing: 10.0,
+                                    crossAxisSpacing: 9.5,
+                                    children: [...itemWidget()],
+                                  );
+                                },
+                              )
+                            ],
+                          ),
+                        ),
 
-                              ///搜索联想起页
-                              searchResultWidget(),
-                            ])),
+                        ///搜索联想起页
+                        searchResultWidget(),
+                      ],
+                    ),
                   ),
-                ],
-              ),
-            )));
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   ///搜索框那一行
@@ -124,6 +134,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
           GestureDetector(
               child: CachedNetworkImage(
                   imageUrl: ImageURL.url_291, width: 24, height: 24),
+
               ///返回按钮
               onTap: () {
                 Navigator.pop(context);
@@ -139,13 +150,13 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
             child:
                 Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
               Container(width: 11.3),
+
+              ///搜索图标
               CachedNetworkImage(
                   imageUrl: ImageURL.url_283, width: 24, height: 24),
-              ///搜索图标
               Container(width: 8),
               Expanded(
                 child: TextField(
-                  // textAlignVertical: TextAlignVertical.center,
                   onEditingComplete: (() {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
@@ -185,14 +196,15 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
 
               ///删除图标
               Visibility(
-                visible: _htVarSearchValue.isNotEmpty?true:false,
+                visible: _htVarSearchValue.isNotEmpty ? true : false,
                 child: GestureDetector(
                   onTap: () {
-                    midSearchProvider.deleteInput(context, _htVarFieldFocusNode);
+                    midSearchProvider.deleteInput(
+                        context, _htVarFieldFocusNode);
                     setState(() {
-                        _htVarSearchValue =
-                            midSearchProvider.htVarFieldController.value.text;
-                      });
+                      _htVarSearchValue =
+                          midSearchProvider.htVarFieldController.value.text;
+                    });
                   },
                   child: CachedNetworkImage(
                     imageUrl: ImageURL.url_79,
@@ -248,12 +260,9 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
     );
   }
 
-////item widget
+  ///item widget
   List<Widget> itemWidget() {
     var result = <Widget>[];
-    // Size screenSize =SysTools().getScreenSize(context) ;
-    // Size screenSize = MediaQuery.of(context).size;
-    // double w = (screenSize.width - 38) / 3;
     for (var i = 0;
         i < (midSearchProvider.midSearchBean?.data ?? <Data>[]).length;
         i++) {
@@ -333,7 +342,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
     return result;
   }
 
-  ///搜索widget
+  ///搜索历史widget
   Widget historyWidget() {
     ///局部刷新,根据状态值来进行刷新
     return Selector<HTMidSearchProvider, bool>(
@@ -410,7 +419,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
     );
   }
 
-  ///搜索结果
+  ///谷歌搜索结果
   Widget searchResultWidget() {
     return Selector<HTMidSearchProvider, List?>(
       selector: (p0, p1) => p1.searchResult,

@@ -1,9 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/beans/ht_mid_search_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/providers/ht_midsearch_provider/ht_midsearch_provider_base.dart';
 import 'package:ht_new_movpresenter/utils/net_request/ht_api.dart';
 import 'package:ht_new_movpresenter/utils/net_request/ht_net_utils.dart';
-import 'package:ht_new_movpresenter/utils/net_request/ui_utils.dart';
-import 'package:dio/dio.dart' as MidSearch;
 import "dart:convert";
 
 mixin HTMidSearchProviderMiXin on HTMidSearchProviderBase {
@@ -25,7 +24,9 @@ mixin HTMidSearchProviderMiXin on HTMidSearchProviderBase {
     Map<String, dynamic> htVarparams = {"type": type};
     var res = await HTNetUtils.htPost(
         apiUrl: Global.midSearchUrl, params: htVarparams, needCommon: true);
-    print(res);
+    if (kDebugMode) {
+      print(res);
+    }
     Map<String, dynamic> stringMap = jsonDecode(res.toString());
 
     for (var element in stringMap['data']) {
@@ -42,7 +43,9 @@ mixin HTMidSearchProviderMiXin on HTMidSearchProviderBase {
     }
     midSearchBean?.data = _temList;
 
-    print(' $midSearchBean');
+    if (kDebugMode) {
+      print(' $midSearchBean');
+    }
     notifyListeners();
   }
 }

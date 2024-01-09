@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -24,7 +25,9 @@ class _PersonDataWidgetState extends State<PersonDataWidget> {
         NavigationDelegate(
           onProgress: (int progress) {
             // Update loading bar.
-            print(progress);
+            if (kDebugMode) {
+              print(progress);
+            }
             EasyLoading.show();
           },
           onPageStarted: (String url) {},

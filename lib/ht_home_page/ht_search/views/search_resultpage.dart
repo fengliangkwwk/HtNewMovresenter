@@ -6,9 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../ht_video_paly/views/play_detailpage.dart';
 
+// ignore: must_be_immutable
 class HTClassSearchResultPage extends StatefulWidget {
-  final String? keyWord;
-  const HTClassSearchResultPage({
+  String? keyWord;
+  HTClassSearchResultPage({
     this.keyWord,
     Key? key,
   }) : super(key: key);
@@ -21,16 +22,14 @@ class HTClassSearchResultPage extends StatefulWidget {
 class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
   HTSearchResultProvider provider = HTSearchResultProvider();
   final _htVarFieldFocusNode = FocusNode();
+  var _htVarSearchValue = "";
+  bool isShowSearchResultList = true;
+
   @override
   void initState() {
     provider.loadSearchResulrData(widget.keyWord);
     _htVarFieldFocusNode.addListener(() {
-      if (_htVarFieldFocusNode.hasFocus) {
-        Navigator.of(context).pop();
-        // Navigator.push(context, MaterialPageRoute(builder: (context) {
-        //   return const HTClassSearchMidPage(title: "");
-        // }));
-      }
+      if (_htVarFieldFocusNode.hasFocus) {}
     });
     super.initState();
   }
@@ -43,13 +42,17 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
             create: (context) => provider,
           )
         ],
-        child: Scaffold(
-          backgroundColor: Colors.black,
-          body: Column(
-            children: [
-              searchWidget(),
-              listWidget(),
-            ],
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+          child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            backgroundColor: Colors.black,
+            body: Column(
+              children: [
+                searchWidget(),
+                !isShowSearchResultList ? googleListWidget() : listWidget(),
+              ],
+            ),
           ),
         ));
   }
@@ -67,6 +70,7 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
             GestureDetector(
                 child: CachedNetworkImage(
                     imageUrl: ImageURL.url_291, width: 24, height: 24),
+
                 ///返回按钮
                 onTap: () {
                   Navigator.of(context).pop();
@@ -82,26 +86,65 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(width: 11.3),
-                    CachedNetworkImage(
-                        imageUrl: ImageURL.url_283, width: 24, height: 24),
 
                     ///搜索图标
+                    CachedNetworkImage(
+                        imageUrl: ImageURL.url_283, width: 24, height: 24),
                     Container(width: 8),
                     Expanded(
                       child: TextField(
-                        controller: TextEditingController(),
+                        onEditingComplete: (() {
+                          loadListData(_htVarSearchValue);
+                        }),
+                        controller: provider.htVarFieldController,
+                        autofocus: false,
                         focusNode: _htVarFieldFocusNode,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.only(bottom: 12),
                           hintText: widget.keyWord,
                           border: InputBorder.none,
                           hintStyle: const TextStyle(
-                              color: Color(0xffAEAFB1), fontSize: 15.0),
+                            color: Color(0xffAEAFB1),
+                            fontSize: 15.0,
+                          ),
+                        ),
+                        onChanged: (val) {
+                          if (provider.htVarFieldController.value
+                              .toString()
+                              .isNotEmpty) {
+                            setState(() {
+                              isShowSearchResultList = false;
+                              _htVarSearchValue =
+                                  provider.htVarFieldController.value.text;
+                            });
+                          }
+                          provider.onChanged(val);
+                        },
+                        onSubmitted: provider.onSubmitted,
+                      ),
+                    ),
+
+                    ///删除图标
+                    Visibility(
+                      visible: _htVarSearchValue.isNotEmpty ? true : false,
+                      child: GestureDetector(
+                        onTap: () {
+                          provider.deleteInput(context, _htVarFieldFocusNode);
+                          setState(() {
+                            _htVarSearchValue =
+                                provider.htVarFieldController.value.text;
+                          });
+                        },
+                        child: CachedNetworkImage(
+                          imageUrl: ImageURL.url_79,
+                          width: 16,
+                          height: 16,
                         ),
                       ),
                     ),
-                    CachedNetworkImage(
-                        imageUrl: ImageURL.url_79, width: 16, height: 16),
                     Container(width: 10.0),
                   ],
                 ),
@@ -112,6 +155,102 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
         ),
       ),
     );
+  }
+
+  ///谷歌联想词列表
+  Widget googleListWidget() {
+    return Selector<HTSearchResultProvider, List?>(
+      selector: (p0, p1) => p1.searchResult,
+      builder: (context, value, child) {
+        if (value == null || (value.isEmpty)) {
+          return Container();
+        }
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(height: 20.0),
+              Container(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Text(
+                  "Search \"$_htVarSearchValue\"",
+                  style:
+                      const TextStyle(color: Color(0xff29D3EA), fontSize: 14.0),
+                ),
+              ),
+              Container(height: 20.0),
+              ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                padding: const EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
+                itemCount: provider.searchResult != null
+                    ? (provider.searchResult?[1]?.length ?? 0)
+                    : 0,
+                itemBuilder: (BuildContext context, int index) {
+                  List itemData = provider.searchResult?[1][index];
+                  //子Widget
+                  return GestureDetector(
+                    child: Container(
+                      height: 45,
+                      width: double.infinity,
+                      color: Colors.amber,
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CachedNetworkImage(
+                              imageUrl: ImageURL.url_300,
+                              width: 16,
+                              height: 16),
+                          Container(width: 10.0),
+                          Text(
+                            itemData[0] ?? '',
+                            style: const TextStyle(
+                              color: Color(0xffECECEC),
+                              fontSize: 14.0,
+                            ),
+                          ),
+                          const SizedBox(),
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      loadListData(itemData[0] ?? '');
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) {
+                      //   return HTClassSearchResultPage(
+                      //       keyWord: itemData[0] ?? "");
+                      // }));
+                    },
+                  );
+                },
+                //设置分割线，颜色为黑色，高度为1
+                separatorBuilder: (BuildContext context, int index) {
+                  ///可以直接使用
+                  // midSearchProvider.data;
+                  return const Divider(
+                    color: Color(0x70ECECEC),
+                    height: 1,
+                  );
+                },
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void loadListData(String word) {
+    setState(() {
+      FocusScope.of(context).requestFocus(FocusNode());
+      isShowSearchResultList = true;
+      provider.htVarFieldController.text = '';
+      widget.keyWord = word;
+      provider.keyword = word;
+      provider.onRefresh();
+      // provider.loadSearchResulrData(widget.keyWord);
+    });
   }
 
   ///2.列表
@@ -130,7 +269,7 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
               itemCount: dataList?.length ?? 0,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
-                childAspectRatio: 112 / 160,
+                childAspectRatio: 112 / 180,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 9.5,
               ),

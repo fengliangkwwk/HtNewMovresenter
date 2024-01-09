@@ -507,7 +507,8 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                     padding: const EdgeInsets.symmetric(
                         vertical: 10.0, horizontal: 20.0),
                     child: Text(
-                      'No. ${data.itemData?.indexOf(element)} image',
+                      element.new_conf_name_2??'',
+                      // 'No. ${data.itemData?.indexOf(element)} image',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 20.0,
