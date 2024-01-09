@@ -49,6 +49,15 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
     super.initState();
   }
 
+  @override
+  void didUpdateWidget(HTClassSearchMidPage oldWidget) async {
+    super.didUpdateWidget(oldWidget);
+    await midSearchProvider.searchData();
+    setState(() {
+      
+    });
+  }
+
   // @override
   // void dispose() {
   //   super.dispose();
@@ -451,24 +460,28 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                   //子Widget
                   return GestureDetector(
                     child: Container(
-                        height: 45,
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              CachedNetworkImage(
-                                  imageUrl: ImageURL.url_300,
-                                  width: 16,
-                                  height: 16),
-                              Container(width: 10.0),
-                              Text(
-                                itemData[0] ?? '',
-                                style: const TextStyle(
-                                  color: Color(0xffECECEC),
-                                  fontSize: 14.0,
-                                ),
-                              )
-                            ])),
+                      color: Colors.transparent,
+                      height: 45,
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CachedNetworkImage(
+                              imageUrl: ImageURL.url_300,
+                              width: 16,
+                              height: 16),
+                          Container(width: 10.0),
+                          Text(
+                            itemData[0] ?? '',
+                            style: const TextStyle(
+                              color: Color(0xffECECEC),
+                              fontSize: 14.0,
+                            ),
+                          ),
+                          const SizedBox(),
+                        ],
+                      ),
+                    ),
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {

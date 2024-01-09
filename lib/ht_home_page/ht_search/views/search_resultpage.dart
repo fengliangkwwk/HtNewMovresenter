@@ -129,7 +129,10 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
 
                     ///删除图标
                     Visibility(
-                      visible: _htVarSearchValue.isNotEmpty ? true : false,
+                      visible:
+                          provider.htVarFieldController.value.text.isNotEmpty
+                              ? true
+                              : false,
                       child: GestureDetector(
                         onTap: () {
                           provider.deleteInput(context, _htVarFieldFocusNode);
@@ -192,8 +195,7 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                   return GestureDetector(
                     child: Container(
                       height: 45,
-                      width: double.infinity,
-                      color: Colors.amber,
+                      color: Colors.transparent,
                       padding: const EdgeInsets.only(top: 10.0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -275,6 +277,13 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
               ),
               itemBuilder: (context, index) {
                 var model = dataList?[index];
+                // 使用split方法将字符串分割成两部分
+                List<String> parts = model!.getRate().split('.');
+                // 获取小数点前的子字符串
+                String beforeDecimal = parts.isNotEmpty ? parts[0] : '';
+                // 获取小数点后的子字符串
+                String afterDecimal = parts.length > 1 ? parts[1] : '';
+
                 return GestureDetector(
                   onTap: () {
                     // if (model?.dataType != '1' || model?.dataType != '3') {
@@ -286,8 +295,8 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                         builder: (context) {
                           return HTClassVideoDetailPage(
                             m_type_2:
-                                (model?.dataType == '1') ? "myfx" : "tt_mflx",
-                            id: model?.id ?? "",
+                                (model.dataType == '1') ? "myfx" : "tt_mflx",
+                            id: model.id ?? "",
                           );
                         },
                       ),
@@ -305,7 +314,7 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(5.0),
                               child: CachedNetworkImage(
-                                imageUrl: model?.cover ?? '',
+                                imageUrl: model.cover ?? '',
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -318,21 +327,15 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                               textBaseline: TextBaseline.alphabetic,
                               children: [
                                 Text(
-                                  // 查找点的位置
-                                  (model!.getRate().substring(0,
-                                              model.getRate().indexOf('.') + 1))
-                                          .isEmpty
-                                      ? '0.'
-                                      : model.getRate().substring(
-                                          0, model.getRate().indexOf('.') + 1),
+                                  '$beforeDecimal.',
                                   style: const TextStyle(
                                       color: Color(0xffFF6D1C),
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600),
                                 ),
-                                const Text(
-                                  '0',
-                                  style: TextStyle(
+                                Text(
+                                  afterDecimal,
+                                  style: const TextStyle(
                                       color: Color(0xffFF6D1C),
                                       fontSize: 12,
                                       fontWeight: FontWeight.w600),

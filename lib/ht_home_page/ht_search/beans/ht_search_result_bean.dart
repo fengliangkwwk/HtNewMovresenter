@@ -1,12 +1,12 @@
 // ignore_for_file: camel_case_types
 
-import 'package:json_annotation/json_annotation.dart'; 
-      
-part 'ht_search_result_bean.g.dart';
-    
-@JsonSerializable(explicitToJson: true)
-class ht_search_result_bean{
+import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'ht_search_result_bean.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class ht_search_result_bean {
   @JsonKey(name: 'status')
   int? status;
 
@@ -18,16 +18,14 @@ class ht_search_result_bean{
 
   ht_search_result_bean();
 
-  static ht_search_result_bean fromJson(Map<String, dynamic> srcJson) => _$ht_search_result_beanFromJson(srcJson);
+  static ht_search_result_bean fromJson(Map<String, dynamic> srcJson) =>
+      _$ht_search_result_beanFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$ht_search_result_beanToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Data{
-
+class Data {
   @JsonKey(name: 'movie_tv_list')
   List<Movie_tv_list>? movieTvList;
 
@@ -45,13 +43,10 @@ class Data{
   static Data fromJson(Map<String, dynamic> srcJson) => _$DataFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$DataToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Movie_tv_list{
-
+class Movie_tv_list {
   @JsonKey(name: 'medit')
   int? medit;
 
@@ -67,7 +62,7 @@ class Movie_tv_list{
   @JsonKey(name: 'rate')
   String? rate;
 
-   String getRate() {
+  String getRate() {
     if (rate == null || rate?.isEmpty == true) {
       return '';
     } else {
@@ -135,16 +130,14 @@ class Movie_tv_list{
 
   Movie_tv_list();
 
-  static Movie_tv_list fromJson(Map<String, dynamic> srcJson) => _$Movie_tv_listFromJson(srcJson);
+  static Movie_tv_list fromJson(Map<String, dynamic> srcJson) =>
+      _$Movie_tv_listFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$Movie_tv_listToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Mtt_list{
-
+class Mtt_list {
   @JsonKey(name: 'medit')
   int? medit;
 
@@ -160,11 +153,14 @@ class Mtt_list{
   @JsonKey(name: 'rate')
   String? rate;
 
-   String getRate() {
+  String getRate() {
     if (rate == null || rate?.isEmpty == true) {
       return '';
     } else {
       try {
+        if (SysTools.hasOneDecimalPlace(rate ?? '')) {
+          return rate ?? '';
+        }
         return double.parse(rate!).toStringAsFixed(1);
       } catch (e) {
         return '';
@@ -228,22 +224,18 @@ class Mtt_list{
 
   Mtt_list();
 
-  static Mtt_list fromJson(Map<String, dynamic> srcJson) => _$Mtt_listFromJson(srcJson);
+  static Mtt_list fromJson(Map<String, dynamic> srcJson) =>
+      _$Mtt_listFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$Mtt_listToJson(this);
-
 }
 
-  
 @JsonSerializable(explicitToJson: true)
-class Z_info{
-
+class Z_info {
   Z_info();
 
-  static Z_info fromJson(Map<String, dynamic> srcJson) => _$Z_infoFromJson(srcJson);
+  static Z_info fromJson(Map<String, dynamic> srcJson) =>
+      _$Z_infoFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$Z_infoToJson(this);
-
 }
-
-  

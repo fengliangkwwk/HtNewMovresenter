@@ -507,7 +507,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                     padding: const EdgeInsets.symmetric(
                         vertical: 10.0, horizontal: 20.0),
                     child: Text(
-                      element.new_conf_name_2??'',
+                      element.new_conf_name_2 ?? '',
                       // 'No. ${data.itemData?.indexOf(element)} image',
                       style: const TextStyle(
                         color: Colors.white,
@@ -598,6 +598,22 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
     );
   }
 
+  String getBeforeDecimal(String str) {
+    // 使用split方法将字符串分割成两部分
+    List<String> parts = str.split('.');
+    // 获取小数点前的子字符串
+    String beforeDecimal = parts.isNotEmpty ? parts[0] : '';
+    return '$beforeDecimal.';
+  }
+
+  String getAfterDecimal(String str) {
+    // 使用split方法将字符串分割成两部分
+    List<String> parts = str.split('.');
+    // 获取小数点后的子字符串
+    String afterDecimal = parts.length > 1 ? parts[1] : '';
+    return afterDecimal;
+  }
+
   ///样式二 横滑 display_type = 2
   Widget HTSideslipWiget(DataList data) {
     ///电影
@@ -636,17 +652,18 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                                     textBaseline: TextBaseline.alphabetic,
                                     children: [
                                       Text(
-                                        // 查找点的位置
-                                        item.getRate().substring(
-                                            0, item.getRate().indexOf('.') + 1),
+                                        getBeforeDecimal(item.getRate()),
+                                        // // 查找点的位置
+                                        // item.getRate().substring(
+                                        //     0, item.getRate().indexOf('.') + 1),
                                         style: const TextStyle(
                                             color: Color(0xffFF6D1C),
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600),
                                       ),
-                                      const Text(
-                                        '0',
-                                        style: TextStyle(
+                                       Text(
+                                        getAfterDecimal(item.getRate()),
+                                        style: const TextStyle(
                                             color: Color(0xffFF6D1C),
                                             fontSize: 12,
                                             fontWeight: FontWeight.w600),
@@ -729,17 +746,15 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                                     textBaseline: TextBaseline.alphabetic,
                                     children: [
                                       Text(
-                                        // 查找点的位置
-                                        item.getRate().substring(
-                                            0, item.getRate().indexOf('.') + 1),
+                                        getBeforeDecimal(item.getRate()),
                                         style: const TextStyle(
                                             color: Color(0xffFF6D1C),
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600),
                                       ),
-                                      const Text(
-                                        '0',
-                                        style: TextStyle(
+                                       Text(
+                                        getAfterDecimal(item.getRate()),
+                                        style: const TextStyle(
                                             color: Color(0xffFF6D1C),
                                             fontSize: 12,
                                             fontWeight: FontWeight.w600),
@@ -844,17 +859,15 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                                   textBaseline: TextBaseline.alphabetic,
                                   children: [
                                     Text(
-                                      // 查找点的位置
-                                      m20.getRate().substring(
-                                          0, m20.getRate().indexOf('.') + 1),
+                                     getBeforeDecimal(m20.getRate()),
                                       style: const TextStyle(
                                           color: Color(0xffFF6D1C),
                                           fontSize: 18,
                                           fontWeight: FontWeight.w600),
                                     ),
-                                    const Text(
-                                      '0',
-                                      style: TextStyle(
+                                     Text(
+                                      getAfterDecimal(m20.getRate()),
+                                      style: const TextStyle(
                                           color: Color(0xffFF6D1C),
                                           fontSize: 12,
                                           fontWeight: FontWeight.w600),
@@ -948,17 +961,15 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                                     textBaseline: TextBaseline.alphabetic,
                                     children: [
                                       Text(
-                                        // 查找点的位置
-                                        tt20.getRate().substring(
-                                            0, tt20.getRate().indexOf('.') + 1),
+                                       getBeforeDecimal(tt20.getRate()),
                                         style: const TextStyle(
                                             color: Color(0xffFF6D1C),
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600),
                                       ),
-                                      const Text(
-                                        '0',
-                                        style: TextStyle(
+                                       Text(
+                                        getAfterDecimal(tt20.getRate()),
+                                        style: const TextStyle(
                                             color: Color(0xffFF6D1C),
                                             fontSize: 12,
                                             fontWeight: FontWeight.w600),
@@ -1100,17 +1111,15 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                       textBaseline: TextBaseline.alphabetic,
                       children: [
                         Text(
-                          // 查找点的位置
-                          itemData.getRate().substring(
-                              0, itemData.getRate().indexOf('.') + 1),
+                          getBeforeDecimal(itemData.getRate()),
                           style: const TextStyle(
                               color: Color(0xffFF6D1C),
                               fontSize: 18,
                               fontWeight: FontWeight.w600),
                         ),
-                        const Text(
-                          '0',
-                          style: TextStyle(
+                         Text(
+                          getAfterDecimal(itemData.getRate()),
+                          style: const TextStyle(
                               color: Color(0xffFF6D1C),
                               fontSize: 12,
                               fontWeight: FontWeight.w600),

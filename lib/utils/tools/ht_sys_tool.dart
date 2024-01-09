@@ -34,4 +34,16 @@ static String formatDuration(Duration duration) {
   String seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
   return "$hours:$minutes:$seconds";
 }
+///要检测一个double类型的数是否有小数点后面一位
+static bool hasOneDecimalPlace(String numberString) {
+  // // 将double转换为字符串
+  // String numberString = number.toString();
+  // 查找小数点的索引
+  int decimalIndex = numberString.indexOf('.');
+  // 如果存在小数点，并且小数点后有一位数字
+  if (decimalIndex != -1 && decimalIndex + 2 == numberString.length) {
+    return true;
+  }
+  return false;
+}
 }

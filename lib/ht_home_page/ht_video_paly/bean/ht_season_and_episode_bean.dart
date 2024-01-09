@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'ht_season_and_episode_bean.g.dart';
@@ -99,7 +101,7 @@ class Data {
   String? like;
 
   @JsonKey(name: 'unlike')
-  String? unlike;
+  dynamic unlike;
 
   @JsonKey(name: 'play_lock')
   String? playLock;

@@ -34,6 +34,7 @@ class HTSearchResultProvider extends HTSearchResultProviderBase
   ///搜索提交
   void onSubmitted(String value) async {
     if (value.isEmpty) return;
+    searchDataList.removeWhere((element) => element == value);
     searchDataList.add(value);
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList(HTSharedKeys.htSearch, searchDataList);
