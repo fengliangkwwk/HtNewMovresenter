@@ -33,7 +33,7 @@ class Local{
   String? k5;
 
   @JsonKey(name: 'value')
-  int? value;
+  dynamic value;
 
   @JsonKey(name: 'k6')
   dynamic k6;

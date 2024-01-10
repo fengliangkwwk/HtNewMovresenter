@@ -16,27 +16,21 @@ mixin PremiumProviderMixin on PremiumProviderBase {
   }) async {
     var res = await HTNetUtils.htPost(apiUrl: Global.restoreUrl, params: {
       ///家庭id
-
       'fid': HTUserStore.vipInfoBean?.family?.fid ?? '0',
 
       ///0 restore  1购买
-
       'flag': flag ?? '0',
 
       ///订阅id
-
       'pid': mainProvider.purChaseProductId(),
 
       ///支付凭证
-
       'receipt': mainProvider.verificationList(),
 
       ///用户id
-
       'uid': HTUserStore.userBean?.uid ?? '0',
 
       ///是否本地订阅
-
       'vp': mainProvider.subscriptionPurchaseState() ? '1' : '0',
     });
 
@@ -53,16 +47,17 @@ mixin PremiumProviderMixin on PremiumProviderBase {
     }
   }
 
-///325
+  ///325购买绑定接口
   Future<void> requesBindVipApi() async {
-    var res = await HTNetUtils.htPost(apiUrl: Global.purchaseBindingUrl, params: {
+    var res =
+        await HTNetUtils.htPost(apiUrl: Global.purchaseBindingUrl, params: {
       ///家庭id
 
       'fid': HTUserStore.vipInfoBean?.family?.fid ?? '0',
 
       ///0 restore  1购买
 
-      'flag':  '1',
+      'flag': '1',
 
       ///订阅id
 
@@ -94,9 +89,7 @@ mixin PremiumProviderMixin on PremiumProviderBase {
     }
   }
 
-
-
-///300
+  ///300订阅引导等相关配置
   Future<void> requestPremiumApi() async {
     EasyLoading.show();
     var res = await HTNetUtils.htPost(
@@ -120,5 +113,4 @@ mixin PremiumProviderMixin on PremiumProviderBase {
       ToastUtil.showToast(msg: json["msg"]);
     }
   }
-  
 }

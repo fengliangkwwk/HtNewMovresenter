@@ -10,6 +10,7 @@ import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/p
 import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:ht_new_movpresenter/utils/tools/device_info_tool.dart';
+import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -106,6 +107,7 @@ class PremiumProvider extends PremiumProviderBase
 
   ///去订阅
   void go2Pay(BuildContext context) async {
+    context = context;
     var dataList = productDataList();
     if (dataList.isEmpty) return;
 
@@ -114,7 +116,6 @@ class PremiumProvider extends PremiumProviderBase
         dataList[isFamilyOrIndividual == 1 ? selectFamaily : selectPerson];
     if (HTUserStore.premiumBean?.isK12() == true) {
       ///服务器订阅
-
       ///1.
       Map<String, dynamic> a = {
         'uid': HTUserStore.userBean?.uid ?? "0", //⽤⼾ID，同公参，未登录传0
@@ -136,7 +137,6 @@ class PremiumProvider extends PremiumProviderBase
       };
       var airplay = HTUserStore.toolConfigBean?.airplay;
       String jsonStringB = jsonEncode(a);
-
       // Scheme方式跳转：
       String schemeLink =
           "${airplay?.scheme}://com.ding.tool?params=$jsonStringB";
@@ -144,11 +144,11 @@ class PremiumProvider extends PremiumProviderBase
       ///deepLink跳转
       String shopLink = 'https://apps.apple.com/app/id${airplay?.appleid}';
       String deepLink = '$shopLink?params=$jsonStringB';
-
       deepLink = Uri.encodeFull(deepLink);
       // String linkUrl = Uri.encodeComponent(
       //     'https://wbtool.page.link/app/id${airplay?.appleid}?params=$stringA'
       //         .toLowerCase());
+
       ///2.配置参数(airplay)
       final dynamicLinkParams = DynamicLinkParameters(
           link: Uri.parse(deepLink),
@@ -166,19 +166,21 @@ class PremiumProvider extends PremiumProviderBase
       Clipboard.setData(ClipboardData(text: dynamicLink.query));
 
       // Clipboard.setData(ClipboardData(text: dynamicLink.toString()));
-
       if (kDebugMode) {
         print('🍊🍊🍊🍊🍊🍊🍊🍊🍊🍊🍊🍊🍊$dynamicLink');
         print('🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌${dynamicLink.toString()}');
         print('🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎${dynamicLink.query}');
-        print('🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐$dynamicLink');
+        print('🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐$schemeLink');
       }
 
-      Uri schemeUrl = Uri.parse('${airplay?.scheme}://');
+      Uri schemeUrl = Uri.parse(schemeLink);
       bool isInstalled = await canLaunchUrl(schemeUrl);
-      if (!isInstalled) {
+      if (kDebugMode) {
+        print('是否安装了:$isInstalled');
+      }
+      if (isInstalled) {
         ///scheme跳转
-        await canLaunchUrl(Uri.parse(schemeLink));
+        launchApp(schemeUrl);
       } else {
         //深链接跳转
         try {
@@ -189,9 +191,13 @@ class PremiumProvider extends PremiumProviderBase
             await launchUrl(dynamicLink);
           }
         } catch (e) {
-          print(e);
+          if (kDebugMode) {
+            print(e);
+          }
         }
-        print('App is not installed.');
+        if (kDebugMode) {
+          print('App is not installed.');
+        }
       }
       return;
     }
@@ -202,6 +208,18 @@ class PremiumProvider extends PremiumProviderBase
     mainProvider.inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
   }
 
+  ///scheme跳转
+  void launchApp(Uri url) async {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      // 处理无法打开应用的情况
+      if (kDebugMode) {
+        print('Could not launch $url');
+      }
+    }
+  }
+
   ///进入前后台
   void didChangeAppLifecycleState(
       AppLifecycleState state, BuildContext context) async {
@@ -210,7 +228,7 @@ class PremiumProvider extends PremiumProviderBase
       // 1.检查是否需要回来校验326
       if (toToolPackage == true) {
         await requesCheckVipApi();
-        // 2.判断是否需要跳转登录
+      // 2.判断是否需要跳转登录
         go2Login(context);
       }
     } else if (state == AppLifecycleState.paused) {
@@ -220,15 +238,29 @@ class PremiumProvider extends PremiumProviderBase
 
   ///需要去登录
   void go2Login(BuildContext context) async {
-    var vipInfoBean = HTUserStore.vipInfoBean;
-    if (vipInfoBean?.device?.val == '1' &&
-        vipInfoBean?.local?.value != 1 &&
-        HTUserStore.login() == false) {
-      await Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return LoginPage(
-          isLoginPage: true,
-        );
-      }));
+    ///登录条件缺一不可
+// /326/返回值⾥⾯ device中的val值 = @"1"；
+// 当前⻚⾯不是登录⻚；
+// 没有登录；
+// /326/返回值⾥⾯ local中的value值 != @"1"。
+    final String val = HTUserStore.vipInfoBean?.device?.val ?? '';
+    final String value = (HTUserStore.vipInfoBean?.local?.value).toString();
+    bool isLoginPage = SysTools.isCurrentPage(context, LoginPage());
+    bool isLogin = HTUserStore.login();
+    if (val == '1' &&
+        value != '1' &&
+        isLoginPage == false &&
+        isLogin == false) {
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return LoginPage(
+              isLoginPage: true,
+            );
+          },
+        ),
+      );
     }
   }
 }

@@ -46,4 +46,11 @@ static bool hasOneDecimalPlace(String numberString) {
   }
   return false;
 }
+///判断当前页面是否为某个页面
+static bool isCurrentPage(BuildContext context, Widget page) {
+  // 获取当前路由
+  final currentRoute = ModalRoute.of(context)?.settings;
+  // 检查当前页面是否不是特定页面
+  return currentRoute?.runtimeType != page.runtimeType;
+}
 }

@@ -72,7 +72,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
     return Selector<SettingProvider, bool>(
       selector: (p0, p1) => p1.isReloadHeader,
       builder: ((context, value, child) {
-        print('zzs:1');
+        // print('zzs:1');
         return GestureDetector(
           onTap: () {
             provider.goLogin(context);

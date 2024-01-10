@@ -19,6 +19,7 @@ Future<void> initApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await userData();
+
   // 强制竖屏
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -26,6 +27,8 @@ Future<void> initApp() async {
   ]);
   WidgetsFlutterBinding.ensureInitialized();
 }
+
+
 
 ///获取订阅状态
 ///1. 判断是否登录 2.用户信息 3.是否禁止 18+ 4.是否首次进入app

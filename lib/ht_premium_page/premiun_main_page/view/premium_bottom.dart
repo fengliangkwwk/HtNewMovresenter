@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider.dart';
 import 'package:ht_new_movpresenter/provider/main_provider.dart';
@@ -92,7 +93,9 @@ class _PremiumBottomWidgetState extends State<PremiumBottomWidget> {
         return GestureDetector(
           onTap: () {
             int num = HTUserStore.popUps;
-            print('🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐$num');
+            if (kDebugMode) {
+              print('🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐$num');
+            }
             HTUserStore.popUps < 3
                 ? htMethodShowPayProptDialog(context)
                 : provider.go2Pay(context);

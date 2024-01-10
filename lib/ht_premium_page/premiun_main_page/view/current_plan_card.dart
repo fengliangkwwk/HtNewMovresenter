@@ -37,7 +37,7 @@ class _CurrentPlanCardWidgetState extends State<CurrentPlanCardWidget> {
     return Selector<MainPovider, bool>(
       selector: (p0, p1) => p1.purchaseRefresh,
       builder: (context, value, child) {
-        if (MainPovider.isVip() != 1) {
+        if (MainPovider.isVip() == 1) {
           return currentPlanFamilyMainWidget();
         }
 
@@ -174,8 +174,7 @@ class _CurrentPlanCardWidgetState extends State<CurrentPlanCardWidget> {
                             //不携带参数
                             return const HTClassFamilyPage(
                               title: '',
-                            );
-                            
+                            );                            
                             // return const HTClassFamilyAddPage(title: '',);
                           }),
                         );

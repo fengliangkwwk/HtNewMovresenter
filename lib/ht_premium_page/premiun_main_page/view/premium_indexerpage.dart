@@ -27,20 +27,19 @@ class _HTClassUnPremiumPageState extends State<HTClassUnPremiumPage>
   @override
   void initState() {
     super.initState();
+    // 注册观察者
     WidgetsBinding.instance.addObserver(this);
-
     provider.loadData();
   }
 
   @override
   void dispose() {
+    // 移除观察者，防止内存泄漏
     WidgetsBinding.instance.removeObserver(this);
-
     super.dispose();
   }
-
-
   @override
+  // 处理应用程序生命周期变化事件
 void didChangeAppLifecycleState(AppLifecycleState state) {
   provider.didChangeAppLifecycleState(state,context);
 }

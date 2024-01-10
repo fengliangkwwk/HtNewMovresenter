@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/provider/premium_provider.dart';
 import 'package:ht_new_movpresenter/provider/main_provider_base.dart';
@@ -87,7 +88,9 @@ mixin MainPurchaseProviderMixin on MainProviderBase {
 
     notifyListeners();
 
-    print('内购待销售商品:${products.length}');
+    if (kDebugMode) {
+      print('内购待销售商品:${products.length}');
+    }
     // await finishIAPTransaction();
   }
 
@@ -106,16 +109,24 @@ mixin MainPurchaseProviderMixin on MainProviderBase {
       } else if (element.status == PurchaseStatus.pending) {
         EasyLoading.show();
       } else if (element.status == PurchaseStatus.error) {
-         print('购买错误: ${element.error}');
+         if (kDebugMode) {
+           print('购买错误: ${element.error}');
+         }
       if (element.error is SKError) {
         SKError skError = element.error as SKError;
-        print('SKError code: ${skError.code}');
-        print('SKError domain: ${skError.domain}');
+        if (kDebugMode) {
+          print('SKError code: ${skError.code}');
+        }
+        if (kDebugMode) {
+          print('SKError domain: ${skError.domain}');
+        }
         // 处理其他 SKError 相关信息
       }
         EasyLoading.dismiss();
       } else if (element.status == PurchaseStatus.restored) {
-        print('object');
+        if (kDebugMode) {
+          print('object');
+        }
         EasyLoading.show();
         await inAppPurchase.completePurchase(element);
         await PremiumProvider().requesCheckVipApi();
