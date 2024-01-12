@@ -462,47 +462,6 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
  */
   ///样式一 轮播图 display_type = 3
   Widget HTBannerWidget(DataList data) {
-    // return CarouselSlider(
-    //   items: [
-    //     Container(
-    //       decoration: BoxDecoration(
-    //         color: Colors.blue,
-    //         borderRadius: BorderRadius.circular(8.0),
-    //       ),
-    //       child: const Center(
-    //         child: Text('Slide 1'),
-    //       ),
-    //     ),
-    //     Container(
-    //       decoration: BoxDecoration(
-    //         color: Colors.green,
-    //         borderRadius: BorderRadius.circular(8.0),
-    //       ),
-    //       child: const Center(
-    //         child: Text('Slide 2'),
-    //       ),
-    //     ),
-    //     Container(
-    //       decoration: BoxDecoration(
-    //         color: Colors.orange,
-    //         borderRadius: BorderRadius.circular(8.0),
-    //       ),
-    //       child: const Center(
-    //         child: Text('Slide 3'),
-    //       ),
-    //     ),
-    //   ],
-    //   options: CarouselOptions(
-    //     height: 200.0,
-    //     enlargeCenterPage: true,
-    //     enableInfiniteScroll: true,
-    //     autoPlay: true,
-    //     aspectRatio: 9 / 16,
-    //     autoPlayCurve: Curves.fastOutSlowIn,
-    //     autoPlayAnimationDuration: const Duration(milliseconds: 800),
-    //     viewportFraction: 0.4,
-    //   ),
-    // );
     var imageSliders = <Widget>[];
     for (var element in data.itemData ?? <ItemData>[]) {
       imageSliders.add(
@@ -523,7 +482,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
           },
           child: Container(
             color: Colors.transparent,
-            height: 375,
+            // height: 375,
             margin: const EdgeInsets.all(5.0),
             child: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(5.0)),
@@ -532,8 +491,6 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                   CachedNetworkImage(
                     imageUrl: element.new_img ?? '',
                     fit: BoxFit.cover,
-                    width: 354.0,
-                    height: double.infinity,
                   ),
                   Positioned(
                     bottom: 0.0,
@@ -578,8 +535,6 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
           children: [
             Positioned(
               child: Container(
-                // color: Colors.green,
-                // height: 254.0,
                 margin: const EdgeInsets.only(top: 12.0, bottom: 21.0),
                 child: CarouselSlider(
                   carouselController: _controller,
@@ -593,7 +548,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                       autoPlayAnimationDuration:
                           const Duration(milliseconds: 800), ///自动播放动画的持续时间
                       enableInfiniteScroll:true,///是否启用无限循环
-                      viewportFraction: 0.4,///中央页面的占比
+                      viewportFraction: 0.3,///中央页面的占比
                       scrollPhysics: const BouncingScrollPhysics(), // 例如，使用弹性滚动
                       /// 中央页面的占比
                       onPageChanged: (index, reason) {
