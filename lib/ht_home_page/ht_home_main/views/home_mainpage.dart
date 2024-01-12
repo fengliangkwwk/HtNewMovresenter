@@ -462,6 +462,47 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
  */
   ///样式一 轮播图 display_type = 3
   Widget HTBannerWidget(DataList data) {
+    // return CarouselSlider(
+    //   items: [
+    //     Container(
+    //       decoration: BoxDecoration(
+    //         color: Colors.blue,
+    //         borderRadius: BorderRadius.circular(8.0),
+    //       ),
+    //       child: const Center(
+    //         child: Text('Slide 1'),
+    //       ),
+    //     ),
+    //     Container(
+    //       decoration: BoxDecoration(
+    //         color: Colors.green,
+    //         borderRadius: BorderRadius.circular(8.0),
+    //       ),
+    //       child: const Center(
+    //         child: Text('Slide 2'),
+    //       ),
+    //     ),
+    //     Container(
+    //       decoration: BoxDecoration(
+    //         color: Colors.orange,
+    //         borderRadius: BorderRadius.circular(8.0),
+    //       ),
+    //       child: const Center(
+    //         child: Text('Slide 3'),
+    //       ),
+    //     ),
+    //   ],
+    //   options: CarouselOptions(
+    //     height: 200.0,
+    //     enlargeCenterPage: true,
+    //     enableInfiniteScroll: true,
+    //     autoPlay: true,
+    //     aspectRatio: 9 / 16,
+    //     autoPlayCurve: Curves.fastOutSlowIn,
+    //     autoPlayAnimationDuration: const Duration(milliseconds: 800),
+    //     viewportFraction: 0.4,
+    //   ),
+    // );
     var imageSliders = <Widget>[];
     for (var element in data.itemData ?? <ItemData>[]) {
       imageSliders.add(
@@ -481,7 +522,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
             );
           },
           child: Container(
-            color: Colors.red,
+            color: Colors.transparent,
             height: 375,
             margin: const EdgeInsets.all(5.0),
             child: ClipRRect(
@@ -502,10 +543,8 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                       decoration: const BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            Colors.red,
-                            Colors.green
-                            // Color.fromARGB(200, 0, 0, 0),
-                            // Color.fromARGB(0, 0, 0, 0)
+                            Color.fromARGB(200, 0, 0, 0),
+                            Color.fromARGB(0, 0, 0, 0)
                           ],
                           begin: Alignment.bottomCenter,
                           end: Alignment.topCenter,
@@ -539,15 +578,23 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
             Positioned(
               child: Container(
                 // color: Colors.green,
-                height: 254.0,
+                // height: 254.0,
                 margin: const EdgeInsets.only(top: 12.0, bottom: 21.0),
                 child: CarouselSlider(
                   carouselController: _controller,
                   options: CarouselOptions(
-                      autoPlay: true,
-                      aspectRatio: 2.0,
-                      enlargeCenterPage: true,
-                      enlargeStrategy: CenterPageEnlargeStrategy.height,
+                      height: 200,///轮播图的高度
+                      autoPlay: true,///是否自动播放
+                      aspectRatio: 140 / 200,///轮播图的宽高比
+                      enlargeCenterPage: true,///是否放大中央页
+                      enlargeStrategy: CenterPageEnlargeStrategy.scale,///放大策略
+                      autoPlayCurve: Curves.fastLinearToSlowEaseIn,///自动播放动画的曲线
+                      autoPlayAnimationDuration:
+                          const Duration(milliseconds: 800), ///自动播放动画的持续时间
+                      enableInfiniteScroll:true,///是否启用无限循环
+                      viewportFraction: 0.4,///中央页面的占比
+                      scrollPhysics: const BouncingScrollPhysics(), // 例如，使用弹性滚动
+                      /// 中央页面的占比
                       onPageChanged: (index, reason) {
                         homeProvider.carouselSliderCurrent = index;
                         // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
@@ -560,7 +607,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
 
             // 添加跑马指示器
             Positioned(
-              top: 244,
+              top: 210,
               child: Selector<HTHomeProvider, int>(
                 selector: (p0, p1) => p1.carouselSliderCurrent,
                 builder: (context, value, child) {
@@ -574,21 +621,25 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                               duration: const Duration(milliseconds: 100));
                         },
                         child: Container(
-                          width: 12.0,
-                          height: 12.0,
+                          width: homeProvider.carouselSliderCurrent == entry.key
+                              ? 13.0
+                              : 5.0,
+                          height: 5.0,
                           margin: const EdgeInsets.symmetric(
                               vertical: 8.0, horizontal: 4.0),
                           decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: (homeProvider.carouselSliderCurrent ==
-                                          entry.key
-                                      ? Colors.white
-                                      : Colors.red)
-                                  .withOpacity(
-                                      homeProvider.carouselSliderCurrent ==
-                                              entry.key
-                                          ? 0.9
-                                          : 0.4)),
+                            borderRadius: BorderRadius.circular(2.5),
+                            // shape: BoxShape.circle,
+                            color:
+                                (homeProvider.carouselSliderCurrent == entry.key
+                                        ? Colors.white
+                                        : const Color(0xffECECEC))
+                                    .withOpacity(
+                                        homeProvider.carouselSliderCurrent ==
+                                                entry.key
+                                            ? 0.9
+                                            : 0.4),
+                          ),
                         ),
                       );
                     }).toList(),

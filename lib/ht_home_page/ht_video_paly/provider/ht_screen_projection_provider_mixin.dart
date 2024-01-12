@@ -35,7 +35,10 @@ mixin HTScreenProjectionProviderMixin on HTVideoDescProviderBase {
       'title': videoDescBean?.data?.title, //投屏资源的标题
       'tvname': "Chucky-Season 3-Eps 1: Murder at 1600", //如果是电视剧则传"剧名-季名-集
       'cover': videoDescBean?.data?.cover,
-      'url': videoUrlStr
+      'url': videoUrlStr,
+      'callback': '1',
+
+      ///回跳影视就也能走scheme了
     };
     var airplay = HTUserStore.toolConfigBean?.airplay;
     String jsonStringB = jsonEncode(a);
@@ -43,6 +46,7 @@ mixin HTScreenProjectionProviderMixin on HTVideoDescProviderBase {
 // Scheme方式跳转：
     String schemeLink =
         "${airplay?.scheme}://com.ding.tool?params=$jsonStringB";
+    Uri schemeUrl = Uri.parse(schemeLink);
 
     //Deeplink方式跳转：
     String shopLink = 'https://apps.apple.com/app/id${airplay?.appleid}';
@@ -72,11 +76,13 @@ mixin HTScreenProjectionProviderMixin on HTVideoDescProviderBase {
       print('🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎${dynamicLink.query}');
       print('🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐🍐$dynamicLink');
     }
-    Uri schemeUrl = Uri.parse('${airplay?.scheme}://');
     bool isInstalled = await canLaunchUrl(schemeUrl);
+    if (kDebugMode) {
+      print('是否安装了:$isInstalled');
+    }
     if (isInstalled) {
       ///scheme跳转
-      await canLaunchUrl(Uri.parse(schemeLink));
+      await canLaunchUrl(schemeUrl);
     } else {
       //深链接跳转
       try {
