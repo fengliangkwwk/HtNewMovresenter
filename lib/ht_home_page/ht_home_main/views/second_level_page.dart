@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/home_second_level_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_second_level_provider.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_middlepage.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 import 'package:provider/provider.dart';
@@ -150,74 +151,90 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
   Widget itemWidget(HomeSecondLevelBean itemData) {
     double width = (SysTools.getScreenSize(context).width - 39)/3;
     double height = width * 160/112;
-    return Expanded(
-      child: Column(
-        children: [
-          SizedBox(
-            child: Stack(
-              children: [
-                ///1. 背景图
-                SizedBox(
-                  width: width,
-                  height:height,
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(5.0),
-                    ),
-                    child: CachedNetworkImage(
-                      imageUrl: itemData.cover ?? '',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-
-                ///2. 评分
-                Positioned(
-                  left: 5,
-                  top: 5,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
-                    children: [
-                      Text(
-                        SysTools.getBeforeDecimal(itemData.getRate()),
-                        style: const TextStyle(
-                            color: Color(0xffFF6D1C),
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600),
+    return GestureDetector(
+      onTap: () {
+          Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return HTClassVideoDetailPage(
+                            m_type_2:
+                                (itemData.mType2 == '1') ? "myfx" : "tt_mflx",
+                            id: itemData.id ?? "",
+                          );
+                        },
                       ),
-                      Text(
-                        SysTools.getAfterDecimal(itemData.getRate()),
-                        style: const TextStyle(
-                            color: Color(0xffFF6D1C),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600),
+                    );
+      },
+      child: SizedBox(
+        child: Column(
+          children: [
+            SizedBox(
+              child: Stack(
+                children: [
+                  ///1. 背景图
+                  SizedBox(
+                    width: width,
+                    height:height,
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(5.0),
                       ),
-                    ],
+                      child: CachedNetworkImage(
+                        imageUrl: itemData.cover ?? '',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-        //  const SizedBox(height: 5,),
-          ///3. 标题
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center, // 将子部件在垂直方向上居中
-              children: [
-                Text(
-                  itemData.title ?? '',
-                  maxLines: 2,
-                  textAlign: TextAlign.left,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Color(0xFF828386),
+      
+                  ///2. 评分
+                  Positioned(
+                    left: 5,
+                    top: 5,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          SysTools.getBeforeDecimal(itemData.getRate()),
+                          style: const TextStyle(
+                              color: Color(0xffFF6D1C),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          SysTools.getAfterDecimal(itemData.getRate()),
+                          style: const TextStyle(
+                              color: Color(0xffFF6D1C),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          //  const SizedBox(height: 5,),
+            ///3. 标题
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center, // 将子部件在垂直方向上居中
+                children: [
+                  Text(
+                    itemData.title ?? '',
+                    maxLines: 2,
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF828386),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

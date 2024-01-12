@@ -96,7 +96,6 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
       print(videoUrl());
     }
     player.setDataSource(videoUrl(), autoPlay: true, showCover: true);
-
     //   player.setSubtitle(
     //   'https://example.com/your-subtitle.srt',
     //   type: FijkSubtitleType.SRT,
@@ -111,7 +110,6 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
       // addHistoryAciton();
     });
   }
-
   ///点击订阅广告跳转到订阅页面事件
   void jumpToPremiumPage(BuildContext context) {
     isFullScreen =
