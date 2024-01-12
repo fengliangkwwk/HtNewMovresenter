@@ -234,18 +234,8 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
 
   ///第三行  播放历史
   Widget historyWidget(BuildContext context) {
-    return Row(children: [
-      Container(width: 10.0),
-      CachedNetworkImage(imageUrl: ImageURL.url_343, width: 16.0, height: 16.0),
-      Container(width: 5.0),
-      const Text("History",
-          style: TextStyle(
-              fontSize: 15.0,
-              color: Colors.white,
-              fontWeight: FontWeight.w600)),
-      const Spacer(),
-      GestureDetector(
-        onTap: () {
+    return GestureDetector(
+       onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -258,11 +248,21 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
             ),
           );
         },
-        child: CachedNetworkImage(
+      child: Row(children: [
+        Container(width: 10.0),
+        CachedNetworkImage(imageUrl: ImageURL.url_343, width: 16.0, height: 16.0),
+        Container(width: 5.0),
+        const Text("History",
+            style: TextStyle(
+                fontSize: 15.0,
+                color: Colors.white,
+                fontWeight: FontWeight.w600)),
+        const Spacer(),
+        CachedNetworkImage(
             imageUrl: ImageURL.url_289, width: 24.0, height: 24.0),
-      ),
-      Container(width: 10.0)
-    ]);
+        Container(width: 10.0)
+      ]),
+    );
   }
 
   ///historyListView列表

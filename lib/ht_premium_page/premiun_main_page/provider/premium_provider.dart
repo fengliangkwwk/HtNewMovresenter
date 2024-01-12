@@ -133,7 +133,8 @@ class PremiumProvider extends PremiumProviderBase
         'type': "1", //深链类型，1.订阅，2.下架导量，3.投屏
         'product': mainProvider
             .selectProductNo, //点击的订阅产品编号（1:个⼈周 2:个⼈⽉ 3:个⼈年 4:家庭周 5:家庭⽉
-        'activityProduct': "0", //正在搞活动的产品编号，值的获取⻅下⽅“常⻅错误2”
+        'activityProduct': "0",//正在搞活动的产品编号，值的获取⻅下⽅“常⻅错误2”
+        'callback':'1',///回跳影视就也能走scheme了
       };
       var airplay = HTUserStore.toolConfigBean?.airplay;
       String jsonStringB = jsonEncode(a);

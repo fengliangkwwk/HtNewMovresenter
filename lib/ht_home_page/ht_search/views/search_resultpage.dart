@@ -288,6 +288,7 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                     // if (model?.dataType != '1' || model?.dataType != '3') {
                     //   return;
                     // }
+                    FocusScope.of(context).requestFocus(FocusNode());
                     Navigator.push(
                       context,
                       MaterialPageRoute(

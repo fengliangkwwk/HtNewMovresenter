@@ -168,8 +168,9 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                 child: TextField(
                   onEditingComplete: (() {
                     if (_htVarSearchValue.isEmpty) {
-                      ToastUtil.showToast(msg: '请输入搜索关键词',gravity:ToastGravity.TOP);
-                      return; 
+                      ToastUtil.showToast(
+                          msg: '请输入搜索关键词', gravity: ToastGravity.TOP);
+                      return;
                     }
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
@@ -285,6 +286,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
       result.add(
         GestureDetector(
           onTap: (() {
+            FocusScope.of(context).requestFocus(FocusNode());
             Navigator.push(
               context,
               MaterialPageRoute(

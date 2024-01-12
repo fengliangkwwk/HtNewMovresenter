@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'dart:convert';
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/foundation.dart';
@@ -68,9 +70,12 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   }
 
   String videoUrl() {
-    // ignore: unrelated_type_equality_checks
+    //  int aa =  MainPovider.isVip();
+    // if (kDebugMode) {
+    //   print('------------$aa');
+    // }
     if (MainPovider.isVip != -1) {
-      videoUrlStr = (videoDescBean?.data?.hd?.link) != null
+      videoUrlStr = ((videoDescBean?.data?.hd?.link) != null)
           ? videoDescBean?.data?.hd?.link
           : videoDescBean?.data?.sd?.link;
     } else {
@@ -85,7 +90,6 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   void initData({String? id}) async {
     ///判断是否有播放记录
     var saveData = await isSaveHistory(id);
-
     // 停止播放并释放资源
     await player.reset();
     if (kDebugMode) {
