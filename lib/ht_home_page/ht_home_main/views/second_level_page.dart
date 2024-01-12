@@ -90,7 +90,6 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
             GestureDetector(
               onTap: () {
                 //HTClassSearchMidPage
-
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return const HTClassSearchMidPage(title: "");
                 }));
@@ -132,17 +131,9 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
                   itemCount: value.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
-
-                    ///
-                    childAspectRatio: 112 / 160,
-
-                    ///
+                    childAspectRatio: 112 / 193,
                     mainAxisSpacing: 10,
-
-                    ///
                     crossAxisSpacing: 9.5,
-
-                    ///
                   ),
                   itemBuilder: (context, index) {
                     return itemWidget(value[index]);
@@ -157,66 +148,73 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
   }
 
   Widget itemWidget(HomeSecondLevelBean itemData) {
-    return SizedBox(
+    double width = (SysTools.getScreenSize(context).width - 39)/3;
+    double height = width * 160/112;
+    return Expanded(
       child: Column(
         children: [
-          Expanded(
-            child: SizedBox(
-              width: double.infinity,
-              child: Stack(
-                children: [
-                  ///1. 背景图
-                  SizedBox(
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(5.0),
-                      ),
-                      child: CachedNetworkImage(
-                        imageUrl: itemData.cover ?? '',
-                        fit: BoxFit.fill,
-                      ),
+          SizedBox(
+            child: Stack(
+              children: [
+                ///1. 背景图
+                SizedBox(
+                  width: width,
+                  height:height,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(5.0),
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: itemData.cover ?? '',
+                      fit: BoxFit.cover,
                     ),
                   ),
+                ),
 
-                  ///2. 评分
-                  Positioned(
-                    left: 5,
-                    top: 5,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
-                      children: [
-                        Text(
-                          SysTools.getBeforeDecimal(itemData.getRate()),
-                          style: const TextStyle(
-                              color: Color(0xffFF6D1C),
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        Text(
-                          SysTools.getAfterDecimal(itemData.getRate()),
-                          style: const TextStyle(
-                              color: Color(0xffFF6D1C),
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),
+                ///2. 评分
+                Positioned(
+                  left: 5,
+                  top: 5,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        SysTools.getBeforeDecimal(itemData.getRate()),
+                        style: const TextStyle(
+                            color: Color(0xffFF6D1C),
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Text(
+                        SysTools.getAfterDecimal(itemData.getRate()),
+                        style: const TextStyle(
+                            color: Color(0xffFF6D1C),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 5),
-
+        //  const SizedBox(height: 5,),
           ///3. 标题
-          Text(
-            itemData.title ?? '',
-            style: const TextStyle(
-              fontSize: 12,
-              color: Color(0xFF828386),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center, // 将子部件在垂直方向上居中
+              children: [
+                Text(
+                  itemData.title ?? '',
+                  maxLines: 2,
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF828386),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
