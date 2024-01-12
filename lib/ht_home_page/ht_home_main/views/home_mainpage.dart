@@ -554,9 +554,10 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                           vertical: 10.0, horizontal: 20.0),
                       child: Text(
                         element.new_conf_name ?? '',
+                        maxLines: 2,
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 20.0,
+                          fontSize: 12.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
