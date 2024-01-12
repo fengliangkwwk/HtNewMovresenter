@@ -173,7 +173,7 @@ class Data {
   String? r18;
 
   @JsonKey(name: 'like')
-  String? like;
+  dynamic like;
 
   @JsonKey(name: 'unlike')
   dynamic unlike;

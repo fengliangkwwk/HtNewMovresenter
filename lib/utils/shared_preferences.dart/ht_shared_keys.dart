@@ -3,6 +3,8 @@ class HTSharedKeys {
   static var htPersonMesaage = 'personMessage';
   static var htVipMesaage = 'htVipMesaage';
   static var htSearch = 'htSearch';
+   ///通知token
+  static var messageToken = 'messageToken';
 
   ///首页的 18+是否隐藏
   static var htHomeHideKey = 'htHomeHideKey';

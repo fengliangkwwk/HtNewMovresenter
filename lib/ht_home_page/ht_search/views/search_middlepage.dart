@@ -1,12 +1,14 @@
 //  * 搜索中间页
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/beans/ht_mid_search_bean.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/providers/ht_midsearch_provider/ht_midsearch_provider.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_resultpage.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage.dart';
 import 'package:ht_new_movpresenter/utils/net_request/ui_utils.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/tools/toast_tool.dart';
 import 'package:provider/provider.dart';
 
 class HTClassSearchMidPage extends StatefulWidget {
@@ -53,9 +55,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
   void didUpdateWidget(HTClassSearchMidPage oldWidget) async {
     super.didUpdateWidget(oldWidget);
     await midSearchProvider.searchData();
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   // @override
@@ -167,12 +167,17 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
               Expanded(
                 child: TextField(
                   onEditingComplete: (() {
+                    if (_htVarSearchValue.isEmpty) {
+                      ToastUtil.showToast(msg: '请输入搜索关键词',gravity:ToastGravity.TOP);
+                      return; 
+                    }
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return HTClassSearchResultPage(
                           keyWord: _htVarSearchValue);
                     }));
                   }),
+                  textInputAction: TextInputAction.search, // 设置为Search
                   controller: midSearchProvider.htVarFieldController,
                   autofocus: true,
                   focusNode: _htVarFieldFocusNode,
@@ -302,6 +307,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                     Container(
                       margin: const EdgeInsets.only(right: 5.0),
                       decoration: BoxDecoration(
+                        color: Colors.red,
                         borderRadius: BorderRadius.circular(6.0), // 设置圆角
                         image: DecorationImage(
                           fit: BoxFit.cover,
@@ -330,16 +336,18 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                 ),
               ),
               const SizedBox(height: 5),
-              Center(
-                child: Text(
-                  itemData?.title ?? '',
-                  maxLines: 2,
-                  style: const TextStyle(
-                    color: Color(0xff828386),
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w600,
+              SizedBox(
+                child: Center(
+                  child: Text(
+                    itemData?.title ?? '',
+                    maxLines: 2,
+                    style: const TextStyle(
+                      color: Color(0xff828386),
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    // textAlign: TextAlign.center,
                   ),
-                  // textAlign: TextAlign.center,
                 ),
               )
             ],

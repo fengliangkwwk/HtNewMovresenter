@@ -9,8 +9,12 @@ class ToastUtil {
       double? fontSize,
       ToastGravity? gravity,
       Color? backgroundColor,
-      Color? textColor
-      }) {
-    Fluttertoast.showToast(msg: msg);
+      Color? textColor}) {
+    Fluttertoast.showToast(
+        msg: msg,
+        fontSize: fontSize,
+        gravity: gravity,
+        backgroundColor: backgroundColor,
+        textColor: textColor);
   }
 }

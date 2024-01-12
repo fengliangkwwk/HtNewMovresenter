@@ -28,8 +28,6 @@ Future<void> initApp() async {
   WidgetsFlutterBinding.ensureInitialized();
 }
 
-
-
 ///获取订阅状态
 ///1. 判断是否登录 2.用户信息 3.是否禁止 18+ 4.是否首次进入app
 Future<void> userData() async {
@@ -46,6 +44,10 @@ Future<void> userData() async {
   ///是否第一次进入 app
   bool? isFirstInto = prefs.getBool(HTSharedKeys.isFirstInto);
   HTUserStore.isFirstInto = isFirstInto ?? true;
+
+  ///通知token
+  String messageToken = prefs.getString(HTSharedKeys.messageToken) ?? '0';
+  HTUserStore.messageToken = messageToken;
 
   ///是否点击了通知授权框
   bool? isClickMessageRequest =

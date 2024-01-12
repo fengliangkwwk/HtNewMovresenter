@@ -63,7 +63,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
           builder: (context, value, child) {
             return Scaffold(
               backgroundColor: Colors.black,
-              body: Container(
+              body: SizedBox(
                 height: double.infinity,
                 child: Column(
                   children: [
@@ -228,7 +228,10 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return const HTClassWatchListPage(title: "");
+                        return const HTClassWatchListPage(
+                          title: "Recently Played",
+                          state: 1,
+                        );
                       },
                     ),
                   ),
@@ -461,67 +464,71 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
   Widget HTBannerWidget(DataList data) {
     var imageSliders = <Widget>[];
     for (var element in data.itemData ?? <ItemData>[]) {
-      imageSliders.add(GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                ///"new_conf_type": 7,// 5、movie；7、tv  (myfx电影，tt_mflx电视剧)
-                return HTClassVideoDetailPage(
-                  m_type_2: (element.new_conf_type == 5 ? "myfx" : "tt_mflx"),
-                  id: element.new_conf_value ?? "",
-                );
-              },
-            ),
-          );
-        },
-        child: Container(
-          height: 375,
-          margin: const EdgeInsets.all(5.0),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-            child: Stack(
-              children: <Widget>[
-                CachedNetworkImage(
-                  imageUrl: element.new_img ?? '',
-                  fit: BoxFit.cover,
-                  width: 354.0,
-                  height: double.infinity,
-                ),
-                Positioned(
-                  bottom: 0.0,
-                  left: 0.0,
-                  right: 0.0,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Color.fromARGB(200, 0, 0, 0),
-                          Color.fromARGB(0, 0, 0, 0)
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
+      imageSliders.add(
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  ///"new_conf_type": 7,// 5、movie；7、tv  (myfx电影，tt_mflx电视剧)
+                  return HTClassVideoDetailPage(
+                    m_type_2: (element.new_conf_type == 5 ? "myfx" : "tt_mflx"),
+                    id: element.new_conf_value ?? "",
+                  );
+                },
+              ),
+            );
+          },
+          child: Container(
+            color: Colors.red,
+            height: 375,
+            margin: const EdgeInsets.all(5.0),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+              child: Stack(
+                children: <Widget>[
+                  CachedNetworkImage(
+                    imageUrl: element.new_img ?? '',
+                    fit: BoxFit.cover,
+                    width: 354.0,
+                    height: double.infinity,
+                  ),
+                  Positioned(
+                    bottom: 0.0,
+                    left: 0.0,
+                    right: 0.0,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.red,
+                            Colors.green
+                            // Color.fromARGB(200, 0, 0, 0),
+                            // Color.fromARGB(0, 0, 0, 0)
+                          ],
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                        ),
                       ),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 20.0),
-                    child: Text(
-                      element.new_conf_name_2 ?? '',
-                      // 'No. ${data.itemData?.indexOf(element)} image',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 20.0),
+                      child: Text(
+                        element.new_conf_name ?? '',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
-      ));
+      );
     }
 
     return Column(
@@ -661,7 +668,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600),
                                       ),
-                                       Text(
+                                      Text(
                                         getAfterDecimal(item.getRate()),
                                         style: const TextStyle(
                                             color: Color(0xffFF6D1C),
@@ -752,7 +759,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600),
                                       ),
-                                       Text(
+                                      Text(
                                         getAfterDecimal(item.getRate()),
                                         style: const TextStyle(
                                             color: Color(0xffFF6D1C),
@@ -859,13 +866,13 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                                   textBaseline: TextBaseline.alphabetic,
                                   children: [
                                     Text(
-                                     getBeforeDecimal(m20.getRate()),
+                                      getBeforeDecimal(m20.getRate()),
                                       style: const TextStyle(
                                           color: Color(0xffFF6D1C),
                                           fontSize: 18,
                                           fontWeight: FontWeight.w600),
                                     ),
-                                     Text(
+                                    Text(
                                       getAfterDecimal(m20.getRate()),
                                       style: const TextStyle(
                                           color: Color(0xffFF6D1C),
@@ -961,13 +968,13 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                                     textBaseline: TextBaseline.alphabetic,
                                     children: [
                                       Text(
-                                       getBeforeDecimal(tt20.getRate()),
+                                        getBeforeDecimal(tt20.getRate()),
                                         style: const TextStyle(
                                             color: Color(0xffFF6D1C),
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600),
                                       ),
-                                       Text(
+                                      Text(
                                         getAfterDecimal(tt20.getRate()),
                                         style: const TextStyle(
                                             color: Color(0xffFF6D1C),
@@ -1117,7 +1124,7 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                               fontSize: 18,
                               fontWeight: FontWeight.w600),
                         ),
-                         Text(
+                        Text(
                           getAfterDecimal(itemData.getRate()),
                           style: const TextStyle(
                               color: Color(0xffFF6D1C),

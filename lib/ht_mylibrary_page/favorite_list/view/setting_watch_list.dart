@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage.dart';
@@ -16,7 +15,7 @@ class HTClassWatchListPage extends StatefulWidget {
   }) : super(key: key);
 
   final String title;
-  final int state;
+  final int state;///收藏页面和浏览历史共用一个页面
 
   @override
   State<HTClassWatchListPage> createState() => _HTClassWatchListPageState();

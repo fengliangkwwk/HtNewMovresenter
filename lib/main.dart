@@ -10,8 +10,10 @@ import 'package:ht_new_movpresenter/ht_mylibrary_page/mylibrary_page/view/settin
 import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/view/premium_indexerpage.dart';
 import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_init_app.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   await initApp();
@@ -19,7 +21,7 @@ void main() async {
     DevicePreview(
       // enabled: !kReleaseMode,
       enabled: false,
-      builder: (context) =>  HTClassApp(), // Wrap your app
+      builder: (context) => HTClassApp(), // Wrap your app
     ),
   );
 }
@@ -27,13 +29,15 @@ void main() async {
 class HTClassApp extends StatelessWidget {
   ///推送
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-   HTClassApp({Key? key}) : super(key: key);
+  HTClassApp({Key? key}) : super(key: key);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    _firebaseMessaging.getToken().then((token) {
+    _firebaseMessaging.getToken().then((token) async {
       if (kDebugMode) {
         print("Firebase Token: $token");
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString(HTSharedKeys.messageToken, token ?? '0');
       }
     });
 
@@ -62,7 +66,7 @@ class HTClassApp extends StatelessWidget {
       // Error getting token.
     });
 
-print(HTUserStore.isClickMessageRequest);
+    print(HTUserStore.isClickMessageRequest);
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => mainProvider)],
       child: MaterialApp(
@@ -90,10 +94,12 @@ print(HTUserStore.isClickMessageRequest);
 
           primarySwatch: Colors.blue,
         ),
-      
+
         home: HTUserStore.isFirstInto
             ? const HTClassLauncherPage(title: "")
-            : (HTUserStore.isClickMessageRequest?const HTClassBtmNavPage():const HTClassPremiumLauncherPage(title: "")), //正常进入启动页
+            : (HTUserStore.isClickMessageRequest
+                ? const HTClassBtmNavPage()
+                : const HTClassPremiumLauncherPage(title: "")), //正常进入启动页
         // home: const HTClassBtmNavPage(),
         // home: const HTClassPremiumLauncherPage(title: '',),
       ),

@@ -18,6 +18,8 @@ class HTUserStore {
   static ToolConfigBean? toolConfigBean;
 
   static List<String> list18 = [];
+  ///通知token
+  static String? messageToken;
 
   static bool login() {
     if (userBean?.uid != null) {

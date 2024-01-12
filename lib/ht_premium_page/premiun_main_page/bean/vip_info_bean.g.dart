@@ -30,7 +30,7 @@ Map<String, dynamic> _$VipInfoBeanToJson(VipInfoBean instance) =>
 
 Local _$LocalFromJson(Map<String, dynamic> json) => Local()
   ..k5 = json['k5'] as String?
-  ..value = json['value'] as int?
+  ..value = json['value']
   ..k6 = json['k6']
   ..k7 = json['k7']
   ..appleServerStatus = json['apple_server_status'] as int?

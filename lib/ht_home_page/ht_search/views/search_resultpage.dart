@@ -283,7 +283,6 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                 String beforeDecimal = parts.isNotEmpty ? parts[0] : '';
                 // 获取小数点后的子字符串
                 String afterDecimal = parts.length > 1 ? parts[1] : '';
-
                 return GestureDetector(
                   onTap: () {
                     // if (model?.dataType != '1' || model?.dataType != '3') {

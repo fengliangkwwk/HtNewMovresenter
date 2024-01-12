@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:device_information/device_information.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 
 class KTClassUIUtils {
@@ -53,7 +54,7 @@ class KTClassUIUtils {
       var modelID = await DeviceInformation.deviceModel;
       var devId = await DeviceInformation.deviceName;
       if (io.Platform.isIOS) {
-//通知栏回调里的deviceToken
+       //通知栏回调里的deviceToken
         htVarParam.putIfAbsent(
             "apns_id",
             () =>
@@ -78,7 +79,7 @@ class KTClassUIUtils {
         htVarParam.putIfAbsent("os_ver",
             () => "16.1"); //设备系统版本，如16.0(UIDevice.currentDevice.systemVersion)
         htVarParam.putIfAbsent("r1", () => "100"); //开关状态 默认值:100
-        htVarParam.putIfAbsent("reg_id", () => "0"); //推送fcmToken 默认值:0
+        htVarParam.putIfAbsent("reg_id", () => HTUserStore.messageToken??'0'); //推送fcmToken 默认值:0
         htVarParam.putIfAbsent(
             "resolution", () => "1125x2436"); //屏幕分辨率 默认值: 1125x2436
         htVarParam.putIfAbsent("simcard", () => "1"); //是否插入手机卡 默认值:1
@@ -106,7 +107,7 @@ class KTClassUIUtils {
         htVarParam.putIfAbsent("control", () => "iPhone10,3");
         htVarParam.putIfAbsent("os_ver", () => "16.1");
         htVarParam.putIfAbsent("r1", () => "100");
-        htVarParam.putIfAbsent("reg_id", () => "0");
+        htVarParam.putIfAbsent("reg_id", () => HTUserStore.messageToken??'0');
         htVarParam.putIfAbsent("resolution", () => "1125x2436");
         htVarParam.putIfAbsent("simcard", () => "1");
         htVarParam.putIfAbsent("timezone", () => "8");
@@ -134,7 +135,7 @@ class KTClassUIUtils {
       htVarParam.putIfAbsent("control", () => "iPhone10,3");
       htVarParam.putIfAbsent("os_ver", () => "16.1");
       htVarParam.putIfAbsent("r1", () => "100");
-      htVarParam.putIfAbsent("reg_id", () => "0");
+      htVarParam.putIfAbsent("reg_id", () => HTUserStore.messageToken??'0');
       htVarParam.putIfAbsent("resolution", () => "1125x2436");
       htVarParam.putIfAbsent("simcard", () => "1");
       htVarParam.putIfAbsent("timezone", () => "8");

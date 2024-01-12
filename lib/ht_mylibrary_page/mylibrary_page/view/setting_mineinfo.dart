@@ -232,7 +232,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
     );
   }
 
-  ///第三行
+  ///第三行  播放历史
   Widget historyWidget(BuildContext context) {
     return Row(children: [
       Container(width: 10.0),
@@ -246,12 +246,17 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
       const Spacer(),
       GestureDetector(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const HTClassWatchListPage(
-              title: "Recently Played",
-              state: 1,
-            );
-          }));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return const HTClassWatchListPage(
+                  title: "Recently Played",
+                  state: 1,
+                );
+              },
+            ),
+          );
         },
         child: CachedNetworkImage(
             imageUrl: ImageURL.url_289, width: 24.0, height: 24.0),
@@ -285,19 +290,19 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
   Widget historyListItem(int index) {
     var model = HTUserStore.historyList[index];
     return GestureDetector(
-        onTap: () {
-               Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return HTClassVideoDetailPage(
-                    m_type_2:model.mType2??"",
-                    id: model.id??"",
-                  );
-                },
-              ),
-            );
-          },
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return HTClassVideoDetailPage(
+                m_type_2: model.mType2 ?? "",
+                id: model.id ?? "",
+              );
+            },
+          ),
+        );
+      },
       child: Column(
         children: [
           topPart(model),
