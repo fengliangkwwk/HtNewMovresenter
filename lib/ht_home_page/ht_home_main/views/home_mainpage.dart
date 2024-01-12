@@ -482,7 +482,6 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
           },
           child: Container(
             color: Colors.transparent,
-            // height: 375,
             margin: const EdgeInsets.all(5.0),
             child: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(5.0)),

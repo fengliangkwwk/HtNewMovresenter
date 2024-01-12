@@ -4,6 +4,7 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/bean/home_second_l
 import 'package:ht_new_movpresenter/ht_home_page/ht_home_main/providers/ht_home_second_level_provider.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_middlepage.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -183,14 +184,25 @@ class _SecondLevelPageState extends State<SecondLevelPage> {
                   Positioned(
                     left: 5,
                     top: 5,
-                    child: Text(
-                      itemData.getRate(),
-                      // itemData.rate ?? '',
-                      style: const TextStyle(
-                        color: Color(0xFFFF6D1C),
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          SysTools.getBeforeDecimal(itemData.getRate()),
+                          style: const TextStyle(
+                              color: Color(0xffFF6D1C),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          SysTools.getAfterDecimal(itemData.getRate()),
+                          style: const TextStyle(
+                              color: Color(0xffFF6D1C),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
                     ),
                   ),
                 ],

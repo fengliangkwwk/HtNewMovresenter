@@ -83,7 +83,7 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
     Map<String, dynamic> htVarparams = {};
 
     ///参数
-    String cutterntTimeStamp = SysTools().getSecondsTimeStamp();
+    String cutterntTimeStamp = SysTools.getSecondsTimeStamp();
     htVarparams['id'] = eid; //电视剧集 id
     htVarparams['sig2'] =
         'kevMvWzTjzlckLgckegcoeeRwdwlwEbejzjLvzvSod1UkEqVkEeOkWjS';
@@ -102,7 +102,7 @@ mixin HTVideoProviderMixin on HTVideoDescProviderBase {
   ///144
   Future<void> request144(String id) async {
     vid = id;
-    String cutterntTimeStamp = SysTools().getSecondsTimeStamp();
+    String cutterntTimeStamp = SysTools.getSecondsTimeStamp();
     var res =
         await HTNetUtils.htPost(apiUrl: Global.movieLinksAndMoviesUrl, params: {
       'id': id,

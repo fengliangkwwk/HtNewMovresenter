@@ -8,21 +8,21 @@ class SysTools {
   }
 
   ///获取当前的时间戳(精确到毫秒 13位返回值)
-  String getMilliSecondsTimeStamp() {
+static  String getMilliSecondsTimeStamp() {
     DateTime now = DateTime.now();
     int timestamp = now.millisecondsSinceEpoch;
     return timestamp.toString();
   }
 
   ///获取当前的时间戳(精确到秒 10位返回值)
-  String getSecondsTimeStamp() {
+static String getSecondsTimeStamp() {
     DateTime now = DateTime.now();
     int timestamp = now.millisecondsSinceEpoch ~/ 1000; // 将13位数时间戳转换为10位数
     return timestamp.toString();
   }
 
   ///时间戳转时间
-  String getTimeFromTimeStamp(int timestamp) {
+static  String getTimeFromTimeStamp(int timestamp) {
     DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
     return dateTime.toString();
   }
@@ -46,6 +46,25 @@ static bool hasOneDecimalPlace(String numberString) {
   }
   return false;
 }
+
+///获取小数点前面子字符串
+static String getBeforeDecimal(String str) {
+    // 使用split方法将字符串分割成两部分
+    List<String> parts = str.split('.');
+    // 获取小数点前的子字符串
+    String beforeDecimal = parts.isNotEmpty ? parts[0] : '';
+    return '$beforeDecimal.';
+  }
+///获取小数点后面子字符串
+static String getAfterDecimal(String str) {
+    // 使用split方法将字符串分割成两部分
+    List<String> parts = str.split('.');
+    // 获取小数点后的子字符串
+    String afterDecimal = parts.length > 1 ? parts[1] : '';
+    return afterDecimal;
+  }
+
+
 ///判断当前页面是否为某个页面
 static bool isCurrentPage(BuildContext context, Widget page) {
   // 获取当前路由

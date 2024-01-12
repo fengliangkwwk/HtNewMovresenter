@@ -73,7 +73,7 @@ class KTClassUIUtils {
         htVarParam.putIfAbsent(
             "imsi", () => '51502'); //网络供应商国家编号+网络编号  默认值:51502
         htVarParam.putIfAbsent(
-            "installTime", () => SysTools().getSecondsTimeStamp()); //首次安装时间
+            "installTime", () => SysTools.getSecondsTimeStamp()); //首次安装时间
         htVarParam.putIfAbsent("lang", () => "en"); //公参：设备当前语言 默认值:en
         htVarParam.putIfAbsent("model", () => modelID); //设备型号 默认值:iPhone10,3
         htVarParam.putIfAbsent("os_ver",
@@ -102,7 +102,7 @@ class KTClassUIUtils {
             "idfa", () => "276E0495-66F6-417B-92FA-66EF0DC69DD4");
         htVarParam.putIfAbsent("imsi", () => "51502");
         htVarParam.putIfAbsent(
-            "installTime", () => SysTools().getSecondsTimeStamp());
+            "installTime", () => SysTools.getSecondsTimeStamp());
         htVarParam.putIfAbsent("lang", () => "en");
         htVarParam.putIfAbsent("control", () => "iPhone10,3");
         htVarParam.putIfAbsent("os_ver", () => "16.1");
@@ -130,7 +130,7 @@ class KTClassUIUtils {
           "idfa", () => "276E0495-66F6-417B-92FA-66EF0DC69DD4");
       htVarParam.putIfAbsent("imsi", () => "51502");
       htVarParam.putIfAbsent(
-          "installTime", () => SysTools().getSecondsTimeStamp());
+          "installTime", () => SysTools.getSecondsTimeStamp());
       htVarParam.putIfAbsent("lang", () => "en");
       htVarParam.putIfAbsent("control", () => "iPhone10,3");
       htVarParam.putIfAbsent("os_ver", () => "16.1");
