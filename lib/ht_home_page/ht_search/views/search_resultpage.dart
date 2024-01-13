@@ -71,9 +71,9 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
             GestureDetector(
                 child: CachedNetworkImage(
                     imageUrl: ImageURL.url_291, width: 24, height: 24),
-
                 ///返回按钮
                 onTap: () {
+                  FocusScope.of(context).requestFocus(FocusNode());
                   Navigator.of(context).pop();
                 }),
             Container(width: 6.0),
@@ -124,7 +124,7 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                           }
                           provider.onChanged(val);
                         },
-                        onSubmitted: provider.onSubmitted,
+                        // onSubmitted: provider.onSubmitted,
                       ),
                     ),
 
@@ -345,43 +345,36 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                               ],
                             ),
                           ),
+
+                          ///右下角的电视剧
                           Visibility(
-                            visible: model.newFlag == "NEW" ? true : false,
-                            child: SizedBox(
-                              width: double.infinity,
-                              height: double.infinity,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const SizedBox(),
-                                  Container(
-                                    height: 24.0,
-                                    // padding: const EdgeInsets.symmetric(horizontal: 9.5 *2),
-                                    width: double.infinity,
-                                    decoration: const BoxDecoration(
-                                        gradient: LinearGradient(
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                            colors: [
-                                          Colors.transparent,
-                                          Colors.black
-                                        ])),
-                                    child: Row(
-                                      children: [
-                                        const Spacer(),
-                                        Text(model.newFlag ?? 'NEW',
-                                            style: const TextStyle(
-                                                color: Color(0xffFF6D1C),
-                                                fontSize: 8.0)),
-                                        Text("| ${model.ssEps}",
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 8.0))
-                                      ],
-                                    ),
-                                  )
-                                ],
+                            visible: model.newFlag == 'NEW' ? true : false,
+                            child: Positioned(
+                              bottom: 0.0,
+                              width: width,
+                              child: Container(
+                                height: 24.0,
+                                decoration: const BoxDecoration(
+                                    gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                      Colors.transparent,
+                                      Colors.black
+                                    ])),
+                                child: Row(children: [
+                                  const Spacer(),
+                                  Text(model.newFlag ?? '',
+                                      style: const TextStyle(
+                                          color: Color(0xffFF6D1C),
+                                          fontSize: 8.0)),
+                                  Text("|${model.ssEps}",
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 8.0)),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                ]),
                               ),
                             ),
                           ),
@@ -406,14 +399,6 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                           ],
                         ),
                       ),
-                      // Text(
-                      //   model.title ?? '',
-                      //   maxLines: 2,
-                      //   style: const TextStyle(
-                      //     color: Color(0xff828386),
-                      //     fontSize: 12.0,
-                      //   ),
-                      // ),
                     ],
                   ),
                 );
