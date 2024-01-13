@@ -8,6 +8,7 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_search/views/search_resultpa
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/play_detailpage.dart';
 import 'package:ht_new_movpresenter/utils/net_request/ui_utils.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 import 'package:ht_new_movpresenter/utils/tools/toast_tool.dart';
 import 'package:provider/provider.dart';
 
@@ -106,7 +107,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                                     shrinkWrap: true,
                                     physics:
                                         const NeverScrollableScrollPhysics(),
-                                    childAspectRatio: 112 / 160,
+                                    childAspectRatio: 112 / 193,
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 10.0, horizontal: 0.0),
                                     mainAxisSpacing: 10.0,
@@ -277,6 +278,8 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
 
   ///item widget
   List<Widget> itemWidget() {
+    double width = (SysTools.getScreenSize(context).width - 39) / 3;
+    double height = width * 160 / 112;
     var result = <Widget>[];
     for (var i = 0;
         i < (midSearchProvider.midSearchBean?.data ?? <Data>[]).length;
@@ -303,10 +306,12 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
           }),
           child: Column(
             children: [
-              Expanded(
+              SizedBox(
                 child: Stack(
                   children: [
                     Container(
+                      width: width,
+                      height: height,
                       margin: const EdgeInsets.only(right: 5.0),
                       decoration: BoxDecoration(
                         color: Colors.red,
@@ -337,21 +342,38 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                   ],
                 ),
               ),
-              const SizedBox(height: 5),
-              SizedBox(
-                child: Center(
-                  child: Text(
-                    itemData?.title ?? '',
-                    maxLines: 2,
-                    style: const TextStyle(
-                      color: Color(0xff828386),
-                      fontSize: 12.0,
-                      fontWeight: FontWeight.w600,
+              // const SizedBox(height: 5),
+
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center, // 将子部件在垂直方向上居中
+                  children: [
+                    Text(
+                      itemData?.title ?? '',
+                      maxLines: 2,
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Color(0xFF828386),
+                      ),
                     ),
-                    // textAlign: TextAlign.center,
-                  ),
+                  ],
                 ),
-              )
+              ),
+              // SizedBox(
+              //   child: Center(
+              //     child: Text(
+              //       itemData?.title ?? '',
+              //       maxLines: 2,
+              //       style: const TextStyle(
+              //         color: Color(0xff828386),
+              //         fontSize: 12.0,
+              //         fontWeight: FontWeight.w600,
+              //       ),
+              //       // textAlign: TextAlign.center,
+              //     ),
+              //   ),
+              // )
             ],
           ),
         ),

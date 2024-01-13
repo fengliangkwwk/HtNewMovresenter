@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/providers/ht_searchresult_provider/ht_searchresult_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
+import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../ht_video_paly/views/play_detailpage.dart';
@@ -257,6 +258,8 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
 
   ///2.列表
   Widget listWidget() {
+    double width = (SysTools.getScreenSize(context).width - 39) / 3;
+    double height = width * 160 / 112;
     return Selector<HTSearchResultProvider, bool>(
       selector: (p0, p1) => p1.loading,
       builder: (context, value, child) {
@@ -271,7 +274,7 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
               itemCount: dataList?.length ?? 0,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
-                childAspectRatio: 112 / 180,
+                childAspectRatio: 112 / 193,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 9.5,
               ),
@@ -305,12 +308,11 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                   child: Column(
                     children: [
                       ///1.背景图
-                      Expanded(
-                          child: Stack(
+                      Stack(
                         children: [
                           SizedBox(
-                            width: double.infinity,
-                            height: double.infinity,
+                            width: width,
+                            height: height,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(5.0),
                               child: CachedNetworkImage(
@@ -384,17 +386,34 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                             ),
                           ),
                         ],
-                      )),
+                      ),
 
                       ///2.标题
-                      Text(
-                        model.title ?? '',
-                        maxLines: 2,
-                        style: const TextStyle(
-                          color: Color(0xff828386),
-                          fontSize: 12.0,
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment:
+                              MainAxisAlignment.center, // 将子部件在垂直方向上居中
+                          children: [
+                            Text(
+                              model.title ?? '',
+                              maxLines: 2,
+                              textAlign: TextAlign.left,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Color(0xFF828386),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
+                      // Text(
+                      //   model.title ?? '',
+                      //   maxLines: 2,
+                      //   style: const TextStyle(
+                      //     color: Color(0xff828386),
+                      //     fontSize: 12.0,
+                      //   ),
+                      // ),
                     ],
                   ),
                 );
