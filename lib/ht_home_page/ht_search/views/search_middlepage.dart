@@ -360,20 +360,7 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                   ],
                 ),
               ),
-              // SizedBox(
-              //   child: Center(
-              //     child: Text(
-              //       itemData?.title ?? '',
-              //       maxLines: 2,
-              //       style: const TextStyle(
-              //         color: Color(0xff828386),
-              //         fontSize: 12.0,
-              //         fontWeight: FontWeight.w600,
-              //       ),
-              //       // textAlign: TextAlign.center,
-              //     ),
-              //   ),
-              // )
+             
             ],
           ),
         ),

@@ -245,162 +245,165 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
 
   ///seeAll More 按钮
   Widget seeAllAndMoreButtoonWidget(DataList data) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Column(
-        children: [
-          ///1.more +  see all
-          Row(children: [
-            Flexible(
-                flex: 1,
-                child: GestureDetector(
-                  onTap: () {
-                    homeProvider.onTapMoreAction(data);
-                  },
-                  child: Selector<HTHomeProvider, DataList?>(
-                    selector: (p0, p1) => p1.selectData,
-                    builder: (context, value, child) {
-                      return Container(
-                        margin: const EdgeInsets.only(left: 10.0, right: 5.0),
-                        height: 35.0,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5.0),
-                            color: const Color(0xff23252A)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(value == null ? "More" : 'loading',
-                                style: const TextStyle(
-                                    color: Color(0xffBCBDBE), fontSize: 15.0)),
-                            Container(width: 5.0),
-                            value == null
-                                ? CachedNetworkImage(
-                                    imageUrl: ImageURL.url_286,
-                                    width: 18,
-                                    height: 18)
-                                : RotationTransition(
-                                    turns: Tween<double>(
-                                      begin: 1,
-                                      end: 300,
-                                    ).animate(_animationController),
-                                    child: CachedNetworkImage(
-                                        imageUrl: ImageURL.url_287,
-                                        width: 18,
-                                        height: 18),
-                                  ),
-                          ],
-                        ),
-                      );
+    return Visibility(
+      visible: data.moreflag == '1'?true:false,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 10),
+        child: Column(
+          children: [
+            ///1.more +  see all
+            Row(children: [
+              Flexible(
+                  flex: 1,
+                  child: GestureDetector(
+                    onTap: () {
+                      homeProvider.onTapMoreAction(data);
                     },
-                  ),
-                )),
-            // Flexible(
-            //     flex: 1,
-            //     child: GestureDetector(
-            //       onTap: () {
-            //         homeProvider.onTapMoreAction(data);
-            //       },
-            //       child: Container(
-            //         margin: const EdgeInsets.only(left: 10.0, right: 5.0),
-            //         height: 35.0,
-            //         decoration: BoxDecoration(
-            //             borderRadius: BorderRadius.circular(5.0),
-            //             color: const Color(0xff23252A)),
-            //         child: Row(
-            //           mainAxisAlignment: MainAxisAlignment.center,
-            //           children: [
-            //             const Text("More",
-            //                 style: TextStyle(
-            //                     color: Color(0xffBCBDBE), fontSize: 15.0)),
-            //             Container(width: 5.0),
-            //             CachedNetworkImage(
-            //                 imageUrl: ImageURL.url_286, width: 18, height: 18),
-            //           ],
-            //         ),
-            //       ),
-            //     )),
-            Flexible(
-              flex: 1,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return SecondLevelPage(
-                          titleStr: data.name ?? '',
-                          listId: data.open_mode_value.toString(),
+                    child: Selector<HTHomeProvider, DataList?>(
+                      selector: (p0, p1) => p1.selectData,
+                      builder: (context, value, child) {
+                        return Container(
+                          margin: const EdgeInsets.only(left: 10.0, right: 5.0),
+                          height: 35.0,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5.0),
+                              color: const Color(0xff23252A)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(value == null ? "More" : 'loading',
+                                  style: const TextStyle(
+                                      color: Color(0xffBCBDBE), fontSize: 15.0)),
+                              Container(width: 5.0),
+                              value == null
+                                  ? CachedNetworkImage(
+                                      imageUrl: ImageURL.url_286,
+                                      width: 18,
+                                      height: 18)
+                                  : RotationTransition(
+                                      turns: Tween<double>(
+                                        begin: 1,
+                                        end: 300,
+                                      ).animate(_animationController),
+                                      child: CachedNetworkImage(
+                                          imageUrl: ImageURL.url_287,
+                                          width: 18,
+                                          height: 18),
+                                    ),
+                            ],
+                          ),
                         );
                       },
                     ),
-                  );
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(left: 0.0, right: 10.0),
-                  height: 35.0,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      color: const Color(0xff23252A)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("See All",
-                          style: TextStyle(
-                              color: Color(0xffBCBDBE), fontSize: 15.0)),
-                      Container(width: 5.0),
-                      CachedNetworkImage(
-                          imageUrl: ImageURL.url_289, width: 18, height: 18),
-                    ],
+                  )),
+              // Flexible(
+              //     flex: 1,
+              //     child: GestureDetector(
+              //       onTap: () {
+              //         homeProvider.onTapMoreAction(data);
+              //       },
+              //       child: Container(
+              //         margin: const EdgeInsets.only(left: 10.0, right: 5.0),
+              //         height: 35.0,
+              //         decoration: BoxDecoration(
+              //             borderRadius: BorderRadius.circular(5.0),
+              //             color: const Color(0xff23252A)),
+              //         child: Row(
+              //           mainAxisAlignment: MainAxisAlignment.center,
+              //           children: [
+              //             const Text("More",
+              //                 style: TextStyle(
+              //                     color: Color(0xffBCBDBE), fontSize: 15.0)),
+              //             Container(width: 5.0),
+              //             CachedNetworkImage(
+              //                 imageUrl: ImageURL.url_286, width: 18, height: 18),
+              //           ],
+              //         ),
+              //       ),
+              //     )),
+              Flexible(
+                flex: 1,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return SecondLevelPage(
+                            titleStr: data.name ?? '',
+                            listId: data.open_mode_value ?? '',
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 0.0, right: 10.0),
+                    height: 35.0,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.0),
+                        color: const Color(0xff23252A)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("See All",
+                            style: TextStyle(
+                                color: Color(0xffBCBDBE), fontSize: 15.0)),
+                        Container(width: 5.0),
+                        CachedNetworkImage(
+                            imageUrl: ImageURL.url_289, width: 18, height: 18),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ]),
-          const SizedBox(height: 10),
-
-          ///2. loading
-          // Selector<HTHomeProvider, DataList?>(
-          //   selector: (p0, p1) => p1.selectData,
-          //   builder: (context, value, child) {
-          //     return Visibility(
-          //       visible: data == value,
-          //       child: child!,
-          //     );
-          //   },
-          //   child: Row(children: [
-          //     Flexible(
-          //         flex: 1,
-          //         child: Container(
-          //             margin: const EdgeInsets.only(left: 10.0, right: 5.0),
-          //             height: 35.0,
-          //             decoration: BoxDecoration(
-          //                 borderRadius: BorderRadius.circular(5.0),
-          //                 color: const Color(0xff23252A)),
-          //             child: Row(
-          //                 mainAxisAlignment: MainAxisAlignment.center,
-          //                 children: [
-          //                   const Text("loading",
-          //                       style: TextStyle(
-          //                           color: Color(0xffBCBDBE), fontSize: 15.0)),
-          //                   Container(width: 5.0),
-          //                   RotationTransition(
-          //                     turns: Tween<double>(
-          //                       begin: 1,
-          //                       end: 300,
-          //                     ).animate(_animationController),
-          //                     child: CachedNetworkImage(
-          //                         imageUrl: ImageURL.url_287,
-          //                         width: 18,
-          //                         height: 18),
-          //                   ),
-          //                 ]))),
-          //     Flexible(
-          //       flex: 1,
-          //       child: Container(),
-          //     ),
-          //   ]),
-          // ),
-        ],
+            ]),
+            const SizedBox(height: 10),
+      
+            ///2. loading
+            // Selector<HTHomeProvider, DataList?>(
+            //   selector: (p0, p1) => p1.selectData,
+            //   builder: (context, value, child) {
+            //     return Visibility(
+            //       visible: data == value,
+            //       child: child!,
+            //     );
+            //   },
+            //   child: Row(children: [
+            //     Flexible(
+            //         flex: 1,
+            //         child: Container(
+            //             margin: const EdgeInsets.only(left: 10.0, right: 5.0),
+            //             height: 35.0,
+            //             decoration: BoxDecoration(
+            //                 borderRadius: BorderRadius.circular(5.0),
+            //                 color: const Color(0xff23252A)),
+            //             child: Row(
+            //                 mainAxisAlignment: MainAxisAlignment.center,
+            //                 children: [
+            //                   const Text("loading",
+            //                       style: TextStyle(
+            //                           color: Color(0xffBCBDBE), fontSize: 15.0)),
+            //                   Container(width: 5.0),
+            //                   RotationTransition(
+            //                     turns: Tween<double>(
+            //                       begin: 1,
+            //                       end: 300,
+            //                     ).animate(_animationController),
+            //                     child: CachedNetworkImage(
+            //                         imageUrl: ImageURL.url_287,
+            //                         width: 18,
+            //                         height: 18),
+            //                   ),
+            //                 ]))),
+            //     Flexible(
+            //       flex: 1,
+            //       child: Container(),
+            //     ),
+            //   ]),
+            // ),
+          ],
+        ),
       ),
     );
   }
@@ -409,12 +412,14 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
   Widget HTHeaderWidget(DataList data) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return SecondLevelPage(
-            titleStr: data.name ?? '',
-            listId: data.display_type.toString(),
-          );
-        }));
+        if (data.seeall == '1') {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return SecondLevelPage(
+              titleStr: data.name ?? '',
+              listId: data.open_mode_value ?? '',
+            );
+          }));
+        }
       },
       child: Container(
         padding: const EdgeInsets.only(top: 2, bottom: 2),
@@ -449,7 +454,10 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                 ),
               )),
           const Spacer(),
-          CachedNetworkImage(imageUrl: ImageURL.url_289, width: 24, height: 24),
+          data.seeall == '1'
+              ? CachedNetworkImage(
+                  imageUrl: ImageURL.url_289, width: 24, height: 24)
+              : const SizedBox(),
           Container(width: 10.0)
         ]),
       ),
@@ -538,16 +546,34 @@ class _HTClassHomeMainPageState extends State<HTClassHomeMainPage>
                 child: CarouselSlider(
                   carouselController: _controller,
                   options: CarouselOptions(
-                      height: 200,///轮播图的高度
-                      autoPlay: true,///是否自动播放
-                      aspectRatio: 140 / 200,///轮播图的宽高比
-                      enlargeCenterPage: true,///是否放大中央页
-                      enlargeStrategy: CenterPageEnlargeStrategy.scale,///放大策略
-                      autoPlayCurve: Curves.fastLinearToSlowEaseIn,///自动播放动画的曲线
+                      height: 200,
+
+                      ///轮播图的高度
+                      autoPlay: true,
+
+                      ///是否自动播放
+                      aspectRatio: 140 / 200,
+
+                      ///轮播图的宽高比
+                      enlargeCenterPage: true,
+
+                      ///是否放大中央页
+                      enlargeStrategy: CenterPageEnlargeStrategy.scale,
+
+                      ///放大策略
+                      autoPlayCurve: Curves.fastLinearToSlowEaseIn,
+
+                      ///自动播放动画的曲线
                       autoPlayAnimationDuration:
-                          const Duration(milliseconds: 800), ///自动播放动画的持续时间
-                      enableInfiniteScroll:true,///是否启用无限循环
-                      viewportFraction: 0.3,///中央页面的占比
+                          const Duration(milliseconds: 800),
+
+                      ///自动播放动画的持续时间
+                      enableInfiniteScroll: true,
+
+                      ///是否启用无限循环
+                      viewportFraction: 0.3,
+
+                      ///中央页面的占比
                       scrollPhysics: const BouncingScrollPhysics(), // 例如，使用弹性滚动
                       /// 中央页面的占比
                       onPageChanged: (index, reason) {
