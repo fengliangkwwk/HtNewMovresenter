@@ -42,7 +42,7 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
 
     if (saveData.item1 == true) {
       selectSsnModelData = Ssn_list()..id = saveData.item2?.ssnId;
-      eid = saveData.item2?.epsId;
+      eid = saveData.item2?.epsId.toString();
     }
 
     await apiRequest(mType2, id);
@@ -70,16 +70,16 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
   }
 
   String videoUrl() {
-    //  int aa =  MainPovider.isVip();
-    // if (kDebugMode) {
-    //   print('------------$aa');
-    // }
+     int aa =  MainPovider.isVip();
+    if (kDebugMode) {
+      print('------------$aa');
+    }
     if (MainPovider.isVip != -1) {
-      videoUrlStr = ((videoDescBean?.data?.hd?.link) != null)
+      videoUrlStr = ((videoDescBean?.data?.hd?.link)?.isNotEmpty == true)
           ? videoDescBean?.data?.hd?.link
           : videoDescBean?.data?.sd?.link;
     } else {
-      videoUrlStr = (videoDescBean?.data?.sd?.link) != null
+      videoUrlStr = (videoDescBean?.data?.sd?.link)?.isNotEmpty == true
           ? videoDescBean?.data?.sd?.link
           : videoDescBean?.data?.hd?.link;
     }

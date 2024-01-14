@@ -35,9 +35,9 @@ mixin HTVideoDescDataProviderMixin on HTVideoProviderMixin {
   /// 分数
   double rate() {
     if (isTV()) {
-      return (double.parse(tv202Bean?.data?.rate ?? '0.0'))/2;
+      return (double.tryParse(tv202Bean?.data?.rate ?? '0.0')??0.0)/2;
     }
-    return (double.parse(videoDescBean?.data?.rate ?? '0.0'))/2 ;
+    return (double.tryParse(videoDescBean?.data?.rate ?? '0.0')??0.0)/2 ;
   }
 
   /// 年份

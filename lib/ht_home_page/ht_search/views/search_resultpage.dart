@@ -71,6 +71,7 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
             GestureDetector(
                 child: CachedNetworkImage(
                     imageUrl: ImageURL.url_291, width: 24, height: 24),
+
                 ///返回按钮
                 onTap: () {
                   FocusScope.of(context).requestFocus(FocusNode());
@@ -97,6 +98,7 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                         onEditingComplete: (() {
                           loadListData(_htVarSearchValue);
                         }),
+                        textInputAction: TextInputAction.search, // 设置为Search
                         controller: provider.htVarFieldController,
                         autofocus: false,
                         focusNode: _htVarFieldFocusNode,
@@ -124,7 +126,9 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                           }
                           provider.onChanged(val);
                         },
-                        // onSubmitted: provider.onSubmitted,
+                        onSubmitted: (value) {
+                          provider.onSubmitted(_htVarSearchValue);
+                        },
                       ),
                     ),
 
@@ -252,7 +256,6 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
       widget.keyWord = word;
       provider.keyword = word;
       provider.onRefresh();
-      // provider.loadSearchResulrData(widget.keyWord);
     });
   }
 
