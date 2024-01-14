@@ -102,10 +102,14 @@ class HTVideoDescProvider extends HTVideoDescProviderBase
     // );
     player.addListener(() {
       if (player.value.state == FijkState.started) {
+        EasyLoading.dismiss();
         if (saveData.item1) {
           print('当前进度:${saveData.item2?.seek}');
           player.seekTo(saveData.item2?.seek ?? 0);
         }
+      }
+      if (player.isBuffering) {
+        EasyLoading.show();
       }
       // addHistoryAciton();
     });
