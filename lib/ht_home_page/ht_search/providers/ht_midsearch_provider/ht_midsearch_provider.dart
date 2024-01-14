@@ -77,4 +77,10 @@ class HTMidSearchProvider extends HTMidSearchProviderBase
       print('联想数据: $searchResult');
     }
   }
+
+  void refreshSearch({List<String>? list}) {
+    searchDataList = list??[];
+    searchHistoty = true;
+    notifyListeners();
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ht_new_movpresenter/ht_home_page/ht_search/providers/ht_midsearch_provider/ht_midsearch_provider.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_search/providers/ht_searchresult_provider/ht_searchresult_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
@@ -10,8 +11,10 @@ import '../../ht_video_paly/views/play_detailpage.dart';
 // ignore: must_be_immutable
 class HTClassSearchResultPage extends StatefulWidget {
   String? keyWord;
+  final HTMidSearchProvider?  midSearchProvider;
   HTClassSearchResultPage({
     this.keyWord,
+    this.midSearchProvider,
     Key? key,
   }) : super(key: key);
 
@@ -40,7 +43,7 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(
-            create: (context) => provider,
+            create: (context) => provider..midSearchProvider = widget.midSearchProvider,
           )
         ],
         child: GestureDetector(
@@ -127,7 +130,7 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
                           provider.onChanged(val);
                         },
                         onSubmitted: (value) {
-                          provider.onSubmitted(_htVarSearchValue);
+                          provider.onSubmitted(value);
                         },
                       ),
                     ),
@@ -252,7 +255,7 @@ class _HTClassSearchResultPageState extends State<HTClassSearchResultPage> {
     setState(() {
       FocusScope.of(context).requestFocus(FocusNode());
       isShowSearchResultList = true;
-      provider.htVarFieldController.text = '';
+      // provider.htVarFieldController.text = '';
       widget.keyWord = word;
       provider.keyword = word;
       provider.onRefresh();

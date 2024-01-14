@@ -176,7 +176,9 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return HTClassSearchResultPage(
-                          keyWord: _htVarSearchValue);
+                          keyWord: _htVarSearchValue,
+                          midSearchProvider: midSearchProvider,
+                          );
                     }));
                   }),
                   textInputAction: TextInputAction.search, // 设置为Search
@@ -417,7 +419,9 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                           onTap: (() {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return HTClassSearchResultPage(keyWord: value);
+                              return HTClassSearchResultPage(keyWord: value,
+                              midSearchProvider: midSearchProvider,
+                              );
                             }));
                           }),
                           child: Container(
@@ -505,7 +509,9 @@ class _HTClassSearchMidPageState extends State<HTClassSearchMidPage>
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         return HTClassSearchResultPage(
-                            keyWord: itemData[0] ?? "");
+                            keyWord: itemData[0] ?? "",
+                            midSearchProvider: midSearchProvider,
+                            );
                       }));
                     },
                   );
