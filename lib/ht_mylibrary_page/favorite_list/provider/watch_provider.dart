@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/favorite_list/bean/history_bean.dart';
+import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_shared_keys.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -127,9 +128,12 @@ class WatchProvider extends ChangeNotifier {
       savaData.add(element.toJson());
     }
     if (state == 2) {
+      HTUserStore.favoriteList = dataList ?? [];
       prefs.setString(HTSharedKeys.favoriteList, jsonEncode(savaData));
     } else {
+      HTUserStore.historyList = dataList ?? [];
       prefs.setString(HTSharedKeys.historyList, jsonEncode(savaData));
+      mainProvider.historyRefreshAction();
     }
   }
 }
