@@ -181,54 +181,59 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
 
   /// 第二行
   Widget secondWidget(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) {
-            return const HTClassUnPremiumPage(
-              title: "Premium",
-            );
-          }),
-        );
+    return Selector<MainPovider,bool>(
+      selector: (p0, p1) => p1.purchaseRefresh,
+      builder: (context, value, child) {
+        return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return const HTClassUnPremiumPage(
+                title: "Premium",
+              );
+            }),
+          );
+        },
+        child: Container(
+            height: 60.0,
+            width: double.infinity,
+            margin: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 23.0),
+            padding: const EdgeInsets.only(left: 16.0),
+            decoration: BoxDecoration(
+                image: const DecorationImage(
+                    image: CachedNetworkImageProvider(ImageURL.url_280),
+                    fit: BoxFit.fill),
+                borderRadius: BorderRadius.circular(6.0)),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("special offer for you",
+                      style: TextStyle(
+                          color: Color(0xff222222),
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w600)),
+                  Container(height: 4.0),
+                  Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                    const Text("\$",
+                        style: TextStyle(
+                            color: Color(0xff222222),
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w600)),
+                    const Text("2.99",
+                        style: TextStyle(
+                            color: Color(0xff222222),
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w600)),
+                    Container(width: 3.0),
+                    const Text("for the 1 Month",
+                        style:
+                            TextStyle(color: Color(0xff222222), fontSize: 10.0)),
+                  ])
+                ])),
+      );
       },
-      child: Container(
-          height: 60.0,
-          width: double.infinity,
-          margin: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 23.0),
-          padding: const EdgeInsets.only(left: 16.0),
-          decoration: BoxDecoration(
-              image: const DecorationImage(
-                  image: CachedNetworkImageProvider(ImageURL.url_280),
-                  fit: BoxFit.fill),
-              borderRadius: BorderRadius.circular(6.0)),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text("special offer for you",
-                    style: TextStyle(
-                        color: Color(0xff222222),
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.w600)),
-                Container(height: 4.0),
-                Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                  const Text("\$",
-                      style: TextStyle(
-                          color: Color(0xff222222),
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w600)),
-                  const Text("2.99",
-                      style: TextStyle(
-                          color: Color(0xff222222),
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w600)),
-                  Container(width: 3.0),
-                  const Text("for the 1 Month",
-                      style:
-                          TextStyle(color: Color(0xff222222), fontSize: 10.0)),
-                ])
-              ])),
     );
   }
 
