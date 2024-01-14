@@ -114,7 +114,6 @@ class PremiumProvider extends PremiumProviderBase
     ///获取选中数据
     var model =
         dataList[isFamilyOrIndividual == 1 ? selectFamaily : selectPerson];
-        var deviceNo = await GetDeviceInfo.deviceNo();
     if (HTUserStore.premiumBean?.isK12() == true) {
       ///服务器订阅
       ///1.
@@ -123,7 +122,7 @@ class PremiumProvider extends PremiumProviderBase
         'vip': mainProvider.subscriptionPurchaseState()
             ? "1"
             : "0", //本包的订阅状态，订阅传1，未订阅传0
-        'deviceNo': deviceNo, //本包设备号，同公参
+        'deviceNo': await GetDeviceInfo.deviceNo(), //本包设备号，同公参
         'force': "1", //写死1
         'appType': "0", //本包类型：0.影视 1.动漫
         'appbundleid': "com.ding.movie", //本包的bundleid
