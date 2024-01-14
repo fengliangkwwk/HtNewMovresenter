@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:ht_new_movpresenter/ht_premium_page/add_member_page/premium_family_addpage.dart';
 import 'package:ht_new_movpresenter/ht_premium_page/family_account_page/view/premium_familypage.dart';
 import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';

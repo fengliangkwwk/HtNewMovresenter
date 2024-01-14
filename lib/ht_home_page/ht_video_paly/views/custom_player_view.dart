@@ -681,7 +681,9 @@ class __FijkPanel2State extends State<_FijkPanel2> {
           child: toast,
         ),
       );
-    } else if (player.state == FijkState.asyncPreparing || player.isBuffering) {
+    } else if (player.state == FijkState.asyncPreparing) {
+
+      print('+++++++++++++++++++++缓冲也是播放状态');
       return Container(
         alignment: Alignment.center,
         child: const SizedBox(

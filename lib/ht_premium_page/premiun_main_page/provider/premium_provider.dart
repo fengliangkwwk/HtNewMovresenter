@@ -133,8 +133,10 @@ class PremiumProvider extends PremiumProviderBase
         'type': "1", //深链类型，1.订阅，2.下架导量，3.投屏
         'product': mainProvider
             .selectProductNo, //点击的订阅产品编号（1:个⼈周 2:个⼈⽉ 3:个⼈年 4:家庭周 5:家庭⽉
-        'activityProduct': "0",//正在搞活动的产品编号，值的获取⻅下⽅“常⻅错误2”
-        'callback':'1',///回跳影视就也能走scheme了
+        'activityProduct': "0", //正在搞活动的产品编号，值的获取⻅下⽅“常⻅错误2”
+        'callback': '1',
+
+        ///回跳影视就也能走scheme了
       };
       var airplay = HTUserStore.toolConfigBean?.airplay;
       String jsonStringB = jsonEncode(a);
@@ -212,6 +214,7 @@ class PremiumProvider extends PremiumProviderBase
   ///scheme跳转
   void launchApp(Uri url) async {
     if (await canLaunchUrl(url)) {
+      toToolPackage = true;
       await launchUrl(url);
     } else {
       // 处理无法打开应用的情况
@@ -229,7 +232,7 @@ class PremiumProvider extends PremiumProviderBase
       // 1.检查是否需要回来校验326
       if (toToolPackage == true) {
         await requesCheckVipApi();
-      // 2.判断是否需要跳转登录
+        // 2.判断是否需要跳转登录
         go2Login(context);
       }
     } else if (state == AppLifecycleState.paused) {
