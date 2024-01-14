@@ -576,6 +576,7 @@ class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage>
           return GestureDetector(
             onTap: () {
               // provider.loadData(model.mType2, model.id);
+              provider.selectSsnModelData = null;
               provider.changePlayerType(model.mType2 ?? '', model.id ?? '');
             },
             child: Container(
