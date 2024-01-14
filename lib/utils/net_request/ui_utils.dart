@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:device_information/device_information.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:ht_new_movpresenter/utils/shared_preferences.dart/ht_user_store.dart';
+import 'package:ht_new_movpresenter/utils/tools/device_info_tool.dart';
 import 'package:ht_new_movpresenter/utils/tools/ht_sys_tool.dart';
 
 class KTClassUIUtils {
