@@ -100,7 +100,7 @@ dependencies:
   #轮播图
   card_swiper: ^3.0.1
   #获取app包的信息
-  package_info_plus: ^5.0.1
+  package_info_plus: ^4.2.0
 
 
 dev_dependencies:
