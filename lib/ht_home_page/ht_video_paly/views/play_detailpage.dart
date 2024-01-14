@@ -12,6 +12,7 @@ import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/custom_play
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_all_episodes.dart';
 import 'package:ht_new_movpresenter/ht_home_page/ht_video_paly/views/tv_play_part.dart';
 import 'package:ht_new_movpresenter/ht_mylibrary_page/feed_back/view/setting_feedback.dart';
+import 'package:ht_new_movpresenter/ht_premium_page/premiun_main_page/bean/ht_premium_bean.dart';
 import 'package:ht_new_movpresenter/provider/main_provider.dart';
 import 'package:ht_new_movpresenter/utils/net_request/url_getImageurl.dart';
 import 'package:ht_new_movpresenter/utils/share/ht_share.dart';
@@ -38,23 +39,24 @@ class HTClassVideoDetailPage extends StatefulWidget {
   State<HTClassVideoDetailPage> createState() => _HTClassVideoDetailPageState();
 }
 
-class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage>with WidgetsBindingObserver {
+class _HTClassVideoDetailPageState extends State<HTClassVideoDetailPage>
+    with WidgetsBindingObserver {
   bool isSaved = false;
   final HTVideoDescProvider provider = HTVideoDescProvider();
 
   @override
   void initState() {
     provider.loadData(widget.m_type_2, widget.id);
-        WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
 
     // provider.playerOption();
     super.initState();
-    
   }
+
   @override
-void didChangeAppLifecycleState(AppLifecycleState state) {
-  provider.didChangeAppLifecycleState(state,context);
-}
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    provider.didChangeAppLifecycleState(state, context);
+  }
 
   @override
   void dispose() {
@@ -82,6 +84,7 @@ void didChangeAppLifecycleState(AppLifecycleState state) {
                 children: [
                   ///播放器
                   videoPlayerViewWidget(),
+
                   ///带背景图的第一行
                   firstPartWidget(),
 
@@ -110,12 +113,14 @@ void didChangeAppLifecycleState(AppLifecycleState state) {
 
                             ///分享那一行
                             sharePartWidget(),
+
                             ///如果是电视剧播放页的话会有这部分
                             (widget.m_type_2 == 'tt_mflx')
                                 ? TVPlayPartWidget()
                                 : Container(
                                     height: 0,
                                   ),
+
                             ///专题列表那部分
                             ...creatspecialSubjectListWidget(),
                           ],
@@ -173,81 +178,89 @@ void didChangeAppLifecycleState(AppLifecycleState state) {
   Widget firstPartWidget() {
     return GestureDetector(
       onTap: () => provider.jumpToPremiumPage(context),
-      child: Visibility(
-        visible: !mainProvider.subscriptionPurchaseState(),
-        child: Container(
-            height: 60.0,
-            width: double.infinity,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: CachedNetworkImageProvider(
-                      ImageURL.url_252,
-                    ),
-                    fit: BoxFit.fill)),
-            child: Row(
+      child: Selector<MainPovider, bool>(
+        selector: (p0, p1) => p1.purchaseRefresh,
+        builder: (context, value, child) {
+          return Visibility(
+            visible: MainPovider.isVip() > 0 ? false : true,
+            child: Container(
+                height: 60.0,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: CachedNetworkImageProvider(
+                          ImageURL.url_252,
+                        ),
+                        fit: BoxFit.fill)),
+                child: Row(
 
-                ///均等分
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CachedNetworkImage(
-                            imageUrl: ImageURL.url_260,
-                            width: 20.0,
-                            height: 20.0),
-                        Container(
-                            margin: const EdgeInsets.only(top: 2.5),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 5.0, vertical: 0.0),
-                            child: const Text("Remove\r\nAll Ads",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Color(0xff685034), fontSize: 10.0)))
-                      ]),
-                  // Container(width: 37.5),
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CachedNetworkImage(
-                            imageUrl: ImageURL.url_261,
-                            width: 20.0,
-                            height: 20.0),
-                        Container(
-                            margin: const EdgeInsets.only(top: 2.5),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 5.0, vertical: 0.0),
-                            child: const Text("Unlock\r\nAll Ads",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Color(0xff685034), fontSize: 10.0)))
-                      ]),
-                  // Container(width: 37.5),
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CachedNetworkImage(
-                            imageUrl: ImageURL.url_262,
-                            width: 20.0,
-                            height: 20.0),
-                        Container(
-                            margin: const EdgeInsets.only(top: 2.5),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 5.0, vertical: 0.0),
-                            child: const Text("Unlimited\r\nScreen Casting",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Color(0xff685034), fontSize: 10.0)))
-                      ]),
-                  const Text("Get Premium",
-                      style: TextStyle(
-                          color: Color(0xff685034),
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w600)),
-                ])),
+                    ///均等分
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CachedNetworkImage(
+                                imageUrl: ImageURL.url_260,
+                                width: 20.0,
+                                height: 20.0),
+                            Container(
+                                margin: const EdgeInsets.only(top: 2.5),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 5.0, vertical: 0.0),
+                                child: const Text("Remove\r\nAll Ads",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Color(0xff685034),
+                                        fontSize: 10.0)))
+                          ]),
+                      // Container(width: 37.5),
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CachedNetworkImage(
+                                imageUrl: ImageURL.url_261,
+                                width: 20.0,
+                                height: 20.0),
+                            Container(
+                                margin: const EdgeInsets.only(top: 2.5),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 5.0, vertical: 0.0),
+                                child: const Text("Unlock\r\nAll Ads",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Color(0xff685034),
+                                        fontSize: 10.0)))
+                          ]),
+                      // Container(width: 37.5),
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CachedNetworkImage(
+                                imageUrl: ImageURL.url_262,
+                                width: 20.0,
+                                height: 20.0),
+                            Container(
+                                margin: const EdgeInsets.only(top: 2.5),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 5.0, vertical: 0.0),
+                                child: const Text("Unlimited\r\nScreen Casting",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Color(0xff685034),
+                                        fontSize: 10.0)))
+                          ]),
+                      const Text("Get Premium",
+                          style: TextStyle(
+                              color: Color(0xff685034),
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w600)),
+                    ])),
+          );
+        },
       ),
     );
   }
