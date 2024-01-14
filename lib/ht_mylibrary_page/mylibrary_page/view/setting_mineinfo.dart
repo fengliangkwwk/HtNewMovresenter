@@ -273,7 +273,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
         return Container(
           margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
           padding: const EdgeInsets.only(right: 5),
-          height: 145,
+          height: HTUserStore.historyList.isNotEmpty ? 145 : 0,
           // width: double.infinity,
           child: ListView.builder(
             itemCount: HTUserStore.historyList.length,
@@ -309,6 +309,7 @@ class _HTClassSettingInfoPageState extends State<HTClassSettingInfoPage> {
           Container(
             margin: const EdgeInsets.only(top: 5),
             height: 20,
+            width: 84,
             child: Text(
               model.title ?? '',
               maxLines: 2,
